@@ -7,7 +7,7 @@ from flask_security import Security, SQLAlchemyUserDatastore
 
 import os
 
-socketio = SocketIO()
+socket = SocketIO()
 db = SQLAlchemy()
 mail = Mail()
 security = Security()
@@ -73,7 +73,7 @@ def create_app(debug=False):
 
 
     # Initiate the socketio object
-    socketio.init_app(app)
+    socket.init_app(app)
 
     return app
 
