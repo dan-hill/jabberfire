@@ -24,3 +24,9 @@ app.config['ORGANIZATION_LONG_NAME'] = "Comanche County Memorial Hospital"
 
 # Security Configurations
 app.config['SECURITY_LOGIN_USER_TEMPLATE'] = 'login.html'
+
+# Paths for templates
+app.config['CSS'] = 'static/css/'
+app.config['PLUGIN'] = 'static/plugin/'
+app.config['IMG'] = 'static/img/'
+app.config['JS'] = 'static/js/'

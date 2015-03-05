@@ -4,7 +4,7 @@ from .. import app
 from .. import models
 from flask_security import login_required
 
-auth = Blueprint('auth', __name__, template_folder='templates')
+auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
 def show():
