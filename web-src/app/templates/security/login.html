@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
 
-    <title>{{ config.APP_LONG_NAME | {{ PAGE_TITLE }}</title>
+    <title></title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -64,12 +64,12 @@
         <!-- BEGIN LOGO -->
         <div class="logo">
             <a href="index.html">
-                <img src="../static/img/ccmh/ccmh-pantone-300.png" alt=""/>
+                <img src="../../static/img/ccmh/ccmh-pantone-300.png" alt=""/>
             </a>
         </div>
 
         <!-- END LOGO -->
-        <form class="login-form" action="login" method="post">
+        <form class="login-form" method="POST" name="login_user_form">
 
             <!-- BEGIN INPUT ERROR ALERT -->
             <div class="alert alert-danger display-hide">
@@ -118,7 +118,7 @@
                 </div>
                 <!-- END FORGOT PASSWORD LINK -->
 
-            </dIv>
+            </div>
             <!-- END REQUEST ACCESS / FORGOT PASSWORD FORM GROUP -->
 
         </form>

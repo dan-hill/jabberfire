@@ -1,64 +1,80 @@
-# setup the app object
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
 from flask_mail import Mail
+from flask_security import Security, SQLAlchemyUserDatastore
 
 import os
 
 socketio = SocketIO()
 db = SQLAlchemy()
 mail = Mail()
+security = Security()
 
+from app.users.user import user_datastore, User
 
 def create_app(debug=False):
+    # Instantiate the application object
     app = Flask(__name__)
 
-    app.debug = debug
+    # Register the blueprints
 
     from dashboard.dashboard import dashboard
-
     app.register_blueprint(dashboard)
 
-    # Database configration
-    app.config['SECRET_KEY'] = 'temp_super_secret_key'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+    from app.users.controller import users
 
-    # Global configurations
-    app.config['ORGANIZATION_SHORT_NAME'] = 'CCMH'
-    app.config['ORGANIZATION_LONG_NAME'] = "Comanche County Memorial Hospital"
+    app.register_blueprint(users)
 
-    # Security Configurations
-    app.config['SECURITY_LOGIN_USER_TEMPLATE'] = 'login.html'
-
-    # Paths for templates
-    app.config['CSS'] = 'static/css/'
-    app.config['PLUGIN'] = 'static/plugin/'
-    app.config['IMG'] = 'static/img/'
-    app.config['JS'] = 'static/js/'
-
-    db.init_app(app)
-
-    # Make sure the database exists.
-    if not os.path.exists('db.sqlite'):
-        with app.app_context():
-            db.create_all()
-
+    # Set configurations
     app.config.update(
-        DEBUG=True,
+        DEBUG=debug,
+
         # EMAIL SETTINGS
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
         MAIL_USERNAME='the.auto.server@gmail.com',
-        MAIL_PASSWORD='autopass'
+        MAIL_PASSWORD='autopass',
+
+        # DATABASE SETTINGS
+        SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
+        SQLALCHEMY_DATABASE_URI='sqlite:///db.sqlite',
+        SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
+
+        # TEMPLATE PATHS
+        CSS='static/css/',
+        PLUGIN='static/plugin/',
+        IMG='static/img/',
+        JS='static/js/',
+
+        # SECURITY CORE
+        SECURITY_PASSWORD_HASH='sha512_crypt',
+        # SECURITY TEMPLATE PATHS
+        SECURITY_LOGIN_USER_TEMPLATE='security/login.html'
     )
 
-    app.config['SITE_URL'] = 'http://127.0.0.1/'
 
+
+    # Initiate the database object
+    db.init_app(app)
+
+    # Create the Database
+    if not os.path.exists('db.sqlite'):
+        with app.app_context():
+            db.create_all()
+
+    # Initiate the security object
+    security.init_app(app, user_datastore)
+
+    # Initiate the Mail object
     mail.init_app(app)
 
-    # wrap the app in socketio
+
+    # Initiate the socketio object
     socketio.init_app(app)
 
     return app
+
+

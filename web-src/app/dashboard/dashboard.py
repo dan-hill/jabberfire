@@ -1,10 +1,18 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, redirect
 from jinja2 import TemplateNotFound
-from flask import current_app
+from flask_security import login_required, current_user
 
 dashboard = Blueprint('dashboard', __name__)
 
+
+@dashboard.route('/')
+@login_required
+def root_path():
+    return redirect('/dashboard', code=302)
+
 @dashboard.route('/dashboard', defaults={'page': 'index'})
+@login_required
 def show(page):
-    return render_template('../templates/dashboard.html',
-                           short_name=current_app.config['ORGANIZATION_SHORT_NAME'])
+    return render_template('dashboard.html')
+
+
