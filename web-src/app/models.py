@@ -1,4 +1,3 @@
-from . import app
 from .database import db
 
 from flask_security import UserMixin, RoleMixin, SQLAlchemyUserDatastore, Security
@@ -25,10 +24,3 @@ class User(db.Model, UserMixin):
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-
-@app.before_first_request
-def create_user():
-    db.create_all()
-    user_datastore.create_user(email='dan@danhill.us', password='password')
-    db.session.commit()
