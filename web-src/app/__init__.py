@@ -40,7 +40,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='sqlite:///db.sqlite',
+        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -51,6 +51,7 @@ def create_app(debug=False):
 
         # SECURITY CORE
         SECURITY_PASSWORD_HASH='sha512_crypt',
+        SECURITY_PASSWORD_SALT='FLAPPYflapflapflap',
         # SECURITY TEMPLATE PATHS
         SECURITY_LOGIN_USER_TEMPLATE='security/login.html'
     )
