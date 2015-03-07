@@ -24,8 +24,10 @@ def create_app(debug=False):
     app.register_blueprint(dashboard)
 
     from app.users.controller import users
-
     app.register_blueprint(users)
+
+    from app.base.controller import base
+    app.register_blueprint(base)
 
     # Set configurations
     app.config.update(

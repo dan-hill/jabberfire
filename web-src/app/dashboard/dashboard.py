@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, abort, redirect
 from jinja2 import TemplateNotFound
 from flask_security import login_required, current_user
+from app import socket
 
 dashboard = Blueprint('dashboard', __name__)
 
@@ -16,3 +17,6 @@ def show(page):
     return render_template('dashboard.html')
 
 
+@socket.on('blah')
+def blah():
+    print 'some blah'
