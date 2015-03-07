@@ -9,6 +9,7 @@ users = Blueprint('users', __name__)
 @users.route('/testuser')
 def create_test_user():
     user_datastore.create_user(email='sdome@blah.com', password=encrypt_password('123123123'), active=1)
+    user_datastore.add_role_to_user('sdome@blah.com', 'admin')
     return 'ok'
 
 

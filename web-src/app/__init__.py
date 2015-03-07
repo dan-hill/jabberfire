@@ -64,14 +64,32 @@ def create_app(debug=False):
     # Create the Database
     if not os.path.exists('db.sqlite'):
         with app.app_context():
+
             db.create_all()
+
+            if not user_datastore.find_role('user'):
+                user_datastore.create_role(
+                    name='user',
+                    description='Generic role'
+                )
+
+            if not user_datastore.find_role('technician'):
+                user_datastore.create_role(
+                    name='technician',
+                    description='Technician role'
+                )
+
+            if not user_datastore.find_role('technician'):
+                user_datastore.create_role(
+                    name='administrator',
+                    description='Administrator role'
+                )
 
     # Initiate the security object
     security.init_app(app, user_datastore)
 
     # Initiate the Mail object
     mail.init_app(app)
-
 
     # Initiate the socketio object
     socket.init_app(app)
