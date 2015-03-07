@@ -8,11 +8,22 @@ var CCMH = (function(window, document, $) {
         });
     };
 
+    var request_current_username = function() {
+        socket.emit('request-current-username')
+    };
+
+    var set_current_username = function() {
+        socket.on('response-current-username', function(data) {
+            $('.username').text(data['username']);
+        })
+    };
 
     return {
 
         init: function() {
-            show_admin_menu()
+            show_admin_menu();
+            request_current_username();
+            set_current_username();
         },
 
         base: function() {

@@ -27,5 +27,8 @@ class User(db.Model, UserMixin):
     def verify_password(self, password):
         return verify_password(password, self.password)
 
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

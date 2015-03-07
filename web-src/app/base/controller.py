@@ -24,3 +24,6 @@ def respond_admin_menu():
         print 'user not an admin'
 
 
+@socket.on('request-current-username')
+def response_current_username():
+    socket.emit('response-current-username', {'username': current_user.full_name})
