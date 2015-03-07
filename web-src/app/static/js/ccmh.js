@@ -2,6 +2,16 @@ var CCMH = (function(window, document, $) {
     var socket;
     socket = io.connect('http://' + document.domain + ':' + location.port + '/#');
 
+    var setup_pjax_container = function() {
+
+        $(document).pjax('a', '#pjax-container');
+
+        $('#pjax-container').on('pjax:end', function () {
+            console.log('pjaxend was fired.')
+
+        });
+    };
+
     var show_admin_menu = function() {
         $(document).ready(function(){
             socket.emit('request-admin-menu');
@@ -27,6 +37,7 @@ var CCMH = (function(window, document, $) {
     return {
 
         init: function() {
+            setup_pjax_container();
             show_admin_menu();
             request_current_username();
             set_current_username();

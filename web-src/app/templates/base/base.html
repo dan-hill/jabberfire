@@ -1,3 +1,4 @@
+{% if "X-PJAX" not in request.headers %}
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -50,7 +51,7 @@
     <!-- END FAVICON -->
 
     <script type="text/javascript"
-                src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+            src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -66,7 +67,7 @@
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">
 
 <!-- BEGIN HEADER -->
-<div class="page-header navbar navbar-fixed-top " style='height:80px'>
+<div class="page-header navbar navbar-fixed-top ">
 
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
@@ -74,7 +75,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="/">
-                <img src="../../static/img/ccmh/ccmh-pantone-300.png" alt="logo" class="logo-default" width="100"/>
+                <img src="../../static/img/ccmh/ccmh-pantone-300.png" alt="logo" class="logo-default" width="50"/>
             </a>
 
             <div class="menu-toggler sidebar-toggler hide">
@@ -298,7 +299,7 @@
                     <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 </li>
                 <li class="start active open">
-                    <a href="javascript:;">
+                    <a href="/dashboard">
                         <i class="icon-home"></i>
                         <span class="title">Dashboard</span>
                         <span class="selected"></span>
@@ -312,9 +313,13 @@
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div class="page-content">
+        <div class="page-content" id="pjax-container">
+            {% endif %}
             {% block body %}
             {% endblock %}
+
+            {% if "X-PJAX" not in request.headers %}
+
         </div>
     </div>
     <!-- END CONTENT -->
@@ -893,6 +898,8 @@
 <script src="{{ config.PLUGIN }}fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <script src="{{ config.PLUGIN }}jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
 <script src="{{ config.PLUGIN }}jquery.sparkline.min.js" type="text/javascript"></script>
+<script src="{{ config.PLUGIN }}jquery.pjax.js" type="text/javascript"></script>
+
 
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -928,3 +935,4 @@
 </body>
 <!-- END BODY -->
 </html>
+{% endif %}

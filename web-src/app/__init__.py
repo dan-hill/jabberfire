@@ -29,6 +29,9 @@ def create_app(debug=False):
     from app.base.controller import base
     app.register_blueprint(base)
 
+    from app.admin.controller import admin
+    app.register_blueprint(admin)
+
     # Set configurations
     app.config.update(
         DEBUG=debug,
