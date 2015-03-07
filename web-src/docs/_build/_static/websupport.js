@@ -117,7 +117,7 @@
             comp = function (a, b) {
                 return b[by] - a[by];
             };
-        }
+    }
 
         // Reset link styles and format the selected sort option.
         $('a.sel').attr('href', '#').removeClass('sel');
@@ -139,9 +139,9 @@
                 if (end == -1) {
                     end = document.cookie.length;
                     by = unescape(document.cookie.substring(start, end));
-                }
-            }
         }
+            }
+    }
         setComparator();
     }
 
@@ -226,7 +226,7 @@
         if (text == '') {
             showError('Please enter a comment.');
             return;
-        }
+    }
 
         // Disable the form that is being submitted.
         form.find('textarea,input').attr('disabled', 'disabled');
@@ -246,7 +246,7 @@
                 // Reset the form.
                 if (node_id) {
                     hideProposeChange(node_id);
-                }
+        }
                 form.find('textarea')
                     .val('')
                     .add(form.find('input'))
@@ -349,7 +349,7 @@
                         div.remove();
                     });
                     return;
-                }
+        }
                 // User mode: only mark the comment as deleted
                 div
                     .find('span.user-id:first')
@@ -410,7 +410,7 @@
             if (classes[i] != 'sort-option') {
                 by = classes[i].substring(2);
             }
-        }
+    }
         setComparator();
         // Save/update the sortBy cookie.
         var expiration = new Date();
@@ -431,19 +431,19 @@
         if (!opts.voting) {
             showError("You'll need to login to vote.");
             return;
-        }
+    }
 
         var id = link.attr('id');
         if (!id) {
             // Didn't click on one of the voting arrows.
             return;
-        }
+    }
         // If it is an unvote, the new vote value is 0,
         // Otherwise it's 1 for an upvote, or -1 for a downvote.
         var value = 0;
         if (id.charAt(1) != 'u') {
             value = id.charAt(0) == 'u' ? 1 : -1;
-        }
+    }
         // The data to be sent to the server.
         var d = {
             comment_id: id.substring(2),
@@ -560,7 +560,7 @@
         if (!comment.displayed && !opts.moderator) {
             return $('<div class="moderate">Thank you!  Your comment will show up '
             + 'once it is has been approved by a moderator.</div>');
-        }
+    }
         // Prettify the comment rating.
         comment.pretty_rating = comment.rating + ' point' +
         (comment.rating == 1 ? '' : 's');
@@ -575,7 +575,7 @@
             var direction = (comment.vote == 1) ? 'u' : 'd';
             div.find('#' + direction + 'v' + comment.id).hide();
             div.find('#' + direction + 'u' + comment.id).show();
-        }
+    }
 
         if (opts.moderator || comment.text != '[deleted]') {
             div.find('a.reply').show();
@@ -585,7 +585,7 @@
                 div.find('#cm' + comment.id).show();
             if (opts.moderator || (opts.username == comment.username))
                 div.find('#dc' + comment.id).show();
-        }
+    }
         return div;
     }
 
@@ -603,7 +603,7 @@
                 cur = cur[this];
             });
             return escape ? esc.text(cur || "").html() : cur;
-        }
+    }
 
         return template.replace(/<([%#])([\w\.]*)\1>/g, function () {
             return handle(arguments[2], arguments[1] == '%' ? true : false);
@@ -800,7 +800,7 @@ $(document).ready(function () {
         var result = $(this);
         $.each(terms, function () {
             result.highlightText(this.toLowerCase(), 'highlighted');
-        });
+    });
     });
 
     // directly open comment window if requested

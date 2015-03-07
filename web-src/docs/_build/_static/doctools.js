@@ -79,10 +79,10 @@ jQuery.fn.highlightText = function (text, className) {
                     node.nextSibling));
                 node.nodeValue = val.substr(0, pos);
             }
-        }
+    }
         else if (!jQuery(node).is("button, select, textarea")) {
             jQuery.each(node.childNodes, function () {
-                highlight(this);
+        highlight(this);
             });
         }
     }

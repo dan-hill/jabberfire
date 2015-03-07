@@ -111,7 +111,7 @@ var Stemmer = function () {
                 else if (re3.test(w)) {
                     re = /.$/;
                     w = w.replace(re, "");
-                }
+        }
                 else if (re4.test(w))
                     w = w + "e";
             }
@@ -177,7 +177,7 @@ var Stemmer = function () {
             re3 = new RegExp("^" + C + v + "[^aeiouwxy]$");
             if (re.test(stem) || (re2.test(stem) && !(re3.test(stem))))
                 w = stem;
-        }
+    }
         re = /ll$/;
         re2 = new RegExp(mgr1);
         if (re.test(w) && re2.test(w)) {
@@ -191,6 +191,7 @@ var Stemmer = function () {
         return w;
     }
 }
+
 
 
 /**
@@ -447,11 +448,11 @@ var Search = {
                             var data = jqxhr.responseText;
                             if (data !== '') {
                                 listItem.append(Search.makeSearchSummary(data, searchterms, hlterms));
-                            }
-                            Search.output.append(listItem);
+                    }
+                    Search.output.append(listItem);
                             listItem.slideDown(5, function () {
                                 displayNextItem();
-                            });
+                    });
                         }
                     });
                 } else {
@@ -460,7 +461,7 @@ var Search = {
                     listItem.slideDown(5, function () {
                         displayNextItem();
                     });
-                }
+        }
             }
             // search finished, update title and status message
             else {
@@ -517,7 +518,7 @@ var Search = {
                                 allfound = false;
                                 break;
                             }
-                        }
+            }
                         if (!allfound) {
                             continue;
                         }
@@ -536,7 +537,7 @@ var Search = {
                         score += Scorer.objPrioDefault;
                     }
                     results.push([filenames[match[0]], fullname, '#' + anchor, descr, score]);
-                }
+        }
             }
         }
 
@@ -587,14 +588,14 @@ var Search = {
                     $u.contains(terms[excluded[i]] || [], file)) {
                     valid = false;
                     break;
-                }
+        }
             }
 
             // if we have still a valid result we can add it to the result list
             if (valid) {
                 results.push([filenames[file], titles[file], '', null, score]);
             }
-        }
+    }
         return results;
     },
 
