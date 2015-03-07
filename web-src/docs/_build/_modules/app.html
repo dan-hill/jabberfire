@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>app &mdash; CCMH IT Asset Management System 0.1 documentation</title>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css"/>
+
+
+    <link rel="top" title="CCMH IT Asset Management System 0.1 documentation" href="../index.html"/>
+    <link rel="up" title="Module code" href="index.html"/>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+<div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+        <div class="wy-side-nav-search">
+
+            <a href="../index.html" class="fa fa-home"> CCMH IT Asset Management System</a>
+
+
+            <div role="search">
+                <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+                    <input type="text" name="q" placeholder="Search docs"/>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+            </div>
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+            <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API Reference</a>
+                    <ul>
+                        <li class="toctree-l2"><a class="reference internal" href="../api_reference.html#module-run">Application
+                            Initilization</a></li>
+                        <li class="toctree-l2"><a class="reference internal" href="../api_reference.html#module-app">Application
+                            Object Instantiation</a></li>
+                    </ul>
+                </li>
+                <li class="toctree-l1"><a class="reference internal" href="../models.html">Data Models</a>
+                    <ul>
+                        <li class="toctree-l2"><a class="reference internal"
+                                                  href="../models.html#module-app.users.user">User</a></li>
+                        <li class="toctree-l2"><a class="reference internal"
+                                                  href="../models.html#module-app.roles.role">Role</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+        </div>
+        &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+            <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+            <a href="../index.html">CCMH IT Asset Management System</a>
+        </nav>
+
+
+        <div class="wy-nav-content">
+            <div class="rst-content">
+                <div role="navigation" aria-label="breadcrumbs navigation">
+                    <ul class="wy-breadcrumbs">
+                        <li><a href="../index.html">Docs</a> &raquo;</li>
+
+                        <li><a href="index.html">Module code</a> &raquo;</li>
+
+                        <li>app</li>
+                        <li class="wy-breadcrumbs-aside">
+
+                        </li>
+                    </ul>
+                    <hr/>
+                </div>
+                <div role="main" class="document">
+
+                    <h1>Source code for app</h1>
+
+                    <div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_socketio</span> <span class="kn">import</span> <span class="n">SocketIO</span>
+<span class="kn">from</span> <span class="nn">flask_mail</span> <span class="kn">import</span> <span
+                            class="n">Mail</span>
+<span class="kn">from</span> <span class="nn">flask_security</span> <span class="kn">import</span> <span class="n">Security</span><span
+                            class="p">,</span> <span class="n">SQLAlchemyUserDatastore</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">socket</span> <span class="o">=</span> <span class="n">SocketIO</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>
+<span class="n">mail</span> <span class="o">=</span> <span class="n">Mail</span><span class="p">()</span>
+<span class="n">security</span> <span class="o">=</span> <span class="n">Security</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">app.users.user</span> <span class="kn">import</span> <span class="n">user_datastore</span><span
+                            class="p">,</span> <span class="n">User</span>
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">(</span><span class="n">debug</span><span
+                            class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="create_app"><a class="viewcode-back"
+                                               href="../api_reference.html#app.create_app">[docs]</a> <span class="c"># Instantiate the application object</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span
+            class="n">__name__</span><span class="p">)</span>
+
+    <span class="c"># Register the blueprints</span>
+
+    <span class="kn">from</span> <span class="nn">dashboard.dashboard</span> <span class="kn">import</span> <span
+            class="n">dashboard</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span
+            class="p">(</span><span class="n">dashboard</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">app.users.controller</span> <span class="kn">import</span> <span
+            class="n">users</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span
+            class="p">(</span><span class="n">users</span><span class="p">)</span>
+
+    <span class="c"># Set configurations</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span
+            class="n">update</span><span class="p">(</span>
+    <span class="n">DEBUG</span><span class="o">=</span><span class="n">debug</span><span class="p">,</span>
+
+    <span class="c"># EMAIL SETTINGS</span>
+    <span class="n">MAIL_SERVER</span><span class="o">=</span><span class="s">&#39;smtp.gmail.com&#39;</span><span
+            class="p">,</span>
+    <span class="n">MAIL_PORT</span><span class="o">=</span><span class="mi">465</span><span class="p">,</span>
+    <span class="n">MAIL_USE_SSL</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">MAIL_USERNAME</span><span class="o">=</span><span
+            class="s">&#39;the.auto.server@gmail.com&#39;</span><span class="p">,</span>
+    <span class="n">MAIL_PASSWORD</span><span class="o">=</span><span class="s">&#39;autopass&#39;</span><span
+            class="p">,</span>
+
+    <span class="c"># DATABASE SETTINGS</span>
+    <span class="n">SECRET_KEY</span><span class="o">=</span><span class="s">&#39;:r7^97B)qA8{&gt;|{8TXDz&quot;4]1bt&gt;O</span><span
+            class="si">%s</span><span class="s">&#39;</span><span class="p">,</span>
+    <span class="n">SQLALCHEMY_DATABASE_URI</span><span class="o">=</span><span class="s">&#39;mysql://root:123qwe!@#QWE@localhost/ccmh&#39;</span><span
+            class="p">,</span>
+    <span class="n">SQLALCHEMY_COMMIT_ON_TEARDOWN</span><span class="o">=</span><span class="bp">True</span><span
+            class="p">,</span>
+
+    <span class="c"># TEMPLATE PATHS</span>
+    <span class="n">CSS</span><span class="o">=</span><span class="s">&#39;static/css/&#39;</span><span
+            class="p">,</span>
+    <span class="n">PLUGIN</span><span class="o">=</span><span class="s">&#39;static/plugin/&#39;</span><span class="p">,</span>
+    <span class="n">IMG</span><span class="o">=</span><span class="s">&#39;static/img/&#39;</span><span
+            class="p">,</span>
+    <span class="n">JS</span><span class="o">=</span><span class="s">&#39;static/js/&#39;</span><span class="p">,</span>
+
+    <span class="c"># SECURITY CORE</span>
+    <span class="n">SECURITY_PASSWORD_HASH</span><span class="o">=</span><span
+            class="s">&#39;sha512_crypt&#39;</span><span class="p">,</span>
+    <span class="n">SECURITY_PASSWORD_SALT</span><span class="o">=</span><span
+            class="s">&#39;FLAPPYflapflapflap&#39;</span><span class="p">,</span>
+    <span class="c"># SECURITY TEMPLATE PATHS</span>
+    <span class="n">SECURITY_LOGIN_USER_TEMPLATE</span><span class="o">=</span><span class="s">&#39;security/login.html&#39;</span>
+    <span class="p">)</span>
+
+
+    <span class="c"># Initiate the database object</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span
+            class="n">app</span><span class="p">)</span>
+
+    <span class="c"># Create the Database</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span
+            class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span
+            class="s">&#39;db.sqlite&#39;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span
+            class="n">app_context</span><span class="p">():</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_datastore</span><span
+            class="o">.</span><span class="n">find_role</span><span class="p">(</span><span
+            class="s">&#39;user&#39;</span><span class="p">):</span>
+    <span class="n">user_datastore</span><span class="o">.</span><span class="n">create_role</span><span
+            class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&#39;Generic role&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_datastore</span><span
+            class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="s">&#39;technician&#39;</span><span
+            class="p">):</span>
+    <span class="n">user_datastore</span><span class="o">.</span><span class="n">create_role</span><span
+            class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;technician&#39;</span><span
+            class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&#39;Technician role&#39;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_datastore</span><span
+            class="o">.</span><span class="n">find_role</span><span class="p">(</span><span class="s">&#39;technician&#39;</span><span
+            class="p">):</span>
+    <span class="n">user_datastore</span><span class="o">.</span><span class="n">create_role</span><span
+            class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;administrator&#39;</span><span
+            class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&#39;Administrator role&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c"># Initiate the security object</span>
+    <span class="n">security</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span
+            class="n">app</span><span class="p">,</span> <span class="n">user_datastore</span><span class="p">)</span>
+
+    <span class="c"># Initiate the Mail object</span>
+    <span class="n">mail</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span
+            class="n">app</span><span class="p">)</span>
+
+    <span class="c"># Initiate the socketio object</span>
+    <span class="n">socket</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span
+            class="n">app</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span>
+</pre>
+                    </div>
+                </div>
+
+            </div>
+            <footer>
+
+
+                <hr/>
+
+                <div role="contentinfo">
+                    <p>
+                        &copy; Copyright 2015, Bee&#39;s Knees.
+                    </p>
+                </div>
+
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a
+                    href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a
+                    href="https://readthedocs.org">Read
+                the Docs</a>.
+
+            </footer>
+        </div>
+</div>
+
+</section>
+
+</div>
+
+
+<script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT: '../',
+        VERSION: '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE: {
+    {
+        has_source | lower
+    }
+    }
+    }
+    ;
+</script>
+<script type="text/javascript" src="../_static/jquery.js"></script>
+<script type="text/javascript" src="../_static/underscore.js"></script>
+<script type="text/javascript" src="../_static/doctools.js"></script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script type="text/javascript" src="../_static/js/theme.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.StickyNav.enable();
+    });
+</script>
+
+
+</body>
+</html>
