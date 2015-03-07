@@ -1,8 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from app import socket
 from flask_security import current_user
-from app import user_datastore
-from flask import current_app
 base = Blueprint('base', __name__)
 
 
@@ -19,9 +17,10 @@ def respond_admin_menu():
     required_roles_set = set(required_roles)
 
     if required_roles_set.issubset(user_role_set):
-        print 'this user is allowed'
-    else:
-        print 'user not an admin'
+        html = render_template('base/_main_menu_item.inc',
+                               MENU_ITEM_TITLE='Admin')
+
+        socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
 
 
 @socket.on('request-current-username')
