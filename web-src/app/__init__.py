@@ -49,10 +49,10 @@ def create_app(debug=False):
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
-        CSS='static/css/',
-        PLUGIN='static/plugin/',
-        IMG='static/img/',
-        JS='static/js/',
+        CSS='/static/css/',
+        PLUGIN='/static/plugin/',
+        IMG='/static/img/',
+        JS='/static/js/',
 
         # SECURITY CORE
         SECURITY_PASSWORD_HASH='sha512_crypt',

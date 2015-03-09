@@ -39,3 +39,33 @@
     border: 1px solid #206EB7 !important;
     background-color: #ffffff !important;
 }
+
+.portlet-list {
+    list-style: none;
+    padding: 0;
+}
+
+.portlet-list .portlet {
+    margin-bottom: 1px;
+    background-color: #377ffd;
+}
+
+.tools i {
+    color: #ffffff;
+    position: relative;
+    top: 50%;
+    transform: translateY(-80%);
+}
+
+i.fa {
+   display: inline-block;
+}
+
+.list-checkbox {
+    color: #ffffff !important;
+    position: relative !important;
+    top: 50% !important;
+    transform: translateY(10%) !important;
+    font-size: 22px !important;
+    text-align: left !important;
+}

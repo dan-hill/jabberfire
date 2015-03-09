@@ -31,4 +31,9 @@ class User(db.Model, UserMixin):
     def full_name(self):
         return self.first_name + ' ' + self.last_name
 
+    @staticmethod
+    def list():
+        return db.session.query(User).all()
+
+
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

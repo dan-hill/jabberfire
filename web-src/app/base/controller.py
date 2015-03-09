@@ -18,8 +18,9 @@ def respond_admin_menu():
 
     if required_roles_set.issubset(user_role_set):
         html = render_template('base/_main_menu_item.inc',
-                               TARGET='/admin',
-                               MENU_ITEM_TITLE='Admin')
+                               TARGET='javascript:;',
+                               MENU_ITEM_TITLE='Admin',
+                               HAS_SUBMENU=True)
 
         socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
 
