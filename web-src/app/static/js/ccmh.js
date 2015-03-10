@@ -19,20 +19,118 @@ var CCMH = (function (window, document, $) {
                 var user_list = new List('user-list', options);
             };
 
-            var handle_tooltips = function() {
+            var handle_tooltips = function () {
                 $('.portlet > .portlet-title > .tools > .tool-test').tooltip({
                     container: 'body',
                     title: 'Test'
                 });
             };
 
-            var handle_list_item_selection = function() {
-                $('.list-checkbox').on('click', function() {
+            var handle_list_item_selection = function () {
+                $('.list-checkbox').on('click', function () {
                     console.log('checked box');
-                    if ($(this).hasClass('fa-square-o')){
+                    if ($(this).hasClass('fa-square-o')) {
                         $(this).removeClass('fa-square-o').addClass('fa-check-square-o');
                     } else {
                         $(this).removeClass('fa-check-square-o').addClass('fa-square-o');
+                    }
+                });
+            };
+
+            var handleSample1 = function () {
+                var False = 'false'
+                $('#tree_1').jstree({
+                    "core": {
+                        "themes": {
+                            "responsive": false
+                        },
+                        'data': {
+                            'a_attr': {},
+                            'children': [{
+                                'a_attr': {},
+                                'children': [{
+                                    'a_attr': {},
+                                    'children': [],
+                                    'icon state': {
+                                        'disabled': False,
+                                        'opened': False,
+                                        'selected': False
+                                    },
+                                    'id': 8,
+                                    'li_attr': {},
+                                    'text': 'Maternity'
+                                },
+                                    {
+                                        'a_attr': {},
+                                        'children': [],
+                                        'icon state': {
+                                            'disabled': False,
+                                            'opened': False,
+                                            'selected': False
+                                        },
+                                        'id': 9,
+                                        'li_attr': {},
+                                        'text': 'Lobby'
+                                    }],
+                                'icon state': {
+                                    'disabled': False,
+                                    'opened': False,
+                                    'selected': False
+                                },
+                                'id': 2,
+                                'li_attr': {},
+                                'text': 'Emergency Room'
+                            },
+                                {
+                                    'a_attr': {},
+                                    'children': [{
+                                        'a_attr': {},
+                                        'children': [],
+                                        'icon state': {
+                                            'disabled': False,
+                                            'opened': False,
+                                            'selected': False
+                                        },
+                                        'id': 10,
+                                        'li_attr': {},
+                                        'text': 'Goiders'
+                                    }],
+                                    'icon state': {
+                                        'disabled': False,
+                                        'opened': False,
+                                        'selected': False
+                                    },
+                                    'id': 3,
+                                    'li_attr': {},
+                                    'text': 'Intensive Care Unit'
+                                }],
+                            'icon state': {'disabled': False, 'opened': False, 'selected': False},
+                            'id': 1,
+                            'li_attr': {},
+                            'text': 'CCMH Main'
+                        }
+
+                    },
+                    "types": {
+                        "default": {
+                            "icon": "fa fa-hospital-o icon-state-default icon-lg"
+                        },
+                        "file": {
+                            "icon": "fa fa-hospital-o icon-state-success icon-lg"
+                        }
+                    },
+                    "plugins": ["types"]
+                });
+
+                // handle link clicks in tree nodes(support target="_blank" as well)
+                $('#tree_1').on('select_node.jstree', function (e, data) {
+                    var link = $('#' + data.selected).find('a');
+                    if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
+                        if (link.attr("target") == "_blank") {
+                            link.attr("href").target = "_blank";
+                        }
+                        document.location.href = link.attr("href");
+                        return false;
                     }
                 });
             };
@@ -42,6 +140,7 @@ var CCMH = (function (window, document, $) {
                     user_list_pagination();
                     handle_tooltips();
                     handle_list_item_selection();
+                    handleSample1()
                 }
             };
         })()

@@ -1,36 +1,44 @@
 from app import db
-from app.roles import Role
-from flask_security import SQLAlchemyUserDatastore, UserMixin
-from flask_security.utils import verify_password
 
 
-roles_users = db.Table(
-    'roles_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
+class Department(db.Model):
+    """ Holder """
 
-class User(db.Model, UserMixin):
-    """Docstring for class Foo."""
+    __tablename__ = 'department'
+
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(255))
-    active = db.Column(db.Boolean())
-    confirmed_at = db.Column(db.DateTime())
+    parent_id = db.Column(db.Integer, db.ForeignKey('department.id'))
 
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
+    name = db.Column(db.String(255))
 
-    roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
+    sub_departments = db.relationship('Department',
+                                      cascade='all',
+                                      backref=db.backref('parent', remote_side='Department.id'))
 
-    def verify_password(self, password):
-        return verify_password(password, self.password)
+    def exists(self):
 
-    @property
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
+        if Department.query.filter_by(id=self.id).first():
+            return True
+        return False
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+        if not self.exists():
+            return False
+        return True
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+        if self.exists():
+            return False
+
+        return True
 
     @staticmethod
     def list():
-        return db.session.query(User).all()
+        return db.session.query(Department).all()

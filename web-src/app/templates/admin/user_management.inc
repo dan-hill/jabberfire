@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% block page_title %}User Management{% endblock %}
 {% block body %}
     <!-- START USER MANAGEMENT CONTENT -->
     <div id="pjax-content" data-js="user_management">
@@ -100,7 +101,7 @@
         </div>
         <!-- END LIST AND LIST FUNCTIONS CONTAINER -->
 
-        <div id="add-user" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+<div id="add-user" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -153,6 +154,32 @@
                                 </div>
                                 <!-- END EMAIL  ADDRESS -->
 
+                                <!-- START FIRST NAME -->
+                                <div class="form-group">
+
+                                    <label class="col-md-4 control-label">First Name</label>
+
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END FIRST NAME -->
+
+                                <!-- START LAST NAME -->
+                                <div class="form-group">
+
+                                    <label class="col-md-4 control-label">Last Name</label>
+
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END LAST NAME -->
+
                                 <!-- START EMPLOYEE ID -->
                                 <div class="form-group">
 
@@ -166,42 +193,38 @@
                                 </div>
                                 <!-- END EMPLOYEE ID -->
 
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Left Icon</label>
+                                <hr>
 
-                                    <div class="col-md-4">
-                                        <div class="input-icon">
-                                            <i class="fa fa-bell-o"></i>
-                                            <input type="text" class="form-control" placeholder="Left icon">
+                                <!-- START DEPARTMENTS -->
+                                <div class="form-group">
+
+                                    <label class="col-md-4 control-label">Departments</label>
+
+                                    <div class="col-md-7">
+
+                                            <ul class="list-group" style="margin-bottom: 2px;">
+                                                <li class="list-group-item">
+                                                    <a href="javascript:;"><i class="fa fa-close pull-right"></i></a>
+                                                    CCMH Main <i class="fa fa-arrow-right"></i>Emergency Room<i class="fa fa-arrow-right"></i>Lobby
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="javascript:;"><i class="fa fa-close pull-right"></i></a>
+                                                    CCMH Main<i class="fa fa-arrow-right"></i>Intensive Care Unit
+                                                </li>
+                                            </ul>
+
+                                        <div class="input-group pull-right">
+
+                                            <a data-toggle="modal" href="#add-departments"
+                                               class="btn btn-icon-only green">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Right Icon</label>
+                                <!-- END DEPARTMENTS -->
 
-                                    <div class="col-md-4">
-                                        <div class="input-icon right">
-                                            <i class="fa fa-microphone"></i>
-                                            <input type="text" class="form-control" placeholder="Right icon">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Input With Spinner</label>
 
-                                    <div class="col-md-4">
-                                        <input type="password" class="form-control spinner" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="form-group last">
-                                    <label class="col-md-3 control-label">Static Control</label>
-
-                                    <div class="col-md-4">
-                                        <p class="form-control-static">
-                                            email@example.com
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -212,6 +235,28 @@
                 </div>
             </div>
         </div>
+
+        <div id="add-departments" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="modal-title">Add Departments to User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="tree_1" >
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                        <button type="button" class="btn green save">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <!-- END USER MANAGEMENT CONTAINER -->
 

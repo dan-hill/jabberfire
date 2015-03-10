@@ -1,8 +1,13 @@
 from app import db
 from app.roles import Role
+from app.departments.model import Department
 from flask_security import SQLAlchemyUserDatastore, UserMixin
 from flask_security.utils import verify_password
 
+departments_users = db.Table(
+    'departments_users',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('department_id', db.Integer(), db.ForeignKey('department.id')))
 
 roles_users = db.Table(
     'roles_users',
@@ -23,6 +28,11 @@ class User(db.Model, UserMixin):
 
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+
+    departments = db.relationship(
+        'Department',
+        secondary=departments_users,
+        backref=db.backref('departments', lazy='dynamic'))
 
     def verify_password(self, password):
         return verify_password(password, self.password)
