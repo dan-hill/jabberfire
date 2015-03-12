@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template
 from app import socket
 from flask_security import current_user
+from flask_security.utils import encrypt_password
 from app.users.user import User
 from app.departments.model import Department
-import json
-import pprint
+from app import user_datastore
 
 admin = Blueprint('admin', __name__)
 
@@ -34,19 +34,22 @@ def get_tree(base_department, tree_dict):
 
     return tree_dict
 
+
 @admin.route('/admin/user-management')
 def admin_user_management():
 
-    for department in Department.list():
-        if not department.parent_id:
-            pprint.pprint(get_tree(department, {}))
+    # TODO Document this function. It is unclear what I was doing here.
 
     return render_template(
         'admin/user_management.inc',
         USERS=User.list())
 
+
 @socket.on('request-admin-menu')
 def respond_admin_menu():
+
+    # TODO The role restriction code needs to be built into it's own function. Preferably a decorator.
+
     required_roles = ['admin']
     user_roles = []
     for role in current_user.roles:
@@ -62,3 +65,19 @@ def respond_admin_menu():
                                HAS_SUBMENU=True)
 
         socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
+
+
+@socket.on('add-user')
+def add_user(data):
+
+    # TODO Add protection against insufficient permissions
+
+    user_datastore.create_user(
+        email=data['email'],
+        password=encrypt_password(data['password']),
+        active=1,
+        first_name=data['first-name'],
+        last_name=data['last-name']
+    )
+
+    user_datastore.add_role_to_user(data['email'], 'user')

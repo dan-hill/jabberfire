@@ -1,6 +1,5 @@
+
 from app import db
-
-
 
 class Department(db.Model):
     """ Holder """

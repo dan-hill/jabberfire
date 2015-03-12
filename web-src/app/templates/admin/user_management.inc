@@ -109,7 +109,7 @@
                         <h4 class="modal-title">Add a New User</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="#" class="form-horizontal">
+                        <form action="#" class="form-horizontal" id="add-user-form">
                             <div class="form-body">
 
                                 <!-- START USERNAME -->
@@ -120,7 +120,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input type="text" class="form-control" placeholder="username">
+                                            <input name='username' type="text" class="form-control" placeholder="username">
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            <input name='password' type="password" class="form-control" placeholder="Password">
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
 															<span class="input-group-addon">
 															<i class="fa fa-envelope"></i>
 															</span>
-                                            <input type="email" class="form-control" placeholder="Email Address">
+                                            <input name='email' type="email" class="form-control" placeholder="Email Address">
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
 
                                     <div class="col-md-5">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="First Name">
+                                            <input name='first-name' type="text" class="form-control" placeholder="First Name">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
 
                                     <div class="col-md-5">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Last Name">
+                                            <input name='last-name' type="text" class="form-control" placeholder="Last Name">
                                         </div>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@
 
                                     <div class="col-md-5">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Employee ID Code">
+                                            <input name='employee-id' type="text" class="form-control" placeholder="Employee ID Code">
                                         </div>
                                     </div>
                                 </div>
@@ -212,9 +212,7 @@
                                                     CCMH Main<i class="fa fa-arrow-right"></i>Intensive Care Unit
                                                 </li>
                                             </ul>
-
                                         <div class="input-group pull-right">
-
                                             <a data-toggle="modal" href="#add-departments"
                                                class="btn btn-icon-only green">
                                                 <i class="fa fa-plus"></i>
@@ -223,14 +221,12 @@
                                     </div>
                                 </div>
                                 <!-- END DEPARTMENTS -->
-
-
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn default">Close</button>
-                        <button type="button" class="btn green">Save changes</button>
+                        <button type="button" class="btn green submit">Save changes</button>
                     </div>
                 </div>
             </div>

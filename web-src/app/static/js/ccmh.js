@@ -134,6 +134,16 @@ var CCMH = (function (window, document, $) {
                     }
                 });
             };
+
+            var handle_add_user_modal_submit_button = function() {
+                $('.submit').on('click', function() {
+                    var data = {};
+                    $('#add-user-form .form-control').each(function() {
+                        data[$(this).attr('name')] = $(this).val();
+                    });
+                    socket.emit('add-user', data)
+                });
+            };
             return {
                 init: function () {
                     handle_user_list();
@@ -141,6 +151,7 @@ var CCMH = (function (window, document, $) {
                     handle_tooltips();
                     handle_list_item_selection();
                     handleSample1()
+                    handle_add_user_modal_submit_button();
                 }
             };
         })()

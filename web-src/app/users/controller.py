@@ -9,15 +9,6 @@ users = Blueprint('users', __name__)
 
 @users.route('/testuser')
 def create_test_user():
-    dept_ccmh_main = Department()
-    dept_ccmh_main.title = 'CCMH Main'
-    dept_ccmh_main.parent_id = 0
-    dept_ccmh_main.save()
-
-    dept_emergency_room = Department()
-    dept_emergency_room.name = 'Emergency Room'
-    dept_emergency_room.parent_id = dept_ccmh_main.id
-    dept_emergency_room.save()
 
 
     user_datastore.create_user(
@@ -30,6 +21,56 @@ def create_test_user():
 
     user_datastore.create_user(email='thirtyseventhirty@gmail.com', password=encrypt_password('123123123'), active=1)
     user_datastore.add_role_to_user('thirtyseventhirty@gmail.com', 'user')
+
+    user_datastore.create_user(
+        email='ralphie@boogers.com',
+        password=encrypt_password('123123123'),
+        active=1,
+        first_name='Ralphie',
+        last_name='Wiggim'
+    )
+
+    user_datastore.add_role_to_user('ralphie@boogers.com', 'user')
+
+    user_datastore.create_user(
+        email='jeff@jeffrules.org',
+        password=encrypt_password('123123123'),
+        active=1,
+        first_name='Jeff',
+        last_name='Jambrox'
+    )
+
+    user_datastore.add_role_to_user('jeff@jeffrules.org', 'admin')
+
+    user_datastore.create_user(
+        email='finn@adventuremaster.com',
+        password=encrypt_password('123123123'),
+        active=1,
+        first_name='Finn',
+        last_name='The Human'
+    )
+
+    user_datastore.add_role_to_user('finn@adventuremaster.com', 'admin')
+
+    user_datastore.create_user(
+        email='jakethedog@adventuremaster.com',
+        password=encrypt_password('123123123'),
+        active=1,
+        first_name='Jake',
+        last_name='The Dog'
+    )
+
+    user_datastore.add_role_to_user('jakethedog@adventuremaster.com', 'admin')
+
+    user_datastore.create_user(
+        email='bender@ilovebender.com',
+        password=encrypt_password('123123123'),
+        active=1,
+        first_name='Bender',
+        last_name='Rodriguez'
+    )
+
+    user_datastore.add_role_to_user('bender@ilovebender.com', 'admin')
 
     return 'ok'
 
