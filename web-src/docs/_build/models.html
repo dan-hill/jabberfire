@@ -8,32 +8,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <title>Data Models &mdash; CCMH IT Asset Management System 0.1 documentation</title>
+    
 
+    
+    
 
-
-
-
-
+    
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
           rel='stylesheet' type='text/css'>
 
+    
+    
+    
 
+    
 
-
-
-
-
-
-
+    
+    
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css"/>
+    
 
-
-
+    
     <link rel="top" title="CCMH IT Asset Management System 0.1 documentation" href="index.html"/>
+    <link rel="prev" title="API Reference" href="api_reference.html"/> 
 
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
 
 </head>
@@ -42,13 +43,13 @@
 
 <div class="wy-grid-for-nav">
 
-
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
         <div class="wy-side-nav-search">
-
+            
             <a href="index.html" class="fa fa-home"> CCMH IT Asset Management System</a>
-
-
+            
+            
 <div role="search">
     <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
         <input type="text" name="q" placeholder="Search docs"/>
@@ -59,98 +60,295 @@
         </div>
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-
-
-
-            <ul class="simple">
+            
+            
+            
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-run">Application Initilization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-app">Application Object Instantiation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Data Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.users.user">User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.roles.role">Role</a></li>
+</ul>
+</li>
 </ul>
 
-
-
+            
+            
         </div>
         &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-
+        
         <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
             <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
             <a href="index.html">CCMH IT Asset Management System</a>
         </nav>
 
 
-
+        
         <div class="wy-nav-content">
             <div class="rst-content">
                 <div role="navigation" aria-label="breadcrumbs navigation">
     <ul class="wy-breadcrumbs">
         <li><a href="index.html">Docs</a> &raquo;</li>
-
+        
         <li>Data Models</li>
         <li class="wy-breadcrumbs-aside">
-
+            
             <a href="_sources/models.txt" rel="nofollow"> View page source</a>
-
+            
         </li>
     </ul>
     <hr/>
 </div>
                 <div role="main" class="document">
-
+                    
   <div class="section" id="data-models">
 <h1>Data Models<a class="headerlink" href="#data-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-app.users.user">
 <span id="user"></span><h2>User<a class="headerlink" href="#module-app.users.user" title="Permalink to this headline">¶</a></h2>
+<p>User data model.</p>
+<p>This module contains functions, variables, and classes related to user data persistance and
+relationships.</p>
+<dl class="attribute">
+<dt id="app.users.user.departments_users">
+<tt class="descclassname">app.users.user.</tt><tt class="descname">departments_users</tt><a class="headerlink" href="#app.users.user.departments_users" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Table</em></p>
+<p>Stores the relationship between users and departments.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.roles_users">
+<tt class="descclassname">app.users.user.</tt><tt class="descname">roles_users</tt><a class="headerlink" href="#app.users.user.roles_users" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Table</em></p>
+<p>Stores the relationship between users and roles.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.user_datastore">
+<tt class="descclassname">app.users.user.</tt><tt class="descname">user_datastore</tt><a class="headerlink" href="#app.users.user.user_datastore" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>SQLAlchemyUserDatastore</em></p>
+<p>The user datastore object. This object is used to access
+convenience functions related to querying user data.</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="app.users.user.User">
 <em class="property">class </em><tt class="descclassname">app.users.user.</tt><tt class="descname">User</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.users.user.User" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">flask_security.core.UserMixin</span></tt></p>
-<p>Docstring for class Foo.</p>
+<p>User data database model.</p>
+<p>The user model provides data about users and their roles in the application.</p>
 <dl class="attribute">
-<dt id="app.users.user.User.active">
-<tt class="descname">active</tt><a class="headerlink" href="#app.users.user.User.active" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.users.user.User.confirmed_at">
-<tt class="descname">confirmed_at</tt><a class="headerlink" href="#app.users.user.User.confirmed_at" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="app.users.user.User.id">
+<tt class="descname">id</tt><a class="headerlink" href="#app.users.user.User.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em></p>
+<p>Unique identifier for the user that is used internally.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="app.users.user.User.email">
 <tt class="descname">email</tt><a class="headerlink" href="#app.users.user.User.email" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.users.user.User.first_name">
-<tt class="descname">first_name</tt><a class="headerlink" href="#app.users.user.User.first_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.users.user.User.id">
-<tt class="descname">id</tt><a class="headerlink" href="#app.users.user.User.id" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="app.users.user.User.last_name">
-<tt class="descname">last_name</tt><a class="headerlink" href="#app.users.user.User.last_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><em>string</em></p>
+<p>The user&#8217;s email address.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="app.users.user.User.password">
 <tt class="descname">password</tt><a class="headerlink" href="#app.users.user.User.password" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><em>string</em></p>
+<p>A salted hash of the user&#8217;s password.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.active">
+<tt class="descname">active</tt><a class="headerlink" href="#app.users.user.User.active" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>boolean</em></p>
+<p>The active/deactive state of a user. Deactive users can not log in,
+but thier information is not destroyed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.confirmed_at">
+<tt class="descname">confirmed_at</tt><a class="headerlink" href="#app.users.user.User.confirmed_at" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>datetime</em></p>
+<p>The date and time the user was created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.first_name">
+<tt class="descname">first_name</tt><a class="headerlink" href="#app.users.user.User.first_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string</em></p>
+<p>The first name of the user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.last_name">
+<tt class="descname">last_name</tt><a class="headerlink" href="#app.users.user.User.last_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string</em></p>
+<p>The last name of the user.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="app.users.user.User.roles">
 <tt class="descname">roles</tt><a class="headerlink" href="#app.users.user.User.roles" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p><em>list of Role</em></p>
+<p>A list of roles the user has assigned to them.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.departments">
+<tt class="descname">departments</tt><a class="headerlink" href="#app.users.user.User.departments" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>list of Departments</em></p>
+<p>A list of the departments the user is assocated with.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="app.users.user.User.full_name">
+<tt class="descname">full_name</tt><a class="reference internal" href="_modules/app/users/user.html#User.full_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.users.user.User.full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string</em></p>
+<p>The user&#8217;s full name in form &#8216;First Last&#8217;.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="app.users.user.User.list">
+<em class="property">static </em><tt class="descname">list</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.users.user.User.list" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List containing objects for all users in the database.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="app.users.user.User.verify_password">
 <tt class="descname">verify_password</tt><big>(</big><em>password</em><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User.verify_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.users.user.User.verify_password" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>password</strong> (<em>string</em>) &#8211; The user&#8217;s plaintext password.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if password is valid. False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descclassname">app.users.user.</tt><tt class="descname">User</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">flask_security.core.UserMixin</span></tt></p>
+<p>User data database model.</p>
+<p>The user model provides data about users and their roles in the application.</p>
+<dl class="attribute">
+<dt>
+<tt class="descname">id</tt></dt>
+<dd><p><em>int</em></p>
+<p>Unique identifier for the user that is used internally.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">email</tt></dt>
+<dd><p><em>string</em></p>
+<p>The user&#8217;s email address.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">password</tt></dt>
+<dd><p><em>string</em></p>
+<p>A salted hash of the user&#8217;s password.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">active</tt></dt>
+<dd><p><em>boolean</em></p>
+<p>The active/deactive state of a user. Deactive users can not log in,
+but thier information is not destroyed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">confirmed_at</tt></dt>
+<dd><p><em>datetime</em></p>
+<p>The date and time the user was created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">first_name</tt></dt>
+<dd><p><em>string</em></p>
+<p>The first name of the user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">last_name</tt></dt>
+<dd><p><em>string</em></p>
+<p>The last name of the user.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">roles</tt></dt>
+<dd><p><em>list of Role</em></p>
+<p>A list of roles the user has assigned to them.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">departments</tt></dt>
+<dd><p><em>list of Departments</em></p>
+<p>A list of the departments the user is assocated with.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">full_name</tt><a class="reference internal" href="_modules/app/users/user.html#User.full_name"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p><em>string</em></p>
+<p>The user&#8217;s full name in form &#8216;First Last&#8217;.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><tt class="descname">list</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User.list"><span class="viewcode-link">[source]</span></a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List containing objects for all users in the database.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">verify_password</tt><big>(</big><em>password</em><big>)</big><a class="reference internal" href="_modules/app/users/user.html#User.verify_password"><span class="viewcode-link">[source]</span></a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>password</strong> (<em>string</em>) &#8211; The user&#8217;s plaintext password.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if password is valid. False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 
@@ -194,7 +392,15 @@ This attribute is used when checking for user roles using the
 
                 </div>
                 <footer>
-
+    
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        
+        
+        <a href="api_reference.html" class="btn btn-neutral" title="API Reference"><span
+                class="fa fa-arrow-circle-left"></span> Previous</a>
+        
+    </div>
+    
 
     <hr/>
 
@@ -253,7 +459,7 @@ This attribute is used when checking for user roles using the
         SphinxRtdTheme.StickyNav.enable();
     });
 </script>
-
+ 
 
 </body>
 </html>

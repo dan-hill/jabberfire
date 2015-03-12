@@ -4,17 +4,13 @@ Data Models
 User
 ----
 
-.. module:: app.users.user
-.. autoclass:: User
+.. automodule:: app.users.user
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Role
 ----
 
-.. module:: app.roles.role
-.. autoclass:: Role
+.. automodule:: app.roles.role
     :members:
-    :undoc-members:
     :show-inheritance:
