@@ -12,7 +12,7 @@ db = SQLAlchemy()
 mail = Mail()
 security = Security()
 
-from app.users.user import user_datastore, User
+from app.users.model import user_datastore, User
 
 def create_app(debug=False):
     # Instantiate the application object

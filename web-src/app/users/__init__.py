@@ -1,2 +1,2 @@
 __author__ = 'dan'
-from user import User
+from model import User

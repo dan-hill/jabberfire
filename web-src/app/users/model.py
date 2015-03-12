@@ -12,7 +12,6 @@ Attributes:
 
 from app import db
 from app.roles import Role
-from app.departments.model import Department
 from flask_security import SQLAlchemyUserDatastore, UserMixin
 from flask_security.utils import verify_password
 
@@ -33,17 +32,27 @@ class User(db.Model, UserMixin):
     The user model provides data about users and their roles in the application.
 
     Attributes:
-      id (int): Unique identifier for the user that is used internally.
-      email (string): The user's email address.
-      password (string): A salted hash of the user's password.
-      active (boolean): The active/deactive state of a user. Deactive users can not log in,
+      id (int):
+        Unique identifier for the user that is used internally.
+      email (string):
+        The user's email address.
+      password (string):
+        A salted hash of the user's password.
+      active (boolean):
+        The active/deactive state of a user. Deactive users can not log in,
         but thier information is not destroyed.
-      confirmed_at (datetime): The date and time the user was created.
-      first_name (string): The first name of the user.
-      last_name (string): The last name of the user.
-      roles (list of Role): A list of roles the user has assigned to them.
-      departments (list of Departments): A list of the departments the user is assocated with.
-      full_name (string): The user's full name in form 'First Last'.
+      confirmed_at (datetime):
+        The date and time the user was created.
+      first_name (string):
+        The first name of the user.
+      last_name (string):
+        The last name of the user.
+      roles (list of Role):
+        A list of roles the user has assigned to them.
+      departments (list of Departments):
+        A list of the departments the user is assocated with.
+      full_name (string):
+        The user's full name in form 'First Last'.
 
     """
 
@@ -54,7 +63,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
-
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
 

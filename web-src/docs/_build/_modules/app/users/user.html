@@ -32,7 +32,7 @@
 
     
     <link rel="top" title="CCMH IT Asset Management System 0.1 documentation" href="../../../index.html"/>
-    <link rel="up" title="app.users" href="../users.html"/> 
+    <link rel="up" title="app" href="../../app.html"/> 
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -102,8 +102,6 @@
         
         <li><a href="../../app.html">app</a> &raquo;</li>
         
-        <li><a href="../users.html">app.users</a> &raquo;</li>
-        
         <li>app.users.user</li>
         <li class="wy-breadcrumbs-aside">
             
@@ -131,10 +129,6 @@
 <span class="kn">from</span> <span class="nn">app.departments.model</span> <span class="kn">import</span> <span class="n">Department</span>
 <span class="kn">from</span> <span class="nn">flask_security</span> <span class="kn">import</span> <span class="n">SQLAlchemyUserDatastore</span><span class="p">,</span> <span class="n">UserMixin</span>
 <span class="kn">from</span> <span class="nn">flask_security.utils</span> <span class="kn">import</span> <span class="n">verify_password</span>
-
-
-
-
 
 <span class="n">departments_users</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
     <span class="s">&#39;departments_users&#39;</span><span class="p">,</span>

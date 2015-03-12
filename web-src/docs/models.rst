@@ -8,6 +8,10 @@ User
     :members:
     :show-inheritance:
 
+.. automodule:: app.users.controller
+    :members:
+    :show-inheritance:
+
 Role
 ----
 

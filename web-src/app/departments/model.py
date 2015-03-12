@@ -2,13 +2,27 @@
 from app import db
 
 class Department(db.Model):
-    """ Holder """
+    """ Department data model.
+
+    Attributes:
+    id (int):
+      Unique identifier for the department. This number is used internally int eh database.
+    parent_id (int):
+      The id of the department that the department belongs under. If the department is at the
+      top of the tree structure, this should be None.
+    name (string):
+      The name of the department. Should not have the name of the parent department prefixed to it.
+    sub_departments (list of departments):
+      A list of department objects that are directly under this department in the organizational tree
+      structure.
+    """
+
+    # TODO change sub_departments to children to more concretely describe the tree nature of the relationship.
 
     __tablename__ = 'department'
 
     id = db.Column(db.Integer, primary_key=True)
     parent_id = db.Column(db.Integer, db.ForeignKey('department.id'))
-
     name = db.Column(db.String(255))
 
     sub_departments = db.relationship('Department',

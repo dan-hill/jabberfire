@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 from app import socket
 from flask_security import current_user
 from flask_security.utils import encrypt_password
-from app.users.user import User
+from app.users.model import User
 from app.departments.model import Department
 from app import user_datastore
 

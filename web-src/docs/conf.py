@@ -20,7 +20,7 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('app/users/user.py'))
+sys.path.insert(0, os.path.abspath('app/users/model.py'))
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -36,7 +36,9 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'sphinxcontrib.napoleon'
+    'sphinxcontrib.napoleon',
+    'sphinxcontrib.httpdomain',
+    'sphinxcontrib.autohttp.flask'
 ]
 
 

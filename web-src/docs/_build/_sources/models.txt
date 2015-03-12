@@ -8,14 +8,13 @@ User
     :members:
     :show-inheritance:
 
-.. autoclass:: User
+.. automodule:: app.users.controller
     :members:
     :show-inheritance:
 
 Role
 ----
 
-.. module:: app.roles.role
-.. autoclass:: Role
+.. automodule:: app.roles.role
     :members:
     :show-inheritance:
