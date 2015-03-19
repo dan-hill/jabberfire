@@ -36,7 +36,7 @@ def create_test_user():
         active=1,
     )
 
-    user_datastore.add_role_to_user('dan@danhill.us', 'admin')
+    user_datastore.add_role_to_user('dan@danhill.us', 'administrator')
 
     user_datastore.create_user(email='thirtyseventhirty@gmail.com', password=encrypt_password('123123123'), active=1)
     user_datastore.add_role_to_user('thirtyseventhirty@gmail.com', 'user')
@@ -59,7 +59,7 @@ def create_test_user():
         last_name='Jambrox'
     )
 
-    user_datastore.add_role_to_user('jeff@jeffrules.org', 'admin')
+    user_datastore.add_role_to_user('jeff@jeffrules.org', 'administrator')
 
     user_datastore.create_user(
         email='finn@adventuremaster.com',
@@ -69,7 +69,7 @@ def create_test_user():
         last_name='The Human'
     )
 
-    user_datastore.add_role_to_user('finn@adventuremaster.com', 'admin')
+    user_datastore.add_role_to_user('finn@adventuremaster.com', 'administrator')
 
     user_datastore.create_user(
         email='jakethedog@adventuremaster.com',
@@ -79,7 +79,7 @@ def create_test_user():
         last_name='The Dog'
     )
 
-    user_datastore.add_role_to_user('jakethedog@adventuremaster.com', 'admin')
+    user_datastore.add_role_to_user('jakethedog@adventuremaster.com', 'administrator')
 
     user_datastore.create_user(
         email='bender@ilovebender.com',
@@ -89,7 +89,7 @@ def create_test_user():
         last_name='Rodriguez'
     )
 
-    user_datastore.add_role_to_user('bender@ilovebender.com', 'admin')
+    user_datastore.add_role_to_user('bender@ilovebender.com', 'administrator')
 
     return 'ok'
 

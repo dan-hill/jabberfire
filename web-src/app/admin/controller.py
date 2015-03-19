@@ -50,7 +50,7 @@ def respond_admin_menu():
 
     # TODO The role restriction code needs to be built into it's own function. Preferably a decorator.
 
-    required_roles = ['admin']
+    required_roles = ['administrator']
     user_roles = []
     for role in current_user.roles:
         user_roles.append(role.name)

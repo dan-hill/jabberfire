@@ -45,7 +45,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -72,23 +72,6 @@ def create_app(debug=False):
 
             db.create_all()
 
-            if not user_datastore.find_role('user'):
-                user_datastore.create_role(
-                    name='user',
-                    description='Generic role'
-                )
-
-            if not user_datastore.find_role('technician'):
-                user_datastore.create_role(
-                    name='technician',
-                    description='Technician role'
-                )
-
-            if not user_datastore.find_role('technician'):
-                user_datastore.create_role(
-                    name='administrator',
-                    description='Administrator role'
-                )
 
     # Initiate the security object
     security.init_app(app, user_datastore)
