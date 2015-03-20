@@ -14,7 +14,7 @@ def root_path():
 @dashboard.route('/dashboard', defaults={'page': 'index'})
 @login_required
 def show(page):
-    return render_template('dashboard.html')
+    return render_template('dashboard.inc')
 
 
 @socket.on('blah')

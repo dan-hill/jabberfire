@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/base.inc" %}
 {% block page_title %}User Management{% endblock %}
 {% block body %}
     <!-- START USER MANAGEMENT CONTENT -->

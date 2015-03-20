@@ -11,7 +11,7 @@ admin = Blueprint('admin', __name__)
 
 @admin.route('/admin')
 def admin_main():
-    return render_template('admin/admin.html')
+    return render_template('admin/admin.inc')
 
 def get_tree(base_department, tree_dict):
 

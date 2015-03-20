@@ -135,10 +135,10 @@ var CCMH = (function (window, document, $) {
                 });
             };
 
-            var handle_add_user_modal_submit_button = function() {
-                $('.submit').on('click', function() {
+            var handle_add_user_modal_submit_button = function () {
+                $('.submit').on('click', function () {
                     var data = {};
-                    $('#add-user-form .form-control').each(function() {
+                    $('#add-user-form .form-control').each(function () {
                         data[$(this).attr('name')] = $(this).val();
                     });
                     socket.emit('add-user', data)

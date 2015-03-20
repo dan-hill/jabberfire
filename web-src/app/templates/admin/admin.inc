@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/base.inc" %}
 {% block body %}
 okie dokie
 {% endblock %}
