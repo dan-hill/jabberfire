@@ -18,7 +18,7 @@ from flask_security.utils import encrypt_password
 users = Blueprint('users', __name__)
 
 
-@users.route('/testuser')
+@users.route('/insert-test-data')
 def create_test_user():
     """
     Populates the database with test user data.
