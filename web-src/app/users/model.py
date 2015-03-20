@@ -56,8 +56,6 @@ class User(db.Model, UserMixin):
 
     """
 
-    # TODO Make a username attribute used in authentication rather than email.
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
