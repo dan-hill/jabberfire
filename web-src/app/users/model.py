@@ -59,6 +59,7 @@ class User(db.Model, UserMixin):
     # TODO Make a username attribute used in authentication rather than email.
 
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, unique=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
@@ -77,7 +78,6 @@ class User(db.Model, UserMixin):
 
     @property
     def full_name(self):
-        return 'blah blah'
         return self.first_name + ' ' + self.last_name
 
     def verify_password(self, password):
