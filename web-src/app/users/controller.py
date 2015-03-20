@@ -34,12 +34,27 @@ def create_test_user():
         email='dan@danhill.us',
         password=encrypt_password('123123123'),
         active=1,
+        first_name='Dan',
+        last_name='Hill'
     )
 
-    user_datastore.add_role_to_user('dan@danhill.us', 'administrator')
+    user_datastore.add_role_to_user(
+        'dan@danhill.us',
+        'administrator'
+    )
 
-    user_datastore.create_user(email='thirtyseventhirty@gmail.com', password=encrypt_password('123123123'), active=1)
-    user_datastore.add_role_to_user('thirtyseventhirty@gmail.com', 'user')
+    user_datastore.create_user(
+        email='tunde.oladipupo@cameron.edu',
+        password=encrypt_password('password'),
+        active=1,
+        first_name='Tunde',
+        last_name='Oladipupo'
+    )
+
+    user_datastore.add_role_to_user(
+        'tunde.oladipupo@cameron.edu',
+        'user'
+    )
 
     user_datastore.create_user(
         email='ralphie@boogers.com',
