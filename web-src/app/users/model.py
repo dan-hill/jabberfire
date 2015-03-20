@@ -66,7 +66,7 @@ class User(db.Model, UserMixin):
     confirmed_at = db.Column(db.DateTime())
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
-    # employee_id = db.Column(db.String(255))
+    employee_id = db.Column(db.String(255))
 
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
