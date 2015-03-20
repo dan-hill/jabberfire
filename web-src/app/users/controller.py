@@ -27,84 +27,42 @@ def create_test_user():
         (string) OK
     """
 
+    # Insert the roles
+    if not user_datastore.find_role('user'):
+        user_datastore.create_role(
+            name='user',
+            description='Generic role'
+        )
+
+    if not user_datastore.find_role('technician'):
+        user_datastore.create_role(
+            name='technician',
+            description='Technician role'
+        )
+
+    if not user_datastore.find_role('administrator'):
+        user_datastore.create_role(
+            name='administrator',
+            description='Administrator role'
+        )
+
     # TODO Return correct status code
     # TODO Only allow to run if user's do not exist in the database already.
+
 
     user_datastore.create_user(
         email='dan@danhill.us',
         password=encrypt_password('123123123'),
         active=1,
         first_name='Dan',
-        last_name='Hill'
+        last_name='Hill',
+        username='dan.hill'
     )
 
     user_datastore.add_role_to_user(
         'dan@danhill.us',
         'administrator'
     )
-
-    user_datastore.create_user(
-        email='tunde.oladipupo@cameron.edu',
-        password=encrypt_password('password'),
-        active=1,
-        first_name='Tunde',
-        last_name='Oladipupo'
-    )
-
-    user_datastore.add_role_to_user(
-        'tunde.oladipupo@cameron.edu',
-        'user'
-    )
-
-    user_datastore.create_user(
-        email='ralphie@boogers.com',
-        password=encrypt_password('123123123'),
-        active=1,
-        first_name='Ralphie',
-        last_name='Wiggim'
-    )
-
-    user_datastore.add_role_to_user('ralphie@boogers.com', 'user')
-
-    user_datastore.create_user(
-        email='jeff@jeffrules.org',
-        password=encrypt_password('123123123'),
-        active=1,
-        first_name='Jeff',
-        last_name='Jambrox'
-    )
-
-    user_datastore.add_role_to_user('jeff@jeffrules.org', 'administrator')
-
-    user_datastore.create_user(
-        email='finn@adventuremaster.com',
-        password=encrypt_password('123123123'),
-        active=1,
-        first_name='Finn',
-        last_name='The Human'
-    )
-
-    user_datastore.add_role_to_user('finn@adventuremaster.com', 'administrator')
-
-    user_datastore.create_user(
-        email='jakethedog@adventuremaster.com',
-        password=encrypt_password('123123123'),
-        active=1,
-        first_name='Jake',
-        last_name='The Dog'
-    )
-
-    user_datastore.add_role_to_user('jakethedog@adventuremaster.com', 'administrator')
-
-    user_datastore.create_user(
-        email='bender@ilovebender.com',
-        password=encrypt_password('123123123'),
-        active=1,
-        first_name='Bender',
-        last_name='Rodriguez'
-    )
-
-    user_datastore.add_role_to_user('bender@ilovebender.com', 'administrator')
 
     return 'ok'
 
@@ -128,7 +86,7 @@ def login():
         302 OK: The login was successful. Redirects to origin page.
     """
 
-    user = user_datastore.get_user(request.form['username'])
+    user = user_datastore.find_user(username=request.form['username'])
     if user is None:
         print 'User did not exist'
         return redirect(request.args['next'])

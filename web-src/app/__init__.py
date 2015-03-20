@@ -45,7 +45,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmhdb',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -67,11 +67,9 @@ def create_app(debug=False):
     db.init_app(app)
 
     # Create the Database
-    if not os.path.exists('db.sqlite'):
-        with app.app_context():
+    with app.app_context():
 
-            db.create_all()
-
+        db.create_all()
 
     # Initiate the security object
     security.init_app(app, user_datastore)
