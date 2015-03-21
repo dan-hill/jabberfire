@@ -8,7 +8,7 @@
     </a>
     {%  if HAS_SUBMENU == True %}
     <ul class="sub-menu">
-        <li><a href="/admin/user-management"><i class="fa fa-users"></i> <span class="title">User Management</span></a></li>
+        <li data-item="user_management"><a href="/admin/user-management"><i class="fa fa-users"></i> <span class="title">User Management</span></a></li>
 	</ul>
     {% endif %}
 </li>

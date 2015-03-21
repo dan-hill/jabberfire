@@ -1,4 +1,5 @@
 {% extends "base/base.inc" %}
 {% block body %}
-{{ short_name }}
+<div id="pjax-content" data-js="dashboard">
+</div>
 {% endblock %}

@@ -36,7 +36,7 @@
                     </form>
                     <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 </li>
-                <li class="start active open">
+                <li class="start active open" data-item="dashboard">
                     <a href="/dashboard">
                         <i class="icon-home"></i>
                         <span class="title">Dashboard</span>

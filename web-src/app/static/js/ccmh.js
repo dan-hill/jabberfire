@@ -144,6 +144,8 @@ var CCMH = (function (window, document, $) {
                     socket.emit('add-user', data)
                 });
             };
+
+
             return {
                 init: function () {
                     handle_user_list();
@@ -152,6 +154,14 @@ var CCMH = (function (window, document, $) {
                     handle_list_item_selection();
                     handleSample1()
                     handle_add_user_modal_submit_button();
+                }
+            };
+        })(),
+
+        dashboard: (function () {
+            return {
+                init: function () {
+
                 }
             };
         })()
@@ -175,13 +185,13 @@ var CCMH = (function (window, document, $) {
         }
     }
 
-
     var setup_pjax_container = function () {
 
         $(document).pjax('a', '#pjax-container');
 
         $('#pjax-container').on('pjax:end', function () {
             execute_page_initializer()
+            update_menu_selection_indicator()
         });
     };
 
@@ -204,7 +214,33 @@ var CCMH = (function (window, document, $) {
     var handle_user_is_admin = function () {
         socket.on('response-user-is-admin', function (data) {
             $('.page-sidebar-menu').append(data['html']['admin-menu-entry'])
+            update_menu_selection_indicator()
         })
+    };
+
+    var update_menu_selection_indicator = function () {
+        $('.page-sidebar-menu>li, .sub-menu>li').each(function() {
+            var menu_id = $(this)[0].getAttribute('data-item');
+            var page_id = $('#pjax-content')[0].getAttribute('data-js');
+            console.log(menu_id);
+            console.log(page_id);
+            if(menu_id == page_id){
+
+                $(this).parents('li').addClass('active open');
+                var m = $(this.parentNode).parents('li');
+
+                m.find('a').append('<span class="selected"></span>');
+                $(this).addClass('active');
+            } else {
+                $(this).parents('li').removeClass('active open');
+                var m = $(this.parentNode).parents('li');
+
+                m.find('selected').remove();
+                $(this).removeClass('active');
+            }
+        });
+
+
     };
 
 
