@@ -2,8 +2,6 @@ var Login = function () {
 
     var handleLogin = function () {
 
-
-
         $(".login-form").bind('submit', function (e) {
             // prevent page refresh
             e.preventDefault();
@@ -36,7 +34,6 @@ var Login = function () {
             });
 
             login.fail(function (data) {
-                alert('failure');
                 if(data.responseText == 'USERNAME REQUIRED'){
                     var alert = $('.login-form .alert');
                     alert.show();

@@ -58,7 +58,7 @@ def create_app(debug=False):
         SECURITY_PASSWORD_HASH='sha512_crypt',
         SECURITY_PASSWORD_SALT='FLAPPYflapflapflap',
         # SECURITY TEMPLATE PATHS
-        SECURITY_LOGIN_USER_TEMPLATE='security/login.html'
+        SECURITY_LOGIN_USER_TEMPLATE='security/login.inc'
     )
 
 
