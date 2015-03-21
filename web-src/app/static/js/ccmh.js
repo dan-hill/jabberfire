@@ -231,6 +231,9 @@ var CCMH = (function (window, document, $) {
 
                 m.find('a').append('<span class="selected"></span>');
                 $(this).addClass('active');
+
+                m.find('.arrow').addClass('open')
+
             } else {
                 $(this).parents('li').removeClass('active open');
                 var m = $(this.parentNode).parents('li');
