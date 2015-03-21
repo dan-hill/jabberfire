@@ -7,7 +7,6 @@ var CCMH = (function (window, document, $) {
 
             var handle_user_list = function () {
                 socket.on('response-user-list', function (data) {
-                    console.log(data)
                 })
             };
 
@@ -28,7 +27,6 @@ var CCMH = (function (window, document, $) {
 
             var handle_list_item_selection = function () {
                 $('.list-checkbox').on('click', function () {
-                    console.log('checked box');
                     if ($(this).hasClass('fa-square-o')) {
                         $(this).removeClass('fa-square-o').addClass('fa-check-square-o');
                     } else {
@@ -222,8 +220,6 @@ var CCMH = (function (window, document, $) {
         $('.page-sidebar-menu>li, .sub-menu>li').each(function() {
             var menu_id = $(this)[0].getAttribute('data-item');
             var page_id = $('#pjax-content')[0].getAttribute('data-js');
-            console.log(menu_id);
-            console.log(page_id);
             if(menu_id == page_id){
 
                 $(this).parents('li').addClass('active open');
