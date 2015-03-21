@@ -8,7 +8,7 @@
 
 """
 
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, redirect, abort, make_response
 from flask_security import login_user
 from app.users import User
 from app.departments.model import Department
@@ -180,13 +180,20 @@ def login():
     Status Codes:
         302 OK: The login was successful. Redirects to origin page.
     """
+    if request.form['username'] == '':
+        return abort(make_response('USERNAME REQUIRED', 400))
+
+    if request.form['password'] == '':
+        return abort(make_response('PASSWORD REQUIRED', 400))
 
     user = user_datastore.find_user(username=request.form['username'])
+
     if user is None:
-        print 'User did not exist'
-        return redirect(request.args['next'])
+        return abort(make_response('USER NOT FOUND', 400))
 
     if user.verify_password(request.form['password']):
         login_user(user)
+        return '', 200
+    else:
+        return abort(make_response('INVALID PASSWORD', 400))
 
-    return redirect(request.args['next'])

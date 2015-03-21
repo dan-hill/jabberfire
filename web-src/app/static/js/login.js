@@ -1,66 +1,71 @@
-var Login = function() {
+var Login = function () {
 
-    var handleLogin = function() {
+    var handleLogin = function () {
 
-        $('.login-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            rules: {
-                username: {
-                    required: true
-                },
-                password: {
-                    required: true
-                },
-                remember: {
-                    required: false
+
+
+        $(".login-form").bind('submit', function (e) {
+            // prevent page refresh
+            e.preventDefault();
+            // post the data
+
+            var login = $.ajax({
+                type: "POST",
+                data: $(".login-form").serialize(),
+                url: "/login"
+            });
+
+            login.done(function (data) {
+                var vars = [], hash;
+                var q = document.URL.split('?')[1];
+                if (q != undefined) {
+                    q = q.split('&');
+                    for (var i = 0; i < q.length; i++) {
+                        hash = q[i].split('=');
+                        vars.push(hash[1]);
+                        vars[hash[0]] = hash[1];
+                    }
+                    if(vars['next'] != ''){
+                        $(location).attr('href', vars['next'])
+                    } else {
+                        $(location).attr('href', encodeURIComponent('/'));
+                    }
+
                 }
-            },
+                $(location).attr('href', encodeURIComponent('/'));
+            });
 
-            messages: {
-                username: {
-                    required: "Username is required."
-                },
-                password: {
-                    required: "Password is required."
+            login.fail(function (data) {
+                alert('failure');
+                if(data.responseText == 'USERNAME REQUIRED'){
+                    var alert = $('.login-form .alert');
+                    alert.show();
+                    alert.find('span').text('Username is required.');
                 }
-            },
 
-            invalidHandler: function(event, validator) { //display error alert on form submit   
-                $('.alert-danger', $('.login-form')).show();
-            },
+                if(data.responseText == 'PASSWORD REQUIRED'){
+                    var alert = $('.login-form .alert');
+                    alert.show();
+                    alert.find('span').text('Password required.');
+                }
+                if(data.responseText == 'USER NOT FOUND'){
+                    var alert = $('.login-form .alert');
+                    alert.show();
+                    alert.find('span').text('No such user.');
+                }
 
-            highlight: function(element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
-            },
+                if(data.responseText == 'INVALID PASSWORD'){
+                    var alert = $('.login-form .alert');
+                    alert.show();
+                    alert.find('span').text('Invalid password.');
 
-            success: function(label) {
-                label.closest('.form-group').removeClass('has-error');
-                label.remove();
-            },
-
-            errorPlacement: function(error, element) {
-                error.insertAfter(element.closest('.input-icon'));
-            },
-
-            submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
-            }
+                }
+            });
         });
 
-        $('.login-form input').keypress(function(e) {
-            if (e.which == 13) {
-                if ($('.login-form').validate().form()) {
-                    $('.login-form').submit(); //form validation success, call ajax form submit
-                }
-                return false;
-            }
-        });
-    }
+    };
 
-    var handleForgetPassword = function() {
+    var handleForgetPassword = function () {
         $('.forget-form').validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
@@ -79,30 +84,30 @@ var Login = function() {
                 }
             },
 
-            invalidHandler: function(event, validator) { //display error alert on form submit   
+            invalidHandler: function (event, validator) { //display error alert on form submit
 
             },
 
-            highlight: function(element) { // hightlight error inputs
+            highlight: function (element) { // hightlight error inputs
                 $(element)
                     .closest('.form-group').addClass('has-error'); // set error class to the control group
             },
 
-            success: function(label) {
+            success: function (label) {
                 label.closest('.form-group').removeClass('has-error');
                 label.remove();
             },
 
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.closest('.input-icon'));
             },
 
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             }
         });
 
-        $('.forget-form input').keypress(function(e) {
+        $('.forget-form input').keypress(function (e) {
             if (e.which == 13) {
                 if ($('.forget-form').validate().form()) {
                     $('.forget-form').submit();
@@ -111,19 +116,19 @@ var Login = function() {
             }
         });
 
-        jQuery('#forget-password').click(function() {
+        jQuery('#forget-password').click(function () {
             jQuery('.login-form').hide();
             jQuery('.forget-form').show();
         });
 
-        jQuery('#back-btn').click(function() {
+        jQuery('#back-btn').click(function () {
             jQuery('.login-form').show();
             jQuery('.forget-form').hide();
         });
 
     }
 
-    var handleRegister = function() {
+    var handleRegister = function () {
 
         function format(state) {
             if (!state.id) return state.text; // optgroup
@@ -131,21 +136,21 @@ var Login = function() {
         }
 
         if (jQuery().select2) {
-	        $("#select2_sample4").select2({
-	            placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a Country',
-	            allowClear: true,
-	            formatResult: format,
-	            formatSelection: format,
-	            escapeMarkup: function(m) {
-	                return m;
-	            }
-	        });
+            $("#select2_sample4").select2({
+                placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a Country',
+                allowClear: true,
+                formatResult: format,
+                formatSelection: format,
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
 
 
-	        $('#select2_sample4').change(function() {
-	            $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-	        });
-    	}
+            $('#select2_sample4').change(function () {
+                $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+            });
+        }
 
         $('.register-form').validate({
             errorElement: 'span', //default input error message container
@@ -192,21 +197,21 @@ var Login = function() {
                 }
             },
 
-            invalidHandler: function(event, validator) { //display error alert on form submit   
+            invalidHandler: function (event, validator) { //display error alert on form submit
 
             },
 
-            highlight: function(element) { // hightlight error inputs
+            highlight: function (element) { // hightlight error inputs
                 $(element)
                     .closest('.form-group').addClass('has-error'); // set error class to the control group
             },
 
-            success: function(label) {
+            success: function (label) {
                 label.closest('.form-group').removeClass('has-error');
                 label.remove();
             },
 
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 if (element.attr("name") == "tnc") { // insert checkbox errors after the container                  
                     error.insertAfter($('#register_tnc_error'));
                 } else if (element.closest('.input-icon').size() === 1) {
@@ -216,12 +221,12 @@ var Login = function() {
                 }
             },
 
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 form.submit();
             }
         });
 
-        $('.register-form input').keypress(function(e) {
+        $('.register-form input').keypress(function (e) {
             if (e.which == 13) {
                 if ($('.register-form').validate().form()) {
                     $('.register-form').submit();
@@ -230,12 +235,12 @@ var Login = function() {
             }
         });
 
-        jQuery('#register-btn').click(function() {
+        jQuery('#register-btn').click(function () {
             jQuery('.login-form').hide();
             jQuery('.register-form').show();
         });
 
-        jQuery('#register-back-btn').click(function() {
+        jQuery('#register-back-btn').click(function () {
             jQuery('.login-form').show();
             jQuery('.register-form').hide();
         });
@@ -243,7 +248,7 @@ var Login = function() {
 
     return {
         //main function to initiate the module
-        init: function() {
+        init: function () {
 
             handleLogin();
             handleForgetPassword();
