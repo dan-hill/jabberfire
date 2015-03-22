@@ -27,7 +27,8 @@ messages = {
     'missing-email-address': 'Email address is missing from request.',
     'empty-email-address': 'Email address is required.',
     'missing-password': 'Password is missing from the request',
-    'empty-password': 'Password is required.'
+    'empty-password': 'Password is required.',
+    'password-mismatch': 'Passwords must match.'
 }
 
 @users.route('/insert-test-data')
@@ -292,6 +293,12 @@ def request_access():
         errors.append({
             'field': 'password',
             'message': messages['empty-password']})
+
+    if not (request.form['password'] == request.form['confirm-password']):
+        errors.append({
+            'field': 'confirm-password',
+            'message': messages['password-mismatch']})
+
     if len(errors) > 0:
         return jsonify(results=errors), 400
 

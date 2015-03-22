@@ -157,7 +157,7 @@ var Login = function () {
 
                 // Reset to non-error conditions
                 $('.register-form input').each(function () {
-                    if ($(this).getType() == 'text') {
+                    if ($(this).getType() == 'text' || $(this).getType() == 'password') {
                         $(this).removeClass('input-error');
                         $(this).addClass('text-field');
                     }
@@ -169,11 +169,11 @@ var Login = function () {
                 });
 
                 var errors = $.parseJSON(data.responseText)['results'];
-
+                console.log(errors)
                 errors.forEach(function (data) {
-                    var element = $('[name=' + data['field'] + ']');
-
-                    if (element.getType() == 'text') {
+                    var element = $('.register-form [name=' + data['field'] + ']');
+                    console.log(element)
+                    if (element.getType() == 'text' || element.getType() == 'password') {
                         element.removeClass('text-field');
                         element.addClass('input-error');
                     }
@@ -181,7 +181,7 @@ var Login = function () {
                     var alert = $('.register-form .alert');
 
                     alert.show();
-                    alert.append('<span>' + data['message'] + '</span>');
+                    alert.append('<span>* ' + data['message'] + '<br/></span>');
 
                 });
             });
