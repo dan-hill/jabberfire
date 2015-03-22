@@ -74,6 +74,7 @@ class User(db.Model, UserMixin):
         secondary=departments_users,
         backref=db.backref('departments', lazy='dynamic'))
 
+    # Flask security pulls active status from an active property rather than status.
     @property
     def active(self):
         print self.status
@@ -81,6 +82,7 @@ class User(db.Model, UserMixin):
             return True
         return False
 
+    # The active setter must be present for flask security to not cause errors.
     @active.setter
     def active(self, value):
         pass
