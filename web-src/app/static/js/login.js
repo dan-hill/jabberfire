@@ -10,7 +10,7 @@ var Login = function () {
             var login = $.ajax({
                 type: "POST",
                 data: $(".login-form").serialize(),
-                url: "/login"
+                url: $(location).attr('href')
             });
 
             login.done(function (data) {
@@ -23,40 +23,48 @@ var Login = function () {
                         vars.push(hash[1]);
                         vars[hash[0]] = hash[1];
                     }
-                    if(vars['next'] != ''){
-                        $(location).attr('href', vars['next'])
-                    } else {
-                        $(location).attr('href', encodeURIComponent('/'));
-                    }
-
+                    window.location.href = vars['next'];
                 }
-                $(location).attr('href', encodeURIComponent('/'));
+                window.location.href = encodeURIComponent('/');
+
             });
 
             login.fail(function (data) {
-                if(data.responseText == 'USERNAME REQUIRED'){
-                    var alert = $('.login-form .alert');
-                    alert.show();
-                    alert.find('span').text('Username is required.');
-                }
+                $.fn.getType = function () {
+                    return this[0].tagName == "INPUT" ? this[0].type.toLowerCase() : this[0].tagName.toLowerCase();
+                };
 
-                if(data.responseText == 'PASSWORD REQUIRED'){
-                    var alert = $('.login-form .alert');
-                    alert.show();
-                    alert.find('span').text('Password required.');
-                }
-                if(data.responseText == 'USER NOT FOUND'){
-                    var alert = $('.login-form .alert');
-                    alert.show();
-                    alert.find('span').text('No such user.');
-                }
+                // Reset to non-error conditions
+                $('.login-form input').each(function () {
+                    if ($(this).getType() == 'text' || $(this).getType() == 'password') {
+                        $(this).removeClass('input-error');
+                        $(this).addClass('text-field');
+                    }
+                });
 
-                if(data.responseText == 'INVALID PASSWORD'){
-                    var alert = $('.login-form .alert');
-                    alert.show();
-                    alert.find('span').text('Invalid password.');
+                // Clear the error alert messages
+                $('.login-form .alert span').each(function () {
+                    $(this).remove();
+                });
 
-                }
+                var errors = $.parseJSON(data.responseText)['results'];
+
+                errors.forEach(function (data) {
+                    var element = $('.login-form [name=' + data['field'] + ']');
+
+                    if (element.getType() == 'text' || element.getType() == 'password') {
+                        element.removeClass('text-field');
+                        element.addClass('input-error');
+                    }
+
+                    var alert = $('.login-form .alert');
+
+                    alert.show();
+
+                    // TODO Make errors into a list so they can be styled more effectivly.
+                    alert.append('<span>*' + data['message'] + '<br/></span>');
+
+                });
             });
         });
 
@@ -123,113 +131,60 @@ var Login = function () {
             jQuery('.forget-form').hide();
         });
 
-    }
+    };
 
     var handleRegister = function () {
 
-        function format(state) {
-            if (!state.id) return state.text; // optgroup
-            return "<img class='flag' src='../../assets/global/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
-        }
+        $(".register-form").bind('submit', function (e) {
+            // prevent page refresh
+            e.preventDefault();
+            // post the data
 
-        if (jQuery().select2) {
-            $("#select2_sample4").select2({
-                placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a Country',
-                allowClear: true,
-                formatResult: format,
-                formatSelection: format,
-                escapeMarkup: function (m) {
-                    return m;
-                }
+            var register = $.ajax({
+                type: "POST",
+                data: $(".register-form").serialize(),
+                url: "/request-access"
             });
 
-
-            $('#select2_sample4').change(function () {
-                $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+            register.done(function (data) {
+                console.log('success!')
             });
-        }
 
-        $('.register-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
-            rules: {
+            register.fail(function (data) {
+                $.fn.getType = function () {
+                    return this[0].tagName == "INPUT" ? this[0].type.toLowerCase() : this[0].tagName.toLowerCase();
+                };
 
-                fullname: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                address: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
+                // Reset to non-error conditions
+                $('.register-form input').each(function () {
+                    if ($(this).getType() == 'text') {
+                        $(this).removeClass('input-error');
+                        $(this).addClass('text-field');
+                    }
+                });
 
-                username: {
-                    required: true
-                },
-                password: {
-                    required: true
-                },
-                rpassword: {
-                    equalTo: "#register_password"
-                },
+                // Clear the error alert messages
+                $('.register-form .alert span').each(function () {
+                    $(this).remove();
+                });
 
-                tnc: {
-                    required: true
-                }
-            },
+                var errors = $.parseJSON(data.responseText)['results'];
 
-            messages: { // custom messages for radio buttons and checkboxes
-                tnc: {
-                    required: "Please accept TNC first."
-                }
-            },
+                errors.forEach(function (data) {
+                    var element = $('[name=' + data['field'] + ']');
 
-            invalidHandler: function (event, validator) { //display error alert on form submit
+                    if (element.getType() == 'text') {
+                        element.removeClass('text-field');
+                        element.addClass('input-error');
+                    }
 
-            },
+                    var alert = $('.register-form .alert');
 
-            highlight: function (element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
-            },
+                    alert.show();
+                    alert.append('<span>' + data['message'] + '</span>');
 
-            success: function (label) {
-                label.closest('.form-group').removeClass('has-error');
-                label.remove();
-            },
-
-            errorPlacement: function (error, element) {
-                if (element.attr("name") == "tnc") { // insert checkbox errors after the container                  
-                    error.insertAfter($('#register_tnc_error'));
-                } else if (element.closest('.input-icon').size() === 1) {
-                    error.insertAfter(element.closest('.input-icon'));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-
-            submitHandler: function (form) {
-                form.submit();
-            }
-        });
-
-        $('.register-form input').keypress(function (e) {
-            if (e.which == 13) {
-                if ($('.register-form').validate().form()) {
-                    $('.register-form').submit();
-                }
-                return false;
-            }
+                });
+            });
         });
 
         jQuery('#register-btn').click(function () {

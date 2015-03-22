@@ -73,3 +73,8 @@ i.fa {
     font-size: 22px !important;
     text-align: left !important;
 }
+
+.input-error {
+    border: 1px solid #b70015 !important;
+    background-color: rgba(255, 0, 16, 0.25) !important;
+}

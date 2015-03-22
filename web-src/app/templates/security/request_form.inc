@@ -1,5 +1,11 @@
 <!-- START REGISTRATION FORM -->
-        <form class="register-form" action="index.html" method="post">
+        <form class="register-form" >
+
+            <!-- START INPUT ERROR ALERT -->
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                </div>
+            <!-- END INPUT ERROR ALERT -->
 
             <!-- START INSTRUCTIONS -->
             <p class="hint">
@@ -38,6 +44,24 @@
                 <input class="form-control placeholder-no-fix text-field" type="text" placeholder="Email" name="email"/>
             </div>
             <!-- END EMAIL -->
+
+            <!-- START PASSWORD INPUT -->
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <input class="form-control form-control-solid placeholder-no-fix text-field" type="password"
+                       autocomplete="off"
+                       placeholder="Password" name="password"/>
+            </div>
+            <!-- END PASSWORD CONFIRM INPUT -->
+
+            <!-- START PASSWORD INPUT -->
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Confirm Password</label>
+                <input class="form-control form-control-solid placeholder-no-fix text-field" type="password"
+                       autocomplete="off"
+                       placeholder="Confirm Password" name="confirm-password"/>
+            </div>
+            <!-- END PASSWORD CONFIRM INPUT -->
 
             <!-- START TERMS AND POLICIES -->
             <div class="form-group margin-top-20 margin-bottom-20">
