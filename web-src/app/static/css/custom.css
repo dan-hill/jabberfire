@@ -78,3 +78,10 @@ i.fa {
     border: 1px solid #b70015 !important;
     background-color: rgba(255, 0, 16, 0.25) !important;
 }
+
+.checkbox-error {
+    margin: 0;
+    padding: 0px;
+    border: 1px solid #b70015 !important;
+    background-color: rgba(255, 0, 16, 0.25) !important;
+}

@@ -161,6 +161,10 @@ var Login = function () {
                         $(this).removeClass('input-error');
                         $(this).addClass('text-field');
                     }
+                    if ($(this).getType() == 'checkbox') {
+                        //element.removeClass('text-field');
+                        $(this).removeClass('checkbox-error');
+                    }
                 });
 
                 // Clear the error alert messages
@@ -173,9 +177,15 @@ var Login = function () {
                 errors.forEach(function (data) {
                     var element = $('.register-form [name=' + data['field'] + ']');
                     console.log(element)
+
                     if (element.getType() == 'text' || element.getType() == 'password') {
                         element.removeClass('text-field');
                         element.addClass('input-error');
+                    }
+
+                    if (element.getType() == 'checkbox') {
+                        //element.removeClass('text-field');
+                        element.addClass('checkbox-error');
                     }
 
                     var alert = $('.register-form .alert');

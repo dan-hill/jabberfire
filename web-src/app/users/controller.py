@@ -28,7 +28,9 @@ messages = {
     'empty-email-address': 'Email address is required.',
     'missing-password': 'Password is missing from the request',
     'empty-password': 'Password is required.',
-    'password-mismatch': 'Passwords must match.'
+    'password-mismatch': 'Passwords must match.',
+    'tnc-off': 'You must accept the Terms of Service.',
+    'email-address-taken': 'Email address is already associated with an account.'
 }
 
 @users.route('/insert-test-data')
@@ -299,31 +301,37 @@ def request_access():
             'field': 'confirm-password',
             'message': messages['password-mismatch']})
 
+    if 'tnc' not in request.form:
+        errors.append({
+            'field': 'tnc',
+            'message': messages['tnc-off']})
+
     if len(errors) > 0:
         return jsonify(results=errors), 400
 
-    username = request.form['first-name'] + '.' + request.form['last-name']
+    username = (request.form['first-name'] + '.' + request.form['last-name']).lower()
 
     if user_datastore.find_user(username=username) is not None:
         username = increment_user(username=username)
 
     if user_datastore.find_user(email=request.form['email']) is not None:
-        return abort(make_response('EMAIL IN USE', 400))
+        errors.append({
+            'field': 'email',
+            'message': messages['email-address-taken']})
+        return jsonify(results=errors), 400
 
-    # TODO Additional Validation
+    # TODO Additional Validation based on organizational rule defined in the settings.
 
     if user_datastore.find_user(username=username) == None:
         user_datastore.create_user(
             email=request.form['email'],
             password=encrypt_password(request.form['password']),
-            active=0,
             first_name=request.form['first-name'],
             last_name=request.form['last-name'],
             username=username,
             employee_id=request.form['employee-id']
         )
 
-    print request.args
     return '', 200
 
 
