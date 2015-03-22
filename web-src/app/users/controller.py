@@ -17,6 +17,12 @@ from flask_security.utils import encrypt_password
 
 users = Blueprint('users', __name__)
 
+messages = {
+    'missing-first-name': 'First name is missing from request.',
+    'empty-first-name': 'First name is required.',
+    'missing-last-name': 'Last name is missing from request.',
+    'empty-last-name': 'Last name is required.'
+}
 
 @users.route('/insert-test-data')
 def create_test_user():
@@ -228,31 +234,47 @@ def request_access():
 
     # Validate first name
     if request.form['first-name'] is None:
-        errors.append({'field': 'first-name', 'message': 'First name is missing from request.'})
+        errors.append({
+            'field': 'first-name',
+            'message': messages['missing-first-name']})
 
     if request.form['first-name'] == '':
-        errors.append({'field': 'first-name', 'message': 'First name is required.'})
+        errors.append({
+            'field': 'first-name',
+            'message': messages['empty-first-name']})
 
     # Validate last name
     if request.form['last-name'] is None:
-        errors.append({'field': 'last-name', 'message': 'Last name is missing from request.'})
+        errors.append({
+            'field': 'last-name',
+            'message': messages['missing-last-name']})
 
     if request.form['last-name'] == '':
-        errors.append({'field': 'last-name', 'message': 'Last name is required.'})
+        errors.append({
+            'field': 'last-name',
+            'message': messages['empty-last-name']})
 
     # Validate employee id
     if request.form['employee-id'] is None:
-        errors.append({'field': 'employee-id', 'message': 'Employee ID is missing from request.'})
+        errors.append({
+            'field': 'employee-id',
+            'message': 'Employee ID is missing from request.'})
 
     if request.form['employee-id'] == '':
-        errors.append({'field': 'employee-id', 'message': 'Employee ID is required.'})
+        errors.append({
+            'field': 'employee-id',
+            'message': 'Employee ID is required.'})
 
     # Validate email address
     if request.form['email'] is None:
-        errors.append({'field': 'email', 'message': 'Email address is missing from request.'})
+        errors.append({
+            'field': 'email',
+            'message': 'Email address is missing from request.'})
 
     if request.form['email'] == '':
-        errors.append({'field': 'email', 'message': 'Email address is required.'})
+        errors.append({
+            'field': 'email',
+            'message': 'Email address is required.'})
 
 
     if len(errors) > 0:
