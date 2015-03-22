@@ -25,7 +25,9 @@ messages = {
     'missing-employee-id': 'Employee ID is missing from request.',
     'empty-employee-id': 'Employee ID is required.',
     'missing-email-address': 'Email address is missing from request.',
-    'empty-email-address': 'Email address is required.'
+    'empty-email-address': 'Email address is required.',
+    'missing-password': 'Password is missing from the request',
+    'empty-password': 'Password is required.'
 }
 
 @users.route('/insert-test-data')
@@ -280,7 +282,16 @@ def request_access():
             'field': 'email',
             'message': messages['empty-email-address']})
 
+    # Validate email address
+    if request.form['password'] is None:
+        errors.append({
+            'field': 'password',
+            'message': messages['missing-password']})
 
+    if request.form['password'] == '':
+        errors.append({
+            'field': 'password',
+            'message': messages['empty-password']})
     if len(errors) > 0:
         return jsonify(results=errors), 400
 
@@ -304,6 +315,7 @@ def request_access():
             username=username,
             employee_id=request.form['employee-id']
         )
+
     print request.args
     return '', 200
 
