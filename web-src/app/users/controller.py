@@ -51,7 +51,7 @@ def create_test_user():
         user_datastore.create_user(
             email='dan@danhill.us',
             password=encrypt_password('123123123'),
-            active=1,
+            status='active',
             first_name='Dan',
             last_name='Hill',
             username='dan.hill',
@@ -67,7 +67,6 @@ def create_test_user():
         user_datastore.create_user(
             email='tunde.oladipupo@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Tunde',
             last_name='Oladipupo',
             username='tunde.oladipupo',
@@ -83,7 +82,6 @@ def create_test_user():
         user_datastore.create_user(
             email='jacob.aldava@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Jacob',
             last_name='Aldava',
             username='jacob.aldava',
@@ -99,7 +97,6 @@ def create_test_user():
         user_datastore.create_user(
             email='walter.angeles@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Walter',
             last_name='Angeles',
             username='walter.angeles',
@@ -115,7 +112,6 @@ def create_test_user():
         user_datastore.create_user(
             email='aldrick.biscette@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Aldrick',
             last_name='Biscette',
             username='aldrick.biscette',
@@ -131,7 +127,6 @@ def create_test_user():
         user_datastore.create_user(
             email='odie.freeman@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Odie',
             last_name='Freeman',
             username='odie.freeman',
@@ -147,7 +142,6 @@ def create_test_user():
         user_datastore.create_user(
             email='bishaka.karki@cameron.edu',
             password=encrypt_password('123123123'),
-            active=1,
             first_name='Bishaka',
             last_name='Karki',
             username='bishaka.karki',

@@ -60,11 +60,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
-    active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
     first_name = db.Column(db.String(255))
     last_name = db.Column(db.String(255))
     employee_id = db.Column(db.String(255))
+    status = db.Column(db.String(32), default='pending')
 
     roles = db.relationship('Role', secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
@@ -73,6 +73,17 @@ class User(db.Model, UserMixin):
         'Department',
         secondary=departments_users,
         backref=db.backref('departments', lazy='dynamic'))
+
+    @property
+    def active(self):
+        print self.status
+        if self.status == 'active':
+            return True
+        return False
+
+    @active.setter
+    def active(self, value):
+        pass
 
     @property
     def full_name(self):
