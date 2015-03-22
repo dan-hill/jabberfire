@@ -205,9 +205,22 @@ def login():
     if len(errors) > 0:
         return jsonify(results=errors), 400
 
-    login_user(user)
+    if user.status == 'pending':
+        errors.append({'field': 'username', 'message': 'You have not yet been approved to access this system.'})
 
-    return jsonify(results=errors), 200
+    if user.status == 'rejected':
+        errors.append({'field': 'username', 'message': 'Your request was rejected. Please contact support for further information'})
+
+    if user.status == 'inactive':
+        errors.append({'field': 'username', 'message': 'Your account has been deactivated. Please contact support for further information,'})
+    if len(errors) > 0:
+        return jsonify(results=errors), 400
+
+    if user.status == 'active':
+        login_user(user)
+        return jsonify(results=errors), 200
+
+    abort(500)
 
 @users.route('/request-access', methods=['POST'])
 def request_access():
