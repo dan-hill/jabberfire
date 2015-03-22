@@ -21,7 +21,11 @@ messages = {
     'missing-first-name': 'First name is missing from request.',
     'empty-first-name': 'First name is required.',
     'missing-last-name': 'Last name is missing from request.',
-    'empty-last-name': 'Last name is required.'
+    'empty-last-name': 'Last name is required.',
+    'missing-employee-id': 'Employee ID is missing from request.',
+    'empty-employee-id': 'Employee ID is required.',
+    'missing-email-address': 'Email address is missing from request.',
+    'empty-email-address': 'Email address is required.'
 }
 
 @users.route('/insert-test-data')
@@ -258,23 +262,23 @@ def request_access():
     if request.form['employee-id'] is None:
         errors.append({
             'field': 'employee-id',
-            'message': 'Employee ID is missing from request.'})
+            'message': messages['missing-employee-id']})
 
     if request.form['employee-id'] == '':
         errors.append({
             'field': 'employee-id',
-            'message': 'Employee ID is required.'})
+            'message': messages['empty-employee-id']})
 
     # Validate email address
     if request.form['email'] is None:
         errors.append({
             'field': 'email',
-            'message': 'Email address is missing from request.'})
+            'message': messages['missing-email-address']})
 
     if request.form['email'] == '':
         errors.append({
             'field': 'email',
-            'message': 'Email address is required.'})
+            'message': messages['empty-email-address']})
 
 
     if len(errors) > 0:
