@@ -44,6 +44,15 @@ def admin_user_management():
         'admin/user_management.inc',
         USERS=User.list())
 
+@socket.on('request-user-list')
+def respond_user_list():
+    print 'Got request for user list.'
+    for user in User.list():
+        html = render_template('admin/user_list_item.inc',
+                               fullname=user.full_name,
+                               username=user.username,
+                               status=user.status)
+        socket.emit('response-user-list', {'username':user.username, 'html': html})
 
 @socket.on('request-admin-menu')
 def respond_admin_menu():

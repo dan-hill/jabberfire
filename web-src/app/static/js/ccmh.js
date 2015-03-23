@@ -5,8 +5,26 @@ var CCMH = (function (window, document, $) {
     var page_initializers = {
         user_management: (function () {
 
+            var get_user_list = function () {
+                socket.emit('request-user-list');
+            };
+
             var handle_user_list = function () {
                 socket.on('response-user-list', function (data) {
+                    handle_list_item_selection();
+                    var found = false;
+                    $('.portlet-list>li').each(function(){
+                        if($(this).attr('data-username') == data['username']){
+                            found = true;
+                            return;
+                        }
+                    })
+                    if(found == false){
+                        $('.portlet-list').append(data['html']);
+                    }
+
+                    user_list_pagination()
+                    handle_list_item_selection()
                 })
             };
 
@@ -146,6 +164,7 @@ var CCMH = (function (window, document, $) {
 
             return {
                 init: function () {
+                    get_user_list();
                     handle_user_list();
                     user_list_pagination();
                     handle_tooltips();
