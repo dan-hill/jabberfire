@@ -33,9 +33,6 @@ messages = {
     'email-address-taken': 'Email address is already associated with an account.'
 }
 
-
-
-
 @users.route('/login', methods=['POST'])
 def login():
     """
