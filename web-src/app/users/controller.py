@@ -14,6 +14,7 @@ from app.users import User
 from app.departments.model import Department
 from app import user_datastore
 from flask_security.utils import encrypt_password
+from app import socket
 
 users = Blueprint('users', __name__)
 
@@ -196,11 +197,26 @@ def request_access():
 
     return '', 200
 
-
 def increment_user(username):
     n = 1
     while user_datastore.find_user(username=username + '.' + str(n)) is not None:
             n += 1
     return username + '.' + str(n)
 
+@socket.on('add-user')
+def add_user(data):
+
+    # TODO Add protection against insufficient permissions
+    if user_datastore.find_user(email=request.form['email']) is None:
+        user_datastore.create_user(
+            email=data['email'],
+            password=encrypt_password(data['password']),
+            first_name=data['first-name'],
+            last_name=data['last-name'],
+            status=data['status']
+        )
+
+        user_datastore.add_role_to_user(data['email'], 'user')
+    else:
+        print 'User already in existance.'
 

@@ -75,18 +75,3 @@ def respond_admin_menu():
 
         socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
 
-
-@socket.on('add-user')
-def add_user(data):
-
-    # TODO Add protection against insufficient permissions
-
-    user_datastore.create_user(
-        email=data['email'],
-        password=encrypt_password(data['password']),
-        active=1,
-        first_name=data['first-name'],
-        last_name=data['last-name']
-    )
-
-    user_datastore.add_role_to_user(data['email'], 'user')
