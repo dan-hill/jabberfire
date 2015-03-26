@@ -20,26 +20,6 @@ from app import socket
 users = Blueprint('users', __name__)
 
 
-def roles_required(roles):
-    print roles
-    def decorator(function):
-        def wrapper(*args, **kwargs):
-            user_roles = []
-            for role in current_user.roles:
-                user_roles.append(role.name)
-
-            user_role_set = set(user_roles)
-            required_roles_set = set(roles)
-
-            if required_roles_set.issubset(user_role_set):
-                function(*args, **kwargs)
-
-            else:
-                print 'something something'
-
-        return wrapper
-
-    return decorator
 
 
 messages = {
@@ -268,14 +248,4 @@ def respond_user_list():
         socket.emit('response-user-list', {'username': user.username, 'html': html})
 
 
-@socket.on('request-admin-menu')
-@roles_required(['administrator'])
-def respond_admin_menu():
-    print 'got request'
-    html = render_template('admin/_admin_sidebar_menu_entry.inc',
-                           TARGET='javascript:;',
-                           MENU_ITEM_TITLE='Admin',
-                           HAS_SUBMENU=True)
-
-    socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
 
