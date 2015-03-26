@@ -3,8 +3,12 @@ from flask_security.utils import encrypt_password
 from app.users.model import User
 from app.departments.model import Department
 from app import user_datastore
+import csv, os
 
 testing = Blueprint('testing', __name__)
+
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 def insert_roles():
     # Insert the roles
@@ -26,114 +30,40 @@ def insert_roles():
             description='Administrator role'
         )
 
+def increment_user(username):
+    n = 1
+    while user_datastore.find_user(username=username + '.' + str(n)) is not None:
+        n += 1
+    return username + '.' + str(n)
 
 def insert_users():
+    reader = csv.reader(open(os.path.join(__location__, 'users.csv')), delimiter=',', quotechar='"')
+    for row in reader:
+        print row
+        username = (row[0] + '.' + row[1]).lower()
+
+        if user_datastore.find_user(username=username) is not None:
+            username = increment_user(username=username)
+
+        if user_datastore.find_user(username=username) is None:
+            user_datastore.create_user(
+                email=row[2],
+                password=encrypt_password(row[3]),
+                status=row[6],
+                first_name=row[0],
+                last_name=row[1],
+                username=username,
+                employee_id=row[4]
+            )
+
+            user_datastore.add_role_to_user(
+                row[2],
+                'administrator'
+            )
     # Insert the users
-    if user_datastore.find_user(username='dan.hill') == None:
-        user_datastore.create_user(
-            email='dan@danhill.us',
-            password=encrypt_password('123123123'),
-            status='active',
-            first_name='Dan',
-            last_name='Hill',
-            username='dan.hill',
-            employee_id='Ji1SNFbcv4'
-        )
 
-        user_datastore.add_role_to_user(
-            'dan@danhill.us',
-            'administrator'
-        )
 
-    if user_datastore.find_user(username='tunde.oladipupo') == None:
-        user_datastore.create_user(
-            email='tunde.oladipupo@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Tunde',
-            last_name='Oladipupo',
-            username='tunde.oladipupo',
-            employee_id='ii6ZitQNXz'
-        )
 
-        user_datastore.add_role_to_user(
-            'tunde.oladipupo@cameron.edu',
-            'administrator'
-        )
-
-    if user_datastore.find_user(username='jacob.aldava') == None:
-        user_datastore.create_user(
-            email='jacob.aldava@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Jacob',
-            last_name='Aldava',
-            username='jacob.aldava',
-            employee_id='3aMwU9ajL9'
-        )
-
-        user_datastore.add_role_to_user(
-            'jacob.aldava@cameron.edu',
-            'administrator'
-        )
-
-    if user_datastore.find_user(username='walter.angeles') == None:
-        user_datastore.create_user(
-            email='walter.angeles@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Walter',
-            last_name='Angeles',
-            username='walter.angeles',
-            employee_id='PvgYaTjEHH'
-        )
-
-        user_datastore.add_role_to_user(
-            'walter.angeles@cameron.edu',
-            'administrator'
-        )
-
-    if user_datastore.find_user(username='aldrick.biscette') == None:
-        user_datastore.create_user(
-            email='aldrick.biscette@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Aldrick',
-            last_name='Biscette',
-            username='aldrick.biscette',
-            employee_id='TPbkwqfbEL'
-        )
-
-        user_datastore.add_role_to_user(
-            'aldrick.biscette@cameron.edu',
-            'administrator'
-        )
-
-    if user_datastore.find_user(username='odie.freeman') == None:
-        user_datastore.create_user(
-            email='odie.freeman@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Odie',
-            last_name='Freeman',
-            username='odie.freeman',
-            employee_id='ikuPEWkvX4'
-        )
-
-        user_datastore.add_role_to_user(
-            'odie.freeman@cameron.edu',
-            'administrator'
-        )
-
-    if user_datastore.find_user(username='bishaka.karki') == None:
-        user_datastore.create_user(
-            email='bishaka.karki@cameron.edu',
-            password=encrypt_password('123123123'),
-            first_name='Bishaka',
-            last_name='Karki',
-            username='bishaka.karki',
-            employee_id='ggNw7zEFds'
-        )
-
-        user_datastore.add_role_to_user(
-            'bishaka.karki@cameron.edu',
-            'administrator'
-        )
 
 @testing.route('/insert-test-data')
 def create_test_user():
