@@ -95,7 +95,35 @@
                         </div>
                         <!-- END PASSWORD CONFIRMATION-->
 
-                        <!-- TODO Add role and status comboboxes -->
+                        <!-- START ROLES -->
+                        <div class="form-group">
+                            <!-- TODO Pull the roles from the database -->
+                            <label class="col-md-4 control-label">Role</label>
+                            <div class="col-md-5">
+                                <select class="form-control" name="role">
+                                    <option value="user">User</option>
+                                    <option value="technician">Technician</option>
+                                    <option value="administrator">Administrator</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- END ROLES -->
+
+                        <!-- START STATUS -->
+                        <div class="form-group">
+                            <!-- TODO Pull the roles from the database -->
+                            <label class="col-md-4 control-label">Status</label>
+                            <div class="col-md-5">
+                                <select class="form-control" name="status">
+                                    <option value="pending">Pending</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="declined">Declined</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- END STATUS -->
+
                         <hr>
 
                         <!-- START DEPARTMENTS -->

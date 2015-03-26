@@ -25,7 +25,7 @@ def run_application():
 
     app = create_app(True)
 
-    socket.run(app, host='0.0.0.0', port=5001)
+    socket.run(app, host='0.0.0.0', port=8080)
 
 if __name__ == '__main__':
     run_application()

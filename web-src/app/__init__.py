@@ -48,7 +48,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS

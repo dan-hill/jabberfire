@@ -8,15 +8,39 @@
 
 """
 
-from flask import Blueprint, request, redirect, abort, make_response, jsonify
-from flask_security import login_user
+from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template
+from flask_security import login_user, current_user
 from app.users import User
 from app.departments.model import Department
 from app import user_datastore
 from flask_security.utils import encrypt_password
+
 from app import socket
 
 users = Blueprint('users', __name__)
+
+
+def roles_required(roles):
+    print roles
+    def decorator(function):
+        def wrapper(*args, **kwargs):
+            user_roles = []
+            for role in current_user.roles:
+                user_roles.append(role.name)
+
+            user_role_set = set(user_roles)
+            required_roles_set = set(roles)
+
+            if required_roles_set.issubset(user_role_set):
+                function(*args, **kwargs)
+
+            else:
+                print 'something something'
+
+        return wrapper
+
+    return decorator
+
 
 messages = {
     'missing-first-name': 'First name is missing from request.',
@@ -33,6 +57,7 @@ messages = {
     'tnc-off': 'You must accept the Terms of Service.',
     'email-address-taken': 'Email address is already associated with an account.'
 }
+
 
 @users.route('/login', methods=['POST'])
 def login():
@@ -87,10 +112,12 @@ def login():
         errors.append({'field': 'username', 'message': 'You have not yet been approved to access this system.'})
 
     if user.status == 'rejected':
-        errors.append({'field': 'username', 'message': 'Your request was rejected. Please contact support for further information'})
+        errors.append({'field': 'username',
+                       'message': 'Your request was rejected. Please contact support for further information'})
 
     if user.status == 'inactive':
-        errors.append({'field': 'username', 'message': 'Your account has been deactivated. Please contact support for further information,'})
+        errors.append({'field': 'username',
+                       'message': 'Your account has been deactivated. Please contact support for further information,'})
     if len(errors) > 0:
         return jsonify(results=errors), 400
 
@@ -99,6 +126,7 @@ def login():
         return jsonify(results=errors), 200
 
     abort(500)
+
 
 @users.route('/request-access', methods=['POST'])
 def request_access():
@@ -197,17 +225,18 @@ def request_access():
 
     return '', 200
 
+
 def increment_user(username):
     n = 1
     while user_datastore.find_user(username=username + '.' + str(n)) is not None:
-            n += 1
+        n += 1
     return username + '.' + str(n)
+
 
 @socket.on('add-user')
 def add_user(data):
-
     # TODO Add protection against insufficient permissions
-    if user_datastore.find_user(email=request.form['email']) is None:
+    if user_datastore.find_user(email=data['email']) is None:
         user_datastore.create_user(
             email=data['email'],
             password=encrypt_password(data['password']),
@@ -217,6 +246,36 @@ def add_user(data):
         )
 
         user_datastore.add_role_to_user(data['email'], 'user')
+
+        user = user_datastore.find_user(email=data['email'])
+        html = render_template('admin/user_list_item.inc',
+                               fullname=user.full_name,
+                               username=user.username,
+                               status=user.status)
+        socket.emit('response-user-list', {'username': user.username, 'html': html})
     else:
         print 'User already in existance.'
+
+
+@socket.on('request-user-list')
+def respond_user_list():
+    print 'Got request for user list.'
+    for user in User.list():
+        html = render_template('admin/user_list_item.inc',
+                               fullname=user.full_name,
+                               username=user.username,
+                               status=user.status)
+        socket.emit('response-user-list', {'username': user.username, 'html': html})
+
+
+@socket.on('request-admin-menu')
+@roles_required(['administrator'])
+def respond_admin_menu():
+    print 'got request'
+    html = render_template('admin/_admin_sidebar_menu_entry.inc',
+                           TARGET='javascript:;',
+                           MENU_ITEM_TITLE='Admin',
+                           HAS_SUBMENU=True)
+
+    socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
 

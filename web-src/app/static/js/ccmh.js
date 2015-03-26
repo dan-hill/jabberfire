@@ -158,6 +158,8 @@ var CCMH = (function (window, document, $) {
                         data[$(this).attr('name')] = $(this).val();
                     });
                     socket.emit('add-user', data)
+                    $('#add-user').modal('toggle')
+                    $('#add-user-form')[0].reset()
                 });
             };
 
@@ -214,6 +216,7 @@ var CCMH = (function (window, document, $) {
 
     var show_admin_menu = function () {
         $(document).ready(function () {
+            console.log('requesting admin menu')
             socket.emit('request-admin-menu');
         });
     };
@@ -230,7 +233,8 @@ var CCMH = (function (window, document, $) {
 
     var handle_user_is_admin = function () {
         socket.on('response-user-is-admin', function (data) {
-            $('.page-sidebar-menu').append(data['html']['admin-menu-entry'])
+            console.log('Got user admin response.')
+            $('.page-sidebar-menu').append(data['html']['admin-menu-entry']);
             update_menu_selection_indicator()
         })
     };

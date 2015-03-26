@@ -44,34 +44,3 @@ def admin_user_management():
         'admin/user_management.inc',
         USERS=User.list())
 
-@socket.on('request-user-list')
-def respond_user_list():
-    print 'Got request for user list.'
-    for user in User.list():
-        html = render_template('admin/user_list_item.inc',
-                               fullname=user.full_name,
-                               username=user.username,
-                               status=user.status)
-        socket.emit('response-user-list', {'username':user.username, 'html': html})
-
-@socket.on('request-admin-menu')
-def respond_admin_menu():
-
-    # TODO The role restriction code needs to be built into it's own function. Preferably a decorator.
-
-    required_roles = ['administrator']
-    user_roles = []
-    for role in current_user.roles:
-        user_roles.append(role.name)
-
-    user_role_set = set(user_roles)
-    required_roles_set = set(required_roles)
-
-    if required_roles_set.issubset(user_role_set):
-        html = render_template('admin/_admin_sidebar_menu_entry.inc',
-                               TARGET='javascript:;',
-                               MENU_ITEM_TITLE='Admin',
-                               HAS_SUBMENU=True)
-
-        socket.emit('response-user-is-admin', {'html': {'admin-menu-entry': html}})
-
