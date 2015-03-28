@@ -25,6 +25,27 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV['simple-auth'] = {
+      crossOriginWhitelist: ['*'],
+      authorizer: 'simple-auth-authorizer:token'
+    };
+
+    ENV['simple-auth-token'] = {
+      serverTokenEndpoint: 'http://localhost:8080/auth',
+      identificationField: 'username',
+      passwordField: 'password',
+      tokenPropertyName: 'token',
+      authorizationPrefix: 'Bearer ',
+      authorizationHeaderName: 'Authorization',
+      headers: {},
+      refreshAccessTokens: true,
+      timeFactor: 1,
+      refreshLeeway: 300, // Refresh the token 5 minutes (300s) before it expires.
+      serverTokenRefreshEndpoint: '/token/refresh',
+      tokenExpireName: 'exp'
+    };
+
   }
 
   if (environment === 'test') {
