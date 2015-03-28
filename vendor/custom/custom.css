@@ -1,4 +1,8 @@
- .logo {
+body {
+  background-color: #F8F1EB !important;
+}
+
+.logo {
     margin-top: 0px;
 }
 
