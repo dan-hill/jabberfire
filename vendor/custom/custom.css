@@ -1,0 +1,88 @@
+ .logo {
+    margin-top: 0px;
+}
+
+body.login {
+  background-color: #F8F1EB !important;
+  width: 100%;
+  height: 100%;
+}
+
+ .content {
+    border: 1px solid #206EB7;
+    background-color: #ffffff;
+}
+
+ .content .form-actions .btn-success {
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+    color: #206EB7;
+    -webkit-transition: background-color 0.3s, color 0.2s, font-size 0.2s, padding-top 0.2s;
+    transition: background-color 0.2s, color 0.1s;
+    border: 1px solid #206EB7;
+}
+ .content .form-actions #back-btn {
+    width: 100%;
+    height: 60px;
+
+}
+ .content .form-actions .btn-success:hover {
+    background-color: #206EB7;
+    color: white;
+}
+
+ .content .form-actions .btn-success:active {
+    background-color: #6393b7;
+    color: white;
+}
+
+ .content .form-actions {
+    padding-bottom: 5px;
+}
+
+ .text-field {
+    border: 1px solid #206EB7 !important;
+    background-color: #ffffff !important;
+}
+
+.portlet-list {
+    list-style: none;
+    padding: 0;
+}
+
+.portlet-list .portlet {
+    margin-bottom: 1px;
+    background-color: #377ffd;
+}
+
+.tools i {
+    color: #ffffff;
+    position: relative;
+    top: 50%;
+    transform: translateY(-80%);
+}
+
+i.fa {
+   display: inline-block;
+}
+
+.list-checkbox {
+    color: #ffffff !important;
+    position: relative !important;
+    top: 50% !important;
+    transform: translateY(10%) !important;
+    font-size: 22px !important;
+    text-align: left !important;
+}
+
+.input-error {
+  color: #ff0000;
+}
+
+.checkbox-error {
+    margin: 0;
+    padding: 0px;
+    border: 1px solid #b70015 !important;
+    background-color: rgba(255, 0, 16, 0.25) !important;
+}

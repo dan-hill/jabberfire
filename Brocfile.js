@@ -17,4 +17,26 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
+
+app.import('bower_components/bootstrap/dist/js/bootstrap.js');
+
+app.import('bower_components/simple-line-icons/css/simple-line-icons.css');
+app.import('bower_components/jquery.uniform/jquery.uniform.js');
+app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
+app.import('bower_components/jquery-validate/dist/jquery.validate.js')
+
+app.import('vendor/metronic/js/metronic.js');
+app.import('vendor/metronic/js/layout.js');
+app.import('vendor/metronic/js/login.js');
+
+app.import('vendor/custom/login.css');
+app.import('vendor/custom/components.css');
+app.import('vendor/custom/plugins.css');
+app.import('vendor/custom/layout.css');
+app.import('vendor/metronic/themes/darkblue.css')
+app.import('vendor/custom/custom.css');
+
 module.exports = app.toTree();
+
