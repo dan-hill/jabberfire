@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   templateName: 'login',
-  afterRender: function() {
+  didInsertElement: function() {
     Ember.$('body').addClass('login');
     Metronic.init();
     Login.init();

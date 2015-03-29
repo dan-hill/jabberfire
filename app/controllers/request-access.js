@@ -37,5 +37,25 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         this.send('authenticate');
       }
     }
-  }
+  },
+  validateInput: function(){
+    var self = this;
+    this.validate().then(function() {
+
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid')  // true
+      console.log(self.get('errors'));
+    }).catch(function() {
+      // any validations fail
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid')  // false
+      console.log(self.get('errors'));
+    }).finally(function() {
+      // all validations complete
+      // regardless of isValid state
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid') // true || false
+      console.log(self.get('errors'));
+    });
+
+
+  }.observes('firstname', 'lastname')
+
 });
