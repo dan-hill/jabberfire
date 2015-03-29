@@ -22,6 +22,8 @@
     "jquery.uniform": "~2.1.2",
     "jquery-validation": "~1.13.1",
     "simple-line-icons": "~1.0.0",
-    "jquery-validate": "~1.13.1"
+    "jquery-validate": "~1.13.1",
+    "font-awesome": "~4.3.0",
+    "jquery-ui": "~1.11.4"
   }
 }

@@ -23,10 +23,10 @@
             <!-- START USERNAME INPUT -->
           {{form-group-input
           label-text='Username'
-          input-id='identification'
+          inputID='identification'
           input-type='text'
           input-placeholder='Enter Login'
-          input-value=identification
+          inputValue=identification
           input-classes='form-control form-control-solid placeholder-no-fix text-field'
           input-errors=errors.identification}}
             <!-- END USERNAME INPUT -->
@@ -34,10 +34,10 @@
             <!-- START PASSWORD INPUT -->
           {{form-group-input
           label-text='Password'
-          input-id='password'
+          inputID='password'
           input-type='password'
           input-placeholder='Enter Password'
-          input-value=password
+          inputValue=password
           input-classes='form-control form-control-solid placeholder-no-fix text-field'
           input-errors=errors.password}}
 
@@ -55,7 +55,7 @@
                 <!-- START REQUEST ACCESS LINK -->
                 <!-- TODO Pull the register-button jquery from metronic.js and fix semantics -->
                 <div class="pull-left forget-password-block">
-                    <a href="javascript:;" id="register-btn" class="forget-password register-btn">Request Access</a>
+                    <a href="/request-access" id="register-btn" class="forget-password register-btn">Request Access</a>
                 </div>
                 <!-- END REQUEST ACCESS LINK -->
 

@@ -1,3 +1,7 @@
+.validation-fail {
+  color: #ff0000 !important;
+}
 
-
-
+.validation-success {
+  color: #008000 !important;
+}
