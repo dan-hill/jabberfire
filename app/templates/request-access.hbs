@@ -1,0 +1,138 @@
+{{outlet}}
+
+{{! app/templates/request-access.hbs }}
+
+<!-- START SIDEBAR TOGGLER BUTTON -->
+<div class="menu-toggler sidebar-toggler"></div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- START LOGIN -->
+<div class="border-div">
+
+    <!-- START FORMS CONTAINER -->
+    <div class="content">
+
+        <!-- START LOGO -->
+        <div class="logo">
+            <a href="/">
+                <img src="img/ccmh/ccmh-pantone-300.png" alt=""/>
+            </a>
+        </div>
+        <!-- END LOGO -->
+
+        <!-- START INSTRUCTIONS -->
+        <p class="hint">
+            Enter your personal details below:
+        </p>
+        <!-- END INSTRUCTIONS -->
+        <!-- START REGISTRATION FORM -->
+        <form {{action 'authenticateForm' isValid on='submit' }}>
+
+            <!-- START FIRST NAME INPUT -->
+          {{form-group-input
+          label-text='First Name'
+          inputID='firstname'
+          input-type='text'
+          input-placeholder='First Name'
+          inputValue=firstname
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.firstname}}
+            <!-- END FIRST NAME INPUT -->
+
+            <!-- START LAST NAME INPUT -->
+          {{form-group-input
+          label-text='Last Name'
+          inputID='lastname'
+          input-type='text'
+          input-placeholder='Last Name'
+          inputValue=lastname
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.lastname}}
+            <!-- END FIRST NAME INPUT -->
+
+            <!-- START EMPLOYEE ID INPUT -->
+          {{form-group-input
+          label-text='Employee ID'
+          inputID='employeeID'
+          input-type='text'
+          input-placeholder='Employee ID'
+          inputValue=employeeID
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.employeeID}}
+            <!-- END EMPLOYEE ID INPUT -->
+
+            <!-- START EMAIL INPUT -->
+          {{form-group-input
+          label-text='Email'
+          inputID='email'
+          input-type='text'
+          input-placeholder='Email Address'
+          inputValue=email
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.email}}
+            <!-- END EMAIL INPUT -->
+
+            <!-- START PASSWORD INPUT -->
+          {{form-group-input
+          label-text='Password'
+          inputID='password'
+          input-type='text'
+          input-placeholder='Password'
+          inputValue=password
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.password}}
+            <!-- END PASSWORD INPUT -->
+
+            <!-- START PASSWORD CONFIRMATION INPUT -->
+          {{form-group-input
+          label-text='Password Confirmaion'
+          inputID='passwordConfirmation'
+          input-type='text'
+          input-placeholder='Confirm Password'
+          inputValue=passwordConfirmation
+          input-classes='form-control form-control-solid placeholder-no-fix text-field'
+          input-errors=errors.passwordConfirmation}}
+            <!-- END PASSWORD CONFIRMATION INPUT -->
+
+            <!-- START TERMS AND POLICIES -->
+            <div class="form-group margin-top-20 margin-bottom-20">
+
+                <!-- START TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXES -->
+                <label class="check">
+                  {{input id='tnc' type='checkbox' checked=tos name='tnc'}}
+                     I agree to the <a href="#">
+                    Terms of Service </a>
+                    & <a href="#">
+                    Privacy Policy </a>
+                </label>
+                <!-- END TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXYES -->
+
+                <!-- START TERMS ERROR -->
+                <div id="register_tnc_error">
+                </div>
+                <!-- END TERMS ERROR -->
+
+            </div>
+            <!-- TERMS AND POLICIES -->
+
+            <!-- START BUTTONS -->
+            <div class="form-actions">
+                <button type="button" id="register-back-btn" class="btn btn-default">Back</button>
+                <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit
+                </button>
+            </div>
+            <!-- END BUTTONS -->
+
+        </form>
+        <!-- END REGISTRATION FORM -->
+
+    </div>
+    <!-- END FORMS CONTAINER -->
+
+</div>
+<!-- END LOGIN -->
+
+<!-- START COPYRIGHT -->
+<div class="copyright">
+    2015 © Comanche County Memorial Hospital
+</div>
+<!-- END COPYRIGHT -->
