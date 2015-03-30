@@ -1,4 +1,9 @@
 import Ember from 'ember';
-
-export default Ember.Route.extend({
+import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-mixin';
+export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+  renderTemplate: function() {
+    this.render({'login': {
+      into: 'auth-content'
+    }});
+  }
 });

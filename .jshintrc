@@ -5,7 +5,11 @@
     "-Promise",
     "Metronic",
     "Layout",
-    "Login"
+    "Login",
+    "Index",
+    "Demo",
+    "Tasks",
+    "CCMH"
   ],
   "browser": true,
   "boss": true,

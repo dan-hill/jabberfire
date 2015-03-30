@@ -25,10 +25,21 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' https://cdn.mxpnl.com", // Allow scripts from https://cdn.mxpnl.com
+      'font-src': "'self' http://fonts.gstatic.com", // Allow fonts to be loaded from http://fonts.gstatic.com
+      'connect-src': "'self' *", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+      'img-src': "*",
+      'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
+      'media-src': "'self'"
+    };
 
     ENV['simple-auth'] = {
       crossOriginWhitelist: ['*'],
-      authorizer: 'simple-auth-authorizer:token'
+      authorizer: 'simple-auth-authorizer:token',
+      store: 'simple-auth-session-store:local-storage'
+
     };
 
     ENV['simple-auth-token'] = {
@@ -42,7 +53,7 @@ module.exports = function(environment) {
       refreshAccessTokens: true,
       timeFactor: 1,
       refreshLeeway: 300, // Refresh the token 5 minutes (300s) before it expires.
-      serverTokenRefreshEndpoint: '/token/refresh',
+      serverTokenRefreshEndpoint: 'http://localhost:8080/auth/refresh',
       tokenExpireName: 'exp'
     };
 

@@ -5,3 +5,24 @@
 .validation-success {
   color: #008000 !important;
 }
+
+ul.page-sidebar-menu li.sidebar-toggler-wrapper {
+  background-color: #002C4D;
+}
+
+.sidebar-search-wrapper  {
+  background-color: #002C4D;
+}
+
+.sidebar-search div.input-group input.form-control {
+  color: #d3d3d3 !important;
+  background-color: #002C4D !important;
+}
+
+.page-footer {
+  background-color: #00182A !important;
+}
+
+.page-header {
+  background-color: #00182A !important;
+}
