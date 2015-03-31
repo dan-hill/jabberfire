@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  userlist: undefined,
   actions: {
     clickedThis: function(){
-      var userlist = this.get('model');
-      console.log(userlist)
+      this.set('userlist', this.get('model'));
     }
   }
 });
