@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
 from flask_mail import Mail
 from flask_security import Security, SQLAlchemyUserDatastore
+from flask_cors import CORS
+from flask_jwt import JWT, jwt_required
 
 import os
 
@@ -11,13 +13,14 @@ socket = SocketIO()
 db = SQLAlchemy()
 mail = Mail()
 security = Security()
-
+jwt = JWT()
 from app.users.model import user_datastore, User
 
 def create_app(debug=False):
     # Instantiate the application object
     app = Flask(__name__)
 
+    CORS(app, resources='*', allow_headers='*')
     # Register the blueprints
 
     from dashboard.controller import dashboard
@@ -61,7 +64,9 @@ def create_app(debug=False):
         SECURITY_PASSWORD_HASH='sha512_crypt',
         SECURITY_PASSWORD_SALT='FLAPPYflapflapflap',
         # SECURITY TEMPLATE PATHS
-        SECURITY_LOGIN_USER_TEMPLATE='security/login.inc'
+        SECURITY_LOGIN_USER_TEMPLATE='security/login.inc',
+
+        JWT_EXPIRATION_DELTA=3600
     )
 
 
@@ -82,6 +87,8 @@ def create_app(debug=False):
 
     # Initiate the socketio object
     socket.init_app(app)
+
+    jwt.init_app(app)
 
     return app
 

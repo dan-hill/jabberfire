@@ -26,8 +26,6 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
     <link href="{{ config.PLUGIN }}simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ config.PLUGIN }}bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ config.PLUGIN }}uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- START PAGE LEVEL STYLES -->
@@ -118,10 +116,6 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     jQuery(document).ready(function () {
-        Metronic.init(); // init metronic core components
-        Layout.init(); // init current layout
-        Login.init();
-        Demo.init();
     });
 </script>
 <!-- END JAVASCRIPTS -->

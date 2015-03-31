@@ -8,17 +8,17 @@
 
 """
 
-from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template
-from flask_security import login_user, current_user
+from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
+from flask_security import login_user
 from app.users import User
 from app.departments.model import Department
 from app import user_datastore
-from flask_security.utils import encrypt_password
-
+from flask_security.utils import encrypt_password, verify_password
+from app import jwt
+from flask_jwt import jwt_required, current_user
 from app import socket
 
 users = Blueprint('users', __name__)
-
 
 
 
@@ -248,4 +248,57 @@ def respond_user_list():
         socket.emit('response-user-list', {'username': user.username, 'html': html})
 
 
+@jwt.authentication_handler
+def authenticate(username, password):
+    user = user_datastore.find_user(username=username)
+    if user is not None:
+        if user.verify_password(password):
+            return user
+
+@jwt.user_handler
+def load_user(payload):
+    user = user_datastore.find_user(id=payload['user_id'])
+    return user
+
+@users.route('/users', methods=['GET', 'POST'])
+@jwt_required()
+def users_route():
+    userlist = []
+    for user in User.list():
+        model = {
+
+                'id': user.id,
+                'firstname': user.first_name,
+                'lastname': user.last_name,
+                'email': user.email,
+                'username': user.username,
+                'employee_id': user.employee_id,
+                'status': user.status,
+
+        }
+        userlist.append(model)
+
+    return jsonify({'users': userlist})
+
+
+@users.route('/users/me', methods=['GET'])
+@jwt_required()
+def users_me():
+    user_roles = []
+    for role in current_user.roles:
+        user_roles.append({'role': role.name})
+
+    model = {
+        'user': {
+            'id': current_user.id,
+            'firstname': current_user.first_name,
+            'lastname': current_user.last_name,
+            'email': current_user.email,
+            'username': current_user.username,
+            'employee_id': current_user.employee_id,
+            'status': current_user.status,
+            'roles': user_roles
+        }
+    }
+    return jsonify(model)
 
