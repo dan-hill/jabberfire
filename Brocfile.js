@@ -44,10 +44,10 @@ app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.ttf', { d
 app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.woff', { destDir: "fonts" });
 
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
 
 app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
 
-app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
 
 app.import('vendor/metronic/js/metronic.js');
 app.import('vendor/metronic/js/layout.js');
@@ -64,4 +64,3 @@ app.import('vendor/metronic/themes/darkblue.css')
 app.import('vendor/custom/custom.css');
 
 module.exports = app.toTree();
-

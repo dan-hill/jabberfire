@@ -42,9 +42,8 @@
             <!-- START USER LIST -->
             <ul class="list portlet-list">
               {{#each user in userlist}}
-              {{ user-list-item firstname=user.firstname lastname=user.lastname}}
+              {{ user-list-item firstname=user.firstname lastname=user.lastname roles=user.roles}}
               {{/each}}
-
             </ul>
             <!-- END USER LIST -->
         </div>

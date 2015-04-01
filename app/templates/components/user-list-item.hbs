@@ -40,9 +40,9 @@
         <!-- START PORTLET BODY -->
         <div class="portlet-body display-hide">
             <strong>User Information</strong>
-
-            <p>User information goes in here... Especially info that we want to sort and filter
-                by.</p>
+            {{#each role in roles}}
+            {{role.name}}
+          {{/each}}
         </div>
         <!-- END PORTLET BODY -->
 

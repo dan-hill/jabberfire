@@ -2,6 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   beforeModel: function() {
-    this.transitionTo('app.dashboard');
+
+    var session = this.get('session');
+
+    if(session.isAuthenticated){
+      this.transitionTo('app.dashboard');
+    } else {
+      this.transitionTo('auth.login');
+    }
   }
 });
