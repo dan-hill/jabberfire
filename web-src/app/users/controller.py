@@ -286,7 +286,7 @@ def users_route():
 def users_me():
     user_roles = []
     for role in current_user.roles:
-        user_roles.append({'role': role.name})
+        user_roles.append({'name': role.name, 'user': current_user.id})
 
     model = {
         'user': {
@@ -297,8 +297,9 @@ def users_me():
             'username': current_user.username,
             'employee_id': current_user.employee_id,
             'status': current_user.status,
-            'roles': user_roles
+            'role': user_roles
         }
     }
+    print model
     return jsonify(model)
 
