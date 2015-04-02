@@ -24,6 +24,7 @@ Router.map(function() {
 
   });
 
+  this.resource('inventory', function() {});
 });
 
 export default Router;

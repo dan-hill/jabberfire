@@ -44,7 +44,10 @@
                     <span class="selected"></span>
               {{/link-to}}
             </li>
-            {{admin-menu}}
+            {{#if hasAdmin}}
+              {{admin-menu}}
+            {{/if}}
+
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
