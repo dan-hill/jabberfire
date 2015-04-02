@@ -19,7 +19,7 @@ export default Ember.Route.extend({
 
 
       required.forEach(function (req) {
-        if (Ember.$.inArray(req, userroles) == -1) {
+        if (Ember.$.inArray(req, userroles) === -1) {
           transition.abort();
         }
       });
@@ -33,7 +33,7 @@ export default Ember.Route.extend({
   },
   setupController: function (controller, model) {
     controller.set('model', model);
-    controller.set('userlist', model)
+    controller.set('userlist', model);
   },
   renderTemplate: function () {
 

@@ -6,25 +6,34 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  // Authorization Resource
   this.resource('auth', function() {
     this.route('login');
     this.route('request-access');
   });
+
+  // Application Resource
   this.resource('app', function() {
 
+    // Dashboard
     this.route('dashboard');
 
+    // Inventory Resource
+    this.resource('inventory', function() {});
+
+    // User Resource
     this.resource('user', function() {
       this.route('profile');
     });
 
+    // Administrator Resource
     this.resource('admin', function() {
       this.resource('user-management', function() {});
+      this.route('settings');
     });
 
   });
 
-  this.resource('inventory', function() {});
 });
 
 export default Router;

@@ -4,11 +4,12 @@ export default Ember.Route.extend({
   setupController: function(controller){
     var userroles = [];
     var required = [3];
-    var is_admin = undefined;
-
+    var is_admin;
+    console.log(this.get('session.currentUser.roles'));
     try {
       // Ain't got not time for this shit
       this.get('session.currentUser.roles').forEach(function (role) {
+        console.log(role);
         if (role % 1 === 0) {
           userroles.push(parseInt(role));
         } else {
@@ -18,9 +19,9 @@ export default Ember.Route.extend({
 
 
       required.forEach(function (req) {
-        if (Ember.$.inArray(req, userroles) == -1) {
+        if (Ember.$.inArray(req, userroles) === -1) {
           is_admin = false;
-          throw('stopit')
+          throw('stopit');
         } else {
           is_admin = true;
         }
