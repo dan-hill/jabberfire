@@ -14,12 +14,10 @@ Router.map(function() {
 
   // Application Resource
   this.resource('app', function() {
-
     // Dashboard
     this.route('dashboard');
 
-    // Inventory Resource
-    this.resource('inventory', function() {});
+    this.resource('assets', function() {});
 
     // User Resource
     this.resource('user', function() {
@@ -31,7 +29,6 @@ Router.map(function() {
       this.resource('user-management', function() {});
       this.route('settings');
     });
-
   });
 
 });

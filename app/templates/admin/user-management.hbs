@@ -8,16 +8,15 @@
         <!-- START LIST TOOLS -->
         <div class="row">
 
-            <!-- START SEARCH BOX -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="search" class="form-control search" placeholder="">
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-            <!-- END SEARCH BOX -->
+            <!-- START SEARCH -->
+          {{search-box
+          label-text='Search'
+          inputID='filter'
+          input-type='search'
+          input-placeholder='search...'
+          inputValue=filter
+          input-classes='col-md-4'}}
+            <!-- END SEARCH -->
 
             <!-- START ACTIONS BUTTON -->
             <div class="col-md-2 col-md-offset-6">
@@ -27,7 +26,7 @@
                         Actions <i class="fa fa-angle-down"></i>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a data-toggle="modal" href="#add-user">Add User</a></li>
+                        <li><a data-toggle="modal" {{action 'openAddUserModal'}}>Add User</a></li>
                         <li><a href="#">Deactivate Selected</a></li>
                     </ul>
                 </div>
@@ -41,7 +40,7 @@
 
             <!-- START USER LIST -->
             <ul class="list portlet-list">
-              {{#each user in userlist}}
+              {{#each user in filteredContent}}
               {{ user-list-item firstname=user.firstname lastname=user.lastname roles=user.roles}}
               {{/each}}
             </ul>

@@ -31,23 +31,10 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="start active open" data-item="dashboard">
-              {{#link-to 'app.dashboard'}}
-                    <i class="icon-home"></i>
-                    <span class="title">Dashboard</span>
-                    <span class="selected"></span>
-              {{/link-to}}
-            </li>
-            <li class="start open" data-item="dashboard">
-              {{#link-to 'inventory'}}
-                  <i class="icon-home"></i>
-                  <span class="title">Inventory</span>
-                  <span class=""></span>
-              {{/link-to}}
-            </li>
-            {{#if hasAdmin}}
-              {{admin-menu}}
-            {{/if}}
+            {{navigation-item link-to='app.dashboard' icon='icon-home' title='Dashboard' id='dashboard-navigation-item'}}
+            {{navigation-item link-to='assets' icon='icon-basket' title='Assets' id='assets-navigation-item'}}
+            {{navigation-item submenu='components/admin-menu' icon='icon-energy' title='Admin' id='admin-navigation-item'}}
+
 
         </ul>
         <!-- END SIDEBAR MENU -->

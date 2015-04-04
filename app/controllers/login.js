@@ -14,7 +14,6 @@ export default Ember.Controller.extend(LoginControllerMixin, EmberValidations.Mi
   },
   actions:{
     authenticateForm: function(isValid){
-      console.log(isValid);
       if(isValid){
         this.send('authenticate');
       }

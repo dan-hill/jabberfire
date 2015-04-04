@@ -133,16 +133,6 @@ var CCMH = (function (window, document, $) {
         });
       };
 
-      var handle_add_user_modal_submit_button = function () {
-        $('.submit').on('click', function () {
-          var data = {};
-          $('#add-user-form .form-control').each(function () {
-            data[$(this).attr('name')] = $(this).val();
-          });
-          $('#add-user').modal('toggle')
-          $('#add-user-form')[0].reset()
-        });
-      };
 
 
       return {
@@ -153,7 +143,6 @@ var CCMH = (function (window, document, $) {
           handle_tooltips();
           handle_list_item_selection();
           handleSample1()
-          handle_add_user_modal_submit_button();
         }
       };
     })(),

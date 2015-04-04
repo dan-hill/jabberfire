@@ -1,12 +1,6 @@
 {{yield}}
 
-    <a href="">
-        <i class="icon-home"></i>
-        <span class="title">Admin</span>
-        <span class="arrow"></span>
-    </a>
     <ul class="sub-menu">
-        <li data-item="user_management">{{#link-to 'user-management'}}<i class="fa fa-users"></i> <span class="title">User Management</span>{{/link-to}}</li>
-        <li data-item="settings">{{#link-to 'admin.settings'}}<i class="fa fa-users"></i> <span class="title">Settings</span>{{/link-to}}</li>
-
+        <li id="user-management-menu-item">{{#link-to 'user-management'}}<i class="fa fa-users"></i> <span class="title">User Management</span><span id="menu-item-decorator"></span>{{/link-to}}</li>
+        <li id="settings">{{#link-to 'admin.settings'}}<i class="fa fa-users"></i> <span class="title">Settings</span><span id="menu-item-decorator"></span>{{/link-to}}</li>
     </ul>

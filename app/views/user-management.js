@@ -3,20 +3,46 @@ import Ember from 'ember';
 export default Ember.View.extend({
   templateName: 'admin/user-management',
   didInsertElement: function() {
-    Ember.$('body').addClass('page-header-fixed');
-    Ember.$('body').addClass('page-quick-sidebar-over-content');
-    Ember.$('body').addClass('page-style-square');
-    Metronic.init();
-    Login.init();
-    Layout.init();
-    Index.init();
-    Index.initDashboardDaterange();
-    Index.initJQVMAP(); // init index page's custom scripts
-    Index.initCalendar(); // init index page's custom scripts
-    Index.initCharts(); // init index page's custom scripts
-    Index.initChat();
-    Index.initMiniCharts();
-    Tasks.initDashboardWidget();
-    CCMH.init();
+    var admin_menu_item = Ember.$('#admin-navigation-item');
+    var user_management_menu_item = Ember.$('#user-management-menu-item');
+    admin_menu_item
+      .addClass('active open')
+      .find('#menu-item-decorator')
+      .addClass('selected');
+
+    admin_menu_item
+      .find('#submenu-arrow')
+      .addClass('open');
+
+    admin_menu_item
+      .children('.sub-menu:not(.always-open)')
+      .slideDown(500);
+
+    user_management_menu_item
+      .addClass('active');
+
+    user_management_menu_item
+      .find('#menu-item-decorator')
+      .addClass('selected');
+  },
+  willDestroyElement: function() {
+    var admin_menu_item = Ember.$('#admin-navigation-item');
+    var user_management_menu_item = Ember.$('#user-management-menu-item');
+
+    admin_menu_item
+      .removeClass('active open')
+      .find('#menu-item-decorator')
+      .removeClass('selected');
+
+    admin_menu_item
+      .find('#submenu-arrow')
+      .removeClass('open');
+
+    user_management_menu_item
+      .removeClass('active');
+
+    user_management_menu_item
+      .find('#menu-item-decorator')
+      .addClass('selected');
   }
 });
