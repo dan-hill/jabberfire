@@ -1,17 +1,20 @@
 
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
 from flask_mail import Mail
 from flask_security import Security
 from flask_cors import CORS
 from flask_jwt import JWT
+from flask_restful import Api
 
 socket = SocketIO()
 db = SQLAlchemy()
 mail = Mail()
 security = Security()
 jwt = JWT()
+api = Api()
+
 from app.users.model import user_datastore, User
 
 def create_app(debug=False):
@@ -87,6 +90,9 @@ def create_app(debug=False):
     socket.init_app(app)
 
     jwt.init_app(app)
+
+    api_bp = Blueprint('api', __name__)
+    api.init_app(api_bp)
 
     return app
 
