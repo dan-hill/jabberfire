@@ -1,0 +1,15 @@
+{{#if submenu}}
+  <a>
+    <i class="{{icon}}"></i>
+    <span class="title">{{title}}</span>
+      <span id='menu-item-decorator' class=""></span>
+    <span id='submenu-arrow' class="arrow"></span>
+  </a>
+  {{partial submenu}}
+{{else}}
+{{#link-to link-to}}
+    <i class="{{icon}}"></i>
+    <span class="title">{{title}}</span>
+    <span id='menu-item-decorator' class=""></span>
+{{/link-to}}
+{{/if}}
