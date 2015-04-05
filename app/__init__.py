@@ -5,16 +5,25 @@ from flask_socketio import SocketIO
 from flask_mail import Mail
 from flask_security import Security
 from flask_cors import CORS
-from flask_jwt import JWT
+from flask_jwt import JWT, JWTError
 from flask_restful import Api
 
 socket = SocketIO()
 db = SQLAlchemy()
 mail = Mail()
 security = Security()
-jwt = JWT()
-api = Api()
 
+
+
+class ErrorFriendlyApi(Api):
+    def error_router(self, original_handler, e):
+        if type(e) is JWTError:
+            return original_handler(e)
+        else:
+            return super(ErrorFriendlyApi, self).error_router(original_handler, e)
+
+api = ErrorFriendlyApi()
+jwt = JWT()
 from app.users.model import user_datastore, User
 
 def create_app(debug=False):
@@ -27,9 +36,6 @@ def create_app(debug=False):
     from app.dashboard.controller import dashboard
     app.register_blueprint(dashboard)
 
-    from app.users.controller import users
-    app.register_blueprint(users)
-
     from app.base.controller import base
     app.register_blueprint(base)
 
@@ -38,6 +44,21 @@ def create_app(debug=False):
 
     from app.testing.controller import testing
     app.register_blueprint(testing)
+
+    from app.roles.controller import role_bp
+    app.register_blueprint(role_bp)
+
+    from app.roles.controller import role_list_bp
+    app.register_blueprint(role_list_bp)
+
+    from app.users.controller import user
+    app.register_blueprint(user)
+
+    from app.users import user_list
+    app.register_blueprint(user_list)
+
+    from app.users.controller import c_user
+    app.register_blueprint(c_user)
 
     # Set configurations
     app.config.update(
@@ -52,7 +73,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -90,9 +111,6 @@ def create_app(debug=False):
     socket.init_app(app)
 
     jwt.init_app(app)
-
-    api_bp = Blueprint('api', __name__)
-    api.init_app(api_bp)
 
     return app
 
