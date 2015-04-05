@@ -30,12 +30,6 @@ def create_app(debug=False):
     CORS(app, resources='*', allow_headers='*')
     # Register the blueprints
 
-    from app.dashboard.controller import dashboard
-    app.register_blueprint(dashboard)
-
-    from app.base.controller import base
-    app.register_blueprint(base)
-
     from app.admin.controller import admin
     app.register_blueprint(admin)
 
