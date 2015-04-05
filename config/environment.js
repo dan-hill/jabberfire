@@ -39,8 +39,10 @@ module.exports = function(environment) {
     ENV['simple-auth'] = {
       crossOriginWhitelist: ['*'],
       authorizer: 'simple-auth-authorizer:token',
-      store: 'simple-auth-session-store:local-storage'
-
+      store: 'simple-auth-session-store:local-storage',
+      authenticationRoute: 'auth.login',
+      routeAfterAuthentication: 'app.dashboard',
+      routeIfAlreadyAuthenticated: 'app.dashboard'
     };
 
     ENV['simple-auth-token'] = {
@@ -57,7 +59,6 @@ module.exports = function(environment) {
       serverTokenRefreshEndpoint: 'http://localhost:8080/auth/refresh',
       tokenExpireName: 'exp'
     };
-
   }
 
   if (environment === 'test') {

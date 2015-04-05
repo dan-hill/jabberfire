@@ -14,10 +14,11 @@ export default Ember.Controller.extend(LoginControllerMixin, EmberValidations.Mi
   },
   actions:{
     authenticateForm: function(isValid){
+      console.log('checking form');
       if(isValid){
+        console.log('Form was valid.');
         this.send('authenticate');
       }
-
     }
   }
 });

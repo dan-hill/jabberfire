@@ -31,9 +31,79 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            {{navigation-item link-to='app.dashboard' icon='icon-home' title='Dashboard' id='dashboard-navigation-item'}}
-            {{navigation-item link-to='assets' icon='icon-basket' title='Assets' id='assets-navigation-item'}}
-            {{navigation-item submenu='components/admin-menu' icon='icon-energy' title='Admin' id='admin-navigation-item'}}
+            {{navigation-item
+              link-to='app.dashboard'
+              icon='icon-home'
+              title='Dashboard'
+              id='dashboard-navigation-item'
+              session=session
+              roles-required='user'}}
+
+            {{navigation-item
+              link-to='assets'
+              icon='icon-screen-desktop'
+              title='Assets'
+              id='assets-navigation-item'
+              session=session
+              roles-required='user'}}
+
+          <!--
+            {{navigation-item
+              submenu='components/admin-menu'
+              icon='icon-energy'
+              title='Admin'
+              id='admin-navigation-item'
+              session=session
+              roles-required='administrator'}}
+          -->
+
+            {{navigation-item
+              link-to='manufacturers'
+              icon='icon-wrench'
+              title='Manufacturers'
+              id='manufacturers-navigation-item'
+              session=session
+              roles-required='administrator technition'}}
+
+            {{navigation-item
+              link-to='suppliers'
+              icon='icon-plane'
+              title='Suppliers'
+              id='suppliers-navigation-item'
+              session=session
+              roles-required='administrator technition'}}
+
+            {{navigation-item
+              link-to='users.list'
+              icon='icon-users'
+              title='Users'
+              id='users-navigation-item'
+              session=session
+              roles-required='administrator technition'}}
+
+            {{navigation-item
+              link-to='orders'
+              icon='icon-fire'
+              title='Orders'
+              id='orders-navigation-item'
+              session=session
+              roles-required='administrator technition'}}
+
+            {{navigation-item
+              link-to='reports'
+              icon='icon-notebook'
+              title='Reports'
+              id='reports-navigation-item'
+              session=session
+              roles-required='administrator technition'}}
+
+            {{navigation-item
+              link-to='app.settings'
+              icon='icon-settings'
+              title='Settings'
+              id='settings-navigation-item'
+              session=session
+              roles-required='administrator'}}
 
 
         </ul>

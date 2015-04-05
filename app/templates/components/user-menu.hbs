@@ -9,7 +9,7 @@
     </a>
     <ul class="dropdown-menu dropdown-menu-default">
         <li>
-            {{#link-to 'user.profile'}}
+          {{#link-to 'users.profile' session.currentUser.id}}
                 <i class="icon-user"></i> My Profile
             {{/link-to}}
         </li>

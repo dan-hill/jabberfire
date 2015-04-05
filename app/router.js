@@ -28,7 +28,11 @@ Router.map(function() {
     this.resource('admin', function() {
       this.resource('user-management', function() {});
     });
-    this.resource('users', function() {});
+
+    this.resource('users', function() {
+      this.route('list');
+      this.route('profile', {path: '/profile/:id'});
+    });
     this.resource('suppliers', function() {});
     this.resource('manufacturers', function() {});
     this.resource('reports', function() {});

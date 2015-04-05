@@ -48,6 +48,7 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
 
 app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
 
+app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
 
 app.import('vendor/metronic/js/metronic.js');
 app.import('vendor/metronic/js/layout.js');
@@ -62,5 +63,8 @@ app.import('vendor/custom/plugins.css');
 app.import('vendor/custom/layout.css');
 app.import('vendor/metronic/themes/darkblue.css')
 app.import('vendor/custom/custom.css');
+app.import('vendor/custom/profile.js');
+app.import('vendor/custom/profile.css');
+
 
 module.exports = app.toTree();

@@ -18,7 +18,7 @@
         <!-- END LOGO -->
 
         <!-- START LOGIN FORM -->
-        <form {{action 'authenticateForm' isValid on='submit' }}>
+        <form {{action 'authenticateForm' isValid}}>
 
             <!-- START USERNAME INPUT -->
           {{form-group-input
@@ -45,7 +45,7 @@
 
             <!-- START SUBMIT BUTTON -->
             <div class="form-actions">
-                <button type="submit" class="btn btn-success uppercase">Login</button>
+                <button id='submit' type="submit" class="btn btn-success uppercase">Login</button>
             </div>
             <!-- END SUBMIT BUTTON -->
 
