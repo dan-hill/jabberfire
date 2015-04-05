@@ -30,9 +30,6 @@ def create_app(debug=False):
     CORS(app, resources='*', allow_headers='*')
     # Register the blueprints
 
-    from app.admin.controller import admin
-    app.register_blueprint(admin)
-
     from app.testing.controller import testing
     app.register_blueprint(testing)
 
@@ -93,9 +90,6 @@ def create_app(debug=False):
 
     # Initiate the Mail object
     mail.init_app(app)
-
-    # Initiate the socketio object
-    socket.init_app(app)
 
     jwt.init_app(app)
 
