@@ -1,5 +1,5 @@
 
-from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
+from flask import Blueprint, send_file, request, redirect, abort, make_response, jsonify, render_template,g
 from flask_security import login_user
 from app.users import User as UserModel
 from app.departments.model import Department
@@ -18,7 +18,9 @@ api.init_app(user)
 api.init_app(c_user)
 
 
-
+@user.route('/')
+def indffex():
+    return send_file('static/index.html')
 
 class User(Resource):
     def get(self, id):

@@ -1,17 +1,14 @@
 
 from flask import Flask, Blueprint
 from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO
 from flask_mail import Mail
-from flask_security import Security
 from flask_cors import CORS
 from flask_jwt import JWT, JWTError
 from flask_restful import Api
 
-socket = SocketIO()
+
 db = SQLAlchemy()
 mail = Mail()
-security = Security()
 
 
 
@@ -86,7 +83,6 @@ def create_app(debug=False):
         SECURITY_PASSWORD_HASH='sha512_crypt',
         SECURITY_PASSWORD_SALT='FLAPPYflapflapflap',
         # SECURITY TEMPLATE PATHS
-        SECURITY_LOGIN_USER_TEMPLATE='security/login.inc',
 
         JWT_EXPIRATION_DELTA=3600
     )
@@ -100,9 +96,6 @@ def create_app(debug=False):
     with app.app_context():
 
         db.create_all()
-
-    # Initiate the security object
-    security.init_app(app, user_datastore)
 
     # Initiate the Mail object
     mail.init_app(app)

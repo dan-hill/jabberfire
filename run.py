@@ -2,9 +2,6 @@
 
 __docformat__ = 'reStructuredText'
 
-from gevent import monkey
-
-
 def run_application():
     """starts the web application server
 
@@ -18,14 +15,13 @@ def run_application():
            being modified in unexpected ways.
 
         """
-    monkey.patch_all()
 
-    from app import socket
+
     from app import create_app
 
     app = create_app(True)
 
-    socket.run(app, host='0.0.0.0', port=8080)
+    app.run(app, host='0.0.0.0', port=8080)
 
 if __name__ == '__main__':
     run_application()
