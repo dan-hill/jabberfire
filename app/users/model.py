@@ -12,8 +12,9 @@ Attributes:
 
 from app import db
 from app.roles import Role
-from flask_security import SQLAlchemyUserDatastore, UserMixin
-from flask_security.utils import verify_password
+from passlib.context import CryptContext
+
+password_context = CryptContext(schemes=['sha256_crypt'])
 
 departments_users = db.Table(
     'departments_users',
@@ -26,7 +27,7 @@ roles_users = db.Table(
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     """ User data database model.
 
     The user model provides data about users and their roles in the application.
@@ -56,13 +57,29 @@ class User(db.Model, UserMixin):
 
     """
 
+    def __init__(self, **kwargs):
+        self.id = kwargs.get('id')
+        self.username = kwargs.get('username')
+        self.email = kwargs.get('email')
+        self.password = kwargs.get('password')
+        self.firstname = kwargs.get('firstname')
+        self.lastname = kwargs.get('lastname')
+        self.employee_id = kwargs.get('employee_id')
+        self.status = kwargs.get('status')
+
+        for role in kwargs.get('roles', []):
+            self.roles.append(role)
+
+        for department in kwargs.get('departments', []):
+            self.departments.append(department)
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(255))
+    _password = db.Column(db.String(255))
     confirmed_at = db.Column(db.DateTime())
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
+    firstname = db.Column(db.String(255))
+    lastname = db.Column(db.String(255))
     employee_id = db.Column(db.String(255))
     status = db.Column(db.String(32), default='pending')
 
@@ -73,6 +90,15 @@ class User(db.Model, UserMixin):
         'Department',
         secondary=departments_users,
         backref=db.backref('departments', lazy='dynamic'))
+
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, p):
+        password_hash = password_context.encrypt(p)
+        self._password = password_hash
 
     # Flask security pulls active status from an active property rather than status.
     @property
@@ -99,7 +125,7 @@ class User(db.Model, UserMixin):
         Returns:
           True if password is valid. False otherwise.
         """
-        return verify_password(password, self.password)
+        return password_context.verify(password, self.password)
 
     @staticmethod
     def list():
@@ -109,5 +135,22 @@ class User(db.Model, UserMixin):
         """
         return db.session.query(User).all()
 
+    def get_auth_token(self):
+        pass
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+    def has_role(self, role):
+        pass
+
+    def add_role(self):
+        pass
+
+    def is_active(self):
+        pass
+
+    @staticmethod
+    def find(**kwargs):
+        return db.session.query(User).filter_by(**kwargs).first()
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()

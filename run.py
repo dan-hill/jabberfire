@@ -21,7 +21,7 @@ def run_application():
 
     app = create_app(True)
 
-    app.run(app, host='0.0.0.0', port=8080)
+    app.run(host='localhost', port=8080, threaded=True)
 
 if __name__ == '__main__':
     run_application()

@@ -5,23 +5,15 @@ from flask_mail import Mail
 from flask_cors import CORS
 from flask_jwt import JWT, JWTError
 from flask_restful import Api
-
+from utility import ErrorFriendlyApi
 
 db = SQLAlchemy()
+jwt = JWT()
+api = ErrorFriendlyApi()
 mail = Mail()
 
 
-
-class ErrorFriendlyApi(Api):
-    def error_router(self, original_handler, e):
-        if type(e) is JWTError:
-            return original_handler(e)
-        else:
-            return super(ErrorFriendlyApi, self).error_router(original_handler, e)
-
-api = ErrorFriendlyApi()
-jwt = JWT()
-from app.users.model import user_datastore, User
+import auth.controller
 
 def create_app(debug=False):
     # Instantiate the application object
@@ -33,20 +25,25 @@ def create_app(debug=False):
     from app.testing.controller import testing
     app.register_blueprint(testing)
 
-    from app.roles.controller import role_bp
-    app.register_blueprint(role_bp)
+    # Role resource blueprints
+    from app.roles import (
+        role_blueprint,
+        role_list_blueprint
+    )
 
-    from app.roles.controller import role_list_bp
-    app.register_blueprint(role_list_bp)
+    app.register_blueprint(role_blueprint)
+    app.register_blueprint(role_list_blueprint)
 
-    from app.users.controller import user
-    app.register_blueprint(user)
+    # User resource blueprints
+    from app.users import (
+        user_blueprint,
+        user_list_blueprint,
+        current_user_blueprint
+    )
 
-    from app.users import user_list
-    app.register_blueprint(user_list)
-
-    from app.users.controller import c_user
-    app.register_blueprint(c_user)
+    app.register_blueprint(user_blueprint)
+    app.register_blueprint(user_list_blueprint)
+    app.register_blueprint(current_user_blueprint)
 
     # Set configurations
     app.config.update(
@@ -78,14 +75,11 @@ def create_app(debug=False):
         JWT_EXPIRATION_DELTA=3600
     )
 
-
-
     # Initiate the database object
     db.init_app(app)
 
     # Create the Database
     with app.app_context():
-
         db.create_all()
 
     # Initiate the Mail object

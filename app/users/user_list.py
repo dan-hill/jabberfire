@@ -1,16 +1,13 @@
 
 from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
 from model import User as UserModel
-from model import user_datastore
-from flask_security.utils import encrypt_password
 from flask_jwt import jwt_required, current_user
 
 from app import jwt, api
 from flask_restful import  Resource
 
-user_list = Blueprint('user_list', __name__)
-
-api.init_app(user_list)
+user_list_blueprint = Blueprint('user_list_blueprint', __name__)
+api.init_app(user_list_blueprint)
 
 
 class UserList(Resource):
@@ -27,8 +24,8 @@ class UserList(Resource):
             model = {
 
                     'id': user.id,
-                    'firstname': user.first_name,
-                    'lastname': user.last_name,
+                    'firstname': user.firstname,
+                    'lastname': user.lastname,
                     'email': user.email,
                     'username': user.username,
                     'employee_id': user.employee_id,
@@ -41,8 +38,8 @@ class UserList(Resource):
     def post(self):
         json = request.json['user']
         user = UserModel()
-        user.first_name = json['firstname']
-        user.last_name = json['lastname']
+        user.firstname = json['firstname']
+        user.lastname = json['lastname']
         user.email = json['email']
         user.employee_id = json['employee_id']
         print json['roles']

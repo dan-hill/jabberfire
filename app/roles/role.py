@@ -1,24 +1,26 @@
+from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
+from app.roles.model import Role as RoleModel
+from app import api, jwt
+from flask_restful import Api, Resource, url_for
+from flask_jwt import jwt_required
 from app import db
-from flask_security import RoleMixin
 
+role_blueprint = Blueprint('role_blueprint', __name__)
+api.init_app(role_blueprint)
 
-class Role(db.Model, RoleMixin):
-    """The user role data model.
+class Role(Resource):
 
-        User roles are defined when the application is initialized. To add
-        additional roles, insert them into the database from the
-        ``app.create_app()`` function using the ``user_datastore.create_role()``
-        function.
+    method_decorators = [jwt_required()]
 
-    """
+    def get(self, id):
 
-    #: Generated id for the role.
-    id = db.Column(db.Integer(), primary_key=True)
+        role = db.session.query(RoleModel).filter_by(id=id).first()
+        model = {
+            'role': {
+                'id': role.id,
+                'name': role.name
+            }
+        }
+        return jsonify(model)
 
-    #: The name of the role.
-    #: This attribute is used when checking for user roles using the
-    #: ``@role_required`` decorator.
-    name = db.Column(db.String(80), unique=True)
-
-    #: Short description of the role.
-    description = db.Column(db.String(255))
+api.add_resource(Role, '/roles/<int:id>')
