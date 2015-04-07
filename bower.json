@@ -26,6 +26,7 @@
     "font-awesome": "~4.3.0",
     "jquery-ui": "~1.11.4",
     "bootstrap-hover-dropdown": "~2.1.3",
-    "ember-cli-list-view": "~0.0.7"
+    "ember-cli-list-view": "~0.0.7",
+    "pace": "~1.0.2"
   }
 }

@@ -26,3 +26,11 @@ ul.page-sidebar-menu li.sidebar-toggler-wrapper {
 .page-header {
   background-color: #00182A !important;
 }
+
+.title {
+  font-family: 'Questrial', sans-serif;
+}
+
+h1 h2 h3 h4 h5 h6{
+  font-family: 'Questrial', sans-serif;
+}

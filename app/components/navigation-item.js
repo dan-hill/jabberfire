@@ -17,7 +17,7 @@ export default Ember.Component.extend({
         current_user_roles.forEach(function(id) {
           self.store.find('role', id).then(function(role){
             if(role.get('name') === req){
-              self.set('rolesMet', true);
+              return self.set('rolesMet', true);
             }
           });
         })

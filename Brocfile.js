@@ -50,6 +50,9 @@ app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.c
 
 app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
 
+app.import('bower_components/pace/pace.js');
+app.import('bower_components/pace/themes/green/pace-theme-minimal.css');
+
 app.import('vendor/metronic/js/metronic.js');
 app.import('vendor/metronic/js/layout.js');
 app.import('vendor/metronic/js/login.js');

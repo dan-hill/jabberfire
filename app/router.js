@@ -39,6 +39,7 @@ Router.map(function() {
     this.resource('messages', function() {});
     this.resource('orders', function() {});
     this.route('settings');
+    this.route('loading');
   });
 
 });

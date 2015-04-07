@@ -1,0 +1,23 @@
+
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption font-green-sharp">
+            <i class="icon-speech font-green-sharp"></i>
+            <span class="caption-subject bold uppercase"> {{model}}</span>
+            <span class="caption-helper">{{manufacturer}}</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="scroller" style="height:200px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+            <h4>Asset Data</h4>
+            <p>{{description}}</p>
+            <ul>
+                <li><strong>Serial: </strong>{{serial}}</li>
+                <li><strong>Status: </strong>{{status}}</li>
+            </ul>
+          {{yield}}
+        </div>
+    </div>
+</div>
+<!-- END Portlet PORTLET-->
