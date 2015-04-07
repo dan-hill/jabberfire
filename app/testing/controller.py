@@ -2,7 +2,7 @@ from flask import Blueprint, redirect
 from app.users.model import User
 from app.departments.model import Department
 import csv, os
-
+from app.assets import Asset
 testing = Blueprint('testing', __name__)
 
 __location__ = os.path.realpath(
@@ -42,6 +42,27 @@ def insert_users():
 
 
 
+def insert_assets():
+    reader = csv.reader(open(os.path.join(__location__, 'assets.csv')), delimiter=',', quotechar='"')
+    for row in reader:
+        if Asset.find(tag=row[2]) is None:
+            Asset(
+                description = row[0],
+                serial= row[1],
+                model= row[2],
+                status =row[3],
+                quantity_on_hand= row[4],
+                max_quantity= row[5],
+                min_quantity= row[6],
+                tag =row[7],
+                image =row[8],
+                note =row[9],
+                purchase_cost= row[10],
+                warranty_expiration= row[11],
+                end_of_life= row[12],
+                requestable= bool(row[13])
+            ).save()
+
 
 @testing.route('/insert-test-data')
 def create_test_user():
@@ -52,5 +73,6 @@ def create_test_user():
         (string) OK
     """
 
-    insert_users()
+    #insert_users()
+    insert_assets()
     return redirect('/')

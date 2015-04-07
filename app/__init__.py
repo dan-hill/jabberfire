@@ -45,6 +45,15 @@ def create_app(debug=False):
     app.register_blueprint(user_list_blueprint)
     app.register_blueprint(current_user_blueprint)
 
+    # Asset resource blueprints
+    from app.assets import (
+        asset_blueprint,
+        asset_list_blueprint
+    )
+
+    app.register_blueprint(asset_blueprint)
+    app.register_blueprint(asset_list_blueprint)
+
     # Set configurations
     app.config.update(
         DEBUG=debug,
