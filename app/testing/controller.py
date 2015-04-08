@@ -73,6 +73,6 @@ def create_test_user():
         (string) OK
     """
 
-    #insert_users()
+    insert_users()
     insert_assets()
     return redirect('/')
