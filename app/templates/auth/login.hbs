@@ -12,7 +12,7 @@
         <!-- START LOGO -->
         <div class="logo">
             <a href="/">
-                <img src="img/ccmh/ccmh-pantone-300.png" alt=""/>
+                <img src={{logo-large}} />
             </a>
         </div>
         <!-- END LOGO -->
@@ -55,14 +55,13 @@
                 <!-- START REQUEST ACCESS LINK -->
                 <!-- TODO Pull the register-button jquery from metronic.js and fix semantics -->
                 <div class="pull-left forget-password-block">
-                  {{#link-to 'auth.request-access'}}Request Access{{/link-to}}
-                    <a href="/request-access" id="register-btn" class="forget-password register-btn">Request Access</a>
+                  {{#link-to 'auth.request-access'}}<span class="forget-password">Request Access</span>{{/link-to}}
                 </div>
                 <!-- END REQUEST ACCESS LINK -->
 
                 <!-- START FORGOT PASSWORD LINK -->
                 <div class="pull-right forget-password-block">
-                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                  {{#link-to 'auth.forgot-password'}}<span class="forget-password">Forgot Password?</span>{{/link-to}}
                 </div>
                 <!-- END FORGOT PASSWORD LINK -->
 

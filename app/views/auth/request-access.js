@@ -1,10 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  templateName: 'request-access',
+  templateName: 'auth/request-access',
   didInsertElement: function () {
     Ember.$('body').addClass('register-form');
-
   }
 
 });
