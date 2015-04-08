@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     controller.set('model', user);
   },
   renderTemplate: function() {
-    this.render('login', {
+    this.render('request-access', {
       into: 'auth'
     });
   }

@@ -1,19 +1,14 @@
 {{yield}}
 
 <!-- START LIST ITEM -->
-<li data-username="{{ username }}">
 
     <!-- START PORTLET -->
-    <div class="portlet box">
+    <div class="portlet">
 
         <!-- START PORTLET HEADER BAR -->
-        <div class="portlet-title">
-
+        <div {{action 'toggleSelected'}} class="portlet-title">
             <!-- START NAME -->
-            <div class="caption">
-                <i class="fa fa-square-o list-checkbox"></i>
-                <span class="name">{{firstname}} {{lastname}}</span>
-            </div>
+          <span class="name"> {{firstname}} {{lastname}}</span>
             <!-- END NAME -->
 
             <!-- START TOOLS -->
@@ -41,13 +36,12 @@
         <div class="portlet-body display-hide">
             <strong>User Information</strong>
             {{#each role in roles}}
-            {{role.name}}
-          {{/each}}
+              {{role.name}}
+            {{/each}}
         </div>
         <!-- END PORTLET BODY -->
 
     </div>
     <!-- END PORTLET -->
 
-</li>
 <!-- END LIST ITEM -->

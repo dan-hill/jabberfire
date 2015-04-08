@@ -57,7 +57,8 @@ body.login {
 
 .portlet-list .portlet {
     margin-bottom: 1px;
-    background-color: #377ffd;
+  margin-left: 14px;
+  margin-right: 14px;
 }
 
 .tools i {
@@ -90,3 +91,4 @@ i.fa {
     border: 1px solid #b70015 !important;
     background-color: rgba(255, 0, 16, 0.25) !important;
 }
+

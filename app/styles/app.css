@@ -34,3 +34,15 @@ ul.page-sidebar-menu li.sidebar-toggler-wrapper {
 h1 h2 h3 h4 h5 h6{
   font-family: 'Questrial', sans-serif;
 }
+
+.name {
+  font-family: 'Questrial', sans-serif;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.portlet.selected {
+  background-color: #e7daff;
+  border-color: #1fff00;
+  border-left: thick solid;
+}
