@@ -10,6 +10,7 @@ Router.map(function() {
   this.resource('auth', function() {
     this.route('login');
     this.route('request-access');
+    this.route('forgot-password');
   });
 
   // Application Resource
