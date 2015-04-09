@@ -3,6 +3,8 @@ import EmberValidations from 'ember-validations';
 
 
 export default Ember.Controller.extend(EmberValidations.Mixin, {
+  'logo-large': 'img/ccmh/logo_large.png',
+
   authenticator: 'simple-auth-authenticator:jwt',
   validations: {
     firstname: {
@@ -36,6 +38,12 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       if(isValid){
         this.send('authenticate');
       }
+    },
+    'open-terms-of-service': function() {
+      this.send('openModal', 'auth/terms-of-service')
+    },
+    'open-privacy-policy': function() {
+      this.send('openModal', 'auth/privacy-policy')
     }
   },
   validateInput: function(){
@@ -57,5 +65,4 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
 
   }.observes('firstname', 'lastname')
-
 });

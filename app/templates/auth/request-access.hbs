@@ -14,7 +14,7 @@
         <!-- START LOGO -->
         <div class="logo">
             <a href="/">
-                <img src="../../../public/img/ccmh/ccmh-pantone-300.png" alt=""/>
+                <img src={{logo-large}} />
             </a>
         </div>
         <!-- END LOGO -->
@@ -24,6 +24,7 @@
             Enter your personal details below:
         </p>
         <!-- END INSTRUCTIONS -->
+
         <!-- START REGISTRATION FORM -->
         <form {{action 'authenticateForm' isValid on='submit' }}>
 
@@ -99,10 +100,9 @@
                 <!-- START TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXES -->
                 <label class="check">
                   {{input id='tnc' type='checkbox' checked=tos name='tnc'}}
-                     I agree to the <a href="#">
-                    Terms of Service </a>
-                    & <a href="#">
-                    Privacy Policy </a>
+                     I agree to the
+                    <a {{action 'open-terms-of-service'}}>Terms of Service </a>
+                    & <a {{action 'open-privacy-policy'}}>Privacy Policy </a>
                 </label>
                 <!-- END TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXYES -->
 
@@ -116,9 +116,8 @@
 
             <!-- START BUTTONS -->
             <div class="form-actions">
-                <button type="button" id="register-back-btn" class="btn btn-default">Back</button>
-                <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit
-                </button>
+                <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+                {{#link-to 'auth.login'}}<span class="forget-password pull-left">Back</span>{{/link-to}}
             </div>
             <!-- END BUTTONS -->
 

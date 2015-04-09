@@ -46,3 +46,9 @@ h1 h2 h3 h4 h5 h6{
   border-color: #1fff00;
   border-left: thick solid;
 }
+
+.portlet-title {
+  font-family: 'Questrial', sans-serif;
+  font-size: 20px;
+
+}

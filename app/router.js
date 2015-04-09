@@ -18,7 +18,10 @@ Router.map(function() {
     // Dashboard
     this.route('dashboard');
 
-    this.resource('assets', function() {});
+    this.resource('assets', function() {
+      this.route('list');
+      this.route('detail');
+    });
 
     // User Resource
     this.resource('user', function() {
@@ -34,8 +37,17 @@ Router.map(function() {
       this.route('list');
       this.route('profile', {path: '/profile/:id'});
     });
-    this.resource('suppliers', function() {});
-    this.resource('manufacturers', function() {});
+
+    this.resource('suppliers', function() {
+      this.route('list');
+      this.route('detail', {path: '/detail/:id'});
+    });
+
+    this.resource('manufacturers', function() {
+      this.route('list');
+      this.route('detail', {path: '/detail/:id'});
+    });
+
     this.resource('reports', function() {});
     this.resource('messages', function() {});
     this.resource('orders', function() {});
