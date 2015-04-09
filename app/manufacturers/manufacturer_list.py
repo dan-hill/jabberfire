@@ -23,13 +23,12 @@ class ManufacturerList(Resource):
                 assets.append(asset.id)
 
             model = {
-                'manufacturer': {
-                    'id': manufacturer.id,
-                    'description': manufacturer.description,
-                    'title': manufacturer.title,
-                    'note': manufacturer.note,
-                    'assets': assets
-                }
+                'id': manufacturer.id,
+                'description': manufacturer.description,
+                'title': manufacturer.title,
+                'note': manufacturer.note,
+                'assets': assets
+
             }
 
             manufacturerlist.append(model)

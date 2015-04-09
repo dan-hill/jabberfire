@@ -32,7 +32,8 @@ class AssetList(Resource):
                 'purchase_cost': asset.purchase_cost,
                 'warranty_expiration': asset.warranty_expiration,
                 'end_of_life': asset.end_of_life,
-                'requestable': asset.requestable
+                'requestable': asset.requestable,
+                'manufacturer': asset.manufacturer
 
             }
 

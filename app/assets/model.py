@@ -17,8 +17,8 @@ class Asset(db.Model):
         self.image = kwargs.get('image')
         self.note = kwargs.get('note')
         self.purchase_cost = kwargs.get('purchase_cost')
-        self.warranty_expiration = kwargs.get('warranty_expiration')
-        self.end_of_life = kwargs.get('end_of_life')
+        self._warranty_expiration = kwargs.get('warranty_expiration')
+        self._end_of_life = kwargs.get('end_of_life')
         self.requestable = kwargs.get('requestable')
 
     id = db.Column(db.Integer, primary_key=True)
@@ -34,8 +34,8 @@ class Asset(db.Model):
     image = db.Column(db.String(255))
     note = db.Column(db.String(1000))
     purchase_cost = db.Column(db.Float)
-    warranty_expiration = db.Column(db.Date)
-    end_of_life = db.Column(db.Date)
+    _warranty_expiration = db.Column(db.Date)
+    _end_of_life = db.Column(db.Date)
     requestable = db.Column(db.Boolean)
     parent_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
 
@@ -49,6 +49,15 @@ class Asset(db.Model):
         backref=db.backref(
             'parent',
             remote_side='Asset.id'))
+
+    @property
+    def warranty_expiration(self):
+        return self._warranty_expiration.isoformat()
+
+    @property
+    def end_of_life(self):
+        return self._end_of_life.isoformat()
+
 
     @staticmethod
     def list():
