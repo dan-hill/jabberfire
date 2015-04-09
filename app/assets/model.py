@@ -1,5 +1,5 @@
 from app import db
-
+from app.manufacturers import Manufacturer
 
 class Asset(db.Model):
 
@@ -39,7 +39,7 @@ class Asset(db.Model):
     requestable = db.Column(db.Boolean)
     parent_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
 
-    manufacturer = None
+    manufacturer = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
 
     supplier = None
 

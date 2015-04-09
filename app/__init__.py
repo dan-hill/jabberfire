@@ -54,6 +54,20 @@ def create_app(debug=False):
     app.register_blueprint(asset_blueprint)
     app.register_blueprint(asset_list_blueprint)
 
+    # Asset resource blueprints
+    from app.manufacturers import (
+        manufacturer_blueprint,
+        manufacturer_list_blueprint
+    )
+
+    app.register_blueprint(manufacturer_blueprint)
+    app.register_blueprint(manufacturer_list_blueprint)
+
+    from app.ember import (
+        ember)
+
+    app.register_blueprint(ember)
+
     # Set configurations
     app.config.update(
         DEBUG=debug,
@@ -67,7 +81,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:123qwe!@#QWE@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -81,8 +95,9 @@ def create_app(debug=False):
         SECURITY_PASSWORD_SALT='FLAPPYflapflapflap',
         # SECURITY TEMPLATE PATHS
 
-        JWT_EXPIRATION_DELTA=3600
-    )
+        JWT_EXPIRATION_DELTA=3600,
+
+        static='app/static/')
 
     # Initiate the database object
     db.init_app(app)
