@@ -53,6 +53,8 @@ app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
 app.import('bower_components/pace/pace.js');
 app.import('bower_components/pace/themes/green/pace-theme-minimal.css');
 
+app.import('bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js');
+app.import('bower_components/flot/jquery.flot.js');
 app.import('vendor/metronic/js/metronic.js');
 app.import('vendor/metronic/js/layout.js');
 app.import('vendor/metronic/js/login.js');

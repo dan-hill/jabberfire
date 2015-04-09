@@ -15,5 +15,6 @@ export default DS.Model.extend({
   'purchase_cost': DS.attr('string'),
   'warranty_expiration': DS.attr('string'),
   'end_of_life':  DS.attr('string'),
-  'requestable':  DS.attr('boolean')
+  'requestable':  DS.attr('boolean'),
+  'manufacturer': DS.belongsTo('manufacturer', {async: true})
 });
