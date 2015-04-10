@@ -16,7 +16,6 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      testGlobalVar: 'this is a test thingy'
     }
   };
 
@@ -75,6 +74,29 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
 
+    ENV['simple-auth'] = {
+      crossOriginWhitelist: ['*'],
+      authorizer: 'simple-auth-authorizer:token',
+      store: 'simple-auth-session-store:local-storage',
+      authenticationRoute: 'auth.login',
+      routeAfterAuthentication: 'app.dashboard',
+      routeIfAlreadyAuthenticated: 'app.dashboard'
+    };
+
+    ENV['simple-auth-token'] = {
+      serverTokenEndpoint: 'http://aw3so.me:5000/token',
+      identificationField: 'username',
+      passwordField: 'password',
+      tokenPropertyName: 'token',
+      authorizationPrefix: 'Bearer ',
+      authorizationHeaderName: 'Authorization',
+      headers: {},
+      refreshAccessTokens: true,
+      timeFactor: 1,
+      refreshLeeway: 300, // Refresh the token 5 minutes (300s) before it expires.
+      serverTokenRefreshEndpoint: 'http://aw3so.me:5000/token/refresh',
+      tokenExpireName: 'exp'
+    };
   }
 
   return ENV;
