@@ -1,7 +1,7 @@
-from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
+from flask import Blueprint, jsonify
 from model import Asset as AssetModel
-from flask_jwt import jwt_required, current_user
-from app import jwt, api, db
+from flask_jwt import jwt_required
+from app import api
 from flask_restful import Resource
 
 asset_blueprint = Blueprint('asset_blueprint', __name__)
@@ -9,6 +9,7 @@ api.init_app(asset_blueprint)
 
 
 class Asset(Resource):
+
     method_decorators = [jwt_required()]
 
     def get(self, id):
@@ -38,16 +39,10 @@ class Asset(Resource):
 
     def post(data):
         # TODO Add protection against insufficient permissions
-        if AssetModel.find(email=data['email']) is None:
-            asset = AssetModel(
-                email=data['email'],
-                password=data['password'],
-                first_name=data['first-name'],
-                last_name=data['last-name'],
-                status=data['status']
-            )
+        if AssetModel.find() is None:
+            asset = AssetModel()
 
             asset.add_role('asset')
             asset.save()
 
-api.add_resource(Asset, '/assets/<int:id>')
+api.add_resource(Asset, '/api/assets/<int:id>')

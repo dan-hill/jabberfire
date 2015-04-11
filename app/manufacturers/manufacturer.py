@@ -33,4 +33,4 @@ class Manufacturer(Resource):
     def post(data):
         pass
 
-api.add_resource(Manufacturer, '/manufacturers/<int:id>')
+api.add_resource(Manufacturer, '/api/manufacturers/<int:id>')

@@ -43,4 +43,4 @@ class AssetList(Resource):
 
 
 
-api.add_resource(AssetList, '/assets')
+api.add_resource(AssetList, '/api/assets')

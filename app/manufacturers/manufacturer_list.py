@@ -37,4 +37,4 @@ class ManufacturerList(Resource):
 
 
 
-api.add_resource(ManufacturerList, '/manufacturers')
+api.add_resource(ManufacturerList, '/api/manufacturers')

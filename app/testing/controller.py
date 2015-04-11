@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect
 from app.users.model import User
+from app.roles import Role
 from app.departments.model import Department
 import csv, os
 from app.assets import Asset
@@ -15,6 +16,16 @@ def increment_user(username):
     while User.find(username=username + '.' + str(n)) is not None:
         n += 1
     return username + '.' + str(n)
+
+def insert_roles():
+    reader = csv.reader(open(os.path.join(__location__, 'roles.csv')), delimiter=',', quotechar='"')
+    for row in reader:
+
+        if Role.find(name=row[1]) is None:
+            User(
+                id=row[0],
+                name=row[1]
+            ).save()
 
 def insert_users():
     reader = csv.reader(open(os.path.join(__location__, 'users.csv')), delimiter=',', quotechar='"')
@@ -35,7 +46,6 @@ def insert_users():
                 username=username,
                 employee_id=row[4]
             ).save()
-
 
 
     # Insert the users
@@ -75,4 +85,6 @@ def create_test_user():
 
     insert_users()
     insert_assets()
+    insert_roles()
+
     return redirect('/')
