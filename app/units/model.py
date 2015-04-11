@@ -23,18 +23,7 @@ class Unit(db.Model):
     requestable = db.Column(db.Boolean)
     parent_id = db.Column(db.Integer, db.ForeignKey('unit.id'))
     asset_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
-    supplier_id = db.Column(db.Integer)
-
-    asset = db.relationship(
-        'Asset',
-        cascaade='all',
-        backref=db.backref(
-            'asset',
-            remote_side='asset.id'
-        )
-    )
-
-    supplier = None
+    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'))
 
     activities = None
 

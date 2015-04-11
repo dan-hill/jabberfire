@@ -23,16 +23,8 @@ class Asset(db.Model):
     tag = db.Column(db.Integer)
     image = db.Column(db.String(255))
     note = db.Column(db.String(1000))
-
-    manufacturer = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
-
-    @property
-    def warranty_expiration(self):
-        return self._warranty_expiration.isoformat()
-
-    @property
-    def end_of_life(self):
-        return self._end_of_life.isoformat()
+    manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
+    units = db.relationship('Unit')
 
 
     @staticmethod
