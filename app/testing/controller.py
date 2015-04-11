@@ -74,7 +74,7 @@ def insert_assets():
             ).save()
 
 
-@testing.route('/insert-test-data')
+@testing.route('/api/insert-test-data')
 def create_test_user():
     """
     Populates the database with test user data.

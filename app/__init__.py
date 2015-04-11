@@ -81,7 +81,7 @@ def create_app(debug=False):
 
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
-        SQLALCHEMY_DATABASE_URI='mysql://root:password@localhost/ccmh',
+        SQLALCHEMY_DATABASE_URI='mysql://root:spring2015capstone@localhost/ccmh',
         SQLALCHEMY_COMMIT_ON_TEARDOWN=True,
 
         # TEMPLATE PATHS
@@ -96,7 +96,7 @@ def create_app(debug=False):
         # SECURITY TEMPLATE PATHS
 
         JWT_EXPIRATION_DELTA=3600,
-
+        JWT_AUTH_URL_RULE='/api/token',
         static='app/static/')
 
     # Initiate the database object

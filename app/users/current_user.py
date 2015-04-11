@@ -32,4 +32,4 @@ class CurrentUser(Resource):
         return jsonify(model)
 
 
-api.add_resource(CurrentUser, '/users/me')
+api.add_resource(CurrentUser, '/api/users/me')

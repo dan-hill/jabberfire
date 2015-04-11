@@ -23,4 +23,4 @@ class Role(Resource):
         }
         return jsonify(model)
 
-api.add_resource(Role, '/roles/<int:id>')
+api.add_resource(Role, '/api/roles/<int:id>')

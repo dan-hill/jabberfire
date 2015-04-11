@@ -45,5 +45,5 @@ class UserList(Resource):
         print json['roles']
         return '', 400
 
-api.add_resource(UserList, '/users')
+api.add_resource(UserList, '/api/users')
 

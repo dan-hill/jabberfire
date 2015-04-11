@@ -18,4 +18,4 @@ class RoleList(Resource):
             roles.append(model)
         return jsonify({'roles': roles})
 
-api.add_resource(RoleList, '/roles')
+api.add_resource(RoleList, '/api/roles')

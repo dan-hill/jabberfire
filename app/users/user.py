@@ -53,5 +53,5 @@ def increment_user(username):
         n += 1
     return username + '.' + str(n)
 
-api.add_resource(User, '/users/<int:id>')
+api.add_resource(User, '/api/users/<int:id>')
 
