@@ -23,6 +23,7 @@ class Unit(db.Model):
     requestable = db.Column(db.Boolean)
     parent_id = db.Column(db.Integer, db.ForeignKey('unit.id'))
     asset_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
+    supplier_id = db.Column(db.Integer)
 
     asset = db.relationship(
         'Asset',
@@ -34,6 +35,8 @@ class Unit(db.Model):
     )
 
     supplier = None
+
+    activities = None
 
     components = db.relationship(
         'Unit',

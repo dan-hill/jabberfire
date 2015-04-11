@@ -26,8 +26,6 @@ class Asset(db.Model):
 
     manufacturer = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
 
-    supplier = None
-
     @property
     def warranty_expiration(self):
         return self._warranty_expiration.isoformat()
