@@ -11,11 +11,6 @@ module.exports = function(environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       }
-    },
-
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
     }
   };
 
@@ -25,14 +20,21 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.APP = {
+      // Here you can pass flags/options to your application instance
+      // when it is created
+      host: 'http://localhost:5000/api'
+    };
+
     ENV.contentSecurityPolicy = {
-      'default-src': "'none'",
-      'script-src': "'self' https://cdn.mxpnl.com", // Allow scripts from https://cdn.mxpnl.com
-      'font-src': "'self' http://fonts.gstatic.com", // Allow fonts to be loaded from http://fonts.gstatic.com
-      'connect-src': "'self' *", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+      'default-src': "*",
+      'script-src': "*", // Allow scripts from https://cdn.mxpnl.com
+      'font-src': "*", // Allow fonts to be loaded from http://fonts.gstatic.com
+      'connect-src': "*", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
       'img-src': "*",
-      'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
-      'media-src': "'self'"
+      'style-src': "*", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
+      'media-src': "*"
     };
 
     ENV['simple-auth'] = {
@@ -45,7 +47,7 @@ module.exports = function(environment) {
     };
 
     ENV['simple-auth-token'] = {
-      serverTokenEndpoint: 'http://localhost:8080/auth',
+      serverTokenEndpoint: 'http://localhost:5000/api/token',
       identificationField: 'username',
       passwordField: 'password',
       tokenPropertyName: 'token',
@@ -55,12 +57,16 @@ module.exports = function(environment) {
       refreshAccessTokens: true,
       timeFactor: 1,
       refreshLeeway: 300, // Refresh the token 5 minutes (300s) before it expires.
-      serverTokenRefreshEndpoint: 'http://localhost:8080/auth/refresh',
+      serverTokenRefreshEndpoint: 'http://localhost:5000/api/token',
       tokenExpireName: 'exp'
     };
   }
 
   if (environment === 'test') {
+    ENV.APP = {
+      // Here you can pass flags/options to your application instance
+      // when it is created
+    };
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
@@ -73,7 +79,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.APP = {
+      // Here you can pass flags/options to your application instance
+      // when it is created
+      host: 'http://aw3so.me/api'
+    };
     ENV['simple-auth'] = {
       crossOriginWhitelist: ['*'],
       authorizer: 'simple-auth-authorizer:token',
@@ -84,7 +94,7 @@ module.exports = function(environment) {
     };
 
     ENV['simple-auth-token'] = {
-      serverTokenEndpoint: 'http://aw3so.me:5000/token',
+      serverTokenEndpoint: 'http://aw3so.me/api/token',
       identificationField: 'username',
       passwordField: 'password',
       tokenPropertyName: 'token',
@@ -94,7 +104,7 @@ module.exports = function(environment) {
       refreshAccessTokens: true,
       timeFactor: 1,
       refreshLeeway: 300, // Refresh the token 5 minutes (300s) before it expires.
-      serverTokenRefreshEndpoint: 'http://aw3so.me:5000/token/refresh',
+      serverTokenRefreshEndpoint: 'http://aw3so.me/api/token',
       tokenExpireName: 'exp'
     };
   }
