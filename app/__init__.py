@@ -45,23 +45,23 @@ def create_app(debug=False):
     app.register_blueprint(user_list_blueprint)
     app.register_blueprint(current_user_blueprint)
 
-    # Asset resource blueprints
-    from app.assets import (
-        asset_blueprint,
-        asset_list_blueprint
-    )
-
-    app.register_blueprint(asset_blueprint)
-    app.register_blueprint(asset_list_blueprint)
-
-    # Asset resource blueprints
-    from app.manufacturers import (
-        manufacturer_blueprint,
-        manufacturer_list_blueprint
-    )
-
-    app.register_blueprint(manufacturer_blueprint)
-    app.register_blueprint(manufacturer_list_blueprint)
+    # # Asset resource blueprints
+    # from app.assets import (
+    #     asset_blueprint,
+    #     asset_list_blueprint
+    # )
+    #
+    # app.register_blueprint(asset_blueprint)
+    # app.register_blueprint(asset_list_blueprint)
+    #
+    # # Asset resource blueprints
+    # from app.manufacturers import (
+    #     manufacturer_blueprint,
+    #     manufacturer_list_blueprint
+    # )
+    #
+    # app.register_blueprint(manufacturer_blueprint)
+    # app.register_blueprint(manufacturer_list_blueprint)
 
     from app.ember import (
         ember)
