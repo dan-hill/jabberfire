@@ -1,5 +1,5 @@
 from app import db
-
+from app.suppliers import Supplier
 class Unit(db.Model):
 
     def __init__(self, **kwargs):

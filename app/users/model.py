@@ -1,30 +1,7 @@
-""" User data model.
-
-This module contains functions, variables, and classes related to user data persistance and
-relationships.
-
-Attributes:
-    departments_users (Table): Stores the relationship between users and departments.
-    roles_users (Table): Stores the relationship between users and roles.
-    user_datastore (SQLAlchemyUserDatastore): The user datastore object. This object is used to access
-      convenience functions related to querying user data.
-"""
-
 from app import db
-from app.roles import Role
 from passlib.context import CryptContext
-
+from app.user_role import UserRole
 password_context = CryptContext(schemes=['sha256_crypt'])
-
-departments_users = db.Table(
-    'departments_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('department_id', db.Integer(), db.ForeignKey('department.id')))
-
-roles_users = db.Table(
-    'roles_users',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-    db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
 class User(db.Model):
@@ -56,6 +33,7 @@ class User(db.Model):
         The user's full name in form 'First Last'.
 
     """
+    __tablename__ = 'user'
 
     def __init__(self, **kwargs):
         self.id = kwargs.get('id')
@@ -83,13 +61,8 @@ class User(db.Model):
     employee_id = db.Column(db.String(255))
     status = db.Column(db.String(32), default='pending')
 
-    roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
+    roles = db.relationship('Role', secondary='user_role', backref='users')
 
-    departments = db.relationship(
-        'Department',
-        secondary=departments_users,
-        backref=db.backref('departments', lazy='dynamic'))
 
     @property
     def password(self):

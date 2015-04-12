@@ -1,6 +1,6 @@
 from app import db
 from app.manufacturers import Manufacturer
-
+from app.units import Unit
 class Asset(db.Model):
 
     def __init__(self, **kwargs):

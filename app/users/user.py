@@ -43,7 +43,7 @@ class User(Resource):
                 status=data['status']
             )
 
-            user.add_role('user')
+
             user.save()
 
 

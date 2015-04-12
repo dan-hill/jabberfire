@@ -24,8 +24,9 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     parent_id = db.Column(db.Integer, db.ForeignKey('department.id'))
     name = db.Column(db.String(255))
+    description = db.Column(db.String(255))
 
-    sub_departments = db.relationship('Department',
+    children = db.relationship('Department',
                                       cascade='all',
                                       backref=db.backref('parent', remote_side='Department.id'))
 

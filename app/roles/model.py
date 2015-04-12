@@ -1,6 +1,5 @@
 from app import db
 
-
 class Role(db.Model):
     """The user role data model.
 
@@ -10,6 +9,7 @@ class Role(db.Model):
         function.
 
     """
+    __tablename__ = 'role'
 
     #: Generated id for the role.
     id = db.Column(db.Integer(), primary_key=True)
@@ -21,3 +21,4 @@ class Role(db.Model):
 
     #: Short description of the role.
     description = db.Column(db.String(255))
+
