@@ -11,6 +11,9 @@ class Role(db.Model):
     """
     __tablename__ = 'role'
 
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+
     #: Generated id for the role.
     id = db.Column(db.Integer(), primary_key=True)
 
@@ -22,3 +25,14 @@ class Role(db.Model):
     #: Short description of the role.
     description = db.Column(db.String(255))
 
+    @staticmethod
+    def find(**kwargs):
+        return db.session.query(Role).filter_by(**kwargs).first()
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @staticmethod
+    def list():
+        return db.session.query(Role).all()

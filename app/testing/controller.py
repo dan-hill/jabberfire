@@ -15,15 +15,17 @@ def increment_user(username):
         n += 1
     return username + '.' + str(n)
 
-def insert_roles():
-    reader = csv.reader(open(os.path.join(__location__, 'roles.csv')), delimiter=',', quotechar='"')
-    for row in reader:
 
+def insert_roles():
+
+    reader = csv.reader(open(os.path.join(__location__, 'roles.csv')), delimiter=',', quotechar='"')
+
+    for row in reader:
         if Role.find(name=row[1]) is None:
-            User(
-                id=row[0],
+            Role(
                 name=row[1]
             ).save()
+
 
 def insert_users():
     reader = csv.reader(open(os.path.join(__location__, 'users.csv')), delimiter=',', quotechar='"')
@@ -46,7 +48,13 @@ def insert_users():
             ).save()
 
 
-    # Insert the users
+def insert_user_roles():
+    users = User.list()
+    roles = Role.list()
+
+    for user in users:
+        for role in roles:
+            user.roles.append(role)
 
 
 
@@ -58,8 +66,8 @@ def create_test_user():
     Returns:
         (string) OK
     """
-
+    insert_roles()
     insert_users()
-
+    insert_user_roles()
 
     return 'ok', 200
