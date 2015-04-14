@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function(params, transition) {
+  model: function(params) {
     return this.get('store').find('manufacturer', params.id);
   },
   setupController:function(controller, model){
@@ -9,7 +9,7 @@ export default Ember.Route.extend({
   },
 
   serialize: function(model) {
-    return { id: model.get('id')}
+    return { id: model.get('id')};
   },
   renderTemplate: function () {
     this.render('manufacturers/detail', {
