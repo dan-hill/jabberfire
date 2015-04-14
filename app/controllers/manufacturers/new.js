@@ -24,9 +24,9 @@ export default Ember.Controller.extend({
       };
 
       manufacturer.save().then(function(){
-          console.log('saved');
+          self.transitionToRoute('manufacturers.list');
         }).catch(function() {
-          console.log('failed to save');
+          self.$().alert('FAILED!');
         });
       console.log(manufacturer.get('id'));
 
