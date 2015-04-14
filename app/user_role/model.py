@@ -9,8 +9,8 @@ class UserRole(db.Model):
         self.role_id = kwargs.get('role_id')
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), primary_key=True)
-    role_id = db.Column(db.Integer(), db.ForeignKey('role.id'), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('role.id'))
     role = db.relationship('Role', backref='user_roles')
 
     @staticmethod

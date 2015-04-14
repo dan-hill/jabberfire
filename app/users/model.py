@@ -1,6 +1,7 @@
 from app import db
 from passlib.context import CryptContext
 from app.user_role import UserRole
+from app.user_department import UserDepartment
 password_context = CryptContext(schemes=['sha256_crypt'])
 
 
@@ -62,7 +63,7 @@ class User(db.Model):
     status = db.Column(db.String(32), default='pending')
 
     roles = db.relationship('Role', secondary='user_role', backref='users')
-
+    departments = db.relationship('Department', secondary='user_department', backref='users')
 
     @property
     def password(self):

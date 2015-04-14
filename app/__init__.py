@@ -12,7 +12,8 @@ jwt = JWT()
 api = ErrorFriendlyApi()
 mail = Mail()
 
-
+from app.units import Unit
+from app.suppliers import Supplier
 import auth.controller
 
 def create_app(debug=False):

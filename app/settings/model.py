@@ -1,22 +1,17 @@
 from app import db
 
-
-class Manufacturer(db.Model):
+class Setting(db.Model):
 
     def __init__(self, **kwargs):
-        # self.id = kwargs.get('id')
         self.description = kwargs.get('description')
         self.title = kwargs.get('title')
-        self.note = kwargs.get('note')
+        self.value = kwargs.get('value')
+
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(1000))
     title = db.Column(db.String(255))
-    note = db.Column(db.String(1000))
-
-    supplier = None
-
-    assets = db.relationship('Asset')
+    value = db.Column(db.String(1000))
 
     @staticmethod
     def list():
@@ -24,11 +19,11 @@ class Manufacturer(db.Model):
         Returns:
           List containing objects for all users in the database.
         """
-        return db.session.query(Manufacturer).all()
+        return db.session.query(Setting).all()
 
     @staticmethod
     def find(**kwargs):
-        return db.session.query(Manufacturer).filter_by(**kwargs).first()
+        return db.session.query(Setting).filter_by(**kwargs).first()
 
     def save(self):
         db.session.add(self)

@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect
 from app.users.model import User
 from app.roles import Role
+from app.departments import Department
 import csv, os
 testing = Blueprint('testing', __name__)
 
@@ -30,7 +31,6 @@ def insert_roles():
 def insert_users():
     reader = csv.reader(open(os.path.join(__location__, 'users.csv')), delimiter=',', quotechar='"')
     for row in reader:
-        print row
         username = (row[0] + '.' + row[1]).lower()
 
         if User.find(username=username) is not None:
@@ -57,6 +57,28 @@ def insert_user_roles():
             user.roles.append(role)
 
 
+def insert_departments():
+    reader = csv.reader(open(os.path.join(__location__, 'departments.csv')), delimiter=',', quotechar='"')
+    for row in reader:
+        department = Department()
+
+        department.name = row[0]
+        department.description = [1]
+        department.save()
+
+        parent = Department.find(id=row[2])
+
+        if parent is not None:
+            parent.children.append(department)
+
+
+def insert_user_departments():
+    users = User.list()
+    department_A = Department.find(id=2)
+    department_B = Department.find(id=4)
+    for user in users:
+        user.departments.append(department_A)
+        user.departments.append(department_B)
 
 @testing.route('/api/insert-test-data')
 def create_test_user():
@@ -69,5 +91,6 @@ def create_test_user():
     insert_roles()
     insert_users()
     insert_user_roles()
-
+    insert_departments()
+    insert_user_departments()
     return 'ok', 200
