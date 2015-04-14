@@ -45,12 +45,15 @@
               {{#jf-portlet-actions}}
                   <!-- TODO seperate out action presentation types into attributes defined on the views -->
                 {{#jf-portlet-action classNames='btn btn-circle btn-default btn-sm'}}{{fa-plus}} Checkout{{/jf-portlet-action}}
-                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-icon-only '}}{{fa-chain}}{{/jf-portlet-action}}
+
+                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-icon-only '}}
+                  {{#link-to 'assets.detail' asset.id}}{{fa-icon icon='chain'}}{{/link-to}}
+                {{/jf-portlet-action}}
+
               {{/jf-portlet-actions}}
 
             {{/jf-portlet-header}}
             {{#jf-portlet-content}}
-              {{yield}}
             <div class="row">
               <div class="col-md-4">
                   <h4>Description:</h4>
@@ -60,9 +63,7 @@
                   <h4>Vitals:</h4>
               {{#jf-list-group}}
                 {{#jf-list-group-item}}<strong>Serial</strong>  <span class='pull-right'>{{asset.serial}}</span>{{/jf-list-group-item}}
-                {{#jf-list-group-item}}<strong>Status</strong>  {{#jf-badge style='warning'}}{{asset.status}}{{/jf-badge}}{{/jf-list-group-item}}
                 {{#jf-list-group-item}}<strong>Quantity</strong>  {{#jf-badge style='success'}}{{asset.quantity_on_hand}}{{/jf-badge}}{{/jf-list-group-item}}
-                {{#jf-list-group-item}}<strong>Tag</strong>  <span class='pull-right'>{{asset.tag}}</span>{{/jf-list-group-item}}
                 {{#jf-list-group-item}}<strong>Manufacturer</strong>  <span class='pull-right'>{{#link-to 'manufacturers.detail' asset.manufacturer.id}}{{asset.manufacturer.title}}{{/link-to}}</span>{{/jf-list-group-item}}
               {{/jf-list-group}}
               </div>
@@ -75,29 +76,6 @@
       {{/asset-list}}
     </div>
     <!-- END LIST AND LIST FUNCTIONS CONTAINER -->
-
-
-
-    <div id="add-departments" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Add Departments to User</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="tree_1">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
-                    <button type="button" class="btn green save">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 

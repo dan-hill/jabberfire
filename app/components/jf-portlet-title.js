@@ -2,5 +2,5 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'span',
-  classNames: ['bold']
+  classNames: ['caption-subject', 'bold']
 });

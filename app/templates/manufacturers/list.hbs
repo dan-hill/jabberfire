@@ -1,73 +1,31 @@
 
-{{page-title title='Manufacturers'}}
+{{#jf-page-title}}Manufacturers{{/jf-page-title}}
 
-{{#page-header title='Manufacturers' page_actions=page_actions}}
+{{#jf-page-bar}}
 
-  {{page-breadcrumb this-page='Manufacturers'}}
+  {{#jf-page-breadcrumbs}}
+    {{#jf-page-breadcrumb}}{{#link-to 'manufacturers.list'}}Manufacturers{{/link-to}}{{/jf-page-breadcrumb}}
+  {{/jf-page-breadcrumbs}}
 
-  {{#page-actions}}
-    {{page-actions-li title='Add New' link='#'}}
-  {{/page-actions}}
+  {{#jf-page-actions}}
+    {{#jf-page-action}}{{#link-to 'manufacturers.new'}}Add New{{/link-to}}{{/jf-page-action}}
+  {{/jf-page-actions}}
 
-{{/page-header}}
-
-
-<div class="row">
-    <div id="manufacturers-list" class="col-md-12">
-
-        <!-- START LIST TOOLS -->
-        <div class="row">
-
-            <!-- START SEARCH -->
-          {{search-box
-          label-text='Search'
-          inputID='filter'
-          input-type='search'
-          input-placeholder='search...'
-          inputValue=filter
-          input-classes='col-md-4'}}
-            <!-- END SEARCH -->
-        </div>
-        <!-- END LIST TOOLS -->
-
-        <!-- START USER LIST CONTAINER -->
-      {{#jf-portlet-list}}
-        {{#each manufacturer in filteredContent}}
-            <!-- BEGIN Portlet PORTLET-->
-          {{#jf-portlet}}
-            {{#jf-portlet-header}}
+{{/jf-page-bar}}
 
 
-              {{#jf-portlet-headline}}
-                {{sl-icon icon='wrench' color='green-sharp'}}
-                {{#jf-portlet-title}}{{manufacturer.title}}{{/jf-portlet-title}}
-              {{/jf-portlet-headline}}
-              {{#jf-portlet-actions}}
-                  <!-- TODO seperate out action presentation types into attributes defined on the views -->
-                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-icon-only '}}{{fa-icon icon='pencil'}}{{/jf-portlet-action}}
-                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-icon-only '}}{{#link-to 'manufacturers.detail' manufacturer.id}}{{fa-icon icon='chain'}}{{/link-to}}{{/jf-portlet-action}}
 
-              {{/jf-portlet-actions}}
+{{#jf-page-content}}
 
-            {{/jf-portlet-header}}
-            {{#jf-portlet-content}}
-            <div class="row">
-            <div class="col-md-4">
-                <h4>Description:</h4>
-            {{manufacturer.description}}
-              </div>
-            <div class="col-md-8">
-                <h4>Note:</h4>
-              {{manufacturer.note}}
+    <div class="portlet box blue-hoki">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-globe"></i>Datatable with TableTools
             </div>
-              </div>
-            {{/jf-portlet-content}}
-
-          {{/jf-portlet}}
-            <!-- END Portlet PORTLET-->
-        {{/each}}
-      {{/jf-portlet-list}}
+            <div class="tools">
+            </div>
+        </div>
+        <div id="table-spot" class="portlet-body">
+        </div>
     </div>
-    <!-- END LIST AND LIST FUNCTIONS CONTAINER -->
-
-</div>
+{{/jf-page-content}}

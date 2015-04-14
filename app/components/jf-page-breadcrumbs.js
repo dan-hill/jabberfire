@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['caption']
+  tagName: 'ul',
+  classNames: ['page-breadcrumb']
 });

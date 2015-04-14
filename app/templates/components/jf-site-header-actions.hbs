@@ -1,0 +1,13 @@
+<ul class="nav navbar-nav pull-right">
+    <li class="dropdown dropdown-user">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+           data-close-others="true">
+          {{fa-icon icon='user'}}
+            <span class="username username-hide-on-mobile">{{session.currentUser.firstname}} {{session.currentUser.lastname}}</span>
+          {{fa-icon icon='angle-down'}}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+      {{yield}}
+            </ul>
+    </li>
+</ul>

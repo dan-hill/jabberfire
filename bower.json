@@ -29,6 +29,7 @@
     "ember-cli-list-view": "~0.0.7",
     "pace": "~1.0.2",
     "flot": "~0.8.3",
-    "jquery.easy-pie-chart": "~2.1.6"
+    "jquery.easy-pie-chart": "~2.1.6",
+    "datatables": "~1.10.6"
   }
 }

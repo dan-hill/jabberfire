@@ -20,7 +20,7 @@ Router.map(function() {
 
     this.resource('assets', function() {
       this.route('list');
-      this.route('detail');
+      this.route('detail', {path: '/detail/:id'});
     });
 
     // User Resource
@@ -46,6 +46,7 @@ Router.map(function() {
     this.resource('manufacturers', function() {
       this.route('list');
       this.route('detail', {path: '/detail/:id'});
+      this.route('new');
     });
 
     this.resource('reports', function() {});

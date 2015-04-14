@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['caption']
+  tagName: 'h3',
+  classNames: ['page-title']
 });

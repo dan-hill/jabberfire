@@ -7,6 +7,7 @@
 					<span class="username username-hide-on-mobile">{{session.currentUser.firstname}} {{session.currentUser.lastname}}</span>
         <i class="fa fa-angle-down"></i>
     </a>
+
     <ul class="dropdown-menu dropdown-menu-default">
         <li>
           {{#link-to 'users.profile' session.currentUser.id}}
