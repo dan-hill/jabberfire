@@ -91,6 +91,6 @@ def create_test_user():
     insert_roles()
     insert_users()
     insert_user_roles()
-    insert_departments()
-    insert_user_departments()
+    # insert_departments()
+    # insert_user_departments()
     return 'ok', 200
