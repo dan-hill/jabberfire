@@ -5,5 +5,7 @@ export default Ember.Component.extend({
   classNameBindings: ['columns'],
   'columns': function() {
     return 'col-md-' + this.get('width');
-  }.property('width')
+  }.property('width'),
+  willInsertElement: function(){
+  }
 });
