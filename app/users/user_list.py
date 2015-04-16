@@ -37,12 +37,7 @@ class UserList(Resource):
 
     def post(self):
         json = request.json['user']
-        user = UserModel()
-        user.firstname = json['firstname']
-        user.lastname = json['lastname']
-        user.email = json['email']
-        user.employee_id = json['employee_id']
-        print json['roles']
+        print json
         return '', 400
 
 api.add_resource(UserList, '/api/users')

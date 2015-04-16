@@ -39,12 +39,14 @@ def create_app(debug=False):
     from app.users import (
         user_blueprint,
         user_list_blueprint,
-        current_user_blueprint
+        current_user_blueprint,
+        access_request_blueprint
     )
 
     app.register_blueprint(user_blueprint)
     app.register_blueprint(user_list_blueprint)
     app.register_blueprint(current_user_blueprint)
+    app.register_blueprint(access_request_blueprint)
 
     # # Asset resource blueprints
     # from app.assets import (
