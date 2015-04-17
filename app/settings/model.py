@@ -11,7 +11,6 @@ class Setting(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(1000))
     title = db.Column(db.String(255))
-    value = db.Column(db.String(1000))
 
     @staticmethod
     def list():
