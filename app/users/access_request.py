@@ -28,7 +28,5 @@ class AccessRequest(Resource):
 
         user.save()
 
-
-
 api.add_resource(AccessRequest, '/api/accessRequests')
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect
+from flask import Blueprint, redirect, abort
 from app.users.model import User
 from app.roles import Role
 from app.departments import Department
@@ -46,7 +46,7 @@ def insert_users():
                 username=username,
                 employee_id=row[4]
             ).save()
-
+    print 'Inserted users.'
 
 def insert_user_roles():
     users = User.list()
@@ -56,6 +56,7 @@ def insert_user_roles():
         for role in roles:
             user.roles.append(role)
 
+    abort(400)
 
 def insert_departments():
     reader = csv.reader(open(os.path.join(__location__, 'departments.csv')), delimiter=',', quotechar='"')
@@ -90,7 +91,7 @@ def create_test_user():
     """
     insert_roles()
     insert_users()
-    insert_user_roles()
+    results = insert_user_roles()
     # insert_departments()
     # insert_user_departments()
-    return 'ok', 200
+    return results, 200
