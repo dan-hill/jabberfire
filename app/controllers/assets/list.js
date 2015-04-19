@@ -7,7 +7,7 @@ export default Ember.ArrayController.extend({
   filteredContent: function() {
     var filter = this.get('filter');
     var self = this;
-    return this.get('assetlist').filter(function(item, index, enumerable){
+    return this.get('assetlist').filter(function(item){
 
 
         var flat;
@@ -18,7 +18,7 @@ export default Ember.ArrayController.extend({
           }
         });
 
-        if(flat != undefined){
+        if(flat !== undefined){
           var filters = filter.split(" ");
 
 
@@ -36,7 +36,7 @@ export default Ember.ArrayController.extend({
   }.property('filter', 'assetlist.@each'),
   actions: {
     openAddAssetModal: function() {
-      this.send('openModal', 'modal-add-asset')
+      this.send('openModal', 'modal-add-asset');
     }
   }
 });
