@@ -13,7 +13,6 @@ module.exports = function(environment) {
       }
     }
   };
-
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -79,11 +78,28 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
     ENV.APP = {
       // Here you can pass flags/options to your application instance
       // when it is created
       host: 'http://aw3so.me/api'
     };
+
+    ENV.contentSecurityPolicy = {
+      'default-src': "*",
+      'script-src': "*", // Allow scripts from https://cdn.mxpnl.com
+      'font-src': "*", // Allow fonts to be loaded from http://fonts.gstatic.com
+      'connect-src': "*", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+      'img-src': "*",
+      'style-src': "*", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
+      'media-src': "*"
+    };
+
     ENV['simple-auth'] = {
       crossOriginWhitelist: ['*'],
       authorizer: 'simple-auth-authorizer:token',

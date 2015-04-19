@@ -11,7 +11,7 @@ module.exports = function (grunt) {
           mode: 'tgz'
         },
         files: [
-          {src: ['dist/*'], 'dest': '/'}
+          {src: ['dist/**'], 'dest': '/'}
         ]
       }
     },
@@ -32,7 +32,8 @@ module.exports = function (grunt) {
       extract: {
         command: [
           'tar xvfz /home/dan/temp/deploy.tar.gz -C /home/dan/temp',
-          'mv /home/dan/temp/dist/* /home/dan/www/client'
+          'rm -r /home/dan/www/client',
+          'mv /home/dan/temp/dist /home/dan/www/client'
         ],
           options: {
           host: '<%= secret.host %>',

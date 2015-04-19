@@ -73,7 +73,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
   },
   validateInput: function(){
     var self = this;
-<<<<<<< HEAD
+
     this.validate()
       .then(function() {
         console.log('everything is valid');
@@ -118,6 +118,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
 
   }.observes('firstname', 'lastname', 'email', 'password', 'passwordConfirmation', 'employee-id')
+<<<<<<< HEAD
 =======
     this.validate().then(function() {
 
@@ -137,4 +138,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
   }.observes('firstname', 'lastname')
 >>>>>>> af95f12... Fix missing semicolons
+=======
+
+>>>>>>> e5255fa... Change livereload port
 });
