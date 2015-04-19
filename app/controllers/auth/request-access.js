@@ -65,14 +65,15 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       }
     },
     'open-terms-of-service': function() {
-      this.send('openModal', 'auth/terms-of-service')
+      this.send('openModal', 'auth/terms-of-service');
     },
     'open-privacy-policy': function() {
-      this.send('openModal', 'auth/privacy-policy')
+      this.send('openModal', 'auth/privacy-policy');
     }
   },
   validateInput: function(){
     var self = this;
+<<<<<<< HEAD
     this.validate()
       .then(function() {
         console.log('everything is valid');
@@ -117,4 +118,23 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
 
   }.observes('firstname', 'lastname', 'email', 'password', 'passwordConfirmation', 'employee-id')
+=======
+    this.validate().then(function() {
+
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid') ; // true
+      console.log(self.get('errors'));
+    }).catch(function() {
+      // any validations fail
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid') ; // false
+      console.log(self.get('errors'));
+    }).finally(function() {
+      // all validations complete
+      // regardless of isValid state
+      console.log( self.get('isValid') ? 'isValid' : 'isNotValid') ;// true || false
+      console.log(self.get('errors'));
+    });
+
+
+  }.observes('firstname', 'lastname')
+>>>>>>> af95f12... Fix missing semicolons
 });

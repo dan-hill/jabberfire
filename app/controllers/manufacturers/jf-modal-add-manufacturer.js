@@ -8,18 +8,20 @@ export default Ember.Controller.extend({
   },
   actions: {
     save: function() {
+      var self = this;
+
       var user = this.store.createRecord('manufacturer', {
         title: this.get('title'),
         description: this.get('description'),
         note: this.get('note')
       });
 
-      var onSuccess = function(user){
+      var onSuccess = function(){
         self.send('closeModal');
       };
 
-      var onFail = function(user){
-        console.log('failed to add user')
+      var onFail = function(){
+        console.log('failed to add user');
       };
 
       user.save(onSuccess, onFail);

@@ -18,7 +18,7 @@ export default Ember.ArrayController.extend({
             }
           });
 
-        if(flat != undefined){
+        if(flat !== undefined){
           var filters = filter.split(" ");
 
 
@@ -36,7 +36,7 @@ export default Ember.ArrayController.extend({
   }.property('filter', 'userlist.@each'),
 actions: {
   openAddUserModal: function() {
-    this.send('openModal', 'modal-add-user')
+    this.send('openModal', 'modal-add-user');
   }
 }
 
