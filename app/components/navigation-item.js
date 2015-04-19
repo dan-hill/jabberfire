@@ -20,9 +20,9 @@ export default Ember.Component.extend({
               return self.set('rolesMet', true);
             }
           });
-        })
+        });
       });
-    })
+    });
 
   }
 });
