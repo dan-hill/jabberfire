@@ -2,9 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   activate: function(){
-    Pace.restart();
+    NProgress.configure({
+      parent: '.page-container',
+      showSpinner: false});
+    console.log('starting nprogress...')
+    NProgress.start();
   },
   deactivate: function() {
-    Pace.restart();
+    console.log('done.')
+    NProgress.done();
   }
 });

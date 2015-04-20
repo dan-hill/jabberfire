@@ -30,6 +30,7 @@
     "pace": "~1.0.2",
     "flot": "~0.8.3",
     "jquery.easy-pie-chart": "~2.1.6",
-    "datatables": "~1.10.6"
+    "datatables": "~1.10.6",
+    "nprogress": "~0.1.6"
   }
 }

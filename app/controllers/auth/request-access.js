@@ -4,9 +4,10 @@ import EmberValidations from 'ember-validations';
 
 export default Ember.Controller.extend(EmberValidations.Mixin, {
   'logo-large': 'img/ccmh/logo_large.png',
-
   authenticator: 'simple-auth-authenticator:jwt',
-
+  willInsertElement: function(){
+    this.set('has-error', false);
+  },
   validations: {
     firstname: {
       presence: true
@@ -44,10 +45,9 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
             .then(function() {
               self.transitionToRoute('auth.request-sent');
             })
-            .catch(function() {
-              console.log('save failed');
+            .catch(function(response) {
+              self.set('has-error', true);
             });
-
         })
         .catch(function(){
           console.log('form was not valid.')
@@ -113,6 +113,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
   }.observes('firstname', 'lastname', 'email', 'password', 'passwordConfirmation', 'employee-id')
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     this.validate().then(function() {
 
@@ -135,4 +136,6 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 =======
 
 >>>>>>> e5255fa... Change livereload port
+=======
+>>>>>>> 558a886... Fix loading routes. Change loading indicator to nprogress.
 });

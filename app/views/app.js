@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.View.extend({
   templateName: 'app',
   didInsertElement: function() {
+    Ember.$('body').addClass('app');
     Ember.$('body').addClass('page-header-fixed');
     Ember.$('body').addClass('page-quick-sidebar-over-content');
     Ember.$('body').addClass('page-style-square');
@@ -18,5 +19,6 @@ export default Ember.View.extend({
     Index.initMiniCharts();
     Tasks.initDashboardWidget();
     CCMH.init();
+
   }
 });

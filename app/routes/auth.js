@@ -4,7 +4,9 @@ import UnauthenticatedRouteMixin from 'simple-auth/mixins/unauthenticated-route-
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
   renderTemplate: function() {
     this.render('auth', {
-      into: 'application'
+      into: 'application',
+      outlet: 'main'
     });
+
   }
 });

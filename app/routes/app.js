@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin,{
   renderTemplate: function() {
+
     this.render('app', {
       into: 'application',
       outlet: 'main'

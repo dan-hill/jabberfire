@@ -50,11 +50,12 @@ app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.c
 
 app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
 
-app.import('bower_components/pace/pace.js');
-app.import('bower_components/pace/themes/green/pace-theme-minimal.css');
 
 app.import('bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js');
 app.import('bower_components/flot/jquery.flot.js');
+
+app.import('bower_components/nprogress/nprogress.js');
+app.import('bower_components/nprogress/nprogress.css');
 
 app.import('bower_components/datatables/media/css/jquery.dataTables.css');
 app.import('bower_components/datatables/media/js/jquery.dataTables.js');

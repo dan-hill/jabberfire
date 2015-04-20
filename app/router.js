@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('request-access');
     this.route('forgot-password');
     this.route('request-sent');
+    this.route('loading');
   });
 
   // Application Resource
@@ -57,6 +58,7 @@ Router.map(function() {
     this.route('loading');
   });
 
+  this.route('loading');
 });
 
 export default Router;

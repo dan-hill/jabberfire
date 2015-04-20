@@ -72,23 +72,4 @@ i.fa {
    display: inline-block;
 }
 
-.list-checkbox {
-    color: #ffffff !important;
-    position: relative !important;
-    top: 50% !important;
-    transform: translateY(10%) !important;
-    font-size: 22px !important;
-    text-align: left !important;
-}
-
-.input-error {
-  color: #ff0000;
-}
-
-.checkbox-error {
-    margin: 0;
-    padding: 0px;
-    border: 1px solid #b70015 !important;
-    background-color: rgba(255, 0, 16, 0.25) !important;
-}
 

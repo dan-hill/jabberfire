@@ -8,6 +8,13 @@
 
         <!-- START REGISTRATION FORM -->
         {{#jf-form}}
+          {{#if has-error}}
+            {{#jf-form-error-alert}}
+                This email address is alread assigned to a user. Use the {{#link-to 'auth.forgot-password'}}password
+                recovery{{/link-to}} form or contact support.
+            {{/jf-form-error-alert}}
+
+          {{/if}}
 
           {{! START FIRST NAME }}
           {{#jf-form-group}}
