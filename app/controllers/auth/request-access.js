@@ -17,7 +17,6 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
     email: {
       format: /.+@.+\..{2,4}/
     },
-
     password: {
       confirmation: true,
       presence: true
@@ -32,8 +31,6 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       var self = this;
       this.validate()
         .then(function(){
-          console.log('form was valid');
-
           var user = self.store.createRecord('access-request', {
             firstname: self.get('firstname'),
             lastname: self.get('lastname'),
@@ -43,11 +40,9 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
             employee_id: self.get('employee-id')
           });
 
-          console.log(user);
-
           user.save()
             .then(function() {
-              console.log('save successful');
+              self.transitionToRoute('auth.request-sent');
             })
             .catch(function() {
               console.log('save failed');
@@ -76,7 +71,6 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
     this.validate()
       .then(function() {
-        console.log('everything is valid');
         self.set('status-lastname', 'success');
         self.set('status-firstname', 'success');
         self.set('status-email', 'success');

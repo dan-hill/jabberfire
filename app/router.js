@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('login');
     this.route('request-access');
     this.route('forgot-password');
+    this.route('request-sent');
   });
 
   // Application Resource
