@@ -8,21 +8,21 @@ export default Ember.Component.extend({
   },
   rolesMet: false,
   willInsertElement: function() {
-    Ember.run.schedule('afterRender',this, function(){
-      var roles_required = this.get('roles-required').split(' ');
-      var current_user_roles = this.get('session.currentUser.roles');
 
-      var self = this;
-      roles_required.forEach(function(req){
-        current_user_roles.forEach(function(id) {
-          self.store.find('role', id).then(function(role){
-            if(role.get('name') === req){
-              return self.set('rolesMet', true);
-            }
-          });
-        });
-      });
-    });
+  },
+  checkRoles: function() {
+    var self = this;
+    if(self.get('session.currentUser.firstname') !== undefined){
+      var user_roles = self.get('session.currentUser.roles');
+      var required_roles = self.get('roles-required').split(' ');
 
-  }
+      if(required_roles.filter(function(req){
+          user_roles.some(function(role, index, self){
+            return req === role.name;
+          })
+        }) !== 0){
+        this.set('rolesMet', true);
+      }
+    }
+  }.observes('session.currentUser.roles')
 });

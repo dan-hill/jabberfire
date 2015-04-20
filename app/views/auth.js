@@ -9,5 +9,8 @@ export default Ember.View.extend({
     Login.init();
     Layout.init();
     CCMH.init();
+  },
+  willDestroyElement: function() {
+    Ember.$('body').removeClass('auth');
   }
 });
