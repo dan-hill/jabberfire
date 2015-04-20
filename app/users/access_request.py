@@ -1,7 +1,7 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint, request, jsonify
 from model import User as UserModel
 from app import api
-from flask_restful import Resource
+from flask_restful import Resource, abort
 
 access_request_blueprint = Blueprint('access_request_blueprint', __name__)
 api.init_app(access_request_blueprint)
@@ -15,7 +15,12 @@ class AccessRequest(Resource):
         user = UserModel.find(email=json['email'])
 
         if user is not None:
-            abort(400)
+            resp = jsonify({
+                'status': 409,
+                'message': 'Conflict.'
+            })
+            resp.status_code = 409
+            return resp
 
         user = UserModel(
             email=json['email'],
@@ -26,7 +31,21 @@ class AccessRequest(Resource):
             password=json['password']
         )
 
-        user.save()
+        if user.save():
+
+            resp = jsonify({
+                'accessRequest': {
+                    'id': user.id
+                }
+            })
+            resp.status_code = 201
+            return resp
+
+        resp = jsonify({
+            'status': 400,
+            'message': 'Bad Request.'
+        })
+        resp.status_code = 400
+        return resp
 
 api.add_resource(AccessRequest, '/api/accessRequests')
-

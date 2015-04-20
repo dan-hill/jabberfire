@@ -15,7 +15,10 @@ class CurrentUser(Resource):
     def get(self):
         userroles = []
         for role in current_user.roles:
-            userroles.append(role.id)
+            userroles.append({
+                'id': role.id,
+                'name': role.name
+            })
 
         model = {
             'user': {

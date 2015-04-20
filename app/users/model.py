@@ -131,3 +131,8 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+        if self.id is not None:
+            return True
+
+        return False
