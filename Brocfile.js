@@ -70,10 +70,10 @@ app.import('vendor/custom/login.css');
 app.import('vendor/custom/components.css');
 app.import('vendor/custom/plugins.css');
 app.import('vendor/custom/layout.css');
-app.import('vendor/metronic/themes/darkblue.css')
+app.import('vendor/metronic/themes/darkblue.css');
 app.import('vendor/custom/custom.css');
 app.import('vendor/custom/profile.js');
 app.import('vendor/custom/profile.css');
-
+app.import('bower_components/list.js/dist/list.js');
 
 module.exports = app.toTree();

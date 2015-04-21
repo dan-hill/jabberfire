@@ -24,5 +24,5 @@ export default Ember.Component.extend({
         this.set('rolesMet', true);
       }
     }
-  }.observes('session.currentUser.roles')
+  }.observes('session.currentUser.roles').on('init')
 });
