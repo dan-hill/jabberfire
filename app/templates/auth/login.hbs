@@ -4,7 +4,11 @@
 
         <!-- START LOGIN FORM -->
         <form {{action 'authenticateForm' isValid}}>
-
+          {{#if has-error}}
+            {{#jf-form-error-alert}}
+                Login failed. Please check that your username and password are correct.
+            {{/jf-form-error-alert}}
+          {{/if}}
             <!-- START USERNAME INPUT -->
           {{form-group-input
           label-text='Username'

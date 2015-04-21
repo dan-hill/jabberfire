@@ -8,6 +8,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       var controller = this.controllerFor('application');
       controller.transitionToRoute('app.dashboard');
     },
+    sessionAuthenticationFailed: function() {
+      var controller = this.controllerFor('auth.login');
+      controller.set('authentication-failed', true);
+    },
     openModal: function(modalName) {
 
       this.render('modal', {

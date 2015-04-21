@@ -20,6 +20,13 @@ export default Ember.Controller.extend(LoginControllerMixin, EmberValidations.Mi
         this.send('authenticate');
       }
     }
-  }
+  },
+  didFailAuthentication: function(){
+    if(this.get('authentication-failed') === true){
+      this.set('has-error', true);
+    } else {
+      this.set('has-error', false);
+    }
+  }.observes('authentication-failed')
 });
 
