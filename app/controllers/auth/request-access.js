@@ -20,7 +20,8 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
     },
     password: {
       confirmation: true,
-      presence: true
+      presence: true,
+      length: { minimum: 8 }
     },
     passwordConfirmation: {
       presence: true
