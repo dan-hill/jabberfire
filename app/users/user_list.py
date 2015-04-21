@@ -19,8 +19,12 @@ class UserList(Resource):
 
         for user in UserModel.list():
             userroles = []
-            for role in user.roles:
-                userroles.append(role.id)
+            for role in current_user.roles:
+                userroles.append({
+                    'id': role.id,
+                    'name': role.name
+                })
+
             model = {
 
                     'id': user.id,
