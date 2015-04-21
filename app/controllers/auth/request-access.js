@@ -30,7 +30,11 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
   actions:{
     'send-request': function () {
+
       var self = this;
+
+      if(self.get('tos') === true){
+      this.set('has-error', false);
       this.validate()
         .then(function(){
           var user = self.store.createRecord('access-request', {
@@ -39,7 +43,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
             email: self.get('email'),
             username: self.get('username'),
             password: self.get('password'),
-            employee_id: self.get('employee-id')
+            employee_id: self.get('employee-id'),
           });
 
           user.save()
@@ -53,6 +57,11 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         .catch(function(){
           console.log('form was not valid.')
         })
+      } else {
+        self.set('error-message', 'You must accept the Terms of Service and Privacy Policy.');
+        self.set('has-error', true);
+
+      }
     },
     authenticateForm: function(isValid){
       console.log(isValid);
@@ -103,15 +112,13 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         } else {
           self.set('status-password', 'success');
         }
+
         if(self.get('errors.passwordConfirmation') !== undefined && self.get('errors.passwordConfirmation').length !== 0){
           self.set('status-passwordConfirmation', 'error');
         } else {
           self.set('status-passwordConfirmation', 'success');
         }
       })
-
-
-
   }.observes('firstname', 'lastname', 'email', 'password', 'passwordConfirmation', 'employee-id')
 <<<<<<< HEAD
 <<<<<<< HEAD
