@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'capstone-frontend',
+    podModulePrefix: 'capstone-frontend/pods',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
