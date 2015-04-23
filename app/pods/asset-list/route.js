@@ -7,14 +7,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
 
   },
   model: function () {
-    return this.store.find('manufacturer');
+    return this.store.find('asset');
   },
   setupController: function (controller, model) {
     controller.set('model', model);
   },
   renderTemplate: function () {
     this.send('changeLayout', 'app');
-    this.render('manufacturers', {
+    this.render('asset-list', {
       into: 'app',
       outlet: 'content'
     });

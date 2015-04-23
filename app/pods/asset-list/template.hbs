@@ -1,15 +1,11 @@
 {{outlet}}
 
-{{#jf-page-title}}Manufacturers{{/jf-page-title}}
+{{#jf-page-title}}Assets{{/jf-page-title}}
 
 {{#jf-page-bar}}
 
-  {{#jf-page-breadcrumbs}}
-    {{#jf-page-breadcrumb}}{{#link-to 'manufacturers'}}Manufacturers{{/link-to}}{{/jf-page-breadcrumb}}
-  {{/jf-page-breadcrumbs}}
-
   {{#jf-page-actions}}
-    {{#jf-page-action}}{{#link-to 'manufacturer.new'}}Add New{{/link-to}}{{/jf-page-action}}
+    {{#jf-page-action}}{{#link-to 'asset.new'}}Add New{{/link-to}}{{/jf-page-action}}
   {{/jf-page-actions}}
 
 {{/jf-page-bar}}
@@ -52,16 +48,16 @@
 {{#jf-row}}
   {{#jf-col-md-12}}
 
-    {{#each manufacturer in sliced}}
-      {{#jf-list-item color='green-jungle'}}
+    {{#each asset in sliced}}
+      {{#jf-list-item color='purple-studio'}}
         {{#jf-list-item-title}}
-          {{fa-icon icon='manufacturer'}} {{manufacturer.title}}
+          {{fa-icon icon='asset'}} {{asset.model}}
         {{/jf-list-item-title}}
         {{#jf-list-item-actions}}
 
           {{#jf-dropdown-button}}
             {{#jf-dropdown-button-title}}
-              {{fa-icon icon='manufacturer'}} Manufacturer {{fa-icon icon='angle-down'}}
+              {{fa-icon icon='asset'}} Asset {{fa-icon icon='angle-down'}}
             {{/jf-dropdown-button-title}}
             <ul class="dropdown-menu pull-right">
                 <li><a><i class="fa fa-pencil"></i> Edit </a></li>
@@ -72,7 +68,7 @@
             </ul>
           {{/jf-dropdown-button}}
 
-          {{#link-to 'manufacturer.detail' manufacturer.id}}<a class="btn btn-circle btn-icon-only btn-default icon-link"></a>{{/link-to}}
+          {{#link-to 'asset.detail' asset.id}}<a class="btn btn-circle btn-icon-only btn-default icon-link"></a>{{/link-to}}
         {{/jf-list-item-actions}}
       {{/jf-list-item}}
 
