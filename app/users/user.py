@@ -16,7 +16,10 @@ class User(Resource):
         user = db.session.query(UserModel).get(id)
 
         for role in user.roles:
-            userroles.append(role.id)
+            userroles.append({
+                'id': role.id,
+                'name': role.name
+            })
 
         model = {
             'user': {
