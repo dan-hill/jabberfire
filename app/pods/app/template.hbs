@@ -1,12 +1,12 @@
 {{#jf-site-header}}
 
-    {{#jf-site-header-logo}}
-      {{#link-to 'app'}}
-        {{jf-img src='img/ccmh/header_logo.png' class='logo-default'}}
-      {{/link-to}}
-    {{/jf-site-header-logo}}
+  {{#jf-site-header-logo}}
+    {{#link-to 'dashboard'}}
+      {{jf-img src='img/ccmh/header_logo.png' class='logo-default'}}
+    {{/link-to}}
+  {{/jf-site-header-logo}}
 
-    {{jf-site-header-toggler}}
+  {{jf-site-header-toggler}}
 
   {{#jf-site-header-actions}}
 
@@ -17,7 +17,7 @@
     {{/jf-site-header-action}}
 
     {{#jf-site-header-action}}
-      {{#link-to 'app.dashboard'}}
+      {{#link-to 'dashboard'}}
         {{sl-icon icon='envelope-open'}} My Inbox {{#jf-badge style='danger'}} 1 {{/jf-badge}}
       {{/link-to}}
     {{/jf-site-header-action}}
@@ -26,7 +26,7 @@
 
     {{#jf-site-header-action}}
         <a {{ action 'invalidateSession' }}>
-            {{sl-icon icon='key'}} Log Out </a>
+          {{sl-icon icon='key'}} Log Out </a>
     {{/jf-site-header-action}}
 
   {{/jf-site-header-actions}}
@@ -36,7 +36,7 @@
 
   {{#jf-site-nav}}
     {{navigation-item
-    link-to='app.dashboard'
+    link-to='dashboard'
     icon='icon-home'
     title='Dashboard'
     id='dashboard-navigation-item'
@@ -102,7 +102,7 @@
   {{/jf-site-nav}}
 
   {{#jf-site-content}}
-    {{outlet}}
+    {{outlet 'content'}}
   {{/jf-site-content}}
 
 {{/jf-site-container}}

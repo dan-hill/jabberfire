@@ -1,0 +1,149 @@
+{{outlet}}
+
+<!-- START INSTRUCTIONS -->
+<p class="hint">
+    Enter your personal details below:
+</p>
+<!-- END INSTRUCTIONS -->
+
+<!-- START REGISTRATION FORM -->
+{{#jf-form}}
+  {{#if has-error}}
+    {{#jf-form-error-alert}}
+      {{error-message}}
+    {{/jf-form-error-alert}}
+
+  {{/if}}
+
+  {{! START FIRST NAME }}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{jf-input-icon
+    status=status-firstname
+    default-caption='Enter your first name.'
+    error-caption='Your first name is required.'
+    success-caption='OK'}}
+
+    {{input type="text"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='First Name'
+    value=firstname
+    id='firstname'}}
+  {{/jf-form-group}}
+  {{! END FIRST NAME }}
+
+  {{! START LAST NAME }}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{jf-input-icon
+    status=status-lastname
+    default-caption='Enter your last name.'
+    error-caption='Your last name is required.'
+    success-caption='OK'}}
+
+    {{input type="text"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='Last Name'
+    value=lastname
+    id='lastname'}}
+  {{/jf-form-group}}
+  {{! END LAST NAME }}
+
+  {{! START EMPLOYEE ID }}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{input type="text"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='Employee ID'
+    value=employee-id
+    id='employee-id'}}
+  {{/jf-form-group}}
+  {{! END EMPLOYEE ID }}
+
+  {{!START EMAIL ADDRESS }}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{jf-input-icon
+    status=status-email
+    default-caption='Enter your email address.'
+    error-caption='Email address invalid.'
+    success-caption='OK'}}
+
+    {{input type="text"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='Email Address'
+    value=email
+    id='email'}}
+  {{/jf-form-group}}
+  {{! END EMAIL ADDRESS }}
+
+  {{!START PASSWORD}}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{jf-input-icon
+    status=status-password
+    default-caption='Enter a password.'
+    error-caption='Password does not meet requirements'
+    success-caption='OK'}}
+
+    {{input type="password"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='Password'
+    value=password
+    id='password'}}
+  {{/jf-form-group}}
+  {{! END PASSWORD }}
+
+  {{!START PASSWORD CONFIRMATION }}
+  {{#jf-form-group}}
+    {{#jf-label}}{{/jf-label}}
+
+    {{jf-input-icon
+    status=status-passwordConfirmation
+    default-caption='Re-enter your password.'
+    error-caption='Passwords do not match'
+    success-caption='OK'}}
+
+    {{input type="password"
+    class='form-control form-control-solid placeholder-no-fix text-field'
+    placeholder='Confirm Password'
+    value=passwordConfirmation
+    id='passwordConfirmation'}}
+  {{/jf-form-group}}
+  {{! END PASSWORD CONFIRMATION }}
+
+  <!-- START TERMS AND POLICIES -->
+  <div class="form-group margin-top-20 margin-bottom-20">
+
+      <!-- START TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXES -->
+      <label class="check">
+        {{input id='tnc' type='checkbox' checked=tos name='tnc'}}
+          I agree to the
+          <a {{action 'open-terms-of-service'}}>Terms of Service </a>
+          & <a {{action 'open-privacy-policy'}}>Privacy Policy </a>
+      </label>
+      <!-- END TERMS OF SERVICE AND PRIVACY POLICY CHECK BOXYES -->
+
+      <!-- START TERMS ERROR -->
+      <div id="register_tnc_error">
+      </div>
+      <!-- END TERMS ERROR -->
+
+  </div>
+  <!-- TERMS AND POLICIES -->
+
+  <!-- START BUTTONS -->
+  <div class="form-actions">
+      <button {{action 'send-request'}} type="button" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+    {{#link-to 'auth.login'}}<span class="forget-password pull-left">Back</span>{{/link-to}}
+  </div>
+  <!-- END BUTTONS -->
+
+
+{{/jf-form}}
+

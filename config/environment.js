@@ -42,8 +42,8 @@ module.exports = function(environment) {
       authorizer: 'simple-auth-authorizer:token',
       store: 'simple-auth-session-store:local-storage',
       authenticationRoute: 'auth.login',
-      routeAfterAuthentication: 'app.dashboard',
-      routeIfAlreadyAuthenticated: 'app.dashboard'
+      routeAfterAuthentication: 'dashboard',
+      routeIfAlreadyAuthenticated: 'dashboard'
     };
 
     ENV['simple-auth-token'] = {
@@ -106,8 +106,8 @@ module.exports = function(environment) {
       authorizer: 'simple-auth-authorizer:token',
       store: 'simple-auth-session-store:local-storage',
       authenticationRoute: 'auth.login',
-      routeAfterAuthentication: 'app.dashboard',
-      routeIfAlreadyAuthenticated: 'app.dashboard'
+      routeAfterAuthentication: 'dashboard',
+      routeIfAlreadyAuthenticated: 'dashboard'
     };
 
     ENV['simple-auth-token'] = {

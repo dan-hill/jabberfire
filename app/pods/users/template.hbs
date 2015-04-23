@@ -1,0 +1,99 @@
+{{outlet}}
+
+{{#jf-page-title}}Users{{/jf-page-title}}
+
+{{#jf-page-bar}}
+
+  {{#jf-page-breadcrumbs}}
+    {{#jf-page-breadcrumb}}{{#link-to 'users'}}Users{{/link-to}}{{/jf-page-breadcrumb}}
+  {{/jf-page-breadcrumbs}}
+
+  {{#jf-page-actions}}
+    {{#jf-page-action}}{{#link-to 'user.new'}}Add New{{/link-to}}{{/jf-page-action}}
+  {{/jf-page-actions}}
+
+{{/jf-page-bar}}
+
+
+
+<!-- START LIST TOOLS -->
+{{#jf-row}}
+    <!-- START SEARCH -->
+  {{search-box
+  label-text='Search'
+  inputID='filter'
+  input-type='search'
+  input-placeholder='search...'
+  inputValue=filter
+  input-classes='col-md-4'}}
+    <!-- END SEARCH -->
+
+  {{view 'select'
+  class="form-control input-small"
+  content=filterables
+  optionValuePath='content.value'
+  optionLabelPath='content.name'
+  value = current_filter}}
+
+  {{#jf-col-md-8}}
+    {{#jf-nav class='pull-right'}}
+      {{#jf-pagination}}
+        {{jf-pagination-previous action='previousPage'}}
+        {{#each page in pages}}
+          {{jf-pagination-page action='didSelectPage' page=page}}
+        {{/each}}
+        {{jf-pagination-next action='nextPage' page=page}}
+      {{/jf-pagination}}
+    {{/jf-nav}}
+  {{/jf-col-md-8}}
+{{/jf-row}}
+<!-- END LIST TOOLS -->
+<!-- START USER LIST CONTAINER -->
+{{#jf-row}}
+   {{#jf-col-md-12}}
+
+          {{#each user in sliced}}
+            {{#jf-list-item}}
+              {{#jf-list-item-title}}
+                {{fa-icon icon='user'}} {{user.firstname}} {{user.lastname}}
+              {{/jf-list-item-title}}
+              {{#jf-list-item-actions}}
+
+                  {{#jf-dropdown-button}}
+                    {{#jf-dropdown-button-title}}
+                        {{fa-icon icon='user'}} User {{fa-icon icon='angle-down'}}
+                    {{/jf-dropdown-button-title}}
+                      <ul class="dropdown-menu pull-right">
+                          <li><a><i class="fa fa-pencil"></i> Edit </a></li>
+                          <li><a><i class="fa fa-trash-o"></i> Delete </a></li>
+                          <li><a><i class="fa fa-ban"></i> Ban </a></li>
+                          <li class="divider"></li>
+                          <li><a><i class="i"></i> Make admin </a></li>
+                      </ul>
+                  {{/jf-dropdown-button}}
+
+                {{#link-to 'user.detail' user.id}}<a class="btn btn-circle btn-icon-only btn-default icon-link"></a>{{/link-to}}
+              {{/jf-list-item-actions}}
+            {{/jf-list-item}}
+
+
+              <!-- END ALERTS PORTLET-->
+
+          {{/each}}
+
+
+    {{#jf-col-md-12}}
+      {{#jf-nav class='pull-right'}}
+        {{#jf-pagination}}
+          {{jf-pagination-previous action='previousPage'}}
+          {{#each page in pages}}
+            {{jf-pagination-page action='didSelectPage' page=page}}
+          {{/each}}
+          {{jf-pagination-next action='nextPage' page=page}}
+        {{/jf-pagination}}
+      {{/jf-nav}}
+    {{/jf-col-md-12}}
+    {{/jf-col-md-12}}
+{{/jf-row}}
+
+<!-- END USER LIST CONTAINER -->
