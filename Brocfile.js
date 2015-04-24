@@ -20,14 +20,26 @@ var app = new EmberApp();
 app.import('bower_components/respond/src/respond.js');
 app.import('bower_components/excanvas/excanvas.js');
 
+// JQuery
 app.import('bower_components/jquery/src/jquery.js');
 app.import('bower_components/jquery-migrate/jquery-migrate.js');
 app.import('bower_components/jquery-ui/jquery-ui.js');
 app.import('bower_components/jquery.uniform/jquery.uniform.js');
 app.import('bower_components/jquery-validate/dist/jquery.validate.js')
+app.import('bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js');
+app.import('bower_components/flot/jquery.flot.js');
+app.import('bower_components/datatables/media/css/jquery.dataTables.css');
+app.import('bower_components/datatables/media/js/jquery.dataTables.js');
+app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
+app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
 
+// Bootstrap
+app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 app.import('bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js');
+
+// FontAwesome
 app.import("bower_components/font-awesome/css/font-awesome.css");
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
@@ -36,44 +48,35 @@ app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { des
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
 app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
 
-
+// Simple Line Icons
 app.import('bower_components/simple-line-icons/css/simple-line-icons.css');
 app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.eot', { destDir: "fonts" });
 app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.svg', { destDir: "fonts" });
 app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.ttf', { destDir: "fonts" });
 app.import('bower_components/simple-line-icons/fonts/Simple-Line-Icons.woff', { destDir: "fonts" });
 
-app.import('bower_components/bootstrap/dist/css/bootstrap.css');
-app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
-
-app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
-
-app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
-
-
-app.import('bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.js');
-app.import('bower_components/flot/jquery.flot.js');
-
+// NProgress
 app.import('bower_components/nprogress/nprogress.js');
 app.import('bower_components/nprogress/nprogress.css');
 
-app.import('bower_components/datatables/media/css/jquery.dataTables.css');
-app.import('bower_components/datatables/media/js/jquery.dataTables.js');
-app.import('vendor/metronic/js/metronic.js');
-app.import('vendor/metronic/js/layout.js');
-app.import('vendor/metronic/js/login.js');
-app.import('vendor/metronic/js/demo.js');
-app.import('vendor/metronic/js/index.js');
-app.import('vendor/metronic/js/tasks.js');
-app.import('vendor/custom/ccmh.js');
-app.import('vendor/custom/login.css');
-app.import('vendor/custom/components.css');
-app.import('vendor/custom/plugins.css');
-app.import('vendor/custom/layout.css');
-app.import('vendor/metronic/themes/darkblue.css');
-app.import('vendor/custom/custom.css');
-app.import('vendor/custom/profile.js');
-app.import('vendor/custom/profile.css');
-app.import('bower_components/list.js/dist/list.js');
+// Custom CSS
+app.import('vendor/css/components.css');
+app.import('vendor/css/custom.css');
+app.import('vendor/css/layout.css');
+app.import('vendor/css/login.css');
+app.import('vendor/css/plugins.css');
+app.import('vendor/css/profile.css');
+
+// Custom JS
+app.import('vendor/js/ccmh.js');
+app.import('vendor/js/darkblue.css');
+app.import('vendor/js/demo.js');
+app.import('vendor/js/index.js');
+app.import('vendor/js/layout.js');
+app.import('vendor/js/login.js');
+app.import('vendor/js/metronic.js');
+app.import('vendor/js/profile.js');
+app.import('vendor/js/quick-sidebar.js');
+app.import('vendor/js/tasks.js');
 
 module.exports = app.toTree();
