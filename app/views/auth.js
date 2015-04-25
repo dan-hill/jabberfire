@@ -5,10 +5,6 @@ export default Ember.View.extend({
   didInsertElement: function() {
     Ember.$('body').addClass('auth');
 
-    Metronic.init();
-    Login.init();
-    Layout.init();
-    CCMH.init();
   },
   willDestroyElement: function() {
     Ember.$('body').removeClass('auth');

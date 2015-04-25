@@ -1,211 +1,23 @@
+{{#jf-page id='dashboard'}}
+  {{#jf-page-title}}Dashboard{{/jf-page-title}}
+    {{#jf-page-bar}}
+        {{#jf-page-actions}}
+                {{#jf-page-action-button}}
+                    Actions {{fa-icon icon='angle-down'}}
+                {{/jf-page-action-button}}
+                {{#jf-page-action-list}}
+                    {{#jf-page-action}}
+                        <a>Another action</a>
+                    {{/jf-page-action}}
 
-<!-- BEGIN PAGE HEADER-->
-<h3 class="page-title">
-    Dashboard <small>reports &amp; statistics</small>
-</h3>
-<div class="page-bar">
-    <ul class="page-breadcrumb">
-        <li>
-            <i class="fa fa-home"></i>
-            <a href="index.html">Home</a>
-            <i class="fa fa-angle-right"></i>
-        </li>
-        <li>
-            <a href="#">Dashboard</a>
-        </li>
-    </ul>
+                {{/jf-page-action-list}}
+        {{/jf-page-actions}}
+    {{/jf-page-bar}}
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+{{#jf-page-content-container}}
 
-</div>
-<!-- END PAGE HEADER-->
-<!-- BEGIN DASHBOARD STATS -->
-<div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat blue-madison">
-            <div class="visual">
-                <i class="fa fa-comments"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    13
-                </div>
-                <div class="desc">
-                    New Messages
-                </div>
-            </div>
-            <a class="more" href="#">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat red-intense">
-            <div class="visual">
-                <i class="fa fa-exclamation-circle"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    15
-                </div>
-                <div class="desc">
-                    Asset Alerts
-                </div>
-            </div>
-            <a class="more" href="#">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat green-haze">
-            <div class="visual">
-                <i class="fa fa-shopping-cart"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    32
-                </div>
-                <div class="desc">
-                    Asset Requests
-                </div>
-            </div>
-            <a class="more" href="#">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat purple-plum">
-            <div class="visual">
-                <i class="fa fa-globe"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    21
-                </div>
-                <div class="desc">
-                    Access requests
-                </div>
-            </div>
-            <a class="more" href="#">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-</div>
-<!-- END DASHBOARD STATS -->
-<div class="clearfix">
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-6">
-        <div class="portlet light ">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-cursor font-purple-intense hide"></i>
-                    <span class="caption-subject font-purple-intense bold uppercase">Asset Stats</span>
-                </div>
-                <div class="actions">
-                    <a href="javascript:;" class="btn btn-sm btn-circle btn-default easy-pie-chart-reload">
-                        <i class="fa fa-repeat"></i> Reload </a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="easy-pie-chart">
-                            <div class="number transactions" data-percent="55">
-											<span>
-											+26 </span>
-                                %
-                                <canvas height="75" width="75"></canvas></div>
-                            <a class="title" href="#">
-                                End of Life <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="margin-bottom-10 visible-sm">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="easy-pie-chart">
-                            <div class="number visits" data-percent="85">
-											<span>
-											+45 </span>
-                                %
-                                <canvas height="75" width="75"></canvas></div>
-                            <a class="title" href="#">
-                                Warehouse Capacity <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="margin-bottom-10 visible-sm">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="easy-pie-chart">
-                            <div class="number bounce" data-percent="46">
-											<span>
-											+34 </span>
-                                %
-                                <canvas height="75" width="75"></canvas></div>
-                            <a class="title" href="#">
-                                Service Speed <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6">
-        <div class="portlet light ">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-equalizer font-purple-plum hide"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Server Stats</span>
-                    <span class="caption-helper">monthly stats...</span>
-                </div>
-                <div class="tools">
-                    <a href="" class="collapse" data-original-title="" title="">
-                    </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
-                    </a>
-                    <a href="" class="reload" data-original-title="" title="">
-                    </a>
-                    <a href="" class="remove" data-original-title="" title="">
-                    </a>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="sparkline-chart">
-                            <div class="number" id="sparkline_bar"><canvas width="113" height="55" style="display: inline-block; width: 113px; height: 55px; vertical-align: top;"></canvas></div>
-                            <a class="title" href="#">
-                                Network <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="margin-bottom-10 visible-sm">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="sparkline-chart">
-                            <div class="number" id="sparkline_bar2"><canvas width="107" height="55" style="display: inline-block; width: 107px; height: 55px; vertical-align: top;"></canvas></div>
-                            <a class="title" href="#">
-                                CPU Load <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="margin-bottom-10 visible-sm">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="sparkline-chart">
-                            <div class="number" id="sparkline_line"><canvas width="100" height="55" style="display: inline-block; width: 100px; height: 55px; vertical-align: top;"></canvas></div>
-                            <a class="title" href="#">
-                                Load Rate <i class="icon-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+  fuergles
+{{/jf-page-content-container}}
+    <!-- END PAGE CONTENT-->
+{{/jf-page}}

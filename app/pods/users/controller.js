@@ -1,7 +1,13 @@
+/*global Ember */
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   userlist: undefined,
+  pageSize: 15,
+  selectedPage: 1,
+  renderEnd: 10,
+  filter: '',
+  current_filter: 'firstname',
 
   pages: function(){
     var number_of_pages = this.get('filtered').length / this.get('pageSize');
@@ -9,25 +15,22 @@ export default Ember.ArrayController.extend({
     for(var i = 0; i < number_of_pages; i++){
       page_array.push(i + 1);
     }
-
     return page_array;
   }.property('pages.@each', 'filtered', 'pageSize'),
 
-  pageSize: 10,
-  selectedPage: 1,
   renderStart: function(){
     return (this.get('selectedPage') - 1) * this.get('pageSize');
   }.property('selectedPage','renderStart'),
-  renderEnd: 10,
-  filter: '',
-  current_filter: 'firstname',
+
   filterables: [
     {name: "Name", value: 'firstname'},
     {name: "Employee ID", value: 'employee_id'},
     {name: "Status", value: 'status'},
     {name: "Email", value: 'email'}
   ],
+
   filtered: function(){
+    this.set('filter', this.get('filter').trim());
     var self = this;
     var users = this.get('model');
     var filter = this.get('filter').toLowerCase();
@@ -36,11 +39,12 @@ export default Ember.ArrayController.extend({
       if(user.get(field) === undefined){return false}
       return ~user.get(field).toLowerCase().indexOf(filter);
     });
-  }.property( 'filter', 'current_filter'),
+  }.property( 'filter', 'current_filter', 'model'),
 
   sliced: function(){
-    return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + 10);
+    return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + this.get('pageSize'));
   }.property('renderStart', 'filtered', 'sliced.@each'),
+
   actions: {
     openAddUserModal: function() {
       this.send('openModal', 'modal-add-user');

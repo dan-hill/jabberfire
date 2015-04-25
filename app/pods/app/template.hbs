@@ -1,111 +1,210 @@
-{{#jf-site-header}}
-
-  {{#jf-site-header-logo}}
+{{#jf-app-header}}
+  {{#jf-app-logo}}
     {{#link-to 'dashboard'}}
-      {{jf-img src='img/ccmh/header_logo.png' class='logo-default'}}
+      {{jf-img src="img/ccmh/header_logo.png" alt="logo" class="logo-default"}}
     {{/link-to}}
-  {{/jf-site-header-logo}}
+  {{/jf-app-logo}}
+  {{#jf-app-toggler data-toggle='collapse' data-target='.navbar-collapse'}}{{/jf-app-toggler}}
 
-  {{jf-site-header-toggler}}
+  <!-- END RESPONSIVE MENU TOGGLER -->
+  <!-- BEGIN TOP NAVIGATION MENU -->
+  {{#jf-app-menu}}
 
-  {{#jf-site-header-actions}}
+    {{#jf-app-notifications}}
+      {{#jf-dropdown-toggle}}
+        {{sl-icon icon='bell'}}{{#jf-badge color='default'}}1{{/jf-badge}}
+      {{/jf-dropdown-toggle}}
+      {{#jf-dropdown-menu}}
+        {{#jf-dropdown-menu-header}}
+            <h3><span class="bold">1 pending</span> notifications</h3>
+            <a href="extra_profile.html">view all</a>
+        {{/jf-dropdown-menu-header}}
+        {{#jf-dropdown-menu-scroller}}
 
-    {{#jf-site-header-action}}
-      {{#link-to 'user.detail' session.currentUser.id}}
-        {{sl-icon icon='user'}} My Profile
+          {{! ITEM }}
+          {{#jf-dropdown-menu-scroller-item}}
+            {{#jf-dropdown-menu-scroller-item-time}}
+                just now
+            {{/jf-dropdown-menu-scroller-item-time}}
+            {{#jf-dropdown-menu-scroller-item-details}}
+              {{#jf-dropdown-menu-scroller-item-label}}
+                {{fa-icon icon='plus'}}
+              {{/jf-dropdown-menu-scroller-item-label}}
+              New user registered.
+            {{/jf-dropdown-menu-scroller-item-details}}
+          {{/jf-dropdown-menu-scroller-item}}
+        {{! /ITEM }}
+
+        {{/jf-dropdown-menu-scroller}}
+      {{/jf-dropdown-menu}}
+
+    {{/jf-app-notifications}}
+    <!-- END NOTIFICATION DROPDOWN -->
+    <!-- BEGIN INBOX DROPDOWN -->
+    {{#jf-app-inbox}}
+      {{#jf-dropdown-toggle}}
+        {{sl-icon icon='envelope-open'}}{{#jf-badge color='default'}}1{{/jf-badge}}
+      {{/jf-dropdown-toggle}}
+      {{#jf-dropdown-menu}}
+        {{#jf-dropdown-menu-header}}
+            <h3>You have <span class="bold">1 new</span> message</h3>
+            <a href="extra_profile.html">view all</a>
+        {{/jf-dropdown-menu-header}}
+        {{#jf-dropdown-menu-scroller}}
+          {{#jf-dropdown-menu-scroller-item}}
+           {{#jf-dropdown-menu-scroller-item-photo}}
+             {{jf-img-circle src=''}}
+           {{/jf-dropdown-menu-scroller-item-photo}}
+            {{#jf-dropdown-menu-scroller-item-subject}}
+              {{#jf-dropdown-menu-scroller-item-from}}
+                Jimmy Dean
+              {{/jf-dropdown-menu-scroller-item-from}}
+            {{#jf-dropdown-menu-scroller-item-time}}
+                just now
+            {{/jf-dropdown-menu-scroller-item-time}}
+            {{/jf-dropdown-menu-scroller-item-subject}}
+            {{#jf-dropdown-menu-scroller-item-message}}
+              I hear you are really into sausage.
+            {{/jf-dropdown-menu-scroller-item-message}}
+          {{/jf-dropdown-menu-scroller-item}}
+        {{/jf-dropdown-menu-scroller}}
+      {{/jf-dropdown-menu}}
+
+    {{/jf-app-inbox}}
+    <!-- END INBOX DROPDOWN -->
+    <!-- BEGIN USER LOGIN DROPDOWN -->
+    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+    <li class="dropdown dropdown-user">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+           data-close-others="true">
+          {{fa-icon icon='user'}}
+            <span class="username username-hide-on-mobile">
+					{{session.currentUser.firstname}} </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+            <li>
+                <a href="">
+                    <i class="icon-user"></i> My Profile </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="icon-settings"></i> Settings </a>
+            </li>
+
+            <li class="divider">
+            </li>
+            <li>
+                <a href="extra_lock.html">
+                    <i class="icon-lock"></i> Lock Screen </a>
+            </li>
+            <li>
+                <a href="login.html">
+                    <i class="icon-key"></i> Log Out </a>
+            </li>
+        </ul>
+    </li>
+    <!-- END USER LOGIN DROPDOWN -->
+    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+    <li class="dropdown dropdown-quick-sidebar-toggler">
+        <a href="javascript:;" class="dropdown-toggle">
+            <i class="icon-logout"></i>
+        </a>
+    </li>
+    <!-- END QUICK SIDEBAR TOGGLER -->
+  {{/jf-app-menu}}
+{{/jf-app-header}}
+
+<!-- END HEADER -->
+{{jf-clearfix}}
+
+<!-- BEGIN CONTAINER -->
+{{#jf-app-content-container}}
+  {{#jf-sidebar-nav}}
+    {{#jf-nav-item id='dashboard-nav'}}
+        {{#link-to 'dashboard'}}
+          {{sl-icon icon='home'}}
+          <span class="title">Dashboard</span>
+          <span class="selected"></span>
+        {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='assets-nav'}}
+      {{#link-to 'users'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Assets</span>
+        <span class=""></span>
       {{/link-to}}
-    {{/jf-site-header-action}}
-
-    {{#jf-site-header-action}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Manufacturers-nav'}}
       {{#link-to 'dashboard'}}
-        {{sl-icon icon='envelope-open'}} My Inbox {{#jf-badge style='danger'}} 1 {{/jf-badge}}
+        {{sl-icon icon='home'}}
+        <span class="title">Manufacturers</span>
+        <span class=""></span>
       {{/link-to}}
-    {{/jf-site-header-action}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Suppliers-nav'}}
+      {{#link-to 'dashboard'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Suppliers</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='users-nav'}}
+      {{#link-to 'users'}}
+        {{sl-icon icon='user'}}
+        <span class="title">Users</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Orders-nav'}}
+      {{#link-to 'dashboard'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Orders</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Reports-nav'}}
+      {{#link-to 'dashboard'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Reports</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Settings-nav'}}
+      {{#link-to 'dashboard'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Settings</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{#jf-nav-item id='Support-nav'}}
+      {{#link-to 'dashboard'}}
+        {{sl-icon icon='home'}}
+        <span class="title">Support</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
 
-    <li class="divider"></li>
+    {{/jf-sidebar-nav}}
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    {{#jf-page-content}}
+      {{outlet 'content'}}
+    {{/jf-page-content}}
 
-    {{#jf-site-header-action}}
-        <a {{ action 'invalidateSession' }}>
-          {{sl-icon icon='key'}} Log Out </a>
-    {{/jf-site-header-action}}
 
-  {{/jf-site-header-actions}}
-{{/jf-site-header}}
-
-{{#jf-site-container}}
-
-  {{#jf-site-nav}}
-    {{navigation-item
-    link-to='dashboard'
-    icon='icon-home'
-    title='Dashboard'
-    id='dashboard-navigation-item'
-    session=session
-    roles-required='user'}}
-
-    {{navigation-item
-    link-to='asset-list'
-    icon='icon-screen-desktop'
-    title='Assets'
-    id='assets-navigation-item'
-    session=session
-    roles-required='user'}}
-
-    {{navigation-item
-    link-to='manufacturers'
-    icon='icon-wrench'
-    title='Manufacturers'
-    id='manufacturers-navigation-item'
-    session=session
-    roles-required='administrator technition'}}
-
-    {{navigation-item
-    link-to='suppliers'
-    icon='icon-plane'
-    title='Suppliers'
-    id='suppliers-navigation-item'
-    session=session
-    roles-required='administrator technition'}}
-
-    {{navigation-item
-    link-to='users'
-    icon='icon-users'
-    title='Users'
-    id='users-navigation-item'
-    session=session
-    roles-required='administrator technition'}}
-
-    {{navigation-item
-    link-to='orders'
-    icon='icon-fire'
-    title='Orders'
-    id='orders-navigation-item'
-    session=session
-    roles-required='administrator technition'}}
-
-    {{navigation-item
-    link-to='reports'
-    icon='icon-notebook'
-    title='Reports'
-    id='reports-navigation-item'
-    session=session
-    roles-required='administrator technition'}}
-
-    {{navigation-item
-    link-to='settings'
-    icon='icon-settings'
-    title='Settings'
-    id='settings-navigation-item'
-    session=session
-    roles-required='administrator'}}
-
-  {{/jf-site-nav}}
-
-  {{#jf-site-content}}
-    {{outlet 'content'}}
-  {{/jf-site-content}}
-
-{{/jf-site-container}}
-
-<!-- END CONTENT -->
-{{main-footer organization-title=globals.organization.name.long}}
+{{/jf-app-content-container}}
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="page-footer-inner">
+        2014 &copy; Metronic by keenthemes. <a
+            href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
+            title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase
+        Metronic!</a>
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>

@@ -32,7 +32,9 @@ app.import('bower_components/datatables/media/css/jquery.dataTables.css');
 app.import('bower_components/datatables/media/js/jquery.dataTables.js');
 app.import('bower_components/jquery.uniform/themes/default/css/uniform.default.css');
 app.import('vendor/jquery.sparkline.build/dist/jquery.sparkline.js');
-
+app.import('bower_components/jquery-switch/jquery.switch/jquery.switch.min.js');
+app.import('bower_components/jquery-switch/jquery.switch/jquery.switch.css');
+app.import('bower_components/slimscroll/jquery.slimscroll.min.js');
 // Bootstrap
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
@@ -60,23 +62,27 @@ app.import('bower_components/nprogress/nprogress.js');
 app.import('bower_components/nprogress/nprogress.css');
 
 // Custom CSS
-app.import('vendor/css/components.css');
+app.import('vendor/css/components-md.css');
 app.import('vendor/css/custom.css');
+app.import('vendor/css/darkblue.css');
 app.import('vendor/css/layout.css');
 app.import('vendor/css/login.css');
-app.import('vendor/css/plugins.css');
+app.import('vendor/css/plugins-md.css');
 app.import('vendor/css/profile.css');
+app.import('vendor/css/tasks.css');
+
+
 
 // Custom JS
-app.import('vendor/js/ccmh.js');
-app.import('vendor/js/darkblue.css');
-app.import('vendor/js/demo.js');
-app.import('vendor/js/index.js');
-app.import('vendor/js/layout.js');
-app.import('vendor/js/login.js');
 app.import('vendor/js/metronic.js');
-app.import('vendor/js/profile.js');
-app.import('vendor/js/quick-sidebar.js');
+app.import('vendor/js/login.js');
+app.import('vendor/js/layout.js');
+app.import('vendor/js/index.js');
+app.import('vendor/js/ccmh.js');
 app.import('vendor/js/tasks.js');
+
+
+// Plugins
+
 
 module.exports = app.toTree();
