@@ -22,6 +22,7 @@ export default Ember.View.extend({
     Index.initMiniCharts();
     Tasks.initDashboardWidget();
     CCMH.init();
+    TableAdvanced.init();
 
   }
 });

@@ -1,158 +1,136 @@
-{{#jf-page-title}}Users{{/jf-page-title}}
+{{#jf-page id='user-new'}}
+  {{#jf-page-title}}Add New User{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'user.new'}}Change Status{{/link-to}}
+        {{/jf-page-action}}
+        {{#jf-page-action}}
+          {{#link-to 'user.new'}}Set Role{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
+      <!-- BEGIN SAMPLE FORM PORTLET-->
+      <div class="portlet light bordered" xmlns="http://www.w3.org/1999/html">
+          <div class="portlet-title">
+              <div class="caption font-red-sunglo">
+                  <span class="caption-subject bold uppercase">User Details</span>
+              </div>
+          </div>
 
-{{#jf-page-bar}}
+          <div class="portlet-body form">
+              <form role="form">
+                  <div class="form-body">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                      {{input type='text' class='form-control' value=firstname}}
+                                      <label for="first-name-control">First Name</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=lastname}}
+                                      <label for="last-name-control">Last Name</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=email}}
+                                      <label for="email-control">Email</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-envelope"></i>
+                                  </div>
+                              </div>
+                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=employee_id}}
+                                      <label for="employee-id-control">Employee ID</label>
+                                      <span class="help-block"></span>
+                                      <i class="fa fa-empire"></i>
+                                  </div>
+                              </div>
 
-  {{#jf-page-actions}}
-    {{#jf-page-action}}{{#link-to 'user.new'}}Add New{{/link-to}}{{/jf-page-action}}
-  {{/jf-page-actions}}
+                              <div class="form-group">
+                                  <div class="col-md-12">
+                                      <ul class="list-unstyled">
+                                        {{#each department in selectedDepartmentsObserver}}
+                                            <li style="margin-bottom: 5px;">
+                                                <button type="button" class="btn default btn-xs">
+                                                    <span class="md-click-circle md-click-animate"></span>
+                                                  {{#each dept in department}}{{dept.name}}{{fa-icon icon='arrow-right'}}{{/each}}
+                                                </button>
+                                            </li>
+                                        {{/each}}
+                                      </ul>
+                                  </div>
 
-{{/jf-page-bar}}
-{{#jf-row}}
-  {{#jf-col-md-12}}
-    <div class="portlet light bordered">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-equalizer font-blue-hoki"></i>
-                <span class="caption-subject font-blue-hoki bold uppercase">Form Sample</span>
-                <span class="caption-helper">demo form...</span>
-            </div>
-            <div class="tools">
-                <a href="" class="collapse" data-original-title="" title="">
-                </a>
-                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
-                </a>
-                <a href="" class="reload" data-original-title="" title="">
-                </a>
-                <a href="" class="remove" data-original-title="" title="">
-                </a>
-            </div>
-        </div>
-        <div class="portlet-body form">
-            <!-- BEGIN FORM-->
-            <form action="#" class="horizontal-form">
-                <div class="form-body">
-                    <h3 class="form-section">Person Info</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">First Name</label>
-                                <input type="text" id="firstName" class="form-control" placeholder="Chee Kin">
-															<span class="help-block">
-															This is inline help </span>
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group has-error">
-                                <label class="control-label">Last Name</label>
-                                <input type="text" id="lastName" class="form-control" placeholder="Lim">
-															<span class="help-block">
-															This field has error. </span>
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Gender</label>
-                                <select class="form-control">
-                                    <option value="">Male</option>
-                                    <option value="">Female</option>
-                                </select>
-															<span class="help-block">
-															Select your gender </span>
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Date of Birth</label>
-                                <input type="text" class="form-control" placeholder="dd/mm/yyyy">
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Category</label>
-                                <div class="select2-container select2_category form-control" id="s2id_autogen9"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-10">Category 1</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen10" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-10" id="s2id_autogen10" tabindex="1"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen10_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-10" id="s2id_autogen10_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-10">   </ul></div></div><select class="select2_category form-control select2-offscreen" data-placeholder="Choose a Category" tabindex="-1" title="">
-                                <option value="Category 1">Category 1</option>
-                                <option value="Category 2">Category 2</option>
-                                <option value="Category 3">Category 5</option>
-                                <option value="Category 4">Category 4</option>
-                            </select>
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Membership</label>
-                                <div class="radio-list">
-                                    <label class="radio-inline">
-                                        <div class="radio" id="uniform-optionsRadios1"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""></span></div> Option 1 </label>
-                                    <label class="radio-inline">
-                                        <div class="radio" id="uniform-optionsRadios2"><span><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"></span></div> Option 2 </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <h3 class="form-section">Address</h3>
-                    <div class="row">
-                        <div class="col-md-12 ">
-                            <div class="form-group">
-                                <label>Street</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>City</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>State</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Post Code</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Country</label>
-                                <select class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                        <!--/span-->
-                    </div>
-                </div>
-                <div class="form-actions right">
-                    <button type="button" class="btn default">Cancel</button>
-                    <button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
-                </div>
-            </form>
-            <!-- END FORM-->
-        </div>
-    </div>
-    {{/jf-col-md-12}}
-{{/jf-row}}
+                                  <div class="col-md-11">
+
+                                    {{#ember-chosen multiple=true id='department_select' value=multipleSelectValue }}
+                                      {{#each department in options}}
+                                          <option {{bind-attr value=department.id}}>{{department.name}}</option>
+                                      {{/each}}
+                                    {{/ember-chosen}}
+                                  </div>
+                                  <div class="col-md-1">
+                                      <a{{action 'didTouchUpOnAddDepartment'}}
+                                              class="btn btn-icon-only green pull-right">
+                                          <i class="fa fa-plus"></i>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+
+                              <div class="form-group">
+                                  <label for="status-control">Status</label>
+                                {{#ember-chosen id='status_select' value=selectedStatus }}
+                                  {{#each status in statuses}}
+                                      <option {{bind-attr value=status.id}}>{{status.name}}</option>
+                                  {{/each}}
+                                {{/ember-chosen}}
+                              </div>
+
+                              <div class="form-group">
+                                  <label for="role-control">Role</label>
+                                {{#ember-chosen id='role_select' value=selectedRole }}
+                                  {{#each role in roles}}
+                                      <option {{bind-attr value=role.id}}>{{role.name}}</option>
+                                  {{/each}}
+                                {{/ember-chosen}}
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-actions noborder pull-right">
+                              <button type="button" class="btn default">Cancel</button>
+                              <button type="button" class="btn blue" {{action 'didTouchUpOnSave'}}>Save</button>
+                          </div>
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+      <!-- END SAMPLE FORM PORTLET-->
+
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}

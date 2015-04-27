@@ -11,7 +11,8 @@
     "Tasks",
     "CCMH",
     "Profile",
-    "NProgress"
+    "NProgress",
+    "TableAdvanced"
   ],
   "browser": true,
   "boss": true,

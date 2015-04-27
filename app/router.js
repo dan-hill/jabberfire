@@ -52,6 +52,19 @@ Router.map(function() {
     this.route('new');
     this.route('edit');
   });
+  this.resource('support', function() {
+    this.route('manual');
+    this.route('new');
+    this.route('contact');
+  });
+
+  this.resource('departments', function() {});
+  this.resource('department', function() {
+    this.route('new');
+    this.route('edit');
+    this.route('detail', {path: '/detail/:id'});
+  });
+
 });
 
 

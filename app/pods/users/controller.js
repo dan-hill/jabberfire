@@ -46,9 +46,6 @@ export default Ember.ArrayController.extend({
   }.property('renderStart', 'filtered', 'sliced.@each'),
 
   actions: {
-    openAddUserModal: function() {
-      this.send('openModal', 'modal-add-user');
-    },
     didSelectPage: function(){
       this.set('selectedPage', parseInt($(event.target).text()));
     },

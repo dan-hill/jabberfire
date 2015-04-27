@@ -5,5 +5,11 @@ export default Ember.Route.extend({
     this.render('user.new', {
       into: 'user'
     });
+  },
+  model: function(){
+    return this.store.find('department');
+  },
+  setupController: function (controller, model) {
+      controller.set('department_list', model);
   }
 });
