@@ -12,11 +12,10 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       controller.set('authentication-failed', true);
       console.log('auth failed!!')
     },
-    showModal: function(name, model) {
-      this.render(name, {
+    showModal: function(model) {
+      this.render(model, {
         into: 'application',
-        outlet: 'modal',
-        model: model
+        outlet: 'modal'
       });
     },
     removeModal: function() {

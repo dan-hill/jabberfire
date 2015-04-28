@@ -1,12 +1,28 @@
+/*global Ember */
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
-export default Ember.ArrayController.extend(Ember.Evented, {
+export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixin, {
+  authenticator: 'simple-auth-authenticator:jwt',
+  validations: {
+    firstname: {
+      presence: true
+    },
+    lastname: {
+      presence: true
+    },
+    email: {
+      format: /.+@.+\..{2,4}/
+    },
+  },
   actionMessage: null,
+  selectedStatus: 'pending',
   statuses: [
     {id: 'pending',   name: 'Pending'},
     {id: 'active',    name: 'Active'},
     {id: 'inactive',  name: 'Inactive'}
   ],
+  selectedRole: 1,
   roles: [
     {id: 1, name: 'User'},
     {id: 2, name: 'Technician'},
@@ -89,35 +105,86 @@ export default Ember.ArrayController.extend(Ember.Evented, {
   }.property('selectedDepartments.@each', 'selectedDepartments'),
   actions: {
     didTouchUpOnAddDepartment: function(){
+      var multiple_select_value = this.get('multipleSelectValue');
+      var selected_departments = this.get('selectedDepartments');
 
-      console.log(this.get('multipleSelectValue'))
-      var multipleSelectValue = this.get('multipleSelectValue');
+      if (multiple_select_value !== undefined && multiple_select_value.length > 0){
 
-      var department = this.get('department_list').find(
-        function(department){
-          return department.get('id') == multipleSelectValue.get('lastObject')
+        var department = this.get('department_list').find(function(department){
+            return department.get('id') == multiple_select_value.get('lastObject')
         });
-      this.get('selectedDepartments').addObject(department);
-      this.set('multipleSelectValue', []);
-      $("#department_select").trigger("chosen:updated");
 
+        selected_departments.addObject(department);
+
+        this.set('multipleSelectValue', []);
+
+        $("#department_select").trigger("chosen:updated");
+      }
     },
     didTouchUpOnSave: function(){
+      var self = this;
+
+      // Set up attributes used
+      var selectedDepartments = this.get('selectedDepartments');
+      var selectedRole = this.get('selectedRole');
+
+
+      // Create the local record
       var user = this.get('store').createRecord('user', {
         'firstname': this.get('firstname'),
         'lastname': this.get('lastname'),
         'email': this.get('email'),
         'employee_id': this.get('employee_id'),
         'status': this.get('selectedStatus')
-      })
+      });
 
-      var role = this.get('store').find('role', this.get('selectedRole'));
+      // Get the role
+      if(selectedRole !== undefined){
+        self.get('store').find('role', parseInt(selectedRole)).then(function(role){
+          // Push the role onto the user
+          user.get('roles').pushObject(role);
+          user.get('departments').pushObjects(selectedDepartments);
 
-      user.get('roles').pushObject(role);
+          user.save()
+            .then(function(){
+              self.transitionToRoute('users');
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+            .finally(function(){
 
-      var departments = this.get('selectedDepartments');
-
-      user.get('departments').pushObjects(selectedDepartments);
+            })
+        }).catch(function(){
+          console.log('something bad happened during get role')
+        })
+      }
     }
-  }
+  },
+  validateInput: function(){
+    var self = this;
+
+    var set_status = function(item, selector){
+      if(self.get('errors.' + item ) !== undefined && self.get('errors.' + item).length !== 0) {
+        selector.removeClass('has-default');
+        selector.addClass('has-error');
+
+      } else {
+        selector.removeClass('has-error');
+        selector.addClass('has-default');
+      }
+    };
+
+    this.validate().then(function() {
+      set_status('firstname', $('#firstname'));
+      set_status('lastname', $('#lastname'));
+      set_status('email', $('#email'));
+      }).catch(function() {
+        set_status('firstname', $('#firstname'));
+        set_status('lastname', $('#lastname'));
+        set_status('email', $('#email'));
+      }
+    )
+  }.observes('firstname', 'lastname', 'email')
+
 });

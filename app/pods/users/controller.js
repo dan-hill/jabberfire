@@ -39,7 +39,7 @@ export default Ember.ArrayController.extend({
       if(user.get(field) === undefined){return false}
       return ~user.get(field).toLowerCase().indexOf(filter);
     });
-  }.property( 'filter', 'current_filter', 'model'),
+  }.property( 'filter', 'current_filter', 'model.@each'),
 
   sliced: function(){
     return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + this.get('pageSize'));
@@ -58,6 +58,18 @@ export default Ember.ArrayController.extend({
       if(this.get('selectedPage') !== this.get('pages').length){
         this.set('selectedPage', this.get('selectedPage') + 1);
       }
+    },
+    didTouchUpOnBulkChangeStatus: function(){
+      this.send('showModal', 'users/change-status')
+    },
+    didTouchUpOnSaveBulkChangeStatus: function(status){
+      console.log('did the thing')
+    },
+    didTouchUpOnBulkChangeRole: function(){
+      this.send('showModal', 'users/change-role')
+    },
+    didTouchUpOnSaveBulkChangeRole: function(){
+      this.send('showModal', 'users/change-role')
     }
   },
   disablePaginationWalking: function(){
@@ -78,4 +90,5 @@ export default Ember.ArrayController.extend({
     $('.pagination li').removeClass('active');
     $('.page-' + this.get('selectedPage')).addClass('active');
   }.observes('selectedPage')
+
 });

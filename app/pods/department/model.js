@@ -4,6 +4,7 @@ export default DS.Model.extend({
   'name': DS.attr('string'),
   'description': DS.attr('string'),
   'parent_id': DS.attr('number'),
-  'children': DS.hasMany('department', { async:false })
+  'parent':  DS.belongsTo('department', {inverse: 'children'}),
+  'children': DS.hasMany('department', { async:false, inverse: 'parent'})
 });
 

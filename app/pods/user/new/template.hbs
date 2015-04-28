@@ -1,4 +1,4 @@
-{{#jf-page id='user-new'}}
+{{#jf-page id='user'}}
   {{#jf-page-title}}Add New User{{/jf-page-title}}
   {{#jf-page-bar}}
     {{#jf-page-actions}}
@@ -31,7 +31,7 @@
                   <div class="form-body">
                       <div class="row">
                           <div class="col-md-6">
-                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                              <div id='firstname' class="form-group form-md-line-input has-default form-md-floating-label">
                                   <div class="input-icon right">
                                       {{input type='text' class='form-control' value=firstname}}
                                       <label for="first-name-control">First Name</label>
@@ -39,17 +39,17 @@
                                       <i class="icon-user"></i>
                                   </div>
                               </div>
-                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                              <div id='lastname' class="form-group form-md-line-input has-default form-md-floating-label">
                                   <div class="input-icon right">
-                                    {{input type='text' class='form-control' value=lastname}}
+                                    {{input type='text' class='form-control' value=lastname }}
                                       <label for="last-name-control">Last Name</label>
                                       <span class="help-block"></span>
                                       <i class="icon-user"></i>
                                   </div>
                               </div>
-                              <div class="form-group form-md-line-input has-default form-md-floating-label">
+                              <div id='email' class="form-group form-md-line-input has-default form-md-floating-label">
                                   <div class="input-icon right">
-                                    {{input type='text' class='form-control' value=email}}
+                                    {{input type='text' class='form-control' value=email }}
                                       <label for="email-control">Email</label>
                                       <span class="help-block"></span>
                                       <i class="icon-envelope"></i>
@@ -57,7 +57,7 @@
                               </div>
                               <div class="form-group form-md-line-input has-default form-md-floating-label">
                                   <div class="input-icon right">
-                                    {{input type='text' class='form-control' value=employee_id}}
+                                    {{input type='text' class='form-control' value=employee_id id='employee_id'}}
                                       <label for="employee-id-control">Employee ID</label>
                                       <span class="help-block"></span>
                                       <i class="fa fa-empire"></i>

@@ -4,9 +4,9 @@ export default Ember.Component.extend({
   closeText: 'Close',
   okText: 'Ok',
   actions: {
-    ok: function() {
+    save: function() {
       this.$('.modal').modal('hide');
-      this.sendAction('ok');
+      this.sendAction('didTouchUpOnSaveBulkChangeStatus');
     }
   },
   show: function() {
