@@ -3,17 +3,15 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin,{
-  beforeModel: function (transition) {
 
-  },
   model: function () {
     return this.store.find('manufacturer');
   },
   setupController: function (controller, model) {
     controller.set('model', model);
+    console.log(model)
   },
   renderTemplate: function () {
-    this.send('changeLayout', 'app');
     this.render('manufacturers', {
       into: 'app',
       outlet: 'content'

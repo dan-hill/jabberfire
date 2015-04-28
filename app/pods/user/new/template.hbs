@@ -27,6 +27,14 @@
           </div>
 
           <div class="portlet-body form">
+              <div id='error-note-container' class="hide">
+                      <div class="note note-warning">
+                          <h4>{{errorNote.title}}</h4>
+                          <p>
+                              {{errorNote.message}}
+                          </p>
+                      </div>
+              </div>
               <form role="form">
                   <div class="form-body">
                       <div class="row">

@@ -87,15 +87,22 @@
                             class="pull-right">{{#each role in model.roles}}{{role.name}}, {{/each}}</span>
                     </li>
                     <li class="list-group-item">Departments<span class="pull-right">
-                      {{#each department in model.departments}}
-                        {{#link-to 'department.detail' department.id}}
-                            <button type="button" class="btn btn-circle red-pink btn-xs">{{department.name}}</button>
-                        {{/link-to}}
-                      {{/each}}
+
                         </span>
                     </li>
                 </ul>
             </div>
+            <div class="panel panel-default">
+                <ul class="unstyled">
+                  {{#each department in model.departments}}
+                      <li>
+                        {{#link-to 'department.detail' department.id}}
+                            <button type="button" class="btn btn-circle red-pink btn-xs">{{department.name}}</button>
+                        {{/link-to}}
+                      </li>
+                  {{/each}}
+                </ul>
+                </div>
         </div>
 
 

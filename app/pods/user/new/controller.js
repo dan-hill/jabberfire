@@ -125,40 +125,44 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
       var self = this;
 
       // Set up attributes used
-      var selectedDepartments = this.get('selectedDepartments');
-      var selectedRole = this.get('selectedRole');
+      var selectedDepartments = self.get('selectedDepartments');
+      var selectedRole = self.get('selectedRole');
 
+      this.validate().then(function(){
+        // Create the local record
+        var user = self.get('store').createRecord('user', {
+          'firstname': self.get('firstname'),
+          'lastname': self.get('lastname'),
+          'email': self.get('email'),
+          'employee_id': self.get('employee_id'),
+          'status': self.get('selectedStatus')
+        });
 
-      // Create the local record
-      var user = this.get('store').createRecord('user', {
-        'firstname': this.get('firstname'),
-        'lastname': this.get('lastname'),
-        'email': this.get('email'),
-        'employee_id': this.get('employee_id'),
-        'status': this.get('selectedStatus')
+        // Get the role
+        if(selectedRole !== undefined){
+          self.get('store').find('role', parseInt(selectedRole)).then(function(role){
+            // Push the role onto the user
+            user.get('roles').pushObject(role);
+            user.get('departments').pushObjects(selectedDepartments);
+
+            user.save()
+              .then(function(){
+                self.transitionToRoute('users');
+              })
+              .catch(function(err){
+                self.set('errorNote', {title: 'Save Error', message: 'An error happened so the user could not be saved.'})
+              })
+              .finally(function(){
+
+              })
+          }).catch(function(){
+            self.set('errorNote', {title: 'Role Error', message: 'Something went wrong while fetching roles..'})
+          })
+        }
+      }).catch(function(){
+        self.set('errorNote', {title: 'Input Error', message: 'The form input is bad.'})
       });
 
-      // Get the role
-      if(selectedRole !== undefined){
-        self.get('store').find('role', parseInt(selectedRole)).then(function(role){
-          // Push the role onto the user
-          user.get('roles').pushObject(role);
-          user.get('departments').pushObjects(selectedDepartments);
-
-          user.save()
-            .then(function(){
-              self.transitionToRoute('users');
-            })
-            .catch(function(err){
-              console.log(err)
-            })
-            .finally(function(){
-
-            })
-        }).catch(function(){
-          console.log('something bad happened during get role')
-        })
-      }
     }
   },
   validateInput: function(){
@@ -185,6 +189,9 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
         set_status('email', $('#email'));
       }
     )
-  }.observes('firstname', 'lastname', 'email')
-
+  }.observes('firstname', 'lastname', 'email'),
+  errorNote: {title: '', message: ''},
+  errorNoteObserver: function(){
+    $('#error-note-container').removeClass('hide');
+  }.observes('errorNote', 'errorNote.name', 'errorNote.message')
 });

@@ -1,7 +1,13 @@
+/*global Ember */
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   manufacturerlist: undefined,
+  pageSize: 15,
+  selectedPage: 1,
+  renderEnd: 10,
+  filter: '',
+  current_filter: 'title',
 
   pages: function(){
     var number_of_pages = this.get('filtered').length / this.get('pageSize');
@@ -9,22 +15,19 @@ export default Ember.ArrayController.extend({
     for(var i = 0; i < number_of_pages; i++){
       page_array.push(i + 1);
     }
-
     return page_array;
   }.property('pages.@each', 'filtered', 'pageSize'),
 
-  pageSize: 10,
-  selectedPage: 1,
   renderStart: function(){
     return (this.get('selectedPage') - 1) * this.get('pageSize');
   }.property('selectedPage','renderStart'),
-  renderEnd: 10,
-  filter: '',
-  current_filter: 'title',
+
   filterables: [
-    {model: "Model", value: 'title'}
+    {name: "Name", value: 'title'}
   ],
+
   filtered: function(){
+    this.set('filter', this.get('filter').trim());
     var self = this;
     var manufacturers = this.get('model');
     var filter = this.get('filter').toLowerCase();
@@ -33,15 +36,13 @@ export default Ember.ArrayController.extend({
       if(manufacturer.get(field) === undefined){return false}
       return ~manufacturer.get(field).toLowerCase().indexOf(filter);
     });
-  }.property( 'filter', 'current_filter'),
+  }.property( 'filter', 'current_filter', 'model'),
 
   sliced: function(){
-    return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + 10);
+    return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + this.get('pageSize'));
   }.property('renderStart', 'filtered', 'sliced.@each'),
+
   actions: {
-    openAddManufacturerModal: function() {
-      this.send('openModal', 'modal-add-manufacturer');
-    },
     didSelectPage: function(){
       this.set('selectedPage', parseInt($(event.target).text()));
     },
@@ -75,3 +76,4 @@ export default Ember.ArrayController.extend({
     $('.page-' + this.get('selectedPage')).addClass('active');
   }.observes('selectedPage')
 });
+
