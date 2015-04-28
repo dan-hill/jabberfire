@@ -6,7 +6,10 @@ from app import jwt
 
 @jwt.authentication_handler
 def authenticate(username, password):
-    user = UserModel.find(username=username)
+    print username
+    print password
+    user = UserModel.find(_username=username)
+    print user
     if user is not None:
         if user.verify_password(password):
             return user

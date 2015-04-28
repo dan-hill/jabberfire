@@ -21,6 +21,15 @@ class User(Resource):
                 'name': role.name
             })
 
+        departments = []
+        for department in user.departments:
+            departments.append({
+                'id': department.id,
+                'parent_id': department.parent_id,
+                'name': department.name,
+                'description': department.description
+            })
+
         model = {
             'user': {
                 'id': user.id,
@@ -30,7 +39,8 @@ class User(Resource):
                 'username': user.username,
                 'employee_id': user.employee_id,
                 'status': user.status,
-                'roles': userroles
+                'roles': userroles,
+                'departments': departments
             }
         }
         return jsonify(model)

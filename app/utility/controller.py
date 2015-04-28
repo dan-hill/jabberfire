@@ -8,3 +8,4 @@ class ErrorFriendlyApi(Api):
             return original_handler(e)
         else:
             return super(ErrorFriendlyApi, self).error_router(original_handler, e)
+

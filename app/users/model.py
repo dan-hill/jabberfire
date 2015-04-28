@@ -55,7 +55,7 @@ class User(db.Model):
             self.departments.append(department)
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True)
+    _username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
     _password = db.Column(db.String(255))
     confirmed_at = db.Column(db.DateTime())
@@ -67,6 +67,21 @@ class User(db.Model):
     roles = db.relationship('Role', secondary='user_role', backref='users')
     departments = db.relationship('Department', secondary='user_department', backref='users')
     settings = db.relationship('Setting', secondary='user_setting', backref='users')
+
+    @property
+    def username(self):
+        return self._username
+
+    @username.setter
+    def username(self, uname):
+        n = 1
+        while User.find(username=uname + '.' + str(n)) is not None:
+            n += 1
+
+        if n == 1:
+            self._username = uname
+        else:
+            self._username = uname + '.' + str(n)
 
     @property
     def password(self):

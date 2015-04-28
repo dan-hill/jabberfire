@@ -1,6 +1,7 @@
 
 from app import db
 
+
 class Department(db.Model):
     """ Department data model.
 
@@ -20,6 +21,13 @@ class Department(db.Model):
     # TODO change sub_departments to children to more concretely describe the tree nature of the relationship.
 
     __tablename__ = 'department'
+
+    def __init__(self, **kwargs):
+        self.id = kwargs.get('id')
+        self.name = kwargs.get('name')
+        self.description = kwargs.get('description')
+        self.parent_id = kwargs.get('parent_id')
+
 
     id = db.Column(db.Integer, primary_key=True)
     parent_id = db.Column(db.Integer, db.ForeignKey('department.id'))

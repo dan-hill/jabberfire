@@ -1,21 +1,12 @@
 from flask import Blueprint, redirect, abort
 from app.users.model import User
 from app.roles import Role
-from app.departments import Department
+from app.departments.model import Department
 import csv, os
 testing = Blueprint('testing', __name__)
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-
-
-def increment_user(username):
-    n = 1
-    while User.find(username=username + '.' + str(n)) is not None:
-        n += 1
-    return username + '.' + str(n)
-
 
 def insert_roles():
 
@@ -26,15 +17,13 @@ def insert_roles():
             Role(
                 name=row[1]
             ).save()
+    print 'inserted roles.'
 
 
 def insert_users():
     reader = csv.reader(open(os.path.join(__location__, 'users.csv')), delimiter=',', quotechar='"')
     for row in reader:
         username = (row[0] + '.' + row[1]).lower()
-
-        if User.find(username=username) is not None:
-            username = increment_user(username=username)
 
         if User.find(username=username) is None:
             User(
@@ -46,7 +35,7 @@ def insert_users():
                 username=username,
                 employee_id=row[4]
             ).save()
-    print 'Inserted users.'
+    print 'inserted users.'
 
 def insert_user_roles():
     users = User.list()
@@ -56,30 +45,35 @@ def insert_user_roles():
         for role in roles:
             user.roles.append(role)
 
-    abort(400)
+    print 'associated users with roles'
 
 def insert_departments():
     reader = csv.reader(open(os.path.join(__location__, 'departments.csv')), delimiter=',', quotechar='"')
     for row in reader:
-        department = Department()
+        if Department.find(name=row[0]) is None:
+            department = Department(
+                name=row[0],
+                id=row[1]
+            )
 
-        department.name = row[0]
-        department.description = [1]
-        department.save()
+            department.save()
 
-        parent = Department.find(id=row[2])
+            parent = Department.find(id=row[2])
 
-        if parent is not None:
-            parent.children.append(department)
+            if parent is not None:
+                parent.children.append(department)
 
+    print 'inserted departments.'
 
 def insert_user_departments():
     users = User.list()
-    department_A = Department.find(id=2)
-    department_B = Department.find(id=4)
+    department_A = Department.find(id=60430)
+    department_B = Department.find(id=60350)
     for user in users:
         user.departments.append(department_A)
         user.departments.append(department_B)
+
+    print 'associated users with departments'
 
 @testing.route('/api/insert-test-data')
 def create_test_user():
@@ -91,7 +85,7 @@ def create_test_user():
     """
     insert_roles()
     insert_users()
-    results = insert_user_roles()
-    # insert_departments()
-    # insert_user_departments()
-    return results, 200
+    insert_user_roles()
+    insert_departments()
+    insert_user_departments()
+    return 'ok', 200

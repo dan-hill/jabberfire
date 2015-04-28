@@ -1,3 +1,3 @@
 __author__ = 'dan'
 
-from controller import roles_required
+from roles_required import roles_required
