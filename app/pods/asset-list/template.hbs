@@ -1,96 +1,103 @@
-{{outlet}}
+{{#jf-page id='asset'}}
+  {{#jf-page-title}}Assets{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'asset.new'}}Add New{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
 
-{{#jf-page-title}}Assets{{/jf-page-title}}
+    {{#jf-row}}
+        <!-- START SEARCH -->
+        <div class="col-md-4">
+          {{#jf-form-group color="success"}}
+            {{#jf-input-icon}}
+              {{input type='search' id='filter' value=filter class='form-control search'}}
+                <label for="filter">Filter</label>
+                <i class="fa fa-search"></i>
+            {{/jf-input-icon}}
+          {{/jf-form-group}}
 
-{{#jf-page-bar}}
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-md-line-input">
+              {{view 'select'
+              class="form-control"
+              content=filterables
+              optionValuePath='content.value'
+              optionLabelPath='content.name'
+              value = current_filter}}
+            </div>
+        </div>
 
-  {{#jf-page-actions}}
-    {{#jf-page-action}}{{#link-to 'asset.new'}}Add New{{/link-to}}{{/jf-page-action}}
-  {{/jf-page-actions}}
 
-{{/jf-page-bar}}
+        <!-- END LIST TOOLS -->
+        <!-- START USER LIST CONTAINER -->
 
+        <div class="col-md-5">
+          {{#jf-nav class='pull-right'}}
+            {{#jf-pagination}}
+              {{jf-pagination-previous action='previousPage'}}
+              {{#each page in pages}}
+                {{jf-pagination-page action='didSelectPage' page=page}}
+              {{/each}}
+              {{jf-pagination-next action='nextPage' page=page}}
+            {{/jf-pagination}}
+          {{/jf-nav}}
+        </div>
+        {{#jf-col-md-12}}
 
+          {{#each asset in sliced}}
 
-<!-- START LIST TOOLS -->
-{{#jf-row}}
-    <!-- START SEARCH -->
-    {{search-box
-    label-text='Search'
-    inputID='filter'
-    input-type='search'
-    input-placeholder='search...'
-    inputValue=filter
-    input-classes='col-md-4'}}
-    <!-- END SEARCH -->
+            {{#jf-list-item color='blue-madison'}}
+              {{#jf-list-item-title}}
+                  <div class="md-checkbox jf-list-blue pull-left">
+                      <input type="checkbox" id="checkbox{{asset.id}}" class="md-check" value={{asset.selected}}>
+                      <label for="checkbox{{asset.id}}">
+                          <span class="check"></span>
+                          <span class="box"></span>
+                      </label>
+                  </div> {{asset.model}}
+              {{/jf-list-item-title}}
+              {{#jf-list-item-actions}}
 
-    {{view 'select'
-    class="form-control input-small"
-    content=filterables
-    optionValuePath='content.value'
-    optionLabelPath='content.name'
-    value = current_filter}}
+                {{#jf-dropdown-button}}
+                  {{#jf-dropdown-button-title}}
+                    {{fa-icon icon='asset'}} Asset {{fa-icon icon='angle-down'}}
+                  {{/jf-dropdown-button-title}}
+                  <ul class="dropdown-menu pull-right">
+                      <li><a><i class="fa fa-pencil"></i> Edit </a></li>
 
-    {{#jf-col-md-8}}
-      {{#jf-nav class='pull-right'}}
-        {{#jf-pagination}}
-          {{jf-pagination-previous action='previousPage'}}
-          {{#each page in pages}}
-            {{jf-pagination-page action='didSelectPage' page=page}}
+                  </ul>
+                {{/jf-dropdown-button}}
+                {{#link-to 'asset.detail' asset.id class="btn btn-circle btn-icon-only btn-default fa fa-chain"}}{{/link-to}}
+              {{/jf-list-item-actions}}
+            {{/jf-list-item}}
+
           {{/each}}
-          {{jf-pagination-next action='nextPage' page=page}}
-        {{/jf-pagination}}
-      {{/jf-nav}}
-    {{/jf-col-md-8}}
-{{/jf-row}}
-<!-- END LIST TOOLS -->
-<!-- START USER LIST CONTAINER -->
-{{#jf-row}}
-  {{#jf-col-md-12}}
 
-    {{#each asset in sliced}}
-      {{#jf-list-item color='purple-studio'}}
-        {{#jf-list-item-title}}
-          {{fa-icon icon='asset'}} {{asset.model}}
-        {{/jf-list-item-title}}
-        {{#jf-list-item-actions}}
-
-          {{#jf-dropdown-button}}
-            {{#jf-dropdown-button-title}}
-              {{fa-icon icon='asset'}} Asset {{fa-icon icon='angle-down'}}
-            {{/jf-dropdown-button-title}}
-            <ul class="dropdown-menu pull-right">
-                <li><a><i class="fa fa-pencil"></i> Edit </a></li>
-                <li><a><i class="fa fa-trash-o"></i> Delete </a></li>
-                <li><a><i class="fa fa-ban"></i> Ban </a></li>
-                <li class="divider"></li>
-                <li><a><i class="i"></i> Make admin </a></li>
-            </ul>
-          {{/jf-dropdown-button}}
-
-          {{#link-to 'asset.detail' asset.id}}<a class="btn btn-circle btn-icon-only btn-default icon-link"></a>{{/link-to}}
-        {{/jf-list-item-actions}}
-      {{/jf-list-item}}
-
-
-      <!-- END ALERTS PORTLET-->
-
-    {{/each}}
-
-
-    {{#jf-col-md-12}}
-      {{#jf-nav class='pull-right'}}
-        {{#jf-pagination}}
-          {{jf-pagination-previous action='previousPage'}}
-          {{#each page in pages}}
-            {{jf-pagination-page action='didSelectPage' page=page}}
-          {{/each}}
-          {{jf-pagination-next action='nextPage' page=page}}
-        {{/jf-pagination}}
-      {{/jf-nav}}
-    {{/jf-col-md-12}}
-  {{/jf-col-md-12}}
-{{/jf-row}}
-
-<!-- END USER LIST CONTAINER -->
-
+          {{#jf-col-md-12}}
+            {{#jf-nav class='pull-right'}}
+              {{#jf-pagination}}
+                {{jf-pagination-previous action='previousPage'}}
+                {{#each page in pages}}
+                  {{jf-pagination-page action='didSelectPage' page=page}}
+                {{/each}}
+                {{jf-pagination-next action='nextPage' page=page}}
+              {{/jf-pagination}}
+            {{/jf-nav}}
+          {{/jf-col-md-12}}
+        {{/jf-col-md-12}}
+    {{/jf-row}}
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}
