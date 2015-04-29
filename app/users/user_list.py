@@ -1,12 +1,12 @@
 
-from flask import Blueprint, request, redirect, abort, make_response, jsonify, render_template,g
+from flask import Blueprint, request, jsonify
 from model import User as UserModel
 from app.roles import Role
 from app.departments.model import Department
 from flask_jwt import jwt_required, current_user
 
 from app import jwt, api
-from flask_restful import  Resource
+from flask_restful import Resource
 import random, string
 from app.auth import roles_required
 

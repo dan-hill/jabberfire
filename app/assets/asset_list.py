@@ -19,21 +19,13 @@ class AssetList(Resource):
             model = {
                 'id': asset.id,
                 'description': asset.description,
-                'title': asset.title,
                 'serial': asset.serial,
                 'model': asset.model,
-                'status': asset.status,
-                'quantity_on_hand': asset.quantity_on_hand,
                 'max_quantity': asset.max_quantity,
                 'min_quantity': asset.min_quantity,
                 'tag': asset.tag,
                 'image': asset.image,
-                'note': asset.note,
-                'purchase_cost': asset.purchase_cost,
-                'warranty_expiration': asset.warranty_expiration,
-                'end_of_life': asset.end_of_life,
-                'requestable': asset.requestable,
-                'manufacturer': asset.manufacturer
+                'note': asset.note
 
             }
 
