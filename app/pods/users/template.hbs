@@ -61,33 +61,62 @@
         {{/jf-nav}}
         </div>
       {{#jf-col-md-12}}
+          <div class="col-md-12">
+              <!-- BEGIN EXAMPLE TABLE PORTLET-->
+              <div class="portlet light">
+                  <div class="portlet-title">
+                      <div class="caption">
+                          <i class="icon-doc font-red-sunglo"></i>
+								<span class="caption-subject bold font-purple-plum uppercase">
+								Activity </span>
+                      </div>
+                  </div>
+                  <div class="portlet-body">
+                      <table class="table table-striped table-bordered table-hover" id="sample_1">
+                          <thead>
+                          <tr>
+                              <th></th>
+                              <th>Name</th>
+                              <th>Email Address</th>
+                              <th>>Username</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {{#each user in sliced}}
+                              <tr>
+                                  <td>
+                                      <div class="md-checkbox jf-list-blue pull-left">
+                                          <input type="checkbox" id="checkbox{{manufacturer.id}}" class="md-check">
+                                          <label for="checkbox{{manufacturer.id}}">
+                                              <span class="check"></span>
+                                              <span class="box"></span>
+                                          </label>
+                                      </div>
+                                  </td>
+                                  <td>
+                                      {{user.firstname}} {{user.lastname}}
+                                  </td>
+                                  <td>
+                                      {{user.email}}
+                                  </td>
+                                  <td>
+                                      {{user.username}}
+                                  </td>
+                              </tr>
 
+                          {{/each}}
+
+
+
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <!-- END EXAMPLE TABLE PORTLET-->
+              <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          </div>
         {{#each user in sliced}}
 
-          {{#jf-list-item color='blue-madison'}}
-            {{#jf-list-item-title}}
-                <div class="md-checkbox jf-list-blue pull-left">
-                    <input type="checkbox" id="checkbox{{user.id}}" class="md-check" value={{user.selected}}>
-                    <label for="checkbox{{user.id}}">
-                        <span class="check"></span>
-                        <span class="box"></span>
-                     </label>
-                </div> {{user.firstname}} {{user.lastname}}
-            {{/jf-list-item-title}}
-            {{#jf-list-item-actions}}
-
-              {{#jf-dropdown-button}}
-                {{#jf-dropdown-button-title}}
-                  {{fa-icon icon='user'}} User {{fa-icon icon='angle-down'}}
-                {{/jf-dropdown-button-title}}
-                <ul class="dropdown-menu pull-right">
-                    <li><a><i class="fa fa-pencil"></i> Edit </a></li>
-
-                </ul>
-              {{/jf-dropdown-button}}
-              {{#link-to 'user.detail' user.id class="btn btn-circle btn-icon-only btn-default fa fa-chain"}}{{/link-to}}
-            {{/jf-list-item-actions}}
-          {{/jf-list-item}}
 
         {{/each}}
 
