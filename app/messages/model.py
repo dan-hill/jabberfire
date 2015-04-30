@@ -15,10 +15,11 @@ class Message(db.Model):
         self.read = kwargs.get('read')
 
     id = db.Column(db.Integer, primary_key=True)
-    to_user = db.Column(db.Integer, db.ForeignKey('user.id'))
-    from_user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    to_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    from_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     type = db.Column(db.String(255))
     read = db.Column(db.DateTime())
+
 
     @staticmethod
     def list():

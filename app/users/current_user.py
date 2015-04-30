@@ -14,22 +14,29 @@ class CurrentUser(Resource):
 
     def get(self):
         userroles = []
+        print current_user
         for role in current_user.roles:
             userroles.append({
                 'id': role.id,
                 'name': role.name
             })
 
+        messages = []
+        for message in current_user.messages:
+            messages.append(message.id)
+
         model = {
             'user': {
                 'id': current_user.id,
+                'user_id': current_user.id,
                 'firstname': current_user.firstname,
                 'lastname': current_user.lastname,
                 'email': current_user.email,
                 'username': current_user.username,
                 'employee_id': current_user.employee_id,
                 'status': current_user.status,
-                'roles': userroles
+                'roles': userroles,
+                'messages': messages
             }
         }
         return jsonify(model)

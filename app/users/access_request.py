@@ -1,7 +1,10 @@
 from flask import Blueprint, request, jsonify
 from model import User as UserModel
+from app.messages.model import Message
 from app import api
 from flask_restful import Resource, abort
+from app.roles import Role
+from app import socket
 
 access_request_blueprint = Blueprint('access_request_blueprint', __name__)
 api.init_app(access_request_blueprint)
@@ -26,12 +29,23 @@ class AccessRequest(Resource):
             email=json['email'],
             firstname=json['firstname'],
             lastname=json['lastname'],
+            username=json['firstname'] + '.' + json['lastname'],
             status='pending',
             employee_id=json['employee_id'],
             password=json['password']
         )
 
         if user.save():
+            user = user.find(username=user.username)
+            group = Role.find(name='administrator')
+
+            users = group.users
+
+            for user in users:
+                message = Message()
+                message.type = 'access-request'
+                message.to_user = user
+
 
             resp = jsonify({
                 'accessRequest': {

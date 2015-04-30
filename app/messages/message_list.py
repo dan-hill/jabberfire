@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from model import Message as MessageModel
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_user
 from app import api
 from flask_restful import Resource
 
@@ -31,3 +31,4 @@ class MessageList(Resource):
 
 
 api.add_resource(MessageList, '/api/messages')
+

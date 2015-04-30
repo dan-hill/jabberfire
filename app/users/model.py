@@ -68,6 +68,10 @@ class User(db.Model):
     departments = db.relationship('Department', secondary='user_department', backref='users')
     settings = db.relationship('Setting', secondary='user_setting', backref='users')
 
+    messages = db.relationship('Message', backref='to_user',  foreign_keys='Message.to_user_id')
+    sent_messages = db.relationship('Message', backref='from_user', foreign_keys='Message.from_user_id')
+
+
     @property
     def username(self):
         return self._username

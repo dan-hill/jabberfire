@@ -3,10 +3,10 @@ from model import User as UserModel
 from flask_jwt import jwt_required, current_user
 from app import jwt, api, db
 from flask_restful import Resource
+from app import socket
 
 user_blueprint = Blueprint('user_blueprint', __name__)
 api.init_app(user_blueprint)
-
 
 class User(Resource):
     method_decorators = [jwt_required()]

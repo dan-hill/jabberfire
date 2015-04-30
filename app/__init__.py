@@ -5,12 +5,14 @@ from flask_mail import Mail
 from flask_cors import CORS
 from flask_jwt import JWT, JWTError
 from flask_restful import Api
+from flask_socketio import SocketIO
 from utility import ErrorFriendlyApi
 
 db = SQLAlchemy()
 jwt = JWT()
 api = ErrorFriendlyApi()
 mail = Mail()
+socket = SocketIO()
 
 from app.units import Unit
 from app.suppliers import Supplier
@@ -49,11 +51,12 @@ def create_app(debug=False):
     app.register_blueprint(access_request_blueprint)
 
     from app.messages import (
-        message_list_blueprint
+        message_list_blueprint,
+        message_blueprint
     )
 
     app.register_blueprint(message_list_blueprint)
-
+    app.register_blueprint(message_blueprint)
 
     from app.settings import (
         setting_list_blueprint
@@ -108,7 +111,7 @@ def create_app(debug=False):
     mail.init_app(app)
 
     jwt.init_app(app)
-
+    socket.init_app(app)
     return app
 
 
