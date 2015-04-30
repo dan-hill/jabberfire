@@ -6,5 +6,8 @@ export default Ember.View.extend({
   didInsertElement: function() {
     Ember.$('body').addClass('login');
 
+  },
+  willDestroyElement: function() {
+    Ember.$('body').removeClass('login');
   }
 });

@@ -4,9 +4,120 @@ body.app {
 
 body.auth {
   background-color: #F8F1EB !important;
-  width: 100%;
   height: 100%;
 }
+
+.auth img.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.auth .container {
+  background-color: #ffffff;
+  padding-right: 25px;
+  padding-left: 25px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  height:100vh;
+  margin-bottom: 0px;
+}
+
+.login .login-btn {
+  width: 100%;
+  height: 40px;
+}
+
+@media (min-width: 768px) {
+  .login .container {
+    width: 350px;
+    height: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .login .container {
+    width: 350px;
+  }
+}
+@media (min-width: 1200px) {
+  .login .container {
+    width: 350px;
+  }
+}
+
+.request-access .send-btn {
+  width: 80px;
+  height: 40px;
+}
+
+
+
+@media (min-width: 768px) {
+  .request-access .container {
+    width: 650px;
+    height: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .request-access .container {
+    width: 650px;
+  }
+}
+@media (min-width: 1200px) {
+  .request-access .container {
+    width: 650px;
+  }
+}
+
+
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for vh unit */
+  min-height: 100vh;
+
+  /* Make it a flex container */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  /* Align the bootstrap's container vertically */
+  -webkit-box-align : center;
+  -webkit-align-items : center;
+  -moz-box-align : center;
+  -ms-flex-align : center;
+  align-items : center;
+
+  /* In legacy web browsers such as Firefox 9
+     we need to specify the width of the flex container */
+  width: 100%;
+
+  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
+     hence the bootstrap's container won't be aligned to the center anymore.
+
+     Therefore, we should use the following declarations to get it centered again */
+  -webkit-box-pack : center;
+  -moz-box-pack : center;
+  -ms-flex-pack : center;
+  -webkit-justify-content : center;
+  justify-content : center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .logo {
   margin-top: 0px;

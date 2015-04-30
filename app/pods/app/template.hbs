@@ -12,16 +12,17 @@
 
     {{#jf-app-notifications}}
       {{#jf-dropdown-toggle}}
-        {{sl-icon icon='bell'}}{{#jf-badge color='default'}}1{{/jf-badge}}
+        {{sl-icon icon='bell'}}{{#jf-badge color='default'}}{{session.currentUser.messages.length}}{{/jf-badge}}
       {{/jf-dropdown-toggle}}
       {{#jf-dropdown-menu}}
         {{#jf-dropdown-menu-header}}
-            <h3><span class="bold">1 pending</span> notifications</h3>
+            <h3><span class="bold">{{session.currentUser.messages.length}} pending</span> notifications</h3>
             <a href="extra_profile.html">view all</a>
         {{/jf-dropdown-menu-header}}
         {{#jf-dropdown-menu-scroller}}
 
           {{! ITEM }}
+          {{#each message in session.currentUser.messages}}
           {{#jf-dropdown-menu-scroller-item}}
             {{#jf-dropdown-menu-scroller-item-time}}
                 just now
@@ -30,9 +31,10 @@
               {{#jf-dropdown-menu-scroller-item-label}}
                 {{fa-icon icon='plus'}}
               {{/jf-dropdown-menu-scroller-item-label}}
-              New user registered.
+              {{message.type}}
             {{/jf-dropdown-menu-scroller-item-details}}
           {{/jf-dropdown-menu-scroller-item}}
+          {{/each}}
         {{! /ITEM }}
 
         {{/jf-dropdown-menu-scroller}}
@@ -40,37 +42,7 @@
 
     {{/jf-app-notifications}}
     <!-- END NOTIFICATION DROPDOWN -->
-    <!-- BEGIN INBOX DROPDOWN -->
-    {{#jf-app-inbox}}
-      {{#jf-dropdown-toggle}}
-        {{sl-icon icon='envelope-open'}}{{#jf-badge color='default'}}1{{/jf-badge}}
-      {{/jf-dropdown-toggle}}
-      {{#jf-dropdown-menu}}
-        {{#jf-dropdown-menu-header}}
-            <h3>You have <span class="bold">1 new</span> message</h3>
-            <a href="extra_profile.html">view all</a>
-        {{/jf-dropdown-menu-header}}
-        {{#jf-dropdown-menu-scroller}}
-          {{#jf-dropdown-menu-scroller-item}}
-           {{#jf-dropdown-menu-scroller-item-photo}}
-             {{jf-img-circle src=''}}
-           {{/jf-dropdown-menu-scroller-item-photo}}
-            {{#jf-dropdown-menu-scroller-item-subject}}
-              {{#jf-dropdown-menu-scroller-item-from}}
-                Jimmy Dean
-              {{/jf-dropdown-menu-scroller-item-from}}
-            {{#jf-dropdown-menu-scroller-item-time}}
-                just now
-            {{/jf-dropdown-menu-scroller-item-time}}
-            {{/jf-dropdown-menu-scroller-item-subject}}
-            {{#jf-dropdown-menu-scroller-item-message}}
-              I hear you are really into sausage.
-            {{/jf-dropdown-menu-scroller-item-message}}
-          {{/jf-dropdown-menu-scroller-item}}
-        {{/jf-dropdown-menu-scroller}}
-      {{/jf-dropdown-menu}}
 
-    {{/jf-app-inbox}}
     <!-- END INBOX DROPDOWN -->
     <!-- BEGIN USER LOGIN DROPDOWN -->
     <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -99,8 +71,11 @@
                     <i class="icon-lock"></i> Lock Screen </a>
             </li>
             <li>
-                <a href="login.html">
-                    <i class="icon-key"></i> Log Out </a>
+              {{#if session.isAuthenticated}}
+                  <a {{ action 'invalidateSession' }}>Logout</a>
+              {{else}}
+                {{#link-to 'login'}}Login{{/link-to}}
+              {{/if}}
             </li>
         </ul>
     </li>

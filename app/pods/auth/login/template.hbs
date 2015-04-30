@@ -1,62 +1,50 @@
-{{! app/templates/login.hbs }}
+<div class="vertical-center">
 
-
-
-<!-- START LOGIN FORM -->
-<form {{action 'authenticateForm' isValid}}>
-  {{#if has-error}}
-    {{#jf-form-error-alert}}
-        Login failed. Please check that your username and password are correct.
-    {{/jf-form-error-alert}}
-  {{/if}}
-    <!-- START USERNAME INPUT -->
-  {{form-group-input
-  label-text='Username'
-  inputID='identification'
-  input-type='text'
-  input-placeholder='Enter Login'
-  inputValue=identification
-  input-classes='form-control form-control-solid placeholder-no-fix text-field'
-  input-errors=errors.identification}}
-    <!-- END USERNAME INPUT -->
-
-    <!-- START PASSWORD INPUT -->
-  {{form-group-input
-  label-text='Password'
-  inputID='password'
-  input-type='password'
-  input-placeholder='Enter Password'
-  inputValue=password
-  input-classes='form-control form-control-solid placeholder-no-fix text-field'
-  input-errors=errors.password}}
-
-    <!-- END PASSWORD INPUT -->
-
-    <!-- START SUBMIT BUTTON -->
-    <div class="form-actions">
-        <button id='submit' type="submit" class="btn btn-success uppercase">Login</button>
-    </div>
-    <!-- END SUBMIT BUTTON -->
-
-    <!-- START REQUEST ACCESS / FORGOT PASSWORD FORM GROUP -->
-    <div class="form-actions">
-
-        <!-- START REQUEST ACCESS LINK -->
-        <!-- TODO Pull the register-button jquery from metronic.js and fix semantics -->
-        <div class="pull-left forget-password-block">
-          {{#link-to 'auth.request-access'}}<span class="forget-password">Request Access</span>{{/link-to}}
+    <div class="portlet light bordered container">
+        <div class="logo">
+          {{jf-img src='img/ccmh/logo_large.png' class="logo"}}
         </div>
-        <!-- END REQUEST ACCESS LINK -->
+        <div class="portlet-body form">
+            {{outlet 'sent'}}
+        {{#if authentication-failed}}
+            <div class="note note-danger">
+                <h4 class="block">Login Failed!</h4>
+                <p>
+                    The username or password you provided is incorrect. If you have forgotten your password, you can
+                    reset it. If you are still having problems, please contact support.
+                </p>
+            </div>
+        {{/if}}
+            <form role="form">
+                <div class="form-body">
+                    <div id='identification' class="form-group form-md-line-input form-md-floating-label">
+                        <div class="input-icon right">
+                          {{input type='text' class='form-control' value=identification}}
+                            <label for="form_control_1">Username</label>
+                            <span class="help-block"></span>
+                            <i class="icon-user"></i>
+                        </div>
+                    </div>
+                    <div id='password' class="form-group form-md-line-input form-md-floating-label">
+                        <div class="input-icon right">
+                          {{input type='password' class='form-control' value=password}}
+                            <label for="form_control_1">Password</label>
+                            <span class="help-block"></span>
+                            <i class="icon-key"></i>
+                        </div>
+                    </div>
 
-        <!-- START FORGOT PASSWORD LINK -->
-        <div class="pull-right forget-password-block">
-          {{#link-to 'auth.forgot-password'}}<span class="forget-password">Forgot Password?</span>{{/link-to}}
+                </div>
+                <div class="form-actions noborder">
+                    <button type="button" class="btn blue login-btn" {{action 'didTouchUpOnLogin'}}>Login</button>
+                </div>
+                <div class="form-actions noborder">
+                    <span class="pull-left">{{#link-to 'auth.request-access'}}
+                        <button type="button" class="btn default btn-xs">Request Access</button>{{/link-to}}</span>
+                    <span class="pull-right">{{#link-to 'auth.forgot-password'}}
+                        <button type="button" class="btn default btn-xs">Forgot Password</button>{{/link-to}}</span>
+                </div>
+            </form>
         </div>
-        <!-- END FORGOT PASSWORD LINK -->
-
     </div>
-    <!-- END REQUEST ACCESS / FORGOT PASSWORD FORM GROUP -->
-
-</form>
-<!-- END LOGIN FORM -->
-
+</div>

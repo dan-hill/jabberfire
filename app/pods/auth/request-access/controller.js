@@ -29,40 +29,30 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
   },
 
   actions:{
-    'send-request': function () {
-
+    didTouchUpOnSend: function() {
       var self = this;
 
-      if(self.get('tos') === true){
-        this.set('has-error', false);
-        this.validate()
-          .then(function(){
-            var user = self.store.createRecord('access-request', {
-              firstname: self.get('firstname'),
-              lastname: self.get('lastname'),
-              email: self.get('email'),
-              username: self.get('username'),
-              password: self.get('password'),
-              employee_id: self.get('employee-id'),
-            });
+      this.validate().then(function () {
+        var user = self.store.createRecord('access-request', {
+          firstname: self.get('firstname'),
+          lastname: self.get('lastname'),
+          email: self.get('email'),
+          password: self.get('password'),
+          employee_id: self.get('employee_id')
+        });
 
-            user.save()
-              .then(function() {
-                self.transitionToRoute('auth.request-sent');
-              })
-              .catch(function(response) {
-                self.set('has-error', true);
-              });
+        user.save()
+          .then(function() {
+            self.set('sent-request', true);
           })
-          .catch(function(){
-            console.log('form was not valid.')
-          })
-      } else {
-        self.set('error-message', 'You must accept the Terms of Service and Privacy Policy.');
-        self.set('has-error', true);
-
-      }
+          .catch(function(response) {
+            self.set('send-failed', true);
+          });
+      }).catch(function () {
+        self.set('validation-failed', true);
+      });
     },
+
     authenticateForm: function(isValid){
       console.log(isValid);
       if(isValid){
@@ -79,40 +69,18 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
   validateInput: function(){
     var self = this;
 
-    this.validate()
-      .then(function() {
-        self.set('status-lastname', 'success');
-        self.set('status-firstname', 'success');
-        self.set('status-email', 'success');
-        self.set('status-password', 'success');
-        self.set('status-passwordConfirmation', 'success');
-      })
-      .catch(function() {
+    var set_status = function(item, selector){
+      if(self.get('errors.' + item ) !== undefined && self.get('errors.' + item).length !== 0) {
+        selector.removeClass('has-default');
+        selector.addClass('has-error');
 
-        if(self.get('errors.lastname') !== undefined && self.get('errors.lastname').length !== 0){
-          self.set('status-lastname', 'error');
-        } else {
-          self.set('status-lastname', 'success');
-        }
+      } else {
+        selector.removeClass('has-error');
+        selector.addClass('has-default');
+      }
+    };
 
-        if(self.get('errors.firstname') !== undefined && self.get('errors.firstname').length !== 0){
-          self.set('status-firstname', 'error');
-        } else {
-          self.set('status-firstname', 'success');
-        }
-
-        if(self.get('errors.email') !== undefined && self.get('errors.email').length !== 0){
-          self.set('status-email', 'error');
-        } else {
-          self.set('status-email', 'success');
-        }
-
-        if(self.get('errors.password') !== undefined && self.get('errors.password').length !== 0){
-          self.set('status-password', 'error');
-        } else {
-          self.set('status-password', 'success');
-        }
-
+<<<<<<< HEAD
         if(self.get('errors.passwordConfirmation') !== undefined && self.get('errors.passwordConfirmation').length !== 0){
           self.set('status-passwordConfirmation', 'error');
         } else {
@@ -146,4 +114,23 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 >>>>>>> e5255fa... Change livereload port
 =======
 >>>>>>> 558a886... Fix loading routes. Change loading indicator to nprogress.
+=======
+    this.validate().then(function() {
+      set_status('firstname', $('#firstname'));
+      set_status('lastname', $('#lastname'));
+      set_status('email', $('#email'));
+      set_status('passwordConfirmation', $('#passwordConfirmation'));
+      set_status('password', $('#password'));
+      set_status('employee_id', $('#employee-id'));
+    }).catch(function() {
+        set_status('firstname', $('#firstname'));
+        set_status('lastname', $('#lastname'));
+        set_status('email', $('#email'));
+        set_status('passwordConfirmation', $('#passwordConfirmation'));
+        set_status('password', $('#password'));
+        set_status('employee_id', $('#employee-id'));
+      }
+    )
+  }.observes('firstname', 'lastname', 'email', 'password', 'passwordConfirmation')
+>>>>>>> cb2d658... Prepared to merge into development
 });

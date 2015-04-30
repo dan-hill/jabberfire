@@ -101,5 +101,4 @@ app.import('vendor/js/table-advanced.js');
 
 // Plugins
 
-
 module.exports = app.toTree();
