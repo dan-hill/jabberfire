@@ -1,5 +1,5 @@
 {{#jf-page id='department'}}
-  {{#jf-page-title}}Departments{{/jf-page-title}}
+  {{#jf-page-title}}Users{{/jf-page-title}}
   {{#jf-page-bar}}
     {{#jf-page-actions}}
       {{#jf-page-action-button}}
@@ -8,6 +8,12 @@
       {{#jf-page-action-list}}
         {{#jf-page-action}}
           {{#link-to 'department.new'}}Add New{{/link-to}}
+        {{/jf-page-action}}
+        {{#jf-page-action}}
+            <a {{action 'didTouchUpOnBulkChangeStatus'}}>Change Status</a>
+        {{/jf-page-action}}
+        {{#jf-page-action}}
+            <a {{action 'didTouchUpOnBulkChangeRole'}}>Change Role</a>
         {{/jf-page-action}}
       {{/jf-page-action-list}}
     {{/jf-page-actions}}
@@ -18,90 +24,84 @@
 
     {{#jf-row}}
         <!-- START SEARCH -->
-        <div class="col-md-4">
-          {{#jf-form-group color="success"}}
-            {{#jf-input-icon}}
-              {{input type='search' id='filter' value=filter class='form-control search'}}
-                <label for="filter">Filter</label>
-                <i class="fa fa-search"></i>
-            {{/jf-input-icon}}
-          {{/jf-form-group}}
-
-        </div>
-        <div class="col-md-3">
-            <div class="form-group form-md-line-input">
-              {{view 'select'
-              class="form-control"
-              content=filterables
-              optionValuePath='content.value'
-              optionLabelPath='content.name'
-              value = current_filter}}
-            </div>
-
-        </div>
 
 
         <!-- END LIST TOOLS -->
         <!-- START USER LIST CONTAINER -->
 
-        <div class="col-md-5">
-          {{#jf-nav class='pull-right'}}
-            {{#jf-pagination}}
-              {{jf-pagination-previous action='previousPage'}}
-              {{#each page in pages}}
-                {{jf-pagination-page action='didSelectPage' page=page}}
-              {{/each}}
-              {{jf-pagination-next action='nextPage' page=page}}
-            {{/jf-pagination}}
-          {{/jf-nav}}
-        </div>
         {{#jf-col-md-12}}
+          {{#jf-table id='departments_table'}}
+            {{#jf-table-tools}}
+                <div class="col-md-4">
+                  {{#jf-form-group color="success"}}
+                    {{#jf-input-icon}}
+                      {{input type='search' id='filter' value=filter class='form-control search'}}
+                        <label for="filter">Filter</label>
+                        <i class="fa fa-search"></i>
+                    {{/jf-input-icon}}
+                  {{/jf-form-group}}
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=filterables
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = current_filter}}
+                    </div>
+                </div>
+            {{/jf-table-tools}}
+            {{#jf-table-content}}
+              {{#jf-table-head}}
+                {{#jf-table-heading}}Name{{/jf-table-heading}}
+                {{#jf-table-heading}}Parent{{/jf-table-heading}}
+                {{#jf-table-heading}}Children{{/jf-table-heading}}
+              {{/jf-table-head}}
+              <tbody>
+              {{#each department in sliced}}
+                {{#jf-table-row}}
+                  {{#jf-table-column}}
+                      <div class="md-checkbox pull-left">
+                          <input type="checkbox" id="checkbox{{department.id}}" class="md-check">
+                          <label for="checkbox{{department.id}}">
+                              <span class="check"></span>
+                              <span class="box"></span>
+                          </label>
+                      </div>
+                      <div>
+                        {{#link-to 'department.detail' department.id}}{{department.name}}{{/link-to}}
+                      </div>
+                  {{/jf-table-column}}
+                  {{#jf-table-column}}{{department.parent.name}}{{/jf-table-column}}
+                  {{#jf-table-column}}
+                    {{#each child in department.children}}
+                      {{child.name}}
+                    {{/each}}
+                  {{/jf-table-column}}
+                {{/jf-table-row}}
+              {{/each}}
+              </tbody>
+            {{/jf-table-content}}
+            {{#jf-row}}
+              {{#jf-col-md-12}}
+                {{#jf-nav class='pull-right'}}
+                  {{#jf-pagination}}
+                    {{jf-pagination-previous action='previousPage'}}
+                    {{#each page in pages}}
+                      {{jf-pagination-page action='didSelectPage' page=page}}
+                    {{/each}}
+                    {{jf-pagination-next action='nextPage' page=page}}
+                  {{/jf-pagination}}
+                {{/jf-nav}}
+              {{/jf-col-md-12}}
+            {{/jf-row}}
+          {{/jf-table}}
+          <!-- END EXAMPLE TABLE PORTLET-->
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
 
-          {{#each department in sliced}}
-            {{#jf-list-item color='red-pink'}}
-              {{#jf-list-item-title}}
-                  <div class="md-checkbox jf-list-blue pull-left">
-                      <input type="checkbox" id="checkbox{{department.id}}" class="md-check">
-                      <label for="checkbox{{department.id}}">
-                          <span class="check"></span>
-                          <span class="box"></span>
-                      </label>
-                  </div> {{department.name}}
-              {{/jf-list-item-title}}
-              {{#jf-list-item-actions}}
-
-                {{#jf-dropdown-button}}
-                  {{#jf-dropdown-button-title}}
-                    {{fa-icon icon='department'}} Department {{fa-icon icon='angle-down'}}
-                  {{/jf-dropdown-button-title}}
-                  <ul class="dropdown-menu pull-right">
-                      <li><a><i class="fa fa-pencil"></i> Edit </a></li>
-                      <li><a><i class="fa fa-trash-o"></i> Delete </a></li>
-                      <li><a><i class="fa fa-ban"></i> Ban </a></li>
-                      <li class="divider"></li>
-                      <li><a><i class="i"></i> Make admin </a></li>
-                  </ul>
-                {{/jf-dropdown-button}}
-                {{#link-to 'department.detail' department.id class="btn btn-circle btn-icon-only btn-default fa fa-chain"}}{{/link-to}}
-              {{/jf-list-item-actions}}
-            {{/jf-list-item}}
-
-          {{/each}}
-
-          {{#jf-col-md-12}}
-            {{#jf-nav class='pull-right'}}
-              {{#jf-pagination}}
-                {{jf-pagination-previous action='previousPage'}}
-                {{#each page in pages}}
-                  {{jf-pagination-page action='didSelectPage' page=page}}
-                {{/each}}
-                {{jf-pagination-next action='nextPage' page=page}}
-              {{/jf-pagination}}
-            {{/jf-nav}}
-          {{/jf-col-md-12}}
         {{/jf-col-md-12}}
     {{/jf-row}}
   {{/jf-page-content-container}}
   <!-- END PAGE CONTENT-->
 {{/jf-page}}
-

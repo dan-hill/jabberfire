@@ -96,7 +96,10 @@
 
 <!-- BEGIN CONTAINER -->
 {{#jf-app-content-container}}
+
+
   {{#jf-sidebar-nav}}
+
     {{#jf-nav-item id='dashboard-nav'}}
         {{#link-to 'dashboard'}}
           {{sl-icon icon='home'}}
@@ -104,6 +107,8 @@
           <span class="selected"></span>
         {{/link-to}}
     {{/jf-nav-item}}
+
+
     {{#jf-nav-item id='assets-nav'}}
       {{#link-to 'asset-list'}}
         {{sl-icon icon='screen-desktop'}}
@@ -111,20 +116,8 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
-    {{#jf-nav-item id='manufacturers-nav'}}
-      {{#link-to 'manufacturers'}}
-        {{sl-icon icon='wrench'}}
-        <span class="title">Manufacturers</span>
-        <span class=""></span>
-      {{/link-to}}
-    {{/jf-nav-item}}
-    {{#jf-nav-item id='suppliers-nav'}}
-      {{#link-to 'suppliers'}}
-        {{sl-icon icon='social-dropbox'}}
-        <span class="title">Suppliers</span>
-        <span class=""></span>
-      {{/link-to}}
-    {{/jf-nav-item}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='user-nav'}}
       {{#link-to 'users'}}
         {{sl-icon icon='user'}}
@@ -132,6 +125,29 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='manufacturers-nav'}}
+      {{#link-to 'manufacturers'}}
+        {{sl-icon icon='wrench'}}
+        <span class="title">Manufacturers</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='suppliers-nav'}}
+      {{#link-to 'suppliers'}}
+        {{sl-icon icon='social-dropbox'}}
+        <span class="title">Suppliers</span>
+        <span class=""></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='orders-nave'}}
       {{#link-to 'orders'}}
         {{sl-icon icon='basket-loaded'}}
@@ -139,6 +155,9 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='reports-nav'}}
       {{#link-to 'dashboard'}}
         {{sl-icon icon='docs'}}
@@ -146,6 +165,9 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='settings-nav'}}
       {{#link-to 'dashboard'}}
         {{sl-icon icon='settings'}}
@@ -153,6 +175,9 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='department-nav'}}
       {{#link-to 'departments'}}
         {{sl-icon icon='layers'}}
@@ -160,6 +185,9 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
     {{#jf-nav-item id='support-nav'}}
       {{#link-to 'support.manual'}}
         {{sl-icon icon='support'}}
@@ -167,6 +195,7 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
+    {{/jf-role-required}}
 
     {{/jf-sidebar-nav}}
     <!-- END SIDEBAR -->
@@ -181,10 +210,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
     <div class="page-footer-inner">
-        2014 &copy; Metronic by keenthemes. <a
-            href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
-            title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase
-        Metronic!</a>
+        2015 &copy; CCMA.
     </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>

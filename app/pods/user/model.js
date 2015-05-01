@@ -8,7 +8,7 @@ export default DS.Model.extend({
   'username': DS.attr('string'),
   'employee_id': DS.attr('string'),
   'status': DS.attr('string'),
-  'roles': DS.hasMany('role', { async:false }),
+  'role': DS.attr('string'),
   'departments': DS.hasMany('department', { async:false }),
   'messages': DS.hasMany('message', { async:true })
 });

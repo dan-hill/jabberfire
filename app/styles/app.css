@@ -136,12 +136,12 @@ body.auth {
   margin-bottom: 10px;
 }
 
-.md-checkbox label > .check{
-  border-color: #FFFFFF;
-}
-.md-checkbox label > .box{
-  border-color: #FFFFFF;
-}
+/*.md-checkbox label > .check{*/
+  /*border-color: #FFFFFF;*/
+/*}*/
+/*.md-checkbox label > .box{*/
+  /*border-color: #FFFFFF;*/
+/*}*/
 
 .portlet.box > .portlet-title > .actions .btn-default {
   padding: 8px 6px 2px 6px;
@@ -150,3 +150,4 @@ body.auth {
 .page-content {
   background-color: #F1F3FA !important;
 }
+

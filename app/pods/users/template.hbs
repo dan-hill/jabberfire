@@ -10,7 +10,7 @@
           {{#link-to 'user.new'}}Add New{{/link-to}}
         {{/jf-page-action}}
         {{#jf-page-action}}
-          <a {{action 'didTouchUpOnBulkChangeStatus'}}>Change Status</a>
+            <a {{action 'didTouchUpOnBulkChangeStatus'}}>Change Status</a>
         {{/jf-page-action}}
         {{#jf-page-action}}
             <a {{action 'didTouchUpOnBulkChangeRole'}}>Change Role</a>
@@ -24,112 +24,81 @@
 
     {{#jf-row}}
         <!-- START SEARCH -->
-          <div class="col-md-4">
-        {{#jf-form-group color="success"}}
-            {{#jf-input-icon}}
-              {{input type='search' id='filter' value=filter class='form-control search'}}
-                <label for="filter">Filter</label>
-                <i class="fa fa-search"></i>
-            {{/jf-input-icon}}
-        {{/jf-form-group}}
-
-          </div>
-        <div class="col-md-3">
-        <div class="form-group form-md-line-input">
-        {{view 'select'
-        class="form-control"
-        content=filterables
-        optionValuePath='content.value'
-        optionLabelPath='content.name'
-        value = current_filter}}
-        </div>
-        </div>
 
 
-    <!-- END LIST TOOLS -->
-    <!-- START USER LIST CONTAINER -->
-
-        <div class="col-md-5">
-        {{#jf-nav class='pull-right'}}
-          {{#jf-pagination}}
-            {{jf-pagination-previous action='previousPage'}}
-            {{#each page in pages}}
-              {{jf-pagination-page action='didSelectPage' page=page}}
-            {{/each}}
-            {{jf-pagination-next action='nextPage' page=page}}
-          {{/jf-pagination}}
-        {{/jf-nav}}
-        </div>
-      {{#jf-col-md-12}}
-          <div class="col-md-12">
-              <!-- BEGIN EXAMPLE TABLE PORTLET-->
-              <div class="portlet light">
-                  <div class="portlet-title">
-                      <div class="caption">
-
-								<span class="caption-subject bold font-purple-plum uppercase"></span>
-                      </div>
-                  </div>
-                  <div class="portlet-body">
-                      <table class="table table-advance table-hover" id="users_table">
-                          <thead>
-                          <tr>
-                              <th>Name</th>
-                              <th>Email Address</th>
-                              <th>Username</th>
-                              <th>Employee ID</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          {{#each user in sliced}}
-                              <tr class="success">
-                                  <td>
-                                      <div class="md-checkbox jf-list-blue pull-left">
-                                          <input type="checkbox" id="checkbox{{user.id}}" class="md-check">
-                                          <label for="checkbox{{user.id}}">
-                                              <span class="check"></span>
-                                              <span class="box"></span>
-                                          </label>
-                                      </div>
-                                      <div>
-                                        {{#link-to 'user.detail' user.id}}{{user.firstname}} {{user.lastname}}{{/link-to}}
-                                      </div>
-                                  </td>
-                                  <td>
-                                      {{user.email}}
-                                  </td>
-                                  <td>
-                                      {{user.username}}
-                                  </td>
-                                  <td>
-                                    {{user.employee_id}}
-                                  </td>
-                              </tr>
-
-                          {{/each}}
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-              <!-- END EXAMPLE TABLE PORTLET-->
-              <!-- BEGIN EXAMPLE TABLE PORTLET-->
-          </div>
-        {{#each user in sliced}}
-
-        {{/each}}
+        <!-- END LIST TOOLS -->
+        <!-- START USER LIST CONTAINER -->
 
         {{#jf-col-md-12}}
-          {{#jf-nav class='pull-right'}}
-            {{#jf-pagination}}
-              {{jf-pagination-previous action='previousPage'}}
-              {{#each page in pages}}
-                {{jf-pagination-page action='didSelectPage' page=page}}
+          {{#jf-table id='users_table'}}
+            {{#jf-table-tools}}
+                <div class="col-md-4">
+                  {{#jf-form-group color="success"}}
+                    {{#jf-input-icon}}
+                      {{input type='search' id='filter' value=filter class='form-control search'}}
+                        <label for="filter">Filter</label>
+                        <i class="fa fa-search"></i>
+                    {{/jf-input-icon}}
+                  {{/jf-form-group}}
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=filterables
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = current_filter}}
+                    </div>
+                </div>
+            {{/jf-table-tools}}
+            {{#jf-table-content}}
+              {{#jf-table-head}}
+                {{#jf-table-heading}}Name{{/jf-table-heading}}
+                {{#jf-table-heading}}Email{{/jf-table-heading}}
+                {{#jf-table-heading}}Username{{/jf-table-heading}}
+                {{#jf-table-heading}}Employee ID{{/jf-table-heading}}
+              {{/jf-table-head}}
+              <tbody>
+              {{#each user in sliced}}
+                {{#jf-table-row}}
+                  {{#jf-table-column}}
+                      <div class="md-checkbox pull-left">
+                          <input type="checkbox" id="checkbox{{user.id}}" class="md-check">
+                          <label for="checkbox{{user.id}}">
+                              <span class="check"></span>
+                              <span class="box"></span>
+                          </label>
+                      </div>
+                      <div>
+                        {{#link-to 'user.detail' user.id}}{{user.firstname}} {{user.lastname}}{{/link-to}}
+                      </div>
+                  {{/jf-table-column}}
+                  {{#jf-table-column}}{{user.email}}{{/jf-table-column}}
+                  {{#jf-table-column}}{{user.username}}{{/jf-table-column}}
+                  {{#jf-table-column}}{{user.employee_id}}{{/jf-table-column}}
+                {{/jf-table-row}}
               {{/each}}
-              {{jf-pagination-next action='nextPage' page=page}}
-            {{/jf-pagination}}
-          {{/jf-nav}}
+              </tbody>
+            {{/jf-table-content}}
+            {{#jf-row}}
+              {{#jf-col-md-12}}
+                {{#jf-nav class='pull-right'}}
+                  {{#jf-pagination}}
+                    {{jf-pagination-previous action='previousPage'}}
+                    {{#each page in pages}}
+                      {{jf-pagination-page action='didSelectPage' page=page}}
+                    {{/each}}
+                    {{jf-pagination-next action='nextPage' page=page}}
+                  {{/jf-pagination}}
+                {{/jf-nav}}
+              {{/jf-col-md-12}}
+            {{/jf-row}}
+          {{/jf-table}}
+          <!-- END EXAMPLE TABLE PORTLET-->
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
         {{/jf-col-md-12}}
-      {{/jf-col-md-12}}
     {{/jf-row}}
   {{/jf-page-content-container}}
   <!-- END PAGE CONTENT-->
