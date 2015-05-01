@@ -1,7 +1,7 @@
 {{#jf-app-header}}
   {{#jf-app-logo}}
     {{#link-to 'dashboard'}}
-      {{jf-img src="img/ccmh/header_logo.png" alt="logo" class="logo-default"}}
+      {{jf-img src="img/ccmh/header_logo.png" alt="logo" class="logo-default" }}
     {{/link-to}}
   {{/jf-app-logo}}
   {{#jf-app-toggler data-toggle='collapse' data-target='.navbar-collapse'}}{{/jf-app-toggler}}
@@ -12,11 +12,11 @@
 
     {{#jf-app-notifications}}
       {{#jf-dropdown-toggle}}
-        {{sl-icon icon='bell'}}{{#jf-badge color='default'}}{{session.currentUser.messages.length}}{{/jf-badge}}
+        {{sl-icon icon='bell'}}{{#if hasMessage}}{{#jf-badge badge-style='badge-success'}}{{session.currentUser.messages.length}}{{/jf-badge}}{{/if}}
       {{/jf-dropdown-toggle}}
       {{#jf-dropdown-menu}}
         {{#jf-dropdown-menu-header}}
-            <h3><span class="bold">{{session.currentUser.messages.length}} pending</span> notifications</h3>
+            <h3><span class="bold">{{#if hasMessage}}{{session.currentUser.messages.length}}{{else}}0{{/if}} pending</span> notifications</h3>
             <a href="extra_profile.html">view all</a>
         {{/jf-dropdown-menu-header}}
         {{#jf-dropdown-menu-scroller}}
@@ -56,12 +56,12 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-default">
             <li>
-                <a href="">
-                    <i class="icon-user"></i> My Profile </a>
+                {{#link-to 'user.detail' session.currentUser.user_id}}
+                    {{sl-icon icon='user'}} My Profile {{/link-to}}
             </li>
             <li>
-                <a href="">
-                    <i class="icon-settings"></i> Settings </a>
+              {{#link-to 'user.settings' session.currentUser.user_id}}
+                {{sl-icon icon='settings'}} My Settings {{/link-to}}
             </li>
 
             <li class="divider">
@@ -106,21 +106,21 @@
     {{/jf-nav-item}}
     {{#jf-nav-item id='assets-nav'}}
       {{#link-to 'asset-list'}}
-        {{sl-icon icon='home'}}
+        {{sl-icon icon='screen-desktop'}}
         <span class="title">Assets</span>
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{#jf-nav-item id='manufacturers-nav'}}
       {{#link-to 'manufacturers'}}
-        {{sl-icon icon='home'}}
+        {{sl-icon icon='wrench'}}
         <span class="title">Manufacturers</span>
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
-    {{#jf-nav-item id='Suppliers-nav'}}
-      {{#link-to 'dashboard'}}
-        {{sl-icon icon='home'}}
+    {{#jf-nav-item id='suppliers-nav'}}
+      {{#link-to 'suppliers'}}
+        {{sl-icon icon='social-dropbox'}}
         <span class="title">Suppliers</span>
         <span class=""></span>
       {{/link-to}}
@@ -132,23 +132,23 @@
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
-    {{#jf-nav-item id='Orders-nav'}}
-      {{#link-to 'dashboard'}}
-        {{sl-icon icon='home'}}
+    {{#jf-nav-item id='orders-nave'}}
+      {{#link-to 'orders'}}
+        {{sl-icon icon='basket-loaded'}}
         <span class="title">Orders</span>
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
-    {{#jf-nav-item id='Reports-nav'}}
+    {{#jf-nav-item id='reports-nav'}}
       {{#link-to 'dashboard'}}
-        {{sl-icon icon='home'}}
+        {{sl-icon icon='docs'}}
         <span class="title">Reports</span>
         <span class=""></span>
       {{/link-to}}
     {{/jf-nav-item}}
-    {{#jf-nav-item id='Settings-nav'}}
+    {{#jf-nav-item id='settings-nav'}}
       {{#link-to 'dashboard'}}
-        {{sl-icon icon='home'}}
+        {{sl-icon icon='settings'}}
         <span class="title">Settings</span>
         <span class=""></span>
       {{/link-to}}

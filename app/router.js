@@ -21,6 +21,7 @@ Router.map(function() {
   this.resource('users', function() {});
   this.resource('user', function() {
     this.route('detail', {path: '/detail/:id'});
+    this.route('settings', {path: '/settings/:id'});
     this.route('new');
     this.route('edit');
   });
@@ -64,7 +65,6 @@ Router.map(function() {
     this.route('edit');
     this.route('detail', {path: '/detail/:id'});
   });
-
 });
 
 

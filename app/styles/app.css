@@ -6,7 +6,10 @@ body.auth {
   background-color: #F8F1EB !important;
   height: 100%;
 }
-
+.logo-default{
+  width: 250px;
+  height: 20px;
+}
 .auth img.logo{
   display: block;
   margin-left: auto;

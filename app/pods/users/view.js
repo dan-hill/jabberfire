@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   didInsertElement: function(){
-    var table = $('#sample_1');
+    var table = $('#users_table');
 
     /* Table tools samples: https://www.datatables.net/release-datatables/extras/TableTools/ */
 
@@ -79,8 +79,11 @@ export default Ember.View.extend({
       }
     });
 
-    var tableWrapper = $('#sample_1_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+    var tableWrapper = $('#users_table_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
 
     tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+  },
+  willDestroyElement: function(){
+    this.get('controller').set('filter', '');
   }
 });

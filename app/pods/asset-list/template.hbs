@@ -55,47 +55,66 @@
           {{/jf-nav}}
         </div>
         {{#jf-col-md-12}}
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
 
-          {{#each asset in sliced}}
+                            <span class="caption-subject bold font-purple-plum uppercase"></span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-advance table-hover" id="users_table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each asset in sliced}}
+                                <tr class="success">
+                                    <td>
+                                        <div class="md-checkbox jf-list-blue pull-left">
+                                            <input type="checkbox" id="checkbox{{user.id}}" class="md-check">
+                                            <label for="checkbox{{user.id}}">
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                            </label>
+                                        </div>
+                                        <div>
+                                          {{#link-to 'asset.detail' asset.id}}{{asset.model}}{{/link-to}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                      {{asset.manufacturer.title}}
+                                    </td>
+                                </tr>
 
-            {{#jf-list-item color='blue-madison'}}
-              {{#jf-list-item-title}}
-                  <div class="md-checkbox jf-list-blue pull-left">
-                      <input type="checkbox" id="checkbox{{asset.id}}" class="md-check" value={{asset.selected}}>
-                      <label for="checkbox{{asset.id}}">
-                          <span class="check"></span>
-                          <span class="box"></span>
-                      </label>
-                  </div> {{asset.model}}
-              {{/jf-list-item-title}}
-              {{#jf-list-item-actions}}
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            </div>
+            {{#each asset in sliced}}
 
-                {{#jf-dropdown-button}}
-                  {{#jf-dropdown-button-title}}
-                    {{fa-icon icon='asset'}} Asset {{fa-icon icon='angle-down'}}
-                  {{/jf-dropdown-button-title}}
-                  <ul class="dropdown-menu pull-right">
-                      <li><a><i class="fa fa-pencil"></i> Edit </a></li>
+            {{/each}}
 
-                  </ul>
-                {{/jf-dropdown-button}}
-                {{#link-to 'asset.detail' asset.id class="btn btn-circle btn-icon-only btn-default fa fa-chain"}}{{/link-to}}
-              {{/jf-list-item-actions}}
-            {{/jf-list-item}}
-
-          {{/each}}
-
-          {{#jf-col-md-12}}
-            {{#jf-nav class='pull-right'}}
-              {{#jf-pagination}}
-                {{jf-pagination-previous action='previousPage'}}
-                {{#each page in pages}}
-                  {{jf-pagination-page action='didSelectPage' page=page}}
-                {{/each}}
-                {{jf-pagination-next action='nextPage' page=page}}
-              {{/jf-pagination}}
-            {{/jf-nav}}
-          {{/jf-col-md-12}}
+            {{#jf-col-md-12}}
+              {{#jf-nav class='pull-right'}}
+                {{#jf-pagination}}
+                  {{jf-pagination-previous action='previousPage'}}
+                  {{#each page in pages}}
+                    {{jf-pagination-page action='didSelectPage' page=page}}
+                  {{/each}}
+                  {{jf-pagination-next action='nextPage' page=page}}
+                {{/jf-pagination}}
+              {{/jf-nav}}
+            {{/jf-col-md-12}}
         {{/jf-col-md-12}}
     {{/jf-row}}
   {{/jf-page-content-container}}

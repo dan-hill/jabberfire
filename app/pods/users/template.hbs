@@ -66,35 +66,34 @@
               <div class="portlet light">
                   <div class="portlet-title">
                       <div class="caption">
-                          <i class="icon-doc font-red-sunglo"></i>
-								<span class="caption-subject bold font-purple-plum uppercase">
-								Activity </span>
+
+								<span class="caption-subject bold font-purple-plum uppercase"></span>
                       </div>
                   </div>
                   <div class="portlet-body">
-                      <table class="table table-striped table-bordered table-hover" id="sample_1">
+                      <table class="table table-advance table-hover" id="users_table">
                           <thead>
                           <tr>
-                              <th></th>
                               <th>Name</th>
                               <th>Email Address</th>
-                              <th>>Username</th>
+                              <th>Username</th>
+                              <th>Employee ID</th>
                           </tr>
                           </thead>
                           <tbody>
                           {{#each user in sliced}}
-                              <tr>
+                              <tr class="success">
                                   <td>
                                       <div class="md-checkbox jf-list-blue pull-left">
-                                          <input type="checkbox" id="checkbox{{manufacturer.id}}" class="md-check">
-                                          <label for="checkbox{{manufacturer.id}}">
+                                          <input type="checkbox" id="checkbox{{user.id}}" class="md-check">
+                                          <label for="checkbox{{user.id}}">
                                               <span class="check"></span>
                                               <span class="box"></span>
                                           </label>
                                       </div>
-                                  </td>
-                                  <td>
-                                      {{user.firstname}} {{user.lastname}}
+                                      <div>
+                                        {{#link-to 'user.detail' user.id}}{{user.firstname}} {{user.lastname}}{{/link-to}}
+                                      </div>
                                   </td>
                                   <td>
                                       {{user.email}}
@@ -102,12 +101,12 @@
                                   <td>
                                       {{user.username}}
                                   </td>
+                                  <td>
+                                    {{user.employee_id}}
+                                  </td>
                               </tr>
 
                           {{/each}}
-
-
-
                           </tbody>
                       </table>
                   </div>
@@ -116,7 +115,6 @@
               <!-- BEGIN EXAMPLE TABLE PORTLET-->
           </div>
         {{#each user in sliced}}
-
 
         {{/each}}
 
