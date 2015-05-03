@@ -54,6 +54,11 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 app.import('bower_components/bootstrap/dist/css/bootstrap.css.map');
 app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 app.import('bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js');
+app.import("bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot", { destDir: "fonts" });
+app.import("bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg", { destDir: "fonts" });
+app.import("bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf", { destDir: "fonts" });
+app.import("bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff", { destDir: "fonts" });
+app.import("bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2", { destDir: "fonts" });
 
 // FontAwesome
 app.import("bower_components/font-awesome/css/font-awesome.css");
@@ -78,6 +83,18 @@ app.import('bower_components/nprogress/nprogress.css');
 // Select2
 app.import('bower_components/select2/select2.js');
 app.import('bower_components/select2/select2.css');
+
+//x-editable
+app.import('bower_components/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css');
+app.import('bower_components/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js');
+app.import('bower_components/x-editable/dist/bootstrap3-editable/img/clear.png', { destDir: "img" });
+
+// Momentjs
+app.import('bower_components/moment/moment.js');
+
+// lodash
+app.import('bower_components/lodash/lodash.js');
+
 // Custom CSS
 app.import('vendor/css/components-md.css');
 app.import('vendor/css/custom.css');

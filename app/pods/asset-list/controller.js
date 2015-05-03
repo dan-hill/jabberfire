@@ -1,51 +1,61 @@
-/*global Ember */
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  assetlist: undefined,
-  pageSize: 15,
-  selectedPage: 1,
-  renderEnd: 10,
-  filter: '',
-  current_filter: 'model',
+
 
   pages: function(){
-    var number_of_pages = this.get('filtered').length / this.get('pageSize');
-    var page_array = [];
-    for(var i = 0; i < number_of_pages; i++){
-      page_array.push(i + 1);
-    }
-    return page_array;
+    var filtered_list = this.get('filtered');
+    var page_size = this.get('pageSize');
+    return _.range(1, (filtered_list.length / page_size) + 1);
   }.property('pages.@each', 'filtered', 'pageSize'),
 
   renderStart: function(){
     return (this.get('selectedPage') - 1) * this.get('pageSize');
   }.property('selectedPage','renderStart'),
 
-  filterables: [
-    {name: "Name", value: 'model'},
-    {name: "Employee ID", value: 'employee_id'},
-    {name: "Status", value: 'status'},
-    {name: "Email", value: 'email'}
-  ],
+  sorted: function() {
+    var assets = this.get('assets');
+    var selected_sort = this.get('selectedSort');
+    var selected_sort_direction = this.get('selectedSortDirection');
+
+    if(selected_sort_direction == 'ascending'){
+      return assets.sortBy(selected_sort);
+    }
+
+    if(selected_sort_direction == 'descending'){
+      return assets.sortBy(selected_sort).reverse();
+    }
+  }.property('selectedSortDirection', 'selectedSort', 'assets.@each'),
 
   filtered: function(){
-    this.set('filter', this.get('filter').trim());
+    if(this.get('table_filter') === undefined) return Ember.A([]);
+
     var self = this;
-    var assets = this.get('model');
-    var filter = this.get('filter').toLowerCase();
+    var assets = this.get('sorted');
+    var filter = this.get('table_filter').toLowerCase();
     var field = this.get('current_filter');
     return assets.filter(function(asset){
       if(asset.get(field) === undefined){return false}
       return ~asset.get(field).toLowerCase().indexOf(filter);
     });
-  }.property( 'filter', 'current_filter', 'model.@each'),
+
+
+  }.property( 'table_filter', 'current_filter', 'sorted.@each'),
 
   sliced: function(){
     return this.get('filtered').slice(this.get('renderStart'), this.get('renderStart') + this.get('pageSize'));
-  }.property('renderStart', 'filtered', 'sliced.@each'),
+  }.property('renderStart', 'filtered', 'sliced.@each', 'pageSize'),
 
   actions: {
+    sortBy:function(selected_sort) {
+      this.set('selectedSort', selected_sort);
+
+      if (this.get('selectedSortDirection') == 'ascending') {
+        this.set('selectedSortDirection', 'descending');
+      } else {
+        this.set('selectedSortDirection', 'ascending');
+      }
+    },
     didSelectPage: function(){
       this.set('selectedPage', parseInt($(event.target).text()));
     },
@@ -55,36 +65,37 @@ export default Ember.ArrayController.extend({
       }
     },
     nextPage: function(){
-      if(this.get('selectedPage') !== this.get('pages').length){
-        this.set('selectedPage', this.get('selectedPage') + 1);
+      if(this.get('pages').length !== undefined){
+        if(this.get('selectedPage') !== this.get('pages').length){
+          this.set('selectedPage', this.get('selectedPage') + 1);
+        }
       }
+
     },
-    didTouchUpOnBulkChangeStatus: function(){
-      this.send('showModal', 'assets/change-status')
-    },
-    didTouchUpOnSaveBulkChangeStatus: function(status){
-      console.log('did the thing')
-    },
-    didTouchUpOnBulkChangeRole: function(){
-      this.send('showModal', 'assets/change-role')
-    },
-    didTouchUpOnSaveBulkChangeRole: function(){
-      this.send('showModal', 'assets/change-role')
+    didTouchUpOnCheckout: function(asset){
+      var role = this.get('session.currentUser.role');
+
+      if(role == 'administrator' || role == 'technician'){
+        this.transitionToRoute('asset.assign', asset.get('id'));
+      } else {
+        this.transitionToRoute('asset.request', asset.get('id'));
+      }
     }
   },
   disablePaginationWalking: function(){
-    console.log(this.get('selectedPage'));
+    if(this.get('pages') !== undefined) return;
+
     if(this.get('selectedPage') !== 1){
       $('.pagination .previous').removeClass('disabled');
     } else {
       $('.pagination .previous').addClass('disabled');
     }
-    console.log(this.get('pages').length);
     if(this.get('selectedPage') === this.get('pages').length){
       $('.pagination .next').removeClass('disabled');
     } else {
       $('.pagination .next').addClass('disabled');
     }
+
   }.observes('selectedPage'),
   pageinationIndicator: function(){
     $('.pagination li').removeClass('active');

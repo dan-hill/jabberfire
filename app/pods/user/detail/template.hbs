@@ -1,6 +1,6 @@
 
 {{#jf-page id='user'}}
-  {{#jf-page-title}}Users{{/jf-page-title}}
+  {{#jf-page-title}}{{user.fullname}}'s Info{{/jf-page-title}}
   {{#jf-page-bar}}
     {{#jf-page-actions}}
       {{#jf-page-action-button}}
@@ -8,13 +8,14 @@
       {{/jf-page-action-button}}
       {{#jf-page-action-list}}
         {{#jf-page-action}}
-          {{#link-to 'user.new'}}Add New{{/link-to}}
+          {{#if editing}}
+              <a {{action 'didTouchUpOnEndEditing'}}>Stop Editing</a>
+          {{else}}
+              <a {{action 'didTouchUpOnStartEditing'}}>Edit User</a>
+          {{/if}}
         {{/jf-page-action}}
         {{#jf-page-action}}
-          {{#link-to 'user.new'}}Change Status{{/link-to}}
-        {{/jf-page-action}}
-        {{#jf-page-action}}
-          {{#link-to 'user.new'}}Set Role{{/link-to}}
+          <a {{action 'didTouchUpOnForcePasswordChange'}}>Force Password Change</a>
         {{/jf-page-action}}
       {{/jf-page-action-list}}
     {{/jf-page-actions}}
@@ -24,50 +25,6 @@
   {{#jf-page-content-container}}
 
     {{#jf-row}}
-        <div class="col-md-4">
-            <!-- PORTLET MAIN -->
-            <div class="profile-sidebar">
-                <!-- PORTLET MAIN -->
-                <div class="portlet light profile-sidebar-portlet">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-userpic">
-                        <img src="img/ccmh/350x350.gif" class="img-responsive" alt="">
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            {{model.firstname}} {{model.lastname}}
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
-                    <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-circle btn-danger btn-sm">Message</button>
-                    </div>
-                    <!-- END SIDEBAR BUTTONS -->
-                    <!-- SIDEBAR MENU -->
-                    <div class="profile-usermenu">
-                        <ul class="nav">
-                            <li class="active">
-                                <a href="extra_profile.html">
-                                    <i class="icon-home"></i>
-                                    Overview </a>
-                            </li>
-                            <li>
-                                <a href="extra_profile_account.html">
-                                    <i class="icon-settings"></i>
-                                    Account Settings </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- END MENU -->
-                </div>
-                <!-- END PORTLET MAIN -->
-
-            </div>
-        </div>
-        <!-- END PORTLET MAIN -->
         <!-- PORTLET MAIN -->
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -77,34 +34,79 @@
                 </div>
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Username <span class="pull-right">{{model.username}}</span></li>
-                    <li class="list-group-item">Email <span class="pull-right">{{model.email}}</span></li>
+                    <li class="list-group-item">Username <span class="pull-right">{{user.username}}</span></li>
+                    <li class="list-group-item">Email <span class="pull-right"><a id="email" data-type="text" data-pk="1"  data-title="Enter email">{{user.email}}</a></span></li>
                     <li class="list-group-item">Employee ID <span
-                            class="pull-right">{{model.employee_id}}</span></li>
-                    <li class="list-group-item">Status <span class="badge badge-success">{{model.status}}</span>
+                            class="pull-right"><a id="employee_id" data-type="text" data-pk="1"  data-title="Enter Employee ID">{{user.employee_id}}</a></span></li>
+                    <li class="list-group-item">Status <span class="pull-right"> {{jf-status-button
+                    status=user.status
+                    user_id=user.id
+                    action='didTouchUpOnChangeStatus'}}</span>
                     </li>
                     <li class="list-group-item">roles<span
-                            class="pull-right">{{#each role in model.roles}}{{role.name}}, {{/each}}</span>
+                            class="pull-right"> {{jf-role-button
+        role=user.role
+        user_id=user.id
+        action='didTouchUpOnChangeRole'}}
+    </span>
                     </li>
-                    <li class="list-group-item">Departments<span class="pull-right">
 
-                        </span>
-                    </li>
                 </ul>
             </div>
-            <div class="panel panel-default">
-                <ul class="unstyled">
-                  {{#each department in model.departments}}
-                      <li>
-                        {{#link-to 'department.detail' department.id}}
-                            <button type="button" class="btn btn-circle red-pink btn-xs">{{department.name}}</button>
-                        {{/link-to}}
-                      </li>
-                  {{/each}}
-                </ul>
-                </div>
         </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h3 class="panel-title">Departments</h3>
+                </div>
+                <!-- List group -->
+                <ul class="list-group">
 
+                  {{#if user.departments}}
+                    {{#each department in selectedDepartmentsObserver}}
+                        <li class="list-group-item">
+                            {{#if editing}}
+                            <a{{action 'didTouchUpOnRemoveDepartment' department}} class="btn btn-icon-only btn-circle red" style="height: 20px; width: 20px;padding-top: 3px;padding-left: 0px;"><span class="md-click-circle md-click-animate" ></span>
+                                <i class="fa fa-remove" style="height: 16px"></i>
+                            </a>
+                            {{/if}}
+                            <button type="button" class="btn default btn-xs">
+                                <span class="md-click-circle md-click-animate"></span>
+                              {{#each dept in department}}
+                                {{dept.name}}{{#unless dept.last}}{{fa-icon icon='arrow-right'}}{{/unless}}
+                              {{/each}}
+                            </button>
+                        </li>
+                    {{/each}}
+
+                    {{else}}
+                        <li class="list-group-item">You do not belong to any departments.</li>
+                    {{/if}}
+                    {{#if editing}}
+                        <li class="list-group-item" style="height: 50px;">
+                            <div class="col-md-11"style="padding-right: 5px">
+
+                              {{#ember-chosen multiple=true id='department_select' value=multipleSelectValue }}
+                                {{#each department in options}}
+                                    <option {{bind-attr value=department.id}}>{{department.name}}</option>
+                                {{/each}}
+                              {{/ember-chosen}}
+                            </div>
+                            <div class="col-md-1" style="padding-left: 0px">
+                                <a{{action 'didTouchUpOnAddDepartment'}}
+                                        class="btn btn-icon-only green " style="height: 29px; width: 29px;">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+
+                            </div>
+
+                        </li>
+                    {{/if}}
+
+                </ul>
+            </div>
+        </div>
 
 
             <div class="col-md-12">

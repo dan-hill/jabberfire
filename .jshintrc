@@ -12,7 +12,9 @@
     "CCMH",
     "Profile",
     "NProgress",
-    "TableAdvanced"
+    "TableAdvanced",
+    "moment",
+    "_"
   ],
   "browser": true,
   "boss": true,

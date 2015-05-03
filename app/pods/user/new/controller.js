@@ -18,52 +18,62 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
   actionMessage: null,
   selectedStatus: 'pending',
   statuses: [
-    {id: 'pending',   name: 'Pending'},
-    {id: 'active',    name: 'Active'},
-    {id: 'inactive',  name: 'Inactive'}
+    {id: 'pending', name: 'Pending'},
+    {id: 'active', name: 'Active'},
+    {id: 'inactive', name: 'Inactive'}
   ],
-  selectedRole: 1,
+  selectedRole: 'user',
   roles: [
-    {id: 1, name: 'User'},
-    {id: 2, name: 'Technician'},
-    {id: 3, name: 'Administrator'}
+    {id: 'user', name: 'User'},
+    {id: 'technician', name: 'Technician'},
+    {id: 'administrator', name: 'Administrator'}
   ],
-  observeable_options: function(){
+  observeable_options: function () {
     this.trigger('dataDidChange', this.get('multipleSelectValue'));
   }.observes('options.@each'),
-  options: function() {
+  options: function () {
     var self = this;
     var multipleSelectValue = this.get('multipleSelectValue')
     var fucking_array = Ember.A([]);
 
-    if(multipleSelectValue === undefined || multipleSelectValue.length <= 0){
-      return this.get('department_list').filter(function(department){return department.get('parent_id') == null});
+    if (multipleSelectValue === undefined || multipleSelectValue.length <= 0) {
+      return this.get('department_list').filter(function (department) {
+        return department.get('parent_id') == null
+      });
     }
 
-    var dept = this.get('department_list').find(function(department){return department.get('id') == multipleSelectValue.get('lastObject')});
+    var dept = this.get('department_list').find(function (department) {
+      return department.get('id') == multipleSelectValue.get('lastObject')
+    });
 
-    if(dept.get('parent_id') == null){
+    if (dept.get('parent_id') == null) {
       fucking_array.addObject(dept);
-      return fucking_array.addObjects(this.get('department_list').filter(function(department){return department.get('parent_id') == dept.get('id')}));
+      return fucking_array.addObjects(this.get('department_list').filter(function (department) {
+        return department.get('parent_id') == dept.get('id')
+      }));
     }
 
 
-    var parent = this.get('department_list').find(function(department){
+    var parent = this.get('department_list').find(function (department) {
       return department.get('id') == dept.get('parent_id');
     });
 
-    if(parent != null){
+    if (parent != null) {
       fucking_array.addObject(dept);
     }
 
-    while(parent.get('parent_id') !== null){
+    while (parent.get('parent_id') !== null) {
       fucking_array.pushObject(parent);
-      parent = this.get('department_list').find(function(department){return department.get('id') == parent.get('parent_id')})
+      parent = this.get('department_list').find(function (department) {
+        return department.get('id') == parent.get('parent_id')
+      })
     }
     fucking_array.addObject(parent);
     fucking_array.addObject(dept).reverse();
 
-    var fuckity = fucking_array.addObjects(this.get('department_list').filter(function(department){return department.get('parent_id') == dept.get('id')}))
+    var fuckity = fucking_array.addObjects(this.get('department_list').filter(function (department) {
+      return department.get('parent_id') == dept.get('id')
+    }))
     return fuckity
 
 
@@ -71,19 +81,20 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
 
 
   selectedDepartments: Ember.A([]),
-  selectedDepartmentsObserver: function(){
+  selectedDepartmentsObserver: function () {
     var department_paths = Ember.A([]);
 
     var selected_departments = this.get('selectedDepartments');
-    for(var i = 0; i < selected_departments.length; i++){
+    for (var i = 0; i < selected_departments.length; i++) {
       var inner_dept_path = Ember.A([]);
       var dept = selected_departments[i];
+      dept.set('last', true)
 
-      var parent = this.get('department_list').find(function(d){
+      var parent = this.get('department_list').find(function (d) {
         return d.get('id') == dept.get('parent_id');
       });
 
-      if(parent != undefined) {
+      if (parent != undefined) {
         inner_dept_path.addObject(dept);
 
 
@@ -96,7 +107,9 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
       }
       inner_dept_path.addObject(parent);
       inner_dept_path.addObject(dept).reverse();
-
+      if (inner_dept_path.get('lastObject') == undefined) {
+        inner_dept_path.pop()
+      }
       department_paths.addObject(inner_dept_path);
     }
 
@@ -104,14 +117,14 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
     return department_paths;
   }.property('selectedDepartments.@each', 'selectedDepartments'),
   actions: {
-    didTouchUpOnAddDepartment: function(){
+    didTouchUpOnAddDepartment: function () {
       var multiple_select_value = this.get('multipleSelectValue');
       var selected_departments = this.get('selectedDepartments');
 
-      if (multiple_select_value !== undefined && multiple_select_value.length > 0){
+      if (multiple_select_value !== undefined && multiple_select_value.length > 0) {
 
-        var department = this.get('department_list').find(function(department){
-            return department.get('id') == multiple_select_value.get('lastObject')
+        var department = this.get('department_list').find(function (department) {
+          return department.get('id') == multiple_select_value.get('lastObject')
         });
 
         selected_departments.addObject(department);
@@ -121,14 +134,14 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
         $("#department_select").trigger("chosen:updated");
       }
     },
-    didTouchUpOnSave: function(){
+    didTouchUpOnSave: function () {
       var self = this;
 
       // Set up attributes used
       var selectedDepartments = self.get('selectedDepartments');
       var selectedRole = self.get('selectedRole');
 
-      this.validate().then(function(){
+      this.validate().then(function () {
         // Create the local record
         var user = self.get('store').createRecord('user', {
           'firstname': self.get('firstname'),
@@ -139,59 +152,62 @@ export default Ember.ArrayController.extend(Ember.Evented, EmberValidations.Mixi
         });
 
         // Get the role
-        if(selectedRole !== undefined){
-          self.get('store').find('role', parseInt(selectedRole)).then(function(role){
-            // Push the role onto the user
-            user.get('roles').pushObject(role);
-            user.get('departments').pushObjects(selectedDepartments);
 
-            user.save()
-              .then(function(){
-                self.transitionToRoute('users');
-              })
-              .catch(function(err){
-                self.set('errorNote', {title: 'Save Error', message: 'An error happened so the user could not be saved.'})
-              })
-              .finally(function(){
+        user.get('departments').pushObjects(selectedDepartments);
 
-              })
-          }).catch(function(){
-            self.set('errorNote', {title: 'Role Error', message: 'Something went wrong while fetching roles..'})
+        user.save()
+          .then(function () {
+            self.transitionToRoute('users');
           })
-        }
-      }).catch(function(){
+          .catch(function (err) {
+            self.set('errorNote', {title: 'Save Error', message: 'An error happened so the user could not be saved.'})
+          })
+          .finally(function () {
+
+          })
+
+
+      }).catch(function () {
         self.set('errorNote', {title: 'Input Error', message: 'The form input is bad.'})
       });
 
-    }
-  },
-  validateInput: function(){
-    var self = this;
 
-    var set_status = function(item, selector){
-      if(self.get('errors.' + item ) !== undefined && self.get('errors.' + item).length !== 0) {
-        selector.removeClass('has-default');
-        selector.addClass('has-error');
+    },
+    validateInput: function () {
+      var self = this;
 
-      } else {
-        selector.removeClass('has-error');
-        selector.addClass('has-default');
-      }
-    };
+      var set_status = function (item, selector) {
+        if (self.get('errors.' + item) !== undefined && self.get('errors.' + item).length !== 0) {
+          selector.removeClass('has-default');
+          selector.addClass('has-error');
 
-    this.validate().then(function() {
-      set_status('firstname', $('#firstname'));
-      set_status('lastname', $('#lastname'));
-      set_status('email', $('#email'));
-      }).catch(function() {
+        } else {
+          selector.removeClass('has-error');
+          selector.addClass('has-default');
+        }
+      };
+
+      this.validate().then(function () {
         set_status('firstname', $('#firstname'));
         set_status('lastname', $('#lastname'));
         set_status('email', $('#email'));
-      }
-    )
-  }.observes('firstname', 'lastname', 'email'),
-  errorNote: {title: '', message: ''},
-  errorNoteObserver: function(){
-    $('#error-note-container').removeClass('hide');
-  }.observes('errorNote', 'errorNote.name', 'errorNote.message')
+      }).catch(function () {
+          set_status('firstname', $('#firstname'));
+          set_status('lastname', $('#lastname'));
+          set_status('email', $('#email'));
+        }
+      )
+    }
+      .
+      observes('firstname', 'lastname', 'email'),
+    errorNote: {
+      title: '', message: ''
+    }
+    ,
+    errorNoteObserver: function () {
+      $('#error-note-container').removeClass('hide');
+    }
+      .
+      observes('errorNote', 'errorNote.name', 'errorNote.message')
+  }
 });

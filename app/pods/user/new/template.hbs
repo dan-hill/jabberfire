@@ -72,21 +72,14 @@
                                   </div>
                               </div>
 
-                              <div class="form-group">
-                                  <div class="col-md-12">
-                                      <ul class="list-unstyled">
-                                        {{#each department in selectedDepartmentsObserver}}
-                                            <li style="margin-bottom: 5px;">
-                                                <button type="button" class="btn default btn-xs">
-                                                    <span class="md-click-circle md-click-animate"></span>
-                                                  {{#each dept in department}}{{dept.name}}{{fa-icon icon='arrow-right'}}{{/each}}
-                                                </button>
-                                            </li>
-                                        {{/each}}
-                                      </ul>
-                                  </div>
 
-                                  <div class="col-md-11">
+
+
+                      </div>
+                          <div class="col-md-6">
+                              <div class="row">
+                                  <div class="col-sm-12"><label class='chosen-label' for="employee-id-control">Departments</label></div>
+                                  <div class="col-md-11"style="padding-right: 5px">
 
                                     {{#ember-chosen multiple=true id='department_select' value=multipleSelectValue }}
                                       {{#each department in options}}
@@ -94,18 +87,34 @@
                                       {{/each}}
                                     {{/ember-chosen}}
                                   </div>
-                                  <div class="col-md-1">
+                                  <div class="col-md-1" style="padding-left: 0px">
                                       <a{{action 'didTouchUpOnAddDepartment'}}
-                                              class="btn btn-icon-only green pull-right">
+                                              class="btn btn-icon-only green " style="height: 29px; width: 29px;">
                                           <i class="fa fa-plus"></i>
                                       </a>
                                   </div>
                               </div>
-                          </div>
-                          <div class="col-md-6">
-
+                              <div class="row">
+                                  <div class="form-group">
+                                      <div class="col-md-12">
+                                          <ul class="list-unstyled">
+                                            {{#each department in selectedDepartmentsObserver}}
+                                                <li style="margin-top: 10px;">
+                                                    <button type="button" class="btn default btn-xs">
+                                                        <span class="md-click-circle md-click-animate"></span>
+                                                      {{fa-icon icon='remove'}}
+                                                      {{#each dept in department}}
+                                                        {{dept.name}}{{#unless dept.last}}{{fa-icon icon='arrow-right'}}{{/unless}}
+                                                      {{/each}}
+                                                    </button>
+                                                </li>
+                                            {{/each}}
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
                               <div class="form-group">
-                                  <label for="status-control">Status</label>
+                                  <label class='chosen-label' for="status-control">Status</label>
                                 {{#ember-chosen id='status_select' value=selectedStatus }}
                                   {{#each status in statuses}}
                                       <option {{bind-attr value=status.id}}>{{status.name}}</option>
@@ -114,7 +123,7 @@
                               </div>
 
                               <div class="form-group">
-                                  <label for="role-control">Role</label>
+                                  <label class='chosen-label' for="role-control">Role</label>
                                 {{#ember-chosen id='role_select' value=selectedRole }}
                                   {{#each role in roles}}
                                       <option {{bind-attr value=role.id}}>{{role.name}}</option>
@@ -128,7 +137,7 @@
                   <div class="row">
                       <div class="col-md-12">
                           <div class="form-actions noborder pull-right">
-                              <button type="button" class="btn default">Cancel</button>
+                              {{#link-to 'users'}}<button type="button" class="btn default">Cancel</button>{{/link-to}}
                               <button type="button" class="btn blue" {{action 'didTouchUpOnSave'}}>Save</button>
                           </div>
                       </div>

@@ -9,6 +9,7 @@
             <path value="file://$PROJECT_DIR$/bower_components" />
             <path value="file://$PROJECT_DIR$/bower_components/ember-qunit" />
             <path value="file://$PROJECT_DIR$/public" />
+            <path value="file://$PROJECT_DIR$/config" />
           </resourceRoots>
         </entryData>
       </entry>

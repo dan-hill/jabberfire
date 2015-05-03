@@ -9,10 +9,6 @@ export default Ember.Component.extend({
   meetsRequirements: function() {
     var user_role = this.get('session.currentUser.role');
     var roles_allowed = this.get('roles_allowed');
-
-    console.log(user_role);
-    console.log(roles_allowed);
-
     return roles_allowed.contains(user_role);
   }.property('session.currentUser.role', 'roles_allowed')
 });

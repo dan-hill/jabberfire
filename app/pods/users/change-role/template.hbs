@@ -9,7 +9,7 @@
                 <div class="form-group">
                   {{#ember-chosen id='role_select' value=selectedRole }}
                     {{#each role in roles}}
-                        <option {{bind-attr value=role.id}}>{{role.name}}</option>
+                        <option {{bind-attr value=role.value}}>{{role.name}}</option>
                     {{/each}}
                   {{/ember-chosen}}
                 </div>

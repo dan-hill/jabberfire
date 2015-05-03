@@ -1,5 +1,5 @@
 {{#jf-page id='manufacturer'}}
-  {{#jf-page-title}}Manufacturers{{/jf-page-title}}
+  {{#jf-page-title}}Manufacturer{{/jf-page-title}}
   {{#jf-page-bar}}
     {{#jf-page-actions}}
       {{#jf-page-action-button}}
@@ -8,12 +8,6 @@
       {{#jf-page-action-list}}
         {{#jf-page-action}}
           {{#link-to 'manufacturer.new'}}Add New{{/link-to}}
-        {{/jf-page-action}}
-        {{#jf-page-action}}
-            <a {{action 'didTouchUpOnBulkChangeStatus'}}>Change Status</a>
-        {{/jf-page-action}}
-        {{#jf-page-action}}
-            <a {{action 'didTouchUpOnBulkChangeRole'}}>Change Role</a>
         {{/jf-page-action}}
       {{/jf-page-action-list}}
     {{/jf-page-actions}}
@@ -51,11 +45,21 @@
                       value = current_filter}}
                     </div>
                 </div>
+                <div class="col-md-1 pull-right">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=pageSizes
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = pageSize}}
+                    </div>
+                </div>
             {{/jf-table-tools}}
             {{#jf-table-content}}
               {{#jf-table-head}}
-                {{#jf-table-heading}}Name{{/jf-table-heading}}
-
+                {{#jf-table-heading}}<a {{action 'sortBy' 'title'}}>Name</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'email'}}>Assets</a>{{/jf-table-heading}}
               {{/jf-table-head}}
               <tbody>
               {{#each manufacturer in sliced}}
@@ -72,7 +76,7 @@
                         {{#link-to 'manufacturer.detail' manufacturer.id}}{{manufacturer.title}}{{/link-to}}
                       </div>
                   {{/jf-table-column}}
-
+                  {{#jf-table-column}}{{manufacturer.assets.length}}{{/jf-table-column}}
                 {{/jf-table-row}}
               {{/each}}
               </tbody>

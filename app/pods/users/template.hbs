@@ -51,13 +51,25 @@
                       value = current_filter}}
                     </div>
                 </div>
+                <div class="col-md-1 pull-right">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=pageSizes
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = pageSize}}
+                    </div>
+                </div>
             {{/jf-table-tools}}
             {{#jf-table-content}}
               {{#jf-table-head}}
-                {{#jf-table-heading}}Name{{/jf-table-heading}}
-                {{#jf-table-heading}}Email{{/jf-table-heading}}
-                {{#jf-table-heading}}Username{{/jf-table-heading}}
-                {{#jf-table-heading}}Employee ID{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'firstname'}}>Name</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'email'}}>Email</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'username'}}>Username</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'employee_id'}}>Employee ID</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'status'}}>Status</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'role'}}>Role</a>{{/jf-table-heading}}
               {{/jf-table-head}}
               <tbody>
               {{#each user in sliced}}
@@ -77,6 +89,19 @@
                   {{#jf-table-column}}{{user.email}}{{/jf-table-column}}
                   {{#jf-table-column}}{{user.username}}{{/jf-table-column}}
                   {{#jf-table-column}}{{user.employee_id}}{{/jf-table-column}}
+                  {{#jf-table-column}}
+                    {{jf-status-button
+                      status=user.status
+                      user_id=user.id
+                      action='didTouchUpOnChangeStatus'}}
+                  {{/jf-table-column}}
+
+                  {{#jf-table-column}}
+                    {{jf-role-button
+                    role=user.role
+                    user_id=user.id
+                    action='didTouchUpOnChangeRole'}}
+                  {{/jf-table-column}}
                 {{/jf-table-row}}
               {{/each}}
               </tbody>

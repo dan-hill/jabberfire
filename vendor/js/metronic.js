@@ -215,23 +215,23 @@ var Metronic = function() {
     var handleMaterialDesign = function() {
 
         // Material design ckeckbox and radio effects
-        $('body').on('click', '.md-checkbox > label, .md-radio > label', function() {
-            var the = $(this);
-            // find the first span which is our circle/bubble
-            var el = $(this).children('span:first-child');
-
-            // add the bubble class (we do this so it doesnt show on page load)
-            el.addClass('inc');
-
-            // clone it
-            var newone = el.clone(true);
-
-            // add the cloned version before our original
-            el.before(newone);
-
-            // remove the original so that it is ready to run on next click
-            $("." + el.attr("class") + ":last", the).remove();
-        });
+        //$('body').on('click', '.md-checkbox > label, .md-radio > label', function() {
+        //    var the = $(this);
+        //    // find the first span which is our circle/bubble
+        //    var el = $(this).children('span:first-child');
+        //
+        //    // add the bubble class (we do this so it doesnt show on page load)
+        //    el.addClass('inc');
+        //
+        //    // clone it
+        //    var newone = el.clone(true);
+        //
+        //    // add the cloned version before our original
+        //    el.before(newone);
+        //
+        //    // remove the original so that it is ready to run on next click
+        //    $("." + el.attr("class") + ":last", the).remove();
+        //});
 
         if ($('body').hasClass('page-md')) {
             // Material design click effect

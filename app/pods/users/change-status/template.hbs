@@ -8,7 +8,7 @@
             <div class="modal-body">
               {{#ember-chosen id='status_select' value=selectedStatus }}
                 {{#each status in statuses}}
-                    <option {{bind-attr value=status.id}}>{{status.name}}</option>
+                    <option {{bind-attr value=status.value}}>{{status.name}}</option>
                 {{/each}}
               {{/ember-chosen}}
             </div>

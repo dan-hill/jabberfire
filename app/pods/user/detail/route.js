@@ -7,6 +7,15 @@ export default Ember.Route.extend({
     });
   },
   model: function (args) {
-    return this.store.find('user', args.id);
+
+    return Ember.RSVP.hash({
+      user: this.store.find('user', args.id),
+      departments: this.store.find('department')
+    });
+  },
+  setupController: function (controller, models) {
+    controller.set('user', models.user);
+    controller.set('departments', models.departments);
+    controller.set('host', this.container.lookup('application:main').get('host'));
   }
 });

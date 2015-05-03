@@ -13,6 +13,16 @@ export default Ember.View.extend({
         $('#department_select option:nth-child(' + i.toString() +')').attr('selected', 'selected');
       }
       $("#department_select").trigger("chosen:updated");
-    }, 5);
+    }, 15);
   },
+  willDestroyElement: function(){
+    var controller = this.get('controller');
+    controller.set('firstname', '');
+    controller.set('lastname', '');
+    controller.set('email', '');
+    controller.set('employee_id', '');
+    controller.set('selectedDepartments',  Ember.A([]));
+    controller.set('status', 'pending');
+    controller.set('role', 'user');
+  }
 });

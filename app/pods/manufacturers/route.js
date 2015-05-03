@@ -8,8 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
     return this.store.find('manufacturer');
   },
   setupController: function (controller, model) {
-    controller.set('model', model);
-    console.log(model)
+    controller.set('manufacturers', model);
   },
   renderTemplate: function () {
     this.render('manufacturers', {

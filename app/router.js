@@ -15,6 +15,11 @@ Router.map(function() {
     this.route('forgot-password');
     this.route('request-sent');
     this.route('loading');
+
+    this.route('password', function() {
+      this.route('reset', {path: '/reset/:password_token'});
+      this.route('forgot');
+    });
   });
 
   // User Resource
@@ -24,6 +29,13 @@ Router.map(function() {
     this.route('settings', {path: '/settings/:id'});
     this.route('new');
     this.route('edit');
+  });
+
+  this.resource('departments', function() {});
+  this.resource('department', function() {
+    this.route('new');
+    this.route('edit');
+    this.route('detail', {path: '/detail/:id'});
   });
 
   // DASHBOARD
@@ -50,19 +62,20 @@ Router.map(function() {
   this.route('asset-list');
   this.resource('asset', function() {
     this.route('detail', {path: '/detail/:id'});
+    this.route('assign', {path: '/assign/:id'});
+    this.route('request', {path: '/request/:id'});
     this.route('new');
     this.route('edit');
   });
+
   this.resource('support', function() {
     this.route('manual');
     this.route('new');
     this.route('contact');
   });
 
-  this.resource('departments', function() {});
-  this.resource('department', function() {
-    this.route('new');
-    this.route('edit');
+
+  this.resource('unit', function() {
     this.route('detail', {path: '/detail/:id'});
   });
 });

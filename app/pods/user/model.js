@@ -10,6 +10,9 @@ export default DS.Model.extend({
   'status': DS.attr('string'),
   'role': DS.attr('string'),
   'departments': DS.hasMany('department', { async:false }),
-  'messages': DS.hasMany('message', { async:true })
+  'messages': DS.hasMany('message', { async:true }),
+  'fullname': function(){
+    return this.get('firstname') + ' ' + this.get('lastname');
+  }.property('firstname', 'lastname')
 });
 
