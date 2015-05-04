@@ -3,8 +3,6 @@ from model import User as UserModel
 from app.messages.model import Message
 from app import api
 from flask_restful import Resource, abort
-from app.roles import Role
-from app import socket
 
 access_request_blueprint = Blueprint('access_request_blueprint', __name__)
 api.init_app(access_request_blueprint)
@@ -37,14 +35,13 @@ class AccessRequest(Resource):
 
         if user.save():
             user = user.find(username=user.username)
-            group = Role.find(name='administrator')
 
-            users = group.users
+            users = UserModel.find(role='administrator')
 
-            for user in users:
+            for u in users:
                 message = Message()
                 message.type = 'access-request'
-                message.to_user = user
+                message.to_user = u
 
 
             resp = jsonify({

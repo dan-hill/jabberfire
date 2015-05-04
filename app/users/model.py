@@ -1,6 +1,5 @@
 from app import db
 from passlib.context import CryptContext
-from app.user_role import UserRole
 from app.user_department import UserDepartment
 from app.user_setting import UserSetting
 
@@ -47,6 +46,7 @@ class User(db.Model):
         self.lastname = kwargs.get('lastname')
         self.employee_id = kwargs.get('employee_id')
         self.status = kwargs.get('status')
+        self.role = kwargs.get('role')
 
         for role in kwargs.get('roles', []):
             self.roles.append(role)
@@ -62,9 +62,9 @@ class User(db.Model):
     firstname = db.Column(db.String(255))
     lastname = db.Column(db.String(255))
     employee_id = db.Column(db.String(255))
-    status = db.Column(db.String(32), default='pending')
+    status = db.Column(db.String(32), default='user')
+    role = db.Column(db.String(32), default='pending')
 
-    roles = db.relationship('Role', secondary='user_role', backref='users')
     departments = db.relationship('Department', secondary='user_department', backref='users')
     settings = db.relationship('Setting', secondary='user_setting', backref='users')
 

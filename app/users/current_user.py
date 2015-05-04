@@ -13,14 +13,6 @@ class CurrentUser(Resource):
     method_decorators = [jwt_required()]
 
     def get(self):
-        userroles = []
-        print current_user
-        for role in current_user.roles:
-            userroles.append({
-                'id': role.id,
-                'name': role.name
-            })
-
         messages = []
         for message in current_user.messages:
             messages.append(message.id)
@@ -35,7 +27,7 @@ class CurrentUser(Resource):
                 'username': current_user.username,
                 'employee_id': current_user.employee_id,
                 'status': current_user.status,
-                'roles': userroles,
+                'role': current_user.role,
                 'messages': messages
             }
         }

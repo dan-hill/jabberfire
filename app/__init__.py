@@ -5,14 +5,14 @@ from flask_mail import Mail
 from flask_cors import CORS
 from flask_jwt import JWT, JWTError
 from flask_restful import Api
-from flask_socketio import SocketIO
+
 from utility import ErrorFriendlyApi
 
 db = SQLAlchemy()
 jwt = JWT()
 api = ErrorFriendlyApi()
 mail = Mail()
-socket = SocketIO()
+
 
 from app.units import Unit
 from app.suppliers import Supplier
@@ -27,15 +27,6 @@ def create_app(debug=False):
 
     from app.testing.controller import testing
     app.register_blueprint(testing)
-
-    # Role resource blueprints
-    from app.roles import (
-        role_blueprint,
-        role_list_blueprint
-    )
-
-    app.register_blueprint(role_blueprint)
-    app.register_blueprint(role_list_blueprint)
 
     # User resource blueprints
     from app.users import (
@@ -58,11 +49,23 @@ def create_app(debug=False):
     app.register_blueprint(message_list_blueprint)
     app.register_blueprint(message_blueprint)
 
+    from app.passwords import (
+        force_blueprint,
+        set_new_password_blueprint
+    )
+
+    app.register_blueprint(force_blueprint)
+    app.register_blueprint(set_new_password_blueprint)
     from app.settings import (
         setting_list_blueprint
     )
 
     app.register_blueprint(setting_list_blueprint)
+
+    from app.units import (
+        unit_blueprint
+    )
+    app.register_blueprint(unit_blueprint)
 
     from app.ember import (
         ember)
@@ -79,7 +82,7 @@ def create_app(debug=False):
         MAIL_USE_SSL=True,
         MAIL_USERNAME='the.auto.server@gmail.com',
         MAIL_PASSWORD='autopass',
-
+        MAIL_DEFAULT_SENDER='CCHA Inventory System',
         # DATABASE SETTINGS
         SECRET_KEY=':r7^97B)qA8{>|{8TXDz"4]1bt>O%s',
         SQLALCHEMY_DATABASE_URI='mysql://root:spring2015capstone@localhost/ccmh',
@@ -111,7 +114,7 @@ def create_app(debug=False):
     mail.init_app(app)
 
     jwt.init_app(app)
-    socket.init_app(app)
+
     return app
 
 

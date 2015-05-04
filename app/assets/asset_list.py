@@ -13,20 +13,15 @@ class AssetList(Resource):
 
     def get(self):
         assetlist = []
-
         for asset in AssetModel.list():
 
             model = {
                 'id': asset.id,
                 'description': asset.description,
-                'serial': asset.serial,
-                'model': asset.model,
+                'name': asset.name,
                 'max_quantity': asset.max_quantity,
                 'min_quantity': asset.min_quantity,
-                'tag': asset.tag,
-                'image': asset.image,
-                'note': asset.note
-
+                'image': asset.image
             }
 
             assetlist.append(model)

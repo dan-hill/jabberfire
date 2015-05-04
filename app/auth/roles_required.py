@@ -6,17 +6,8 @@ def roles_required(roles):
 
     def decorator(function):
         def wrapper(*args, **kwargs):
-            user_roles = []
-            for role in current_user.roles:
-                user_roles.append(role.name)
-
-            user_role_set = set(user_roles)
-            required_roles_set = set(roles)
-            print user_role_set
-            print required_roles_set
-            if required_roles_set.issubset(user_role_set):
+            if current_user.role in roles:
                 function(*args, **kwargs)
-
             else:
                 abort(403)
 

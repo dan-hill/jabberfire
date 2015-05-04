@@ -1,25 +1,14 @@
-from flask import Blueprint, redirect, abort, jsonify
+from flask import Blueprint, redirect, abort, jsonify, make_response
 from app.users.model import User
-from app.roles import Role
 from app.departments.model import Department
 import csv, os
-from app import socket
-import threading
+import io
+
+
 testing = Blueprint('testing', __name__)
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-
-def insert_roles():
-
-    reader = csv.reader(open(os.path.join(__location__, 'roles.csv')), delimiter=',', quotechar='"')
-
-    for row in reader:
-        if Role.find(name=row[1]) is None:
-            Role(
-                name=row[1]
-            ).save()
-    print 'inserted roles.'
 
 
 def insert_users():
@@ -35,19 +24,11 @@ def insert_users():
                 firstname=row[0],
                 lastname=row[1],
                 username=username,
-                employee_id=row[4]
+                employee_id=row[4],
+                role='administrator'
             ).save()
     print 'inserted users.'
 
-def insert_user_roles():
-    users = User.list()
-    roles = Role.list()
-
-    for user in users:
-        for role in roles:
-            user.roles.append(role)
-
-    print 'associated users with roles'
 
 def insert_departments():
     reader = csv.reader(open(os.path.join(__location__, 'departments.csv')), delimiter=',', quotechar='"')
@@ -85,9 +66,17 @@ def create_test_user():
     Returns:
         (string) OK
     """
-    insert_roles()
     insert_users()
-    insert_user_roles()
     insert_departments()
     insert_user_departments()
     return 'ok', 200
+
+@testing.route('/api/img/<filename>', methods=['GET'])
+def get_image(filename):
+    print filename
+    with open(os.path.join(__location__, filename), 'r+') as f:
+        imgdata = f.read()
+    response = make_response(imgdata)
+    response.headers['Content-Type'] = 'image/jpeg'
+    response.headers['Content-Disposition'] = 'attachment; filename='+filename
+    return response

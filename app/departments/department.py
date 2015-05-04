@@ -22,9 +22,9 @@ class Department(Resource):
         model = {
             'department': {
                 'id': department.id,
-                'parent_id': department.description,
-                'name': department.reason,
-                'description': department.approved,
+                'parent_id': department.parent_id,
+                'name': department.name,
+                'description': department.description,
                 'children': children
             }
         }
