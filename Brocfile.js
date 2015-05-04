@@ -95,6 +95,9 @@ app.import('bower_components/moment/moment.js');
 // lodash
 app.import('bower_components/lodash/lodash.js');
 
+// QRCode
+app.import('vendor/plugins/qrcode.js');
+
 // Custom CSS
 app.import('vendor/css/components-md.css');
 app.import('vendor/css/custom.css');

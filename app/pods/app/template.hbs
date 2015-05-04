@@ -109,11 +109,11 @@
     {{/jf-nav-item}}
 
 
-    {{#jf-nav-item id='assets-nav'}}
+    {{#jf-nav-item id='asset-nav'}}
       {{#link-to 'asset-list'}}
         {{sl-icon icon='screen-desktop'}}
         <span class="title">Assets</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
 
@@ -122,57 +122,57 @@
       {{#link-to 'users'}}
         {{sl-icon icon='user'}}
         <span class="title">Users</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
 
     {{#jf-role-required roles='administrator technician'}}
-    {{#jf-nav-item id='manufacturers-nav'}}
+    {{#jf-nav-item id='manufacturer-nav'}}
       {{#link-to 'manufacturers'}}
         {{sl-icon icon='wrench'}}
         <span class="title">Manufacturers</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
 
     {{#jf-role-required roles='administrator technician'}}
-    {{#jf-nav-item id='suppliers-nav'}}
+    {{#jf-nav-item id='supplier-nav'}}
       {{#link-to 'suppliers'}}
         {{sl-icon icon='social-dropbox'}}
         <span class="title">Suppliers</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
 
     {{#jf-role-required roles='administrator technician'}}
-    {{#jf-nav-item id='orders-nave'}}
+    {{#jf-nav-item id='order-nave'}}
       {{#link-to 'orders'}}
         {{sl-icon icon='basket-loaded'}}
         <span class="title">Orders</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
 
     {{#jf-role-required roles='administrator technician'}}
-    {{#jf-nav-item id='reports-nav'}}
-      {{#link-to 'dashboard'}}
+    {{#jf-nav-item id='report-nav'}}
+      {{#link-to 'reports'}}
         {{sl-icon icon='docs'}}
         <span class="title">Reports</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
 
     {{#jf-role-required roles='administrator technician'}}
-    {{#jf-nav-item id='settings-nav'}}
-      {{#link-to 'dashboard'}}
+    {{#jf-nav-item id='setting-nav'}}
+      {{#link-to 'settings'}}
         {{sl-icon icon='settings'}}
         <span class="title">Settings</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
@@ -182,7 +182,7 @@
       {{#link-to 'departments'}}
         {{sl-icon icon='layers'}}
         <span class="title">Departments</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}
@@ -192,7 +192,7 @@
       {{#link-to 'support.manual'}}
         {{sl-icon icon='support'}}
         <span class="title">Support</span>
-        <span class=""></span>
+        <span class="selected"></span>
       {{/link-to}}
     {{/jf-nav-item}}
     {{/jf-role-required}}

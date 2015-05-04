@@ -14,7 +14,8 @@
     "NProgress",
     "TableAdvanced",
     "moment",
-    "_"
+    "_",
+    "QRCode"
   ],
   "browser": true,
   "boss": true,

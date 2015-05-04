@@ -8,7 +8,7 @@
       {{/jf-page-action-button}}
       {{#jf-page-action-list}}
         {{#jf-page-action}}
-            <a {{action 'didTouchUpOnAddNewUnit'}}>Add New Unit</a>
+          {{#link-to 'unit.new' asset.id}}Add New {{/link-to}}
         {{/jf-page-action}}
         {{#jf-page-action}}
           {{#if editing}}

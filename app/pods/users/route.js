@@ -10,11 +10,25 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
   },
   setupController: function (controller, model) {
 
+    controller.set('users', _.filter(model.toArray(), function(user){return user.get('user_id') !== undefined}));
 
-    controller.set('model', model);
-    controller.get('model').filter(function(record){return record.get('id') == null}).forEach(function(m){
-      m.deleteRecord();
-    });
+
+    controller.set('pageSize', '15');
+    controller.set('selectedPage', 1);
+    controller.set('pageSizes', [
+      {name: "15", value: '15'},
+      {name: "25", value: '25'},
+      {name: "50", value: '50'},
+      {name: "100", value: '100'}]);
+    controller.set('sortValue', 'firstname');
+    controller.set('sortOrder', true);
+    controller.set('table_filter', '');
+    controller.set('current_filter', 'firstname');
+    controller.set('filterables', [
+      {name: "Name", value: 'firstname'}]);
+
+
+
   },
   renderTemplate: function () {
     this.render('users', {

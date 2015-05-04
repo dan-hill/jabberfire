@@ -10,7 +10,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     sessionAuthenticationFailed: function() {
       var controller = this.controllerFor('auth.login');
       controller.set('authentication-failed', true);
-      console.log('auth failed!!')
     },
     showModal: function(model) {
       this.render(model, {

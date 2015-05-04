@@ -76,7 +76,8 @@ Router.map(function() {
 
 
   this.resource('unit', function() {
-    this.route('detail', {path: '/detail/:id'});
+    this.route('detail', { path: '/detail/:id'});
+    this.route('new', { path: '/new/:asset_id'});
   });
 });
 
