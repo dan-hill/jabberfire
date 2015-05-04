@@ -23,7 +23,7 @@ Router.map(function() {
   });
 
   // User Resource
-  this.resource('users', function() {});
+  this.route('users');
   this.resource('user', function() {
     this.route('detail', {path: '/detail/:id'});
     this.route('settings', {path: '/settings/:id'});
@@ -31,7 +31,9 @@ Router.map(function() {
     this.route('edit');
   });
 
-  this.resource('departments', function() {});
+  this.resource('departments', function() {
+    this.route('loading');
+  });
   this.resource('department', function() {
     this.route('new');
     this.route('edit');
@@ -42,14 +44,18 @@ Router.map(function() {
   this.route('dashboard');
 
   // MANUFACTURER
-  this.resource('manufacturers', function() {});
+  this.route('manufacturers', function() {
+    this.route('loading');
+  });
   this.resource('manufacturer', function() {
     this.route('detail', {path: '/detail/:id'});
     this.route('new');
     this.route('edit');
   });
 
-
+  this.resource('app', function() {
+    this.route('loading');
+  });
   this.route('app');
   this.resource('suppliers', function() {});
   this.resource('supplier', function() {});
@@ -78,6 +84,10 @@ Router.map(function() {
   this.resource('unit', function() {
     this.route('detail', { path: '/detail/:id'});
     this.route('new', { path: '/new/:asset_id'});
+  });
+
+  this.route('assets', function() {
+    this.route('loading');
   });
 });
 

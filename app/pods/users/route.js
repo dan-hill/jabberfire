@@ -5,13 +5,11 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin,{
 
   model: function () {
-
     return this.store.find('user');
   },
   setupController: function (controller, model) {
 
     controller.set('users', _.filter(model.toArray(), function(user){return user.get('user_id') !== undefined}));
-
 
     controller.set('pageSize', '15');
     controller.set('selectedPage', 1);
@@ -27,8 +25,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
     controller.set('filterables', [
       {name: "Name", value: 'firstname'}]);
 
-
-
   },
   renderTemplate: function () {
     this.render('users', {
@@ -36,7 +32,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
       outlet: 'content'
     });
   },
-  afterModel:function(){
-  }
+
 });
 

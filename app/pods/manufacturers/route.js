@@ -11,6 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
     controller.set('manufacturers', model);
   },
   renderTemplate: function () {
+    this.send('changeLayout', 'app');
     this.render('manufacturers', {
       into: 'app',
       outlet: 'content'
