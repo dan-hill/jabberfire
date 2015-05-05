@@ -98,13 +98,13 @@ export default Ember.ArrayController.extend({
     },
     didTouchUpOnChangeStatus: function(status, user_id){
       var self = this;
-      var user = self.get('model').find(function(user){return user.get('id') == user_id});
+      var user = self.get('users').find(function(user){return user.get('id') == user_id});
       user.set('status', status);
       user.save();
     },
     didTouchUpOnChangeRole: function(role, user_id){
       var self = this;
-      var user = self.get('model').find(function(user){return user.get('id') == user_id});
+      var user = self.get('users').find(function(user){return user.get('id') == user_id});
       user.set('role', role);
       user.save().then();
 

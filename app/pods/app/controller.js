@@ -7,6 +7,10 @@ export default Ember.Controller.extend({
   }.observes('session.currentUser.user_id'),
   hasMessage: function(){
     return (this.get('session.currentUser.messages.length') > 0)
-  }.property('session.currentUser.messages.length')
-
+  }.property('session.currentUser.messages.length'),
+  actions: {
+    didClickOnScanModal: function(){
+      this.send('showModal', 'app/scanner')
+    }
+  }
 });

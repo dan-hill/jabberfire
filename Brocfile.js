@@ -108,8 +108,33 @@ app.import('vendor/css/plugins-md.css');
 app.import('vendor/css/profile.css');
 app.import('vendor/css/tasks.css');
 
+// QR Scanner
+app.import('bower_components/jsqrcode/src/grid.js');
+app.import('bower_components/jsqrcode/src/version.js');
+app.import('bower_components/jsqrcode/src/detector.js');
+app.import('bower_components/jsqrcode/src/formatinf.js');
+app.import('bower_components/jsqrcode/src/errorlevel.js');
+app.import('bower_components/jsqrcode/src/bitmat.js');
+app.import('bower_components/jsqrcode/src/datablock.js');
+app.import('bower_components/jsqrcode/src/bmparser.js');
+app.import('bower_components/jsqrcode/src/datamask.js');
+app.import('bower_components/jsqrcode/src/rsdecoder.js');
+app.import('bower_components/jsqrcode/src/gf256poly.js');
+app.import('bower_components/jsqrcode/src/gf256.js');
+app.import('bower_components/jsqrcode/src/decoder.js');
 
+app.import('bower_components/jsqrcode/src/qrcode.js');
+app.import('bower_components/jsqrcode/src/findpat.js');
+app.import('bower_components/jsqrcode/src/alignpat.js');
+app.import('bower_components/jsqrcode/src/databr.js');
+app.import('vendor/plugins/scanner/webqr/llqrcode.js');
+app.import('vendor/plugins/scanner/webqr/webqr.js');
+app.import('bower_components/jsqrcode/src/grid.js');
+app.import('vendor/plugins/scanner/webqr/scan.js')
 
+app.import('vendor/plugins/scanner/webqr/cam.png', { destDir: "img" })
+app.import('vendor/plugins/scanner/webqr/vid.png', { destDir: "img" })
+app.import('vendor/plugins/scanner/webqr/audio.mp3', { destDir: "img" })
 // Custom JS
 app.import('vendor/js/metronic.js');
 app.import('vendor/js/login.js');
@@ -118,6 +143,7 @@ app.import('vendor/js/index.js');
 app.import('vendor/js/ccmh.js');
 app.import('vendor/js/tasks.js');
 app.import('vendor/js/table-advanced.js');
+
 
 // Plugins
 
