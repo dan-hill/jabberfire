@@ -15,9 +15,18 @@ class Asset(Resource):
     def get(self, id):
         asset = AssetModel.find(id=id)
 
-        unitlist = []
+        units = []
         for unit in asset.units:
-            unitlist.append(unit.id)
+            units.append({
+            'id': unit.id,
+            'status': unit.status,
+            'tag': unit.tag,
+            'purchase_cost': unit.purchase_cost,
+            'warranty_expiration': unit.warranty_expiration,
+            'end_of_life': unit.end_of_life,
+            'asset': unit.asset_id,
+            })
+
         model = {
             'asset': {
                 'id': asset.id,
@@ -27,7 +36,8 @@ class Asset(Resource):
                 'min_quantity': asset.min_quantity,
                 'image': asset.image,
                 'manufacturer': asset.manufacturer_id,
-                'units': unitlist
+                'units': units,
+                'requires_approval': 1 if asset.requires_approval else 0
             }
         }
         return jsonify(model)

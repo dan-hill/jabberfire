@@ -19,12 +19,27 @@ class WorkOrders(Resource):
             for activity in work_order.activities:
                 activities.append(activity.id)
 
+            unit = ''
+            if work_order.unit is not None:
+                unit = {
+                    'id':  work_order.unit.id,
+                    'status':  work_order.unit.status,
+                    'tag':  work_order.unit.tag,
+                    'purchase_cost':  work_order.unit.purchase_cost,
+                    'warranty_expiration':  work_order.unit.warranty_expiration,
+                    'end_of_life': work_order.unit.end_of_life,
+                    'asset':  work_order.unit.asset_id,
+                    'asset_id':  work_order.unit.asset_id
+                }
+
             work_orders.append({
                 'id': work_order.id,
                 'department': work_order.department_id,
                 'user': work_order.user_id,
                 'asset': work_order.asset_id,
-                'activities': activities
+                'activities': activities,
+                'fulfilled': work_order.fufilled,
+                'unit': unit
             })
 
 
@@ -43,12 +58,26 @@ class WorkOrders(Resource):
         if not work_order.save():
             abort(400)
 
+        unit = ''
+        if work_order.unit is not None:
+            unit = {
+                'id':  work_order.unit.id,
+                'status':  work_order.unit.status,
+                'tag':  work_order.unit.tag,
+                'purchase_cost':  work_order.unit.purchase_cost,
+                'warranty_expiration':  work_order.unit.warranty_expiration,
+                'end_of_life': work_order.unit.end_of_life,
+                'asset':  work_order.unit.asset_id,
+                'asset_id':  work_order.unit.asset_id
+            }
         model = {
             'workOrder': {
                 'id': work_order.id,
                 'department': work_order.department_id,
                 'user': work_order.user_id,
-                'asset': work_order.asset_id
+                'asset': work_order.asset_id,
+                'fulfilled': work_order.fufilled,
+                'unit': unit
             }
         }
         print model

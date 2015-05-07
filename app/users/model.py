@@ -79,6 +79,7 @@ class User(db.Model):
     def username(self):
         return self._username
 
+
     @username.setter
     def username(self, uname):
         n = 1

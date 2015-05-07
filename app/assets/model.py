@@ -9,6 +9,8 @@ class Asset(db.Model):
         self.max_quantity = kwargs.get('max_quantity')
         self.min_quantity = kwargs.get('min_quantity')
         self.image = kwargs.get('image')
+        self.manufacturer_id = kwargs.get('manufacturer')
+        self.requires_approval = kwargs.get('requires_approval')
 
 
     id = db.Column(db.Integer, primary_key=True)
@@ -17,8 +19,9 @@ class Asset(db.Model):
     max_quantity = db.Column(db.Integer)
     min_quantity = db.Column(db.Integer)
     image = db.Column(db.String(255))
+    requires_approval = db.Column(db.Boolean)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
-    units = db.relationship('Unit')
+    units = db.relationship('Unit', backref='asset')
 
 
     @staticmethod

@@ -1,5 +1,7 @@
 from app import db
 from app.assets import Asset
+
+
 # from app.suppliers import Supplier
 class Unit(db.Model):
     __tablename__ = 'unit'
@@ -25,7 +27,7 @@ class Unit(db.Model):
     parent_id = db.Column(db.Integer, db.ForeignKey('unit.id'))
     asset_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'))
-
+    work_orders = db.relationship('WorkOrder',  backref='unit')
 
     children = db.relationship(
         'Unit',

@@ -32,7 +32,7 @@ def upload_file():
 def index(filename):
     if request.method == 'GET':
         print filename
-        with open(os.path.join(__location__, filename), 'r+') as f:
+        with open(os.path.join(__location__, 'images/' + filename), 'r+') as f:
             imgdata = f.read()
         response = make_response(imgdata)
         response.headers['Content-Type'] = 'image/jpeg'

@@ -18,6 +18,10 @@ class WorkOrder(db.Model):
 
     activities = db.relationship('Activity', backref='work_order')
 
+    @property
+    def fufilled(self):
+        if self.unit_id is not None:
+            return True
 
     @staticmethod
     def list():

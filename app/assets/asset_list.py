@@ -12,8 +12,20 @@ class AssetList(Resource):
     method_decorators = [jwt_required()]
 
     def get(self):
+
         assetlist = []
         for asset in AssetModel.list():
+            units = []
+            for unit in asset.units:
+                units.append({
+                'id': unit.id,
+                'status': unit.status,
+                'tag': unit.tag,
+                'purchase_cost': unit.purchase_cost,
+                'warranty_expiration': unit.warranty_expiration,
+                'end_of_life': unit.end_of_life,
+                'asset': unit.asset_id,
+                })
 
             model = {
                 'id': asset.id,
@@ -21,9 +33,11 @@ class AssetList(Resource):
                 'name': asset.name,
                 'max_quantity': asset.max_quantity,
                 'min_quantity': asset.min_quantity,
-                'image': asset.image
+                'image': asset.image,
+                'units': units,
+                'requires_approval': 'true' if asset.requires_approval else 'false'
             }
-
+            print model
             assetlist.append(model)
 
         return jsonify({'assets': assetlist})
@@ -35,10 +49,10 @@ class AssetList(Resource):
         asset = AssetModel(
             name=json['name'],
             description=json['description'],
-            manufacturer=json['manufacturer'],
-            min=json['min'],
+            manufacturer_id=json['manufacturer'],
+            min_quantity=json['min_quantity'],
             image=json['image'],
-            max=json['max']
+            max_quantity=json['max_quantity']
         )
 
         asset.save()
@@ -48,7 +62,11 @@ class AssetList(Resource):
                 'id': asset.id,
                 'name': asset.name,
                 'description': asset.description,
-                'parent_id': asset.parent_id
+                'manufacturer': asset.manufacturer_id,
+                'min_quantity': asset.min_quantity,
+                'max_quantity': asset.max_quantity,
+                'image': asset.image,
+                'requires_approval': 'true' if asset.requires_approval else 'false'
             }
         }
 

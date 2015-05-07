@@ -45,12 +45,11 @@ class Activities(Resource):
                 'id': activity.id,
                 'work-order': activity.work_order_id,
                 'user': activity.user_id,
-                'date': activity.date,
-                'type': activity.date,
-                'note': activity.note
+                'date': activity.date.isoformat(),
+                'type': activity.type
             }
         }
-
+        print model
         return jsonify(model)
 
 api.add_resource(Activities, '/api/activities')

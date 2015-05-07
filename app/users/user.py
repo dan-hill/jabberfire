@@ -21,7 +21,14 @@ class User(Resource):
                 'name': department.name,
                 'description': department.description
             })
-
+        work_orders = []
+        for work_order in current_user.work_orders:
+            work_orders.append({
+                'id': work_order.id,
+                'department': work_order.department_id,
+                'user': work_order.user_id,
+                'asset': work_order.asset_id
+            })
         model = {
             'user': {
                 'id': user.id,
@@ -33,7 +40,8 @@ class User(Resource):
                 'employee_id': user.employee_id,
                 'status': user.status,
                 'role': user.role,
-                'departments': departments
+                'departments': departments,
+                'work_orders': work_orders
             }
         }
         return jsonify(model)
@@ -62,6 +70,15 @@ class User(Resource):
                 'description': department.description
             })
 
+        work_orders = []
+        for work_order in current_user.work_orders:
+            work_orders.append({
+                'id': work_order.id,
+                'department': work_order.department_id,
+                'user': work_order.user_id,
+                'asset': work_order.asset_id
+            })
+
         model = {
             'user': {
                 'id': user.id,
@@ -73,7 +90,8 @@ class User(Resource):
                 'employee_id': user.employee_id,
                 'status': user.status,
                 'role': user.role,
-                'departments': departments
+                'departments': departments,
+                'work_orders': work_orders
             }
         }
 

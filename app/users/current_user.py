@@ -17,6 +17,15 @@ class CurrentUser(Resource):
         for message in current_user.messages:
             messages.append(message.id)
 
+        work_orders = []
+        for work_order in current_user.work_orders:
+            work_orders.append({
+                'id': work_order.id,
+                'department': work_order.department_id,
+                'user': work_order.user_id,
+                'asset': work_order.asset_id
+            })
+
         model = {
             'user': {
                 'id': current_user.id,
@@ -28,7 +37,8 @@ class CurrentUser(Resource):
                 'employee_id': current_user.employee_id,
                 'status': current_user.status,
                 'role': current_user.role,
-                'messages': messages
+                'messages': messages,
+                'work_orders': work_orders
             }
         }
         return jsonify(model)
