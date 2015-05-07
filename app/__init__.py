@@ -6,6 +6,7 @@ from flask_cors import CORS
 from flask_jwt import JWT, JWTError
 from flask_restful import Api
 
+import os
 from utility import ErrorFriendlyApi
 
 db = SQLAlchemy()
@@ -28,6 +29,8 @@ def create_app(debug=False):
     from app.testing.controller import testing
     app.register_blueprint(testing)
 
+    from app.img import img
+    app.register_blueprint(img)
     # User resource blueprints
     from app.users import (
         user_blueprint,
@@ -63,14 +66,27 @@ def create_app(debug=False):
     app.register_blueprint(setting_list_blueprint)
 
     from app.units import (
-        unit_blueprint
+        unit_blueprint,
+        units_blueprint
     )
     app.register_blueprint(unit_blueprint)
+    app.register_blueprint(units_blueprint)
+
+    from app.work_order import (
+        work_orders_blueprint
+    )
+    app.register_blueprint(work_orders_blueprint)
 
     from app.ember import (
         ember)
 
     app.register_blueprint(ember)
+
+    from app.activity import (
+        activities_blueprint
+    )
+
+    app.register_blueprint(activities_blueprint)
 
     # Set configurations
     app.config.update(
@@ -101,7 +117,11 @@ def create_app(debug=False):
 
         JWT_EXPIRATION_DELTA=3600,
         JWT_AUTH_URL_RULE='/api/token',
-        static='app/static/')
+        static='app/static/',
+
+        UPLOAD_FOLDER=os.path.realpath('.') + '/img/',
+        ALLOWED_EXTENSIONS=set(['jpg', 'png']))
+
 
     # Initiate the database object
     db.init_app(app)

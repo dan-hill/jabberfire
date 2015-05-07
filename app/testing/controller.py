@@ -70,13 +70,3 @@ def create_test_user():
     insert_departments()
     insert_user_departments()
     return 'ok', 200
-
-@testing.route('/api/img/<filename>', methods=['GET'])
-def get_image(filename):
-    print filename
-    with open(os.path.join(__location__, filename), 'r+') as f:
-        imgdata = f.read()
-    response = make_response(imgdata)
-    response.headers['Content-Type'] = 'image/jpeg'
-    response.headers['Content-Disposition'] = 'attachment; filename='+filename
-    return response

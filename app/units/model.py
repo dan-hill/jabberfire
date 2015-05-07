@@ -1,5 +1,4 @@
 from app import db
-from app.activities import Activity
 from app.assets import Asset
 # from app.suppliers import Supplier
 class Unit(db.Model):
@@ -16,7 +15,7 @@ class Unit(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(255))
-    tag = db.Column(db.Integer)
+    tag = db.Column(db.String(255))
     image = db.Column(db.String(255))
     note = db.Column(db.String(1000))
     purchase_cost = db.Column(db.Float)
@@ -27,7 +26,6 @@ class Unit(db.Model):
     asset_id = db.Column(db.Integer, db.ForeignKey('asset.id'))
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.id'))
 
-    activities = db.relationship('Activity', backref=db.backref('unit'))
 
     children = db.relationship(
         'Unit',

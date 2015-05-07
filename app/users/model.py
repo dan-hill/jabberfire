@@ -2,7 +2,8 @@ from app import db
 from passlib.context import CryptContext
 from app.user_department import UserDepartment
 from app.user_setting import UserSetting
-
+from app.work_order import WorkOrder
+from app.activity import Activity
 password_context = CryptContext(schemes=['sha256_crypt'])
 
 
@@ -67,10 +68,12 @@ class User(db.Model):
 
     departments = db.relationship('Department', secondary='user_department', backref='users')
     settings = db.relationship('Setting', secondary='user_setting', backref='users')
+    units = db.relationship('Unit', secondary='work_order', backref='users')
+    work_orders = db.relationship('WorkOrder', backref='created_by')
+    activities = db.relationship('Activity', backref='user')
 
     messages = db.relationship('Message', backref='to_user',  foreign_keys='Message.to_user_id')
     sent_messages = db.relationship('Message', backref='from_user', foreign_keys='Message.from_user_id')
-
 
     @property
     def username(self):

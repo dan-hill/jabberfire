@@ -1,6 +1,5 @@
 from app import db
 from app.departments import Department
-from app.activities import Activity
 class UserDepartment(db.Model):
     __tablename__ = 'user_department'
 
@@ -12,7 +11,6 @@ class UserDepartment(db.Model):
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     department_id = db.Column(db.Integer(), db.ForeignKey('department.id'))
     department = db.relationship('Department', backref='user_departments')
-    activities = db.relationship('Activity', backref='user_department')
 
     @staticmethod
     def list():
