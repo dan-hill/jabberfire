@@ -27,7 +27,8 @@ class ManufacturerList(Resource):
                 'description': manufacturer.description,
                 'title': manufacturer.title,
                 'note': manufacturer.note,
-                'assets': assets
+                'assets': assets,
+                'image': manufacturer.image
 
             }
 
@@ -40,7 +41,8 @@ class ManufacturerList(Resource):
         manufacturer = ManufacturerModel(
             title=json['title'],
             description=json['description'],
-            note=json['note']
+            note=json['note'],
+            image=json['image']
         )
         manufacturer.save()
 
@@ -49,7 +51,8 @@ class ManufacturerList(Resource):
                 'id': manufacturer.id,
                 'title': manufacturer.title,
                 'description': manufacturer.description,
-                'note': manufacturer.note
+                'note': manufacturer.note,
+                'image': manufacturer.image
             }
         }
 

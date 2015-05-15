@@ -8,15 +8,16 @@ class Manufacturer(db.Model):
         self.description = kwargs.get('description')
         self.title = kwargs.get('title')
         self.note = kwargs.get('note')
+        self.image = kwargs.get('image')
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(1000))
-    title = db.Column(db.String(255))
+    title = db.Column(db.String(255), nullable=False)
     note = db.Column(db.String(1000))
+    image = db.Column(db.String(255))
 
     supplier = None
-
-    assets = db.relationship('Asset')
+    assets = db.relationship('Asset', backref='manufacturer')
 
     @staticmethod
     def list():

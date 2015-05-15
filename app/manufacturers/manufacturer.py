@@ -25,7 +25,8 @@ class Manufacturer(Resource):
                 'description': manufacturer.description,
                 'title': manufacturer.title,
                 'note': manufacturer.note,
-                'assets': assets
+                'assets': assets,
+                'image': manufacturer.image
             }
         }
         return jsonify(model)

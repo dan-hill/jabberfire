@@ -7,6 +7,7 @@ from flask_restful import Resource
 asset_list_blueprint = Blueprint('asset_list_blueprint', __name__)
 api.init_app(asset_list_blueprint)
 from app.auth import roles_required
+from app.manufacturers import Manufacturer
 
 class AssetList(Resource):
     method_decorators = [jwt_required()]
@@ -55,6 +56,7 @@ class AssetList(Resource):
             max_quantity=json['max_quantity']
         )
 
+        asset.manufacturer = Manufacturer().find(id=json['manufacturer'])
         asset.save()
 
         model = {
@@ -69,6 +71,7 @@ class AssetList(Resource):
                 'requires_approval': 'true' if asset.requires_approval else 'false'
             }
         }
+
 
         print model
         return jsonify(model), 201
