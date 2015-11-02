@@ -1,0 +1,50 @@
+<div class="vertical-center">
+
+    <div class="portlet light bordered container">
+        <div class="logo">
+          {{jf-img src='img/ccmh/logo_large.png' class="logo"}}
+        </div>
+        <div class="portlet-body form">
+            {{outlet 'sent'}}
+        {{#if authentication-failed}}
+            <div class="note note-danger">
+                <h4 class="block">Login Failed!</h4>
+                <p>
+                    The username or password you provided is incorrect. If you have forgotten your password, you can
+                    reset it. If you are still having problems, please contact support.
+                </p>
+            </div>
+        {{/if}}
+            <form role="form">
+                <div class="form-body">
+                    <div id='identification' class="form-group form-md-line-input form-md-floating-label">
+                        <div class="input-icon right">
+                          {{input type='text' class='form-control' value=identification}}
+                            <label for="form_control_1">Username</label>
+                            <span class="help-block"></span>
+                            <i class="icon-user"></i>
+                        </div>
+                    </div>
+                    <div id='password' class="form-group form-md-line-input form-md-floating-label">
+                        <div class="input-icon right">
+                          {{input type='password' class='form-control' value=password}}
+                            <label for="form_control_1">Password</label>
+                            <span class="help-block"></span>
+                            <i class="icon-key"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions noborder">
+                    <button type="button" class="btn blue login-btn" {{action 'didTouchUpOnLogin'}}>Login</button>
+                </div>
+                <div class="form-actions noborder">
+                    <span class="pull-left">{{#link-to 'auth.request-access'}}
+                        <button type="button" class="btn default btn-xs">Request Access</button>{{/link-to}}</span>
+                    <span class="pull-right">{{#link-to 'auth.forgot-password'}}
+                        <button type="button" class="btn default btn-xs">Forgot Password</button>{{/link-to}}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

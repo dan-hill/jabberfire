@@ -1,0 +1,85 @@
+
+{{modal-header title='Add New Manufacturer' x-action='close'}}
+<div class="modal-body">
+    <form action="#" class="form-horizontal" id="add-user-form">
+        <div class="form-body">
+
+            <!-- START FIRST NAME -->
+
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">First Name</label>
+
+                <div class="col-md-5">
+                  {{form-group-input
+                  label-text='Title'
+                  inputID='title'
+                  input-type='text'
+                  input-placeholder='Title'
+                  inputValue=title
+                  input-classes='form-control '
+                  input-errors=errors.title}}
+                </div>
+            </div>
+            <!-- END FIRST NAME -->
+
+            <!-- START LAST NAME -->
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">Description</label>
+
+                <div class="col-md-5">
+                  {{form-group-input
+                  label-text='Description'
+                  inputID='description'
+                  input-type='textbox'
+                  input-placeholder='Description'
+                  inputValue=description
+                  input-classes='form-control '
+                  input-errors=errors.description}}
+                </div>
+            </div>
+            <!-- END LAST NAME -->
+
+            <!-- START EMAIL  ADDRESS -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Note</label>
+
+                <div class="col-md-5">
+                  {{form-group-input
+                  label-text='Note'
+                  inputID='note'
+                  input-type='textbox'
+                  input-placeholder='Note'
+                  inputValue=note
+                  input-classes='form-control '
+                  input-errors=errors.note}}
+                </div>
+            </div>
+            <!-- END EMAIL  ADDRESS -->
+
+            <!-- START STATUS -->
+            <div class="form-group">
+                <!-- TODO Pull the roles from the database -->
+                <label class="col-md-4 control-label">Status</label>
+                <div class="col-md-5">
+                    <select class="form-control" name="status">
+                        <option value="pending">Pending</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="declined">Declined</option>
+                    </select>
+                </div>
+            </div>
+            <!-- END STATUS -->
+
+            <!-- START DEPARTMENTS -->
+            <!-- TODO Implement departments
+            <!-- END DEPARTMENTS -->
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+  {{close-button action='close'}}
+  {{save-button action='save'}}
+</div>

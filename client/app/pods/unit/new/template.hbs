@@ -1,0 +1,79 @@
+{{#jf-page id='unit'}}
+  {{#jf-page-title}}Add New {{asset.name}} Unit{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'user.new'}}Change Status{{/link-to}}
+        {{/jf-page-action}}
+        {{#jf-page-action}}
+          {{#link-to 'user.new'}}Set Role{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
+      <!-- BEGIN SAMPLE FORM PORTLET-->
+      <div class="portlet light bordered" xmlns="http://www.w3.org/1999/html">
+          <div class="portlet-title">
+              <div class="caption font-red-sunglo">
+                  <span class="caption-subject bold uppercase">Unit Details</span>
+              </div>
+          </div>
+
+          <div class="portlet-body form">
+              <div id='error-note-container' class="hide">
+                  <div class="note note-warning">
+                      <h4>{{errorNote.title}}</h4>
+                      <p>
+                        {{errorNote.message}}
+                      </p>
+                  </div>
+              </div>
+              <form role="form">
+                  <div class="form-body">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div id="qrcode"></div>
+                          </div>
+                          <div class="col-md-6">
+                              <div id='firstname' class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=firstname}}
+                                      <label for="first-name-control">First Name</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+                              <div id='firstname' class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=firstname}}
+                                      <label for="first-name-control">First Name</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-actions noborder pull-right">
+                            {{#link-to 'users'}}<button type="button" class="btn default">Cancel</button>{{/link-to}}
+                              <button type="button" class="btn blue" {{action 'didTouchUpOnGenerateQRCode'}}>Save</button>
+                          </div>
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+      <!-- END SAMPLE FORM PORTLET-->
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}

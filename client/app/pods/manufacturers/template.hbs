@@ -1,0 +1,105 @@
+{{#jf-page id='manufacturer'}}
+  {{#jf-page-title}}Manufacturer{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'manufacturer.new'}}Add New{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
+
+    {{#jf-row}}
+        <!-- START SEARCH -->
+
+
+        <!-- END LIST TOOLS -->
+        <!-- START USER LIST CONTAINER -->
+
+        {{#jf-col-md-12}}
+          {{#jf-table id='manufacturers_table'}}
+            {{#jf-table-tools}}
+                <div class="col-md-4">
+                  {{#jf-form-group color="success"}}
+                    {{#jf-input-icon}}
+                      {{input type='search' id='filter' value=filter class='form-control search'}}
+                        <label for="filter">Filter</label>
+                        <i class="fa fa-search"></i>
+                    {{/jf-input-icon}}
+                  {{/jf-form-group}}
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=filterables
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = current_filter}}
+                    </div>
+                </div>
+                <div class="col-md-1 pull-right">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=pageSizes
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = pageSize}}
+                    </div>
+                </div>
+            {{/jf-table-tools}}
+            {{#jf-table-content}}
+              {{#jf-table-head}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'title'}}>Name</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'email'}}>Assets</a>{{/jf-table-heading}}
+              {{/jf-table-head}}
+              <tbody>
+              {{#each manufacturer in sliced}}
+                {{#jf-table-row}}
+                  {{#jf-table-column}}
+                      <div class="md-checkbox pull-left">
+                          <input type="checkbox" id="checkbox{{manufacturer.id}}" class="md-check">
+                          <label for="checkbox{{manufacturer.id}}">
+                              <span class="check"></span>
+                              <span class="box"></span>
+                          </label>
+                      </div>
+                      <div>
+                        {{#link-to 'manufacturer.detail' manufacturer.id}}{{manufacturer.title}}{{/link-to}}
+                      </div>
+                  {{/jf-table-column}}
+                  {{#jf-table-column}}{{manufacturer.assets.length}}{{/jf-table-column}}
+                {{/jf-table-row}}
+              {{/each}}
+              </tbody>
+            {{/jf-table-content}}
+            {{#jf-row}}
+              {{#jf-col-md-12}}
+                {{#jf-nav class='pull-right'}}
+                  {{#jf-pagination}}
+                    {{jf-pagination-previous action='previousPage'}}
+                    {{#each page in pages}}
+                      {{jf-pagination-page action='didSelectPage' page=page}}
+                    {{/each}}
+                    {{jf-pagination-next action='nextPage' page=page}}
+                  {{/jf-pagination}}
+                {{/jf-nav}}
+              {{/jf-col-md-12}}
+            {{/jf-row}}
+          {{/jf-table}}
+          <!-- END EXAMPLE TABLE PORTLET-->
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+        {{/jf-col-md-12}}
+    {{/jf-row}}
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}
