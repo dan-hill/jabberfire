@@ -1,0 +1,81 @@
+
+{{page-title title='Assets'}}
+
+{{#page-header title='Assets' page_actions=page_actions}}
+
+  {{page-breadcrumb this-page='Assets'}}
+
+  {{#page-actions}}
+    {{page-actions-li title='Action A' link='#'}}
+  {{/page-actions}}
+
+{{/page-header}}
+
+
+<div class="row">
+    <div id="asset-list" class="col-md-12">
+
+        <!-- START LIST TOOLS -->
+        <div class="row">
+
+            <!-- START SEARCH -->
+          {{search-box
+          label-text='Search'
+          inputID='filter'
+          input-type='search'
+          input-placeholder='search...'
+          inputValue=filter
+          input-classes='col-md-4'}}
+            <!-- END SEARCH -->
+        </div>
+        <!-- END LIST TOOLS -->
+
+        <!-- START USER LIST CONTAINER -->
+      {{#asset-list}}
+        {{#each asset in filteredContent}}
+            <!-- BEGIN Portlet PORTLET-->
+          {{#jf-portlet}}
+            {{#jf-portlet-header}}
+
+
+              {{#jf-portlet-headline}}
+                {{jf-portlet-icon}}
+                {{#jf-portlet-title}}{{asset.model}}{{/jf-portlet-title}}
+              {{/jf-portlet-headline}}
+              {{#jf-portlet-actions}}
+                  <!-- TODO seperate out action presentation types into attributes defined on the views -->
+                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-sm'}}{{fa-plus}} Checkout{{/jf-portlet-action}}
+
+                {{#jf-portlet-action classNames='btn btn-circle btn-default btn-icon-only '}}
+                  {{#link-to 'assets.detail' asset.id}}{{fa-icon icon='chain'}}{{/link-to}}
+                {{/jf-portlet-action}}
+
+              {{/jf-portlet-actions}}
+
+            {{/jf-portlet-header}}
+            {{#jf-portlet-content}}
+            <div class="row">
+              <div class="col-md-4">
+                  <h4>Description:</h4>
+                  <p>{{asset.description}}</p>
+              </div>
+              <div class="col-md-8">
+                  <h4>Vitals:</h4>
+              {{#jf-list-group}}
+                {{#jf-list-group-item}}<strong>Serial</strong>  <span class='pull-right'>{{asset.serial}}</span>{{/jf-list-group-item}}
+                {{#jf-list-group-item}}<strong>Quantity</strong>  {{#jf-badge style='success'}}{{asset.quantity_on_hand}}{{/jf-badge}}{{/jf-list-group-item}}
+                {{#jf-list-group-item}}<strong>Manufacturer</strong>  <span class='pull-right'>{{#link-to 'manufacturers.detail' asset.manufacturer.id}}{{asset.manufacturer.title}}{{/link-to}}</span>{{/jf-list-group-item}}
+              {{/jf-list-group}}
+              </div>
+            </div>
+            {{/jf-portlet-content}}
+
+          {{/jf-portlet}}
+            <!-- END Portlet PORTLET-->
+        {{/each}}
+      {{/asset-list}}
+    </div>
+    <!-- END LIST AND LIST FUNCTIONS CONTAINER -->
+
+</div>
+

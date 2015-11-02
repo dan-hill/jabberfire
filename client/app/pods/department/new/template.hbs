@@ -1,0 +1,115 @@
+{{#jf-page id='department'}}
+  {{#jf-page-title}}Add New Department{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'department.new'}}New Department{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
+      <!-- BEGIN SAMPLE FORM PORTLET-->
+      <div class="portlet light bordered" xmlns="http://www.w3.org/1999/html">
+          <div class="portlet-title">
+              <div class="caption font-red-sunglo">
+                  <span class="caption-subject bold uppercase">Department Details</span>
+              </div>
+          </div>
+
+          <div class="portlet-body form">
+              <form role="form">
+                  <div class="form-body">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div id='name' class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=name}}
+                                      <label for="first-name-control">Name</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+                              <div id='description' class="form-group form-md-line-input has-default form-md-floating-label">
+
+                                    {{textarea value=description cols="80" rows="6" class="form-control"}}
+                                      <label for="last-name-control">Description</label>
+                                      <span class="help-block"></span>
+                              </div>
+                              <div id='id' class="form-group form-md-line-input has-default form-md-floating-label">
+                                  <div class="input-icon right">
+                                    {{input type='text' class='form-control' value=department_id}}
+                                      <label for="first-name-control">Department ID</label>
+                                      <span class="help-block"></span>
+                                      <i class="icon-user"></i>
+                                  </div>
+                              </div>
+
+                          </div>
+
+
+
+
+
+
+
+
+                          <div class="col-md-6">
+                                                           <div class="form-group">
+
+
+                                  <div class="col-md-11">
+
+                                    {{#ember-chosen multiple=true id='department_select' value=multipleSelectValue }}
+                                      {{#each department in options}}
+                                          <option {{bind-attr value=department.id}}>{{department.name}}</option>
+                                      {{/each}}
+                                    {{/ember-chosen}}
+                                  </div>
+                                  <div class="col-md-1">
+                                      <a{{action 'didTouchUpOnAddDepartment'}}
+                                              class="btn btn-icon-only green pull-right">
+                                          <i class="fa fa-plus"></i>
+                                      </a>
+                                  </div>
+                                                               <div class="col-md-12">
+                                                                   <ul class="list-unstyled">
+                                                                     {{#each department in selectedDepartmentsObserver}}
+                                                                         <li style="margin-top: 5px;">
+                                                                             <button type="button" class="btn default btn-xs">
+                                                                                 <span class="md-click-circle md-click-animate"></span>
+                                                                               {{#each dept in department}}{{dept.name}}{{fa-icon icon='arrow-right'}}{{/each}}
+                                                                             </button>
+                                                                         </li>
+                                                                     {{/each}}
+                                                                   </ul>
+                                                               </div>
+                              </div>
+                          </div>
+
+
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-actions noborder pull-right">
+                              <button type="button" class="btn default">Cancel</button>
+                              <button type="button" class="btn blue" {{action 'didTouchUpOnSave'}}>Save</button>
+                          </div>
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+      </div>
+      <!-- END SAMPLE FORM PORTLET-->
+
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}

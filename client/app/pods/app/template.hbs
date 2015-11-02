@@ -1,0 +1,218 @@
+{{#jf-app-header}}
+  {{#jf-app-logo}}
+    {{#link-to 'dashboard'}}
+      {{jf-img src="img/ccmh/header_logo.png" alt="logo" class="logo-default" }}
+    {{/link-to}}
+  {{/jf-app-logo}}
+  {{#jf-app-toggler data-toggle='collapse' data-target='.navbar-collapse'}}{{/jf-app-toggler}}
+
+  <!-- END RESPONSIVE MENU TOGGLER -->
+  <!-- BEGIN TOP NAVIGATION MENU -->
+  {{#jf-app-menu}}
+
+    {{#jf-app-notifications}}
+      {{#jf-dropdown-toggle}}
+        {{sl-icon icon='bell'}}{{#if hasMessage}}{{#jf-badge badge-style='badge-success'}}{{session.currentUser.messages.length}}{{/jf-badge}}{{/if}}
+      {{/jf-dropdown-toggle}}
+      {{#jf-dropdown-menu}}
+        {{#jf-dropdown-menu-header}}
+            <h3><span class="bold">{{#if hasMessage}}{{session.currentUser.messages.length}}{{else}}0{{/if}} pending</span> notifications</h3>
+            <a href="extra_profile.html">view all</a>
+        {{/jf-dropdown-menu-header}}
+        {{#jf-dropdown-menu-scroller}}
+
+          {{! ITEM }}
+          {{#each message in session.currentUser.messages}}
+          {{#jf-dropdown-menu-scroller-item}}
+            {{#jf-dropdown-menu-scroller-item-time}}
+                just now
+            {{/jf-dropdown-menu-scroller-item-time}}
+            {{#jf-dropdown-menu-scroller-item-details}}
+              {{#jf-dropdown-menu-scroller-item-label}}
+                {{fa-icon icon='plus'}}
+              {{/jf-dropdown-menu-scroller-item-label}}
+              {{message.type}}
+            {{/jf-dropdown-menu-scroller-item-details}}
+          {{/jf-dropdown-menu-scroller-item}}
+          {{/each}}
+        {{! /ITEM }}
+
+        {{/jf-dropdown-menu-scroller}}
+      {{/jf-dropdown-menu}}
+
+    {{/jf-app-notifications}}
+    <!-- END NOTIFICATION DROPDOWN -->
+
+    <!-- END INBOX DROPDOWN -->
+    <!-- BEGIN USER LOGIN DROPDOWN -->
+    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+    <li class="dropdown dropdown-user">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+           data-close-others="true">
+          {{fa-icon icon='user'}}
+            <span class="username username-hide-on-mobile">
+					{{session.currentUser.firstname}} </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-default">
+            <li>
+                {{#link-to 'user.detail' session.currentUser.user_id}}
+                    {{sl-icon icon='user'}} My Profile {{/link-to}}
+            </li>
+            <li>
+              {{#link-to 'user.settings' session.currentUser.user_id}}
+                {{sl-icon icon='settings'}} My Settings {{/link-to}}
+            </li>
+
+            <li class="divider">
+            </li>
+            <li>
+                <a href="extra_lock.html">
+                    <i class="icon-lock"></i> Lock Screen </a>
+            </li>
+            <li>
+              {{#if session.isAuthenticated}}
+                  <a {{ action 'invalidateSession' }}>Logout</a>
+              {{else}}
+                {{#link-to 'login'}}Login{{/link-to}}
+              {{/if}}
+            </li>
+        </ul>
+    </li>
+    <!-- END USER LOGIN DROPDOWN -->
+    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+    <li class="dropdown dropdown-quick-sidebar-toggler">
+        <a {{action 'didClickOnScanModal'}}class="dropdown-toggle">
+            <i class="icon-logout"></i>
+        </a>
+    </li>
+    <!-- END QUICK SIDEBAR TOGGLER -->
+  {{/jf-app-menu}}
+{{/jf-app-header}}
+
+<!-- END HEADER -->
+{{jf-clearfix}}
+
+<!-- BEGIN CONTAINER -->
+{{#jf-app-content-container}}
+
+
+  {{#jf-sidebar-nav}}
+
+    {{#jf-nav-item id='dashboard-nav'}}
+        {{#link-to 'dashboard'}}
+          {{sl-icon icon='home'}}
+          <span class="title">Dashboard</span>
+          <span class="selected"></span>
+        {{/link-to}}
+    {{/jf-nav-item}}
+
+
+    {{#jf-nav-item id='asset-nav'}}
+      {{#link-to 'asset-list'}}
+        {{sl-icon icon='screen-desktop'}}
+        <span class="title">Assets</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='user-nav'}}
+      {{#link-to 'users'}}
+        {{sl-icon icon='user'}}
+        <span class="title">Users</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='manufacturer-nav'}}
+      {{#link-to 'manufacturers'}}
+        {{sl-icon icon='wrench'}}
+        <span class="title">Manufacturers</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='supplier-nav'}}
+      {{#link-to 'suppliers'}}
+        {{sl-icon icon='social-dropbox'}}
+        <span class="title">Suppliers</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='order-nave'}}
+      {{#link-to 'orders'}}
+        {{sl-icon icon='basket-loaded'}}
+        <span class="title">Orders</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='report-nav'}}
+      {{#link-to 'reports'}}
+        {{sl-icon icon='docs'}}
+        <span class="title">Reports</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='setting-nav'}}
+      {{#link-to 'settings'}}
+        {{sl-icon icon='settings'}}
+        <span class="title">Settings</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='department-nav'}}
+      {{#link-to 'departments'}}
+        {{sl-icon icon='layers'}}
+        <span class="title">Departments</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{#jf-role-required roles='administrator technician'}}
+    {{#jf-nav-item id='support-manual-nav'}}
+      {{#link-to 'support.manual'}}
+        {{sl-icon icon='support'}}
+        <span class="title">Support</span>
+        <span class="selected"></span>
+      {{/link-to}}
+    {{/jf-nav-item}}
+    {{/jf-role-required}}
+
+    {{/jf-sidebar-nav}}
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    {{#jf-page-content}}
+      {{outlet 'content'}}
+    {{/jf-page-content}}
+
+
+{{/jf-app-content-container}}
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="page-footer-inner">
+        2015 &copy; CCMA.
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+{{#jf-page id='asset'}}
+  {{#jf-page-title}}Assets{{/jf-page-title}}
+  {{#jf-page-bar}}
+    {{#jf-page-actions}}
+      {{#jf-page-action-button}}
+          Actions {{fa-icon icon='angle-down'}}
+      {{/jf-page-action-button}}
+      {{#jf-page-action-list}}
+        {{#jf-page-action}}
+          {{#link-to 'asset.new'}}Add New{{/link-to}}
+        {{/jf-page-action}}
+      {{/jf-page-action-list}}
+    {{/jf-page-actions}}
+  {{/jf-page-bar}}
+  <!-- END PAGE HEADER-->
+  <!-- BEGIN PAGE CONTENT-->
+  {{#jf-page-content-container}}
+
+    {{#jf-row}}
+        <!-- START SEARCH -->
+
+
+        <!-- END LIST TOOLS -->
+        <!-- START USER LIST CONTAINER -->
+
+        {{#jf-col-md-12}}
+          {{#jf-table id='assets_table'}}
+            {{#jf-table-tools}}
+                <div class="col-md-4">
+                  {{#jf-form-group color="success"}}
+                    {{#jf-input-icon}}
+                      {{input type='search' id='table_filter' value=table_filter class='form-control search'}}
+                        <label for="table_filter">Filter</label>
+                        <i class="fa fa-search"></i>
+                    {{/jf-input-icon}}
+                  {{/jf-form-group}}
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=filterables
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = current_filter}}
+                    </div>
+                </div>
+                <div class="col-md-1 pull-right">
+                    <div class="form-group form-md-line-input">
+                      {{view 'select'
+                      class="form-control"
+                      content=pageSizes
+                      optionValuePath='content.value'
+                      optionLabelPath='content.name'
+                      value = pageSize}}
+                    </div>
+                </div>
+            {{/jf-table-tools}}
+            {{#jf-table-content}}
+              {{#jf-table-head}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'title'}}>Name</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'max_quantity'}}>Max</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'min_quantity'}}>Min</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}<a {{action 'sortBy' 'quantity_on_hand'}}>On Hand</a>{{/jf-table-heading}}
+                {{#jf-table-heading}}{{/jf-table-heading}}
+              {{/jf-table-head}}
+              <tbody>
+              {{#each asset in sliced}}
+                {{#jf-table-row}}
+                  {{#jf-table-column}}
+                      <div class="md-checkbox pull-left">
+                          <input type="checkbox" id="checkbox{{asset.id}}" class="md-check">
+                          <label for="checkbox{{asset.id}}">
+                              <span class="check"></span>
+                              <span class="box"></span>
+                          </label>
+                      </div>
+                      <div>
+                        {{#link-to 'asset.detail' asset.id}}{{asset.name}}{{/link-to}}
+                      </div>
+                  {{/jf-table-column}}
+                  {{#jf-table-column}}{{asset.max_quantity}}{{/jf-table-column}}
+                  {{#jf-table-column}}{{asset.min_quantity}}{{/jf-table-column}}
+                  {{#jf-table-column}}{{asset.units.length}}{{/jf-table-column}}
+                  {{#jf-table-column}}<button {{action 'didTouchUpOnCheckout' asset}} type="button" class="btn btn-circle green btn-xs pull-right"><span class="md-click-circle md-click-animate"></span>Checkout</button>{{/jf-table-column}}
+                {{/jf-table-row}}
+              {{/each}}
+              </tbody>
+            {{/jf-table-content}}
+            {{#jf-row}}
+              {{#jf-col-md-12}}
+                {{#jf-nav class='pull-right'}}
+                  {{#jf-pagination}}
+                    {{jf-pagination-previous action='previousPage'}}
+                    {{#each page in pages}}
+                      {{jf-pagination-page action='didSelectPage' page=page}}
+                    {{/each}}
+                    {{jf-pagination-next action='nextPage' page=page}}
+                  {{/jf-pagination}}
+                {{/jf-nav}}
+              {{/jf-col-md-12}}
+            {{/jf-row}}
+          {{/jf-table}}
+          <!-- END EXAMPLE TABLE PORTLET-->
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+        {{/jf-col-md-12}}
+    {{/jf-row}}
+  {{/jf-page-content-container}}
+  <!-- END PAGE CONTENT-->
+{{/jf-page}}

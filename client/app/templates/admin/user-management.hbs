@@ -1,0 +1,78 @@
+{{outlet}}
+<!-- START USER MANAGEMENT CONTENT -->
+<div id="pjax-content" data-js="user_management">
+
+    <!-- START LIST AND LIST FUNCTIONS CONTAINER -->
+    <div id="user-list">
+
+        <!-- START LIST TOOLS -->
+        <div class="row">
+
+            <!-- START SEARCH -->
+          {{search-box
+          label-text='Search'
+          inputID='filter'
+          input-type='search'
+          input-placeholder='search...'
+          inputValue=filter
+          input-classes='col-md-4'}}
+            <!-- END SEARCH -->
+
+            <!-- START ACTIONS BUTTON -->
+            <div class="col-md-2 col-md-offset-6">
+                <div class="btn-group pull-right">
+                    <button class="btn blue dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-expanded="false">
+                        Actions <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a data-toggle="modal" {{action 'openAddUserModal'}}>Add User</a></li>
+                        <li><a href="#">Deactivate Selected</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END ACTIONS BUTTON -->
+        </div>
+        <!-- END LIST TOOLS -->
+
+        <!-- START USER LIST CONTAINER -->
+        <div class="row">
+
+            <!-- START USER LIST -->
+            <ul class="list portlet-list">
+              {{#each user in filteredContent}}
+              {{ user-list-item firstname=user.firstname lastname=user.lastname roles=user.roles}}
+              {{/each}}
+            </ul>
+            <!-- END USER LIST -->
+        </div>
+        <!-- END USER LIST CONTAINER -->
+
+    </div>
+    <!-- END LIST AND LIST FUNCTIONS CONTAINER -->
+
+
+
+    <div id="add-departments" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Add Departments to User</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="tree_1">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                    <button type="button" class="btn green save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- END USER MANAGEMENT CONTAINER -->
